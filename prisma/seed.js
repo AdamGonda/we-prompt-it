@@ -1,4 +1,4 @@
-import { PrismaClient, OfferStatus } from '@prisma/client';
+import { PrismaClient } from '@prisma/client';
 
 const prisma = new PrismaClient();
 
@@ -10,6 +10,7 @@ async function main() {
 			firstName: 'Adam',
 			lastName: 'Gonda',
 			email: 'adamgondagyula@gmail.com'
+			
 		}
 	});
 
