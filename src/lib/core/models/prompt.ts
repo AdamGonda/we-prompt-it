@@ -6,7 +6,17 @@ async function createPrompt(data) {
 }
 
 async function getPromptById(id) {
-	return await prisma.prompt.findUnique({ where: { id } });
+	return await prisma.prompt.findUnique({
+		where: { id },
+		include: {
+			author: true,
+			content: {
+				include: {
+					aiModel: true,
+				}
+			}
+		}
+	});
 }
 
 async function getAllPrompts() {

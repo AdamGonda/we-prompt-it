@@ -1,9 +1,11 @@
 <script>
 	import { page } from '$app/stores';
-
+	import CreateEditPromptForm from '$lib/components/create-edit-prompt-form.svelte';
 </script>
 
-<h2>Create prompt</h2>
+Create prompt
+<CreateEditPromptForm type="create" />
+
 
 <style>
 </style>

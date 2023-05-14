@@ -52,13 +52,14 @@ async function main() {
 
 	const prompt1 = await prisma.prompt.create({
 		data: {
+			description: "some short description what this prompt is about",
 			title: 'First prompt',
 			author: {
 				connect: {
 					id: adamUser.id
 				}
 			},
-			promptContent: {
+			content: {
 				create: {
 					version: '1.0',
 					content: 'This is the content of the first prompt',
@@ -76,13 +77,14 @@ async function main() {
 
 	const prompt2 = await prisma.prompt.create({
 		data: {
+			description: "some short description what this prompt is about",
 			title: 'Second prompt',
 			author: {
 				connect: {
 					id: testUser1.id
 				}
 			},
-			promptContent: {
+			content: {
 				create: {
 					version: '1.0',
 					content: 'This is the content of the second prompt',
@@ -100,13 +102,14 @@ async function main() {
 
 	const prompt3 = await prisma.prompt.create({
 		data: {
+			description: "some short description what this prompt is about",
 			title: 'Third prompt',
 			author: {
 				connect: {
 					id: adamUser.id
 				}
 			},
-			promptContent: {
+			content: {
 				create: {
 					version: '1.0',
 					content: 'This is the content of the third prompt',
@@ -124,13 +127,14 @@ async function main() {
 
 	const prompt4 = await prisma.prompt.create({
 		data: {
+			description: "some short description what this prompt is about",
 			title: 'Fourth prompt',
 			author: {
 				connect: {
 					id: testUser2.id
 				}
 			},
-			promptContent: {
+			content: {
 				create: {
 					version: '1.0',
 					content: 'This is the content of the fourth prompt',
@@ -149,12 +153,14 @@ async function main() {
 	const prompt5 = await prisma.prompt.create({
 		data: {
 			title: 'Fifth prompt',
-			author: {
+
+
+description: "some short description what this prompt is about",			author: {
 				connect: {
 					id: testUser1.id
 				}
 			},
-			promptContent: {
+			content: {
 				create: {
 					version: '1.0',
 					content: 'This is the content of the fifth prompt',
@@ -177,12 +183,14 @@ async function main() {
 	const prompt6 = await prisma.prompt.create({
 		data: {
 			title: 'Sixth prompt',
-			author: {
+
+
+description: "some short description what this prompt is about",			author: {
 				connect: {
 					id: adamUser.id
 				}
 			},
-			promptContent: {
+			content: {
 				create: {
 					version: '1.0',
 					content: 'This is the content of the sixth prompt',
@@ -200,13 +208,14 @@ async function main() {
 
 	const prompt7 = await prisma.prompt.create({
 		data: {
+			description: "some short description what this prompt is about",
 			title: 'Seventh prompt',
 			author: {
 				connect: {
 					id: testUser2.id
 				}
 			},
-			promptContent: {
+			content: {
 				create: {
 					version: '1.0',
 					content: 'This is the content of the seventh prompt',
