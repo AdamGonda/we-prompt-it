@@ -1,0 +1,2 @@
+-- AlterEnum
+ALTER TYPE "ResourceStatus" ADD VALUE 'INTERACTION_STARTED';
