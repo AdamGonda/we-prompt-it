@@ -2,4 +2,6 @@
   export let prompt;
 </script>
 
-Prompt {prompt.id}
+<div>
+  Prompt {prompt.id}
+</div>

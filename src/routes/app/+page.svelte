@@ -7,9 +7,18 @@
 </script>
 
 <h2>Logged in landing</h2>
-{#each allPrompts as prompt (prompt.id) }
+
+<main>
+	{#each allPrompts as prompt (prompt.id) }
 	<Prompt {prompt}/>
-{/each}
+	{/each}
+
+</main>
 
 <style>
+
+	main {
+		display: flex;
+		flex-direction: column;
+	}
 </style>
