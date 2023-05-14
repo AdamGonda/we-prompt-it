@@ -10,14 +10,25 @@
 	</a>
 	{#if user}
 		<a href={`/app/listing`}>
-			<div>
-				<span
-					>search</span
-				>
-			</div>
+			<div>Explore</div>
 		</a>
-		<a href={`/app/create-offer`}>
-			<div>Offer</div>
+		<a href={`/app/create-prompt`}>
+			<div>Create prompt</div>
+		</a>
+		<a href={`/app/edit-profile/1`}>
+			<div>Edit profile</div>
+		</a>
+		<a href={`/app/edit-prompt/1`}>
+			<div>Edit prompt</div>
+		</a>
+		<a href={`/app/my-collection`}>
+			<div>My collection</div>
+		</a>
+		<a href={`/app/profile/1`}>
+			<div>Profile</div>
+		</a>
+		<a href={`/app/prompt/1`}>
+			<div>Prompt</div>
 		</a>
 		<div style="cursor: pointer;" on:click={() => signOut()}>{user?.firstName}</div>
 		{/if}
