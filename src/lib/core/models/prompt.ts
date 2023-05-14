@@ -9,6 +9,10 @@ async function getPromptById(id) {
 	return await prisma.prompt.findUnique({ where: { id } });
 }
 
+async function getAllPrompts() {
+	return await prisma.prompt.findMany({ include: { stars: true } });
+}
+
 async function updatePrompt(id, data) {
 	return await prisma.prompt.update({ where: { id }, data });
 }
@@ -17,4 +21,4 @@ async function deletePrompt(id) {
 	return await prisma.prompt.delete({ where: { id } });
 }
 
-export { createPrompt, getPromptById, updatePrompt, deletePrompt };
+export { createPrompt, getPromptById, updatePrompt, deletePrompt, getAllPrompts };

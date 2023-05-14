@@ -28,13 +28,13 @@ async function main() {
 	});
 	const aiModel1 = await prisma.aIModel.create({
 		data: {
-			name: 'GPT-4',
+			name: 'GPT-4'
 		}
 	});
 
 	const aiModel2 = await prisma.aIModel.create({
 		data: {
-			name: 'GPT-5',
+			name: 'GPT-5'
 		}
 	});
 
@@ -54,10 +54,10 @@ async function main() {
 		data: {
 			title: 'First prompt',
 			author: {
-        connect: {
-          id: adamUser.id,
-        },
-      },
+				connect: {
+					id: adamUser.id
+				}
+			},
 			promptContent: {
 				create: {
 					version: '1.0',
@@ -78,10 +78,10 @@ async function main() {
 		data: {
 			title: 'Second prompt',
 			author: {
-        connect: {
-          id: testUser1.id,
-        },
-      },
+				connect: {
+					id: testUser1.id
+				}
+			},
 			promptContent: {
 				create: {
 					version: '1.0',
@@ -98,62 +98,186 @@ async function main() {
 		}
 	});
 
+	const prompt3 = await prisma.prompt.create({
+		data: {
+			title: 'Third prompt',
+			author: {
+				connect: {
+					id: adamUser.id
+				}
+			},
+			promptContent: {
+				create: {
+					version: '1.0',
+					content: 'This is the content of the third prompt',
+					aIModelId: aiModel2.id
+				}
+			},
+			tags: {
+				connect: [{ id: tag1.id }, { id: tag2.id }]
+			},
+			stars: {
+				create: [{ userId: testUser1.id }]
+			}
+		}
+	});
+
+	const prompt4 = await prisma.prompt.create({
+		data: {
+			title: 'Fourth prompt',
+			author: {
+				connect: {
+					id: testUser2.id
+				}
+			},
+			promptContent: {
+				create: {
+					version: '1.0',
+					content: 'This is the content of the fourth prompt',
+					aIModelId: aiModel1.id
+				}
+			},
+			tags: {
+				connect: [{ id: tag1.id }]
+			},
+			stars: {
+				create: [{ userId: adamUser.id }, { userId: testUser2.id }]
+			}
+		}
+	});
+
+	const prompt5 = await prisma.prompt.create({
+		data: {
+			title: 'Fifth prompt',
+			author: {
+				connect: {
+					id: testUser1.id
+				}
+			},
+			promptContent: {
+				create: {
+					version: '1.0',
+					content: 'This is the content of the fifth prompt',
+					aIModelId: aiModel2.id
+				}
+			},
+			tags: {
+				connect: [{ id: tag2.id }]
+			},
+			stars: {
+				create: [
+					{ userId: adamUser.id },
+					{ userId: testUser1.id },
+					{ userId: testUser2.id }
+				]
+			}
+		}
+	});
+
+	const prompt6 = await prisma.prompt.create({
+		data: {
+			title: 'Sixth prompt',
+			author: {
+				connect: {
+					id: adamUser.id
+				}
+			},
+			promptContent: {
+				create: {
+					version: '1.0',
+					content: 'This is the content of the sixth prompt',
+					aIModelId: aiModel1.id
+				}
+			},
+			tags: {
+				connect: [{ id: tag1.id }, { id: tag2.id }]
+			},
+			stars: {
+				create: [{ userId: testUser1.id }, { userId: testUser2.id }]
+			}
+		}
+	});
+
+	const prompt7 = await prisma.prompt.create({
+		data: {
+			title: 'Seventh prompt',
+			author: {
+				connect: {
+					id: testUser2.id
+				}
+			},
+			promptContent: {
+				create: {
+					version: '1.0',
+					content: 'This is the content of the seventh prompt',
+					aIModelId: aiModel2.id
+				}
+			},
+			tags: {
+				connect: [{ id: tag1.id }]
+			},
+			stars: {
+				create: [{ userId: adamUser.id }]
+			}
+		}
+	});
+
 	const changeRequest1 = await prisma.changeRequest.create({
 		data: {
-			title: "First change request",
-			description: "This is the first change request",
-			content: "Proposed change for first change request",
+			title: 'First change request',
+			description: 'This is the first change request',
+			content: 'Proposed change for first change request',
 			author: {
 				connect: {
-					id: adamUser.id,
-				},
-			},
-		},
+					id: adamUser.id
+				}
+			}
+		}
 	});
-	
+
 	const changeRequest2 = await prisma.changeRequest.create({
 		data: {
-			title: "Second change request",
-			description: "This is the second change request",
-			content: "Proposed change for second change request",
+			title: 'Second change request',
+			description: 'This is the second change request',
+			content: 'Proposed change for second change request',
 			author: {
 				connect: {
-					id: testUser1.id,
-				},
-			},
-		},
+					id: testUser1.id
+				}
+			}
+		}
 	});
-	
+
 	const comment1 = await prisma.comment.create({
 		data: {
-			content: "This is a comment on the first change request",
+			content: 'This is a comment on the first change request',
 			author: {
 				connect: {
-					id: testUser1.id,
-				},
+					id: testUser1.id
+				}
 			},
 			changeRequest: {
 				connect: {
-					id: changeRequest1.id,
-				},
-			},
-		},
+					id: changeRequest1.id
+				}
+			}
+		}
 	});
-	
+
 	const comment2 = await prisma.comment.create({
 		data: {
-			content: "This is a comment on the second change request",
+			content: 'This is a comment on the second change request',
 			author: {
 				connect: {
-					id: adamUser.id,
-				},
+					id: adamUser.id
+				}
 			},
 			changeRequest: {
 				connect: {
-					id: changeRequest2.id,
-				},
-			},
-		},
+					id: changeRequest2.id
+				}
+			}
+		}
 	});
 
 	const follower1 = await prisma.follower.create({
