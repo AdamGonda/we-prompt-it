@@ -47,6 +47,15 @@ model PromptContent {
   prompt    Prompt[]
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+  aIModelId Int
+  model     AIModel  @relation(fields: [aIModelId], references: [id])
+}
+
+model AIModel {
+  id            Int             @id @default(autoincrement())
+  version       String
+  name          String
+  PromptContent PromptContent[]
 }
 
 model ChangeRequest {

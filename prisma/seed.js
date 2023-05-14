@@ -3,7 +3,7 @@ import { PrismaClient } from '@prisma/client';
 const prisma = new PrismaClient();
 
 async function main() {
-	const testUser1 = await prisma.user.upsert({
+	const adamUser = await prisma.user.upsert({
 		where: { email: 'adamgondagyula@gmail.com' },
 		update: {},
 		create: {
@@ -14,7 +14,7 @@ async function main() {
 		}
 	});
 
-	const testUser2 = await prisma.user.upsert({
+	const testUser1 = await prisma.user.upsert({
 		where: { email: 'testshareloop1@gmail.com' },
 		update: {},
 		create: {
@@ -24,7 +24,7 @@ async function main() {
 		}
 	});
 
-	const testUser3 = await prisma.user.upsert({
+	const testUser2 = await prisma.user.upsert({
 		where: { email: 'testshareloop2@gmail.com' },
 		update: {},
 		create: {
