@@ -19,8 +19,8 @@
 		<a href={`/app/create-offer`}>
 			<div>Offer</div>
 		</a>
-		{/if}
 		<div style="cursor: pointer;" on:click={() => signOut()}>{user?.firstName}</div>
+		{/if}
 </nav>
 
 <style>

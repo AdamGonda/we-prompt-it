@@ -1,4 +1,5 @@
-import prisma from '@prisma/client'
+import { PrismaClient } from '@prisma/client'
+const prisma = new PrismaClient()
 
 async function createUser(data) {
   return await prisma.user.create({
@@ -6,9 +7,9 @@ async function createUser(data) {
   })
 }
 
-async function getUser(id) {
+async function getUserByEmail(email) {
   return await prisma.user.findUnique({
-    where: { id },
+    where: { email },
   })
 }
 
@@ -25,9 +26,9 @@ async function deleteUser(id) {
   })
 }
 
-export default {
+export {
   createUser,
-  getUser,
+  getUserByEmail,
   updateUser,
   deleteUser,
 }
