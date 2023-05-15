@@ -1,6 +1,6 @@
-import { getAllAIModels } from '$lib/core/models/ai-model.js';
-import { createRepo } from '$lib/core/models/repo.js';
-import { getAllTags } from '$lib/core/models/tag.js';
+import { getAllAIModels } from '$lib/core/ai-model.js';
+import { createRepo } from '$lib/core/repo.js';
+import { getAllTags } from '$lib/core/tag.js';
 import { formToObject } from '$lib/utils';
 import { redirect } from '@sveltejs/kit';
 

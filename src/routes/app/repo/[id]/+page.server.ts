@@ -1,8 +1,8 @@
-import { getAllAIModels } from '$lib/core/models/ai-model';
-import { getRepoById } from '$lib/core/models/repo';
-import { addStar } from '$lib/core/models/star';
-import { getAllTags } from '$lib/core/models/tag';
-import { getUserByEmail } from '$lib/core/models/user.js';
+import { getAllAIModels } from '$lib/core/ai-model';
+import { getRepoById } from '$lib/core/repo';
+import { addStar } from '$lib/core/star';
+import { getAllTags } from '$lib/core/tag';
+import { getUserByEmail } from '$lib/core/user.js';
 
 export function load({ params }) {
 	const id = Number(params.id);
