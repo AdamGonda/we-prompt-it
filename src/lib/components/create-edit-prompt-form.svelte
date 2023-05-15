@@ -1,9 +1,6 @@
 <script>
 	import { page } from '$app/stores';
-	import { each } from 'svelte/internal';
 	export let type;
-
-	console.log('log $page.data', $page.data);
 
 	let data = {
 		action: 'createPrompt',
