@@ -1,42 +1,44 @@
 <script>
 	import { page } from '$app/stores';
 
-	
 	const data = {
 		id: $page.data.repo.id,
 		name: $page.data.repo.name,
 		changeRequests: $page.data.repo.changeRequests,
 		stars: $page.data.repo.stars,
-		author: $page.data.repo.author,
-	}
+		author: $page.data.repo.author
+	};
 </script>
-
 
 <div>
 	<button>Create new based on this</button>
 	<button>Stars: {data.stars?.length}</button>
 </div>
 
-<h1>
+<div class="location">
 	<a href={`/app/profile/${data.author.id}`}>
-		{data.author.firstName}
-	</a>	
+		<span>{data.author.firstName}</span>
+	</a>
 	/
 	<a href={`/app/prompt/${data.id}`}>
-		{data.name}
+		<span>{data.name}</span>
 	</a>
-</h1>
+</div>
 
 <ul>
 	<li>
 		<a href={`/app/prompt/${$page.params.id}`}>
-			Prompt
+			<span>Prompt</span>
 		</a>
+	</li>
+	<li>
 		<a href={`/app/prompt/${$page.params.id}/change-requests`}>
-			Change requests - {data.changeRequests?.length}
+			<span>Change requests - {data.changeRequests?.length}</span>
 		</a>
+	</li>
+	<li>
 		<a href={`/app/prompt/${$page.params.id}/edit`}>
-			Edit
+			<span>Edit</span>
 		</a>
 	</li>
 </ul>
