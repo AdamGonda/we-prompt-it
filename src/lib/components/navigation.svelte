@@ -12,23 +12,39 @@
 		<a href={`/app/listing`}>
 			<div>Explore</div>
 		</a>
-		<a href={`/app/create-prompt`}>
+
+		<!-- Prompt -->
+		<a href={`/app/prompt/1`}>
+			<div>Prompt</div>
+		</a>
+		<a href={`/app/prompt/create`}>
 			<div>Create prompt</div>
 		</a>
-		<a href={`/app/edit-profile/1`}>
-			<div>Edit profile</div>
-		</a>
-		<a href={`/app/edit-prompt/1`}>
+		<a href={`/app/prompt/edit/1`}>
 			<div>Edit prompt</div>
 		</a>
-		<a href={`/app/my-collection`}>
-			<div>My collection</div>
-		</a>
+
+		<!-- Profile -->
 		<a href={`/app/profile/1`}>
 			<div>Profile</div>
 		</a>
-		<a href={`/app/prompt/1`}>
-			<div>Prompt</div>
+		<a href={`/app/profile/edit/1`}>
+			<div>Edit profile</div>
+		</a>
+
+		<a href={`/app/my-collection`}>
+			<div>My collection</div>
+		</a>
+
+		<!-- Change request -->
+		<a href={`/app/change-request/1`}>
+			<div>Change request</div>
+		</a>
+		<a href={`/app/change-request/create`}>
+			<div>Create change request</div>
+		</a>
+		<a href={`/app/change-request/edit/1`}>
+			<div>Edit change request</div>
 		</a>
 		<div style="cursor: pointer;" on:click={() => signOut()}>{user?.firstName}</div>
 		{/if}
