@@ -13,7 +13,7 @@
 	}
 </script>
 
-<form name="create-prompt-form" method="POST">
+<form name="create-prompt-form" method="POST" action="?/edit">
 	<label for="name">
 		Name
 		<input name="name" type="text" value={data.name} />
@@ -44,6 +44,11 @@
 	</label>
 
 	<input type="submit" />
+</form>
+
+<form method="POST" action="?/delete">
+	Danger zone
+	<input type="submit" value="Delete">
 </form>
 
 <style>

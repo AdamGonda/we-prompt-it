@@ -17,6 +17,9 @@
 		<a href={`/app/repo/create`}>
 			<div>Create prompt</div>
 		</a>
+		<a href={`/app/my-collection`}>
+			<div>My collection</div>
+		</a>
 
 		<!-- Profile -->
 		<!-- <a href={`/app/profile/1`}>
@@ -25,10 +28,7 @@
 		<a href={`/app/profile/edit/1`}>
 			<div>Edit profile</div>
 		</a>
-
-		<a href={`/app/my-collection`}>
-			<div>My collection</div>
-		</a> -->
+		-->
 
 		<!-- Change request -->
 		<!-- <a href={`/app/change-request/1`}>

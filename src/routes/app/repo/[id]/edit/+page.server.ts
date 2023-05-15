@@ -14,11 +14,15 @@ export function load({ params }) {
 }
 
 export const actions = {
-	default: async ({ request, params }) => {
+	edit: async ({ request, params }) => {
 		const formData = await request.formData();
 		const obj = formToObject(formData);
 
 		await updateRepo(Number(params.id), obj);
 		throw redirect(301, `/app/repo/${params.id}`);
+	},
+	delete: async ({ request, params }) => {
+		console.log('log delete')
+		throw redirect(301, `/app/my-collection`);
 	}
 };
