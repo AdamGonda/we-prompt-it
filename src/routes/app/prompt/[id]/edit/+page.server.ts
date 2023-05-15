@@ -3,7 +3,7 @@ import { formToObject } from '$lib/utils';
 import { redirect } from '@sveltejs/kit';
 
 export const actions = {
-	editPrompt: async ({ request, params }) => {
+	editRepo: async ({ request, params }) => {
     const formData = await request.formData();
 		const obj = formToObject(formData);
 

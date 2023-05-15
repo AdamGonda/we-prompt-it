@@ -18,7 +18,7 @@ async function createRepo(event, data) {
 	return await prisma.repo.create({
 		data: {
 			description: data.description,
-			name: data.title,
+			name: data.name,
 			author: {
 				connect: {
 					id: user.id
@@ -26,7 +26,6 @@ async function createRepo(event, data) {
 			},
 			prompt: {
 				create: {
-					version: '1.0',
 					content: data.content,
 					aIModelId: 1
 				}
@@ -72,7 +71,7 @@ async function updateRepo(id, data) {
 	await prisma.repo.update({
 		where: { id },
 		data: {
-			name: data.title,
+			name: data.name,
 			description: data.description
 		}
 	});
