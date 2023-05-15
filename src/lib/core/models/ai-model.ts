@@ -9,6 +9,10 @@ async function getAIModelById(id) {
 	return await prisma.aIModel.findUnique({ where: { id } });
 }
 
+async function getAllAIModels() {
+	return await prisma.aIModel.findMany();
+}
+
 async function updateAIModel(id, data) {
 	return await prisma.aIModel.update({ where: { id }, data });
 }
@@ -17,4 +21,4 @@ async function deleteAIModel(id) {
 	return await prisma.aIModel.delete({ where: { id } });
 }
 
-export { createAIModel, getAIModelById, updateAIModel, deleteAIModel };
+export { createAIModel, getAIModelById, getAllAIModels, updateAIModel, deleteAIModel };
