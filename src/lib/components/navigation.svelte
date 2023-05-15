@@ -13,12 +13,13 @@
 			<div>Explore</div>
 		</a>
 
+		<a href={`/app/my-collection`}>
+			<div>My collection</div>
+		</a>
+
 		<!-- Prompt -->
 		<a href={`/app/repo/create`}>
 			<div>Create prompt</div>
-		</a>
-		<a href={`/app/my-collection`}>
-			<div>My collection</div>
 		</a>
 
 		<!-- Profile -->
