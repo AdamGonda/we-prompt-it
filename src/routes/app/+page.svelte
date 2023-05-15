@@ -1,6 +1,6 @@
 <script>
 	import { page } from '$app/stores';
-	import Prompt from '$lib/components/prompt.svelte';
+	import Repo from '$lib/components/repo.svelte';
 	
 
 	const { allRepos } = $page.data;
@@ -9,8 +9,8 @@
 <h2>Logged in landing</h2>
 
 <main>
-	{#each allRepos as prompt (prompt.id) }
-	<Prompt {prompt}/>
+	{#each allRepos as repo (repo.id) }
+		<Repo {repo}/>
 	{/each}
 
 </main>
