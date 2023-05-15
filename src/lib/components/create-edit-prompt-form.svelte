@@ -12,7 +12,7 @@
 
 	if (type == 'edit') {
 		data.action = 'editRepo';
-		data.title = $page.data.repo.title;
+		data.name = $page.data.repo.name;
 		data.description = $page.data.repo.description;
 		data.content = $page.data.repo.prompt.content;
 	}
@@ -24,8 +24,8 @@
 
 <form name="create-prompt-form" method="POST" action={`?/${data.action}`}>
 	<label for="title">
-		Title
-		<input name="title" type="text" placeholder={data.title} />
+		Name
+		<input name="title" type="text" placeholder={data.name} />
 	</label>
 
 	<label for="description">
