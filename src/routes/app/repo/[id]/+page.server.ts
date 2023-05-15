@@ -1,6 +1,6 @@
 import { getAllAIModels } from '$lib/core/models/ai-model';
 import { getRepoById } from '$lib/core/models/repo';
-import { createStar } from '$lib/core/models/star';
+import { addStar } from '$lib/core/models/star';
 import { getAllTags } from '$lib/core/models/tag';
 import { getUserByEmail } from '$lib/core/models/user.js';
 
@@ -17,6 +17,6 @@ export const actions = {
 	addStar: async (event) => {
 		const userEmail = (await event.locals.getSession()).user.email;
 		const user = await getUserByEmail(userEmail);
-		await createStar(user.id, Number(event.params.id));
+		await addStar(user.id, Number(event.params.id));
 	}
 };
