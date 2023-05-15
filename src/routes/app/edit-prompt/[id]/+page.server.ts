@@ -1,6 +1,8 @@
 import { getAllAIModels } from '$lib/core/models/ai-model';
-import { getPromptById } from '$lib/core/models/prompt.js';
+import { getPromptById, updatePrompt } from '$lib/core/models/prompt.js';
 import { getAllTags } from '$lib/core/models/tag';
+import { formToObject } from '$lib/utils';
+import { redirect } from '@sveltejs/kit';
 
 export function load({ params }) {
     const id = Number(params.id)
@@ -12,9 +14,12 @@ export function load({ params }) {
 }
 
 export const actions = {
-	editPrompt: async (event) => {
-        // todo edit prompt
-        console.log('log edit prompt', )
+	editPrompt: async ({ request, params }) => {
+        const formData = await request.formData();
+		const obj = formToObject(formData);
+
+		await updatePrompt(Number(params.id), obj);
+		throw redirect(301, '/app');
     },
 	
 };

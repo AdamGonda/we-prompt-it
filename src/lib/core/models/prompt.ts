@@ -57,7 +57,27 @@ async function getAllPrompts() {
 }
 
 async function updatePrompt(id, data) {
-	return await prisma.prompt.update({ where: { id }, data });
+	const prompt = await prisma.prompt.findUnique({
+		where: { id },
+		include: { content: true }
+	});
+
+	if (!prompt) {
+		throw new Error(`No prompt found with id: ${id}`);
+	}
+
+	await prisma.prompt.update({
+		where: { id },
+		data: {
+			title: data.title,
+			description: data.description
+		}
+	});
+
+	await prisma.promptContent.update({
+		where: { id: prompt.content.id },
+		data: { content: data.content, aIModelId: data.model }
+	});
 }
 
 async function deletePrompt(id) {
