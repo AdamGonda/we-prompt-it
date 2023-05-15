@@ -1,4 +1,5 @@
 <script>
+	import { enhance } from '$app/forms';
 	import { page } from '$app/stores';
 
 	let data = {
@@ -11,7 +12,7 @@
 </script>
 
 Create
-<form name="create-prompt-form" method="POST">
+<form name="create-prompt-form" method="POST" use:enhance>
 	<label for="name">
 		Name
 		<input name="name" type="text" placeholder={data.namePlaceholder} />

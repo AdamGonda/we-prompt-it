@@ -27,6 +27,8 @@ export async function getUsersCollection(event) {
     }
   })
 
+  const forked = createdBy.filter(repo => repo.isForked)
+
   const stars = await prisma.star.findMany({
     where: {
       userId: dbUser.id,
@@ -36,6 +38,7 @@ export async function getUsersCollection(event) {
   })
   
   return {
+    forked,
     createdBy,
     starred: stars?.map(star => star.repo),
   }

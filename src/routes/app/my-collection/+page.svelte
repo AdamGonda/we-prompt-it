@@ -14,6 +14,11 @@
 		<Repo {repo}/>
 	{/each}
 
+	<h3>Forked</h3>
+	{#each myCollection.forked as repo (repo.id) }
+		<Repo {repo}/>
+	{/each}
+
 
 	<h3>Starred</h3>
 	{#each myCollection.starred as repo (repo.id) }
