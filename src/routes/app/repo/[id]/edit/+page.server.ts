@@ -1,5 +1,5 @@
 import { getAllAIModels } from '$lib/core/models/ai-model';
-import { getRepoById, updateRepo } from '$lib/core/models/repo';
+import { deleteRepo, getRepoById, updateRepo } from '$lib/core/models/repo';
 import { getAllTags } from '$lib/core/models/tag';
 import { formToObject } from '$lib/utils';
 import { redirect } from '@sveltejs/kit';
@@ -22,7 +22,7 @@ export const actions = {
 		throw redirect(301, `/app/repo/${params.id}`);
 	},
 	delete: async ({ request, params }) => {
-		console.log('log delete')
+		await deleteRepo(Number(params.id))
 		throw redirect(301, `/app/my-collection`);
 	}
 };

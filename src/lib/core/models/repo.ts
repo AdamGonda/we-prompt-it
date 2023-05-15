@@ -29,7 +29,7 @@ async function createRepo(event, data) {
 					content: data.content,
 					aIModelId: 1
 				}
-			},
+			}
 			// tags: {
 			// 	connect: [{ id: tag1.id }]
 			// },
@@ -46,7 +46,6 @@ async function getRepoById(id) {
 			prompt: {
 				include: {
 					aiModel: true
-					
 				}
 			},
 			changeRequests: true
@@ -55,7 +54,10 @@ async function getRepoById(id) {
 }
 
 async function getAllRepos() {
-	return await prisma.repo.findMany({ include: { stars: true } });
+	return await prisma.repo.findMany({
+		where: { isDeleted: false },
+		include: { stars: true }
+	});
 }
 
 async function updateRepo(id, data) {
@@ -83,7 +85,7 @@ async function updateRepo(id, data) {
 }
 
 async function deleteRepo(id) {
-	return await prisma.repo.delete({ where: { id } });
+	return await prisma.repo.update({ where: { id }, data: { isDeleted: true } });
 }
 
 export { createRepo, getRepoById, updateRepo, deleteRepo, getAllRepos };
