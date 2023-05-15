@@ -47,7 +47,8 @@ async function getPromptById(id) {
 				include: {
 					aiModel: true
 				}
-			}
+			},
+			
 		}
 	});
 }

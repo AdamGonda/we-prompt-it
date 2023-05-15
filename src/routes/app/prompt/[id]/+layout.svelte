@@ -1,6 +1,8 @@
 <script>
 	import { page } from '$app/stores';
 
+	console.log('log $page.data', $page.data)
+
 	const changeRequestsNo = 5
 </script>
 

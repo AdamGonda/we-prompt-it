@@ -240,6 +240,11 @@ description: "some short description what this prompt is about",			author: {
 				connect: {
 					id: adamUser.id
 				}
+			},
+			prompt: {
+				connect: {
+					id: prompt1.id
+				}
 			}
 		}
 	});
@@ -252,6 +257,11 @@ description: "some short description what this prompt is about",			author: {
 			author: {
 				connect: {
 					id: testUser1.id
+				}
+			},
+			prompt: {
+				connect: {
+					id: prompt1.id
 				}
 			}
 		}
