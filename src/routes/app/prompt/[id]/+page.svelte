@@ -8,9 +8,18 @@
 	}
 </script>
 
-<h1>{data.title}</h1>
-<h1>{data.description}</h1>
-<h1>{data.content}</h1>
+<main>
+	<div>
+		<h2>{data.content}</h2>
+	</div>
+	<div>
+		<h2>About</h2>
+		<p>{data.description}</p>
+	</div>
+</main>
 
 <style>
+main {
+	display: flex;
+}
 </style>

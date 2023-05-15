@@ -1,22 +1,36 @@
 <script>
 	import { page } from '$app/stores';
 
-	const changeRequestsNo = $page.data.prompt.changeRequests.length
+	
+	const data = {
+		title: $page.data.prompt.title,
+		changeRequestsNo:$page.data.prompt.changeRequests.length,
+		starts: $page.data.prompt,
+	}
 </script>
+
+
+<div>
+	<button>Create noew based on this</button>
+	<button>Stars: {data.changeRequestsNo}</button>
+</div>
+
+<h1>{data.title}</h1>
 
 <ul>
 	<li>
 		<a href={`/app/prompt/${$page.params.id}`}>
 			Prompt
 		</a>
-		<a href={`/app/change-request/list`}>
-			Change requests - {changeRequestsNo}
+		<a href={`/app/prompt/${$page.params.id}/change-requests`}>
+			Change requests - {data.changeRequestsNo}
 		</a>
 		<a href={`/app/prompt/${$page.params.id}/edit`}>
 			Edit
 		</a>
 	</li>
 </ul>
+
 <main>
 	<slot />
 </main>
