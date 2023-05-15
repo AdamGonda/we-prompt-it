@@ -14,7 +14,7 @@
 		</a>
 
 		<!-- Prompt -->
-		<a href={`/app/prompt/create`}>
+		<a href={`/app/repo/create`}>
 			<div>Create prompt</div>
 		</a>
 

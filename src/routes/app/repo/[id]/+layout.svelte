@@ -20,24 +20,24 @@
 		<span>{data.author.firstName}</span>
 	</a>
 	/
-	<a href={`/app/prompt/${data.id}`}>
+	<a href={`/app/repo/${data.id}`}>
 		<span>{data.name}</span>
 	</a>
 </div>
 
 <ul>
 	<li>
-		<a href={`/app/prompt/${$page.params.id}`}>
+		<a href={`/app/repo/${$page.params.id}`}>
 			<span>Prompt</span>
 		</a>
 	</li>
 	<li>
-		<a href={`/app/prompt/${$page.params.id}/change-requests`}>
+		<a href={`/app/repo/${$page.params.id}/change-requests`}>
 			<span>Change requests - {data.changeRequests?.length}</span>
 		</a>
 	</li>
 	<li>
-		<a href={`/app/prompt/${$page.params.id}/edit`}>
+		<a href={`/app/repo/${$page.params.id}/edit`}>
 			<span>Edit</span>
 		</a>
 	</li>
