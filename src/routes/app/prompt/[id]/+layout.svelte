@@ -12,7 +12,7 @@
 
 
 <div>
-	<button>Create noew based on this</button>
+	<button>Create new based on this</button>
 	<button>Stars: {data.changeRequestsNo}</button>
 </div>
 
