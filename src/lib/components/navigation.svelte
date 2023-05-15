@@ -17,12 +17,6 @@
 		<a href={`/app/prompt/create`}>
 			<div>Create prompt</div>
 		</a>
-		<a href={`/app/prompt/1`}>
-			<div>Prompt</div>
-		</a>
-		<a href={`/app/prompt/1/edit`}>
-			<div>Edit prompt</div>
-		</a>
 
 		<!-- Profile -->
 		<!-- <a href={`/app/profile/1`}>
