@@ -3,7 +3,7 @@
 	export let type;
 
 	let data = {
-		action: 'createPrompt',
+		action: 'createRepo',
 		title: 'some title goes here todocopy',
 		description: 'some description goes here todocopy',
 		content: 'some prompt contnet todocopy',
@@ -11,14 +11,14 @@
 	};
 
 	if (type == 'edit') {
-		data.action = 'editPrompt';
-		data.title = $page.data.prompt.title;
-		data.description = $page.data.prompt.description;
-		data.content = $page.data.prompt.content.content;
+		data.action = 'editRepo';
+		data.title = $page.data.repo.title;
+		data.description = $page.data.repo.description;
+		data.content = $page.data.repo.prompt.content;
 	}
 
 	function isSelected(model) {
-		return type == 'edit' && model.id == $page.data.prompt.content.aiModel.id
+		return type == 'edit' && model.id == $page.data.repo.prompt.aiModel.id
 	}
 </script>
 

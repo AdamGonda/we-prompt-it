@@ -3,18 +3,18 @@
 
 	
 	const data = {
-		promptId: $page.data.prompt.id,
-		title: $page.data.prompt.title,
-		changeRequestsNo:$page.data.prompt.changeRequests.length,
-		starts: $page.data.prompt,
-		author: $page.data.prompt.author,
+		id: $page.data.repo.id,
+		name: $page.data.repo.name,
+		changeRequests: $page.data.repo.changeRequests,
+		stars: $page.data.repo.stars,
+		author: $page.data.repo.author,
 	}
 </script>
 
 
 <div>
 	<button>Create new based on this</button>
-	<button>Stars: {data.changeRequestsNo}</button>
+	<button>Stars: {data.stars?.length}</button>
 </div>
 
 <h1>
@@ -22,8 +22,8 @@
 		{data.author.firstName}
 	</a>	
 	/
-	<a href={`/app/prompt/${data.promptId}`}>
-		{data.title}
+	<a href={`/app/prompt/${data.id}`}>
+		{data.name}
 	</a>
 </h1>
 
@@ -33,7 +33,7 @@
 			Prompt
 		</a>
 		<a href={`/app/prompt/${$page.params.id}/change-requests`}>
-			Change requests - {data.changeRequestsNo}
+			Change requests - {data.changeRequests?.length}
 		</a>
 		<a href={`/app/prompt/${$page.params.id}/edit`}>
 			Edit

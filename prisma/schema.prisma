@@ -9,54 +9,56 @@ datasource db {
 }
 
 model User {
-  id             Int             @id @default(autoincrement())
-  email          String          @unique
-  firstName      String
-  lastName       String
-  picture        String          @default("")
+  id            Int             @id @default(autoincrement())
+  email         String          @unique
+  firstName     String
+  lastName      String
+  picture       String          @default("")
+  createdAt     DateTime        @default(now())
+  updatedAt     DateTime        @updatedAt
+  repos         Repo[]
+  starredRepos  Star[]
+  reputation    Int             @default(0)
+  followers     Follower[]      @relation("Followers")
+  followings    Follower[]      @relation("Followings")
+  changeRequest ChangeRequest[]
+  comments      Comment[]
+}
+
+model Repo {
+  id          Int    @id @default(autoincrement())
+  name        String @default("")
+  description String @default("")
+  promptId    Int    @unique
+  prompt      Prompt @relation(fields: [promptId], references: [id])
+
   createdAt      DateTime        @default(now())
   updatedAt      DateTime        @updatedAt
-  prompts        Prompt[]
-  starredPrompts Star[]
-  reputation     Int             @default(0)
-  followers      Follower[]      @relation("Followers")
-  followings     Follower[]      @relation("Followings")
-  changeRequest  ChangeRequest[]
+  authorId       Int
+  author         User            @relation(fields: [authorId], references: [id])
+  stars          Star[]
+  tags           Tag[]
   comments       Comment[]
+  changeRequests ChangeRequest[]
 }
 
 model Prompt {
-  id          Int           @id @default(autoincrement())
-  title       String        @default("")
-  description String        @default("")
-  content     PromptContent @relation(fields: [promptContentId], references: [id])
+  id          Int    @id @default(autoincrement())
+  version     String @default("0.0.1")
+  description String @default("")
+  repo        Repo?
+  content     String
 
-  createdAt       DateTime        @default(now())
-  updatedAt       DateTime        @updatedAt
-  authorId        Int
-  author          User            @relation(fields: [authorId], references: [id])
-  stars           Star[]
-  tags            Tag[]
-  promptContentId Int
-  comments        Comment[]
-  changeRequests  ChangeRequest[]
-}
-
-model PromptContent {
-  id        Int      @id @default(autoincrement())
-  version   String   @default("0.0.1")
-  content   String   @default("")
-  prompt    Prompt[]
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  aIModelId Int
-  aiModel   AIModel  @relation(fields: [aIModelId], references: [id])
+  aIModelId Int?
+  aiModel   AIModel? @relation(fields: [aIModelId], references: [id])
 }
 
 model AIModel {
-  id            Int             @id @default(autoincrement())
-  name          String
-  PromptContent PromptContent[]
+  id     Int      @id @default(autoincrement())
+  name   String
+  Prompt Prompt[]
 }
 
 model ChangeRequest {
@@ -65,8 +67,8 @@ model ChangeRequest {
   description String
   content     String
 
-  promptId  Int
-  prompt    Prompt    @relation(fields: [promptId], references: [id])
+  repoId    Int?
+  repo      Repo?     @relation(fields: [repoId], references: [id])
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt
   authorId  Int
@@ -81,18 +83,18 @@ model Comment {
   updatedAt       DateTime       @updatedAt
   authorId        Int
   author          User           @relation(fields: [authorId], references: [id])
-  promptId        Int?
-  prompt          Prompt?        @relation(fields: [promptId], references: [id])
+  repoId          Int?
+  repo            Repo?          @relation(fields: [repoId], references: [id])
   changeRequestId Int?
   changeRequest   ChangeRequest? @relation(fields: [changeRequestId], references: [id])
 }
 
 model Star {
-  id       Int    @id @default(autoincrement())
-  userId   Int
-  promptId Int
-  user     User   @relation(fields: [userId], references: [id])
-  prompt   Prompt @relation(fields: [promptId], references: [id])
+  id     Int   @id @default(autoincrement())
+  userId Int
+  user   User  @relation(fields: [userId], references: [id])
+  repoId Int?
+  repo   Repo? @relation(fields: [repoId], references: [id])
 }
 
 model Follower {
@@ -106,7 +108,7 @@ model Follower {
 }
 
 model Tag {
-  id      Int      @id @default(autoincrement())
-  name    String   @unique
-  prompts Prompt[]
+  id    Int    @id @default(autoincrement())
+  name  String @unique
+  repos Repo[]
 }

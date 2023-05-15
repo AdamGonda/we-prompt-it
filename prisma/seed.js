@@ -50,16 +50,16 @@ async function main() {
 		}
 	});
 
-	const prompt1 = await prisma.prompt.create({
+	const repo1 = await prisma.repo.create({
 		data: {
-			description: "some short description what this prompt is about",
-			title: 'First prompt',
+			description: 'some short description what this prompt is about',
+			name: 'First prompt',
 			author: {
 				connect: {
 					id: adamUser.id
 				}
 			},
-			content: {
+			prompt: {
 				create: {
 					version: '1.0',
 					content: 'This is the content of the first prompt',
@@ -75,16 +75,16 @@ async function main() {
 		}
 	});
 
-	const prompt2 = await prisma.prompt.create({
+	const repo2 = await prisma.repo.create({
 		data: {
-			description: "some short description what this prompt is about",
-			title: 'Second prompt',
+			description: 'some short description what this prompt is about',
+			name: 'Second prompt',
 			author: {
 				connect: {
 					id: testUser1.id
 				}
 			},
-			content: {
+			prompt: {
 				create: {
 					version: '1.0',
 					content: 'This is the content of the second prompt',
@@ -100,16 +100,16 @@ async function main() {
 		}
 	});
 
-	const prompt3 = await prisma.prompt.create({
+	const repo3 = await prisma.repo.create({
 		data: {
-			description: "some short description what this prompt is about",
-			title: 'Third prompt',
+			description: 'some short description what this prompt is about',
+			name: 'Third prompt',
 			author: {
 				connect: {
 					id: adamUser.id
 				}
 			},
-			content: {
+			prompt: {
 				create: {
 					version: '1.0',
 					content: 'This is the content of the third prompt',
@@ -125,16 +125,16 @@ async function main() {
 		}
 	});
 
-	const prompt4 = await prisma.prompt.create({
+	const repo4 = await prisma.repo.create({
 		data: {
-			description: "some short description what this prompt is about",
-			title: 'Fourth prompt',
+			description: 'some short description what this prompt is about',
+			name: 'Fourth prompt',
 			author: {
 				connect: {
 					id: testUser2.id
 				}
 			},
-			content: {
+			prompt: {
 				create: {
 					version: '1.0',
 					content: 'This is the content of the fourth prompt',
@@ -150,17 +150,17 @@ async function main() {
 		}
 	});
 
-	const prompt5 = await prisma.prompt.create({
+	const repo5 = await prisma.repo.create({
 		data: {
-			title: 'Fifth prompt',
+			name: 'Fifth prompt',
 
-
-description: "some short description what this prompt is about",			author: {
+			description: 'some short description what this prompt is about',
+			author: {
 				connect: {
 					id: testUser1.id
 				}
 			},
-			content: {
+			prompt: {
 				create: {
 					version: '1.0',
 					content: 'This is the content of the fifth prompt',
@@ -180,17 +180,17 @@ description: "some short description what this prompt is about",			author: {
 		}
 	});
 
-	const prompt6 = await prisma.prompt.create({
+	const repo6 = await prisma.repo.create({
 		data: {
-			title: 'Sixth prompt',
+			name: 'Sixth prompt',
 
-
-description: "some short description what this prompt is about",			author: {
+			description: 'some short description what this prompt is about',
+			author: {
 				connect: {
 					id: adamUser.id
 				}
 			},
-			content: {
+			prompt: {
 				create: {
 					version: '1.0',
 					content: 'This is the content of the sixth prompt',
@@ -206,16 +206,16 @@ description: "some short description what this prompt is about",			author: {
 		}
 	});
 
-	const prompt7 = await prisma.prompt.create({
+	const repo7 = await prisma.repo.create({
 		data: {
-			description: "some short description what this prompt is about",
-			title: 'Seventh prompt',
+			description: 'some short description what this prompt is about',
+			name: 'Seventh prompt',
 			author: {
 				connect: {
 					id: testUser2.id
 				}
 			},
-			content: {
+			prompt: {
 				create: {
 					version: '1.0',
 					content: 'This is the content of the seventh prompt',
@@ -241,9 +241,9 @@ description: "some short description what this prompt is about",			author: {
 					id: adamUser.id
 				}
 			},
-			prompt: {
+			repo: {
 				connect: {
-					id: prompt1.id
+					id: repo1.id
 				}
 			}
 		}
@@ -259,9 +259,9 @@ description: "some short description what this prompt is about",			author: {
 					id: testUser1.id
 				}
 			},
-			prompt: {
+			repo: {
 				connect: {
-					id: prompt1.id
+					id: repo1.id
 				}
 			}
 		}

@@ -2,9 +2,9 @@
 	import { page } from '$app/stores';
 
 	const data = {
-		title: $page.data.prompt.title,
-		description: $page.data.prompt.description,
-		content: $page.data.prompt.content.content,
+		name: $page.data.repo.name,
+		description: $page.data.repo.description,
+		content: $page.data.repo.prompt.content,
 	}
 </script>
 

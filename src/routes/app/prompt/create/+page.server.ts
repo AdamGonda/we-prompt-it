@@ -1,5 +1,5 @@
 import { getAllAIModels } from '$lib/core/models/ai-model.js';
-import { createPrompt } from '$lib/core/models/prompt.js';
+import { createRepo } from '$lib/core/models/repo.js';
 import { getAllTags } from '$lib/core/models/tag.js';
 import { formToObject } from '$lib/utils';
 import { redirect } from '@sveltejs/kit';
@@ -12,11 +12,11 @@ export async function load(event) {
 }
 
 export const actions = {
-	createPrompt: async (event) => {
+	createRepo: async (event) => {
 		const formData = await event.request.formData();
 		const obj = formToObject(formData);
 
-		await createPrompt(event, obj);
+		await createRepo(event, obj);
 		throw redirect(301, '/app');
 	}
 };

@@ -3,13 +3,13 @@
 	import Prompt from '$lib/components/prompt.svelte';
 	
 
-	const { allPrompts } = $page.data;
+	const { allRepos } = $page.data;
 </script>
 
 <h2>Logged in landing</h2>
 
 <main>
-	{#each allPrompts as prompt (prompt.id) }
+	{#each allRepos as prompt (prompt.id) }
 	<Prompt {prompt}/>
 	{/each}
 

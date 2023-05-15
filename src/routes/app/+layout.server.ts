@@ -1,10 +1,10 @@
 import type { RequestEvent } from '@sveltejs/kit';
 import { getUserByEmail } from '$lib/core/models/user';
-import { getAllPrompts } from '$lib/core/models/prompt';
+import { getAllRepos } from '$lib/core/models/repo';
 
 export async function load(event: RequestEvent) {
 	const user = getUserByEmail((await event.locals.getSession()).user.email);
-	const allPrompts = getAllPrompts()
+	const allRepos = getAllRepos()
 
-	return { user, allPrompts };
+	return { user, allRepos };
 }
