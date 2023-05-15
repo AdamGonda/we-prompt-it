@@ -1,5 +1,5 @@
 import { getAllAIModels } from '$lib/core/models/ai-model';
-import { getPromptById, updatePrompt } from '$lib/core/models/prompt.js';
+import { getPromptById } from '$lib/core/models/prompt';
 import { getAllTags } from '$lib/core/models/tag';
 
 export function load({ params }) {
@@ -10,3 +10,4 @@ export function load({ params }) {
 
     return { prompt, aiModels, tags };
 }
+
