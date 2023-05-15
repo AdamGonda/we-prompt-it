@@ -6,6 +6,7 @@
 		title: $page.data.prompt.title,
 		changeRequestsNo:$page.data.prompt.changeRequests.length,
 		starts: $page.data.prompt,
+		author: $page.data.prompt.author,
 	}
 </script>
 
@@ -15,7 +16,7 @@
 	<button>Stars: {data.changeRequestsNo}</button>
 </div>
 
-<h1>{data.title}</h1>
+<h1>{data.author.firstName}/{data.title}</h1>
 
 <ul>
 	<li>
