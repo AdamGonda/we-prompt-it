@@ -23,6 +23,7 @@ model User {
   followings    Follower[]      @relation("Followings")
   changeRequest ChangeRequest[]
   comments      Comment[]
+  isDeleted     Boolean         @default(false)
 }
 
 model Repo {
@@ -44,11 +45,12 @@ model Repo {
 }
 
 model Prompt {
-  id          Int    @id @default(autoincrement())
-  version     String @default("0.0.1")
-  description String @default("")
+  id          Int     @id @default(autoincrement())
+  version     String  @default("0.0.1")
+  description String  @default("")
   repo        Repo?
   content     String
+  isDeleted   Boolean @default(false)
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -57,9 +59,10 @@ model Prompt {
 }
 
 model AIModel {
-  id     Int      @id @default(autoincrement())
-  name   String
-  Prompt Prompt[]
+  id        Int      @id @default(autoincrement())
+  name      String
+  Prompt    Prompt[]
+  isDeleted Boolean  @default(false)
 }
 
 model ChangeRequest {
@@ -75,6 +78,7 @@ model ChangeRequest {
   authorId  Int
   author    User      @relation(fields: [authorId], references: [id])
   comments  Comment[]
+  isDeleted Boolean   @default(false)
 }
 
 model Comment {
@@ -88,28 +92,35 @@ model Comment {
   repo            Repo?          @relation(fields: [repoId], references: [id])
   changeRequestId Int?
   changeRequest   ChangeRequest? @relation(fields: [changeRequestId], references: [id])
+  isDeleted       Boolean        @default(false)
 }
 
 model Star {
-  id     Int   @id @default(autoincrement())
-  userId Int
-  user   User  @relation(fields: [userId], references: [id])
-  repoId Int?
-  repo   Repo? @relation(fields: [repoId], references: [id])
+  id        Int      @id @default(autoincrement())
+  userId    Int
+  user      User     @relation(fields: [userId], references: [id])
+  repoId    Int
+  repo      Repo     @relation(fields: [repoId], references: [id])
+  createdAt DateTime @default(now())
+  isDeleted Boolean  @default(false)
+
+  @@unique([userId, repoId])
 }
 
 model Follower {
-  id          Int  @id @default(autoincrement())
-  userId      Int  @map("user_id")
-  followingId Int  @map("following_id")
-  user        User @relation("Followers", fields: [userId], references: [id])
-  following   User @relation("Followings", fields: [followingId], references: [id])
+  id          Int     @id @default(autoincrement())
+  userId      Int     @map("user_id")
+  followingId Int     @map("following_id")
+  user        User    @relation("Followers", fields: [userId], references: [id])
+  following   User    @relation("Followings", fields: [followingId], references: [id])
+  isDeleted   Boolean @default(false)
 
   createdAt DateTime @default(now())
 }
 
 model Tag {
-  id    Int    @id @default(autoincrement())
-  name  String @unique
-  repos Repo[]
+  id        Int     @id @default(autoincrement())
+  name      String  @unique
+  repos     Repo[]
+  isDeleted Boolean @default(false)
 }

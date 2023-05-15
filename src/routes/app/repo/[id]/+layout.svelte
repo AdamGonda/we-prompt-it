@@ -1,6 +1,8 @@
 <script>
 	import { page } from '$app/stores';
 
+	console.log('log $page.data.repo', $page.data.repo)
+
 	const data = {
 		id: $page.data.repo.id,
 		name: $page.data.repo.name,
@@ -14,7 +16,10 @@
 	<button>
 		<a href={`/app/repo/${data.id}/fork`}>Create new based on this</a>
 	</button>
-	<button>Stars: {data.stars?.length}</button>
+
+	<form name="add-star" method="POST" action="?/addStar">
+		<input type="submit" value={`Stars: ${data.stars?.length}`} />
+	</form>
 </div>
 
 <div class="location">
@@ -50,4 +55,7 @@
 </main>
 
 <style>
+	form[name="add-star"] input[type="submit"] {
+		cursor: pointer;
+	}
 </style>

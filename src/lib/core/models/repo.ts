@@ -42,7 +42,7 @@ async function getRepoById(id) {
 		where: { id },
 		include: {
 			author: true,
-			stars: true,
+			stars: { where: { isDeleted: false } },
 			prompt: {
 				include: {
 					aiModel: true
@@ -56,7 +56,7 @@ async function getRepoById(id) {
 async function getAllRepos() {
 	return await prisma.repo.findMany({
 		where: { isDeleted: false },
-		include: { stars: true }
+		include: { stars: { where: { isDeleted: false } } }
 	});
 }
 
