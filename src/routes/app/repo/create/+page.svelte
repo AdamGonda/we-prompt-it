@@ -12,7 +12,7 @@
 </script>
 
 Create
-<form name="create-prompt-form" method="POST" use:enhance>
+<form name="create-prompt-form" method="POST">
 	<label for="name">
 		Name
 		<input name="name" type="text" placeholder={data.namePlaceholder} />
