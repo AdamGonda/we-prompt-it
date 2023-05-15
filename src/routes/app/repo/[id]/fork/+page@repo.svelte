@@ -2,19 +2,22 @@
 	import { page } from '$app/stores';
 
 	let data = {
-		namePlaceholder: 'name placeholder todocopy',
-		descriptionPlaceholder: 'description placeholder todocopy',
-		contentPlaceholder: 'content placeholder todocopy',
-		
+		name: $page.data.repo.name,
+		description: $page.data.repo.description,
+		content: $page.data.repo.prompt.content,
 		models: $page.data.aiModels
 	};
+
+	function isSelected(model) {
+		return model.id == $page.data.repo.prompt.aiModel.id;
+	}
 </script>
 
-Create
+Fork
 <form name="create-prompt-form" method="POST">
 	<label for="name">
 		Name
-		<input name="name" type="text" placeholder={data.namePlaceholder} />
+		<input name="name" type="text" value={data.name} />
 	</label>
 
 	<label for="description">
@@ -23,20 +26,20 @@ Create
 			name="description"
 			rows="4"
 			cols="50"
-			placeholder={data.descriptionPlaceholder}
+			value={data.description}
 		/>
 	</label>
 
 	<label for="content">
 		Prompt
-		<textarea name="content" rows="4" cols="50" placeholder={data.contentPlaceholder} />
+		<textarea name="content" rows="4" cols="50" value={data.content} />
 	</label>
 
 	<label for="model">
 		Model
 		<select name="model">
 			{#each data.models as model}
-				<option value={model.id}>{model.name}</option>
+				<option selected={isSelected(model)} value={model.id}>{model.name}</option>
 			{/each}
 		</select>
 	</label>

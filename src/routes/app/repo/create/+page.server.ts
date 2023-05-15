@@ -12,7 +12,7 @@ export async function load(event) {
 }
 
 export const actions = {
-	createRepo: async (event) => {
+	default: async (event) => {
 		const formData = await event.request.formData();
 		const obj = formToObject(formData);
 

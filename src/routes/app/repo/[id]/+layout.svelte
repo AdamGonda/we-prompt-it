@@ -11,7 +11,9 @@
 </script>
 
 <div>
-	<button>Create new based on this</button>
+	<button>
+		<a href={`/app/repo/${data.id}/fork`}>Create new based on this</a>
+	</button>
 	<button>Stars: {data.stars?.length}</button>
 </div>
 
