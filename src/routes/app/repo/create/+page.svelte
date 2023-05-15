@@ -1,5 +1,4 @@
 <script>
-	import { enhance } from '$app/forms';
 	import { page } from '$app/stores';
 
 	let data = {
