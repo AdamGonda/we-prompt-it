@@ -1,8 +1,9 @@
 <script>
 	import { page } from '$app/stores';
+
 </script>
 
-List change requests
+<h2>Change requests</h2>
 
 <style>
 </style>
