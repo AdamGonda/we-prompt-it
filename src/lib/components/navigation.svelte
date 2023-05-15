@@ -9,7 +9,7 @@
 		<div>Logo</div>
 	</a>
 	{#if user}
-		<a href={`/app/listing`}>
+		<a href={`/app/explore`}>
 			<div>Explore</div>
 		</a>
 

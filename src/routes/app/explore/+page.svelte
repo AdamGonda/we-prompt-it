@@ -3,7 +3,7 @@
 
 </script>
 
-<h2>Prompt listing</h2>
+<h2>Explore</h2>
 
 <style>
 </style>
