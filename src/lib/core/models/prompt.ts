@@ -48,7 +48,7 @@ async function getPromptById(id) {
 					aiModel: true
 				}
 			},
-			
+			changeRequests: true
 		}
 	});
 }

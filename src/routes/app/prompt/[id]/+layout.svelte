@@ -1,9 +1,7 @@
 <script>
 	import { page } from '$app/stores';
 
-	console.log('log $page.data', $page.data)
-
-	const changeRequestsNo = 5
+	const changeRequestsNo = $page.data.prompt.changeRequests.length
 </script>
 
 <ul>
