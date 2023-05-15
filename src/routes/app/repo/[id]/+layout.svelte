@@ -23,7 +23,7 @@
 </div>
 
 <div class="location">
-	<a href={`/app/my-collection`}>
+	<a href={`/app/profile/${$page.params.id}`}>
 		<span>{data.author.firstName}</span>
 	</a>
 	/
