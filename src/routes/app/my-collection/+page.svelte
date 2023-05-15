@@ -3,12 +3,20 @@
 	import Repo from '$lib/components/repo.svelte';
 	
 
-	const { allRepos } = $page.data;
+	const { myCollection } = $page.data;
 </script>
 
 <main>
 	<h1>My collection</h1>
-	{#each allRepos as repo (repo.id) }
+
+	<h3>Created by me</h3>
+	{#each myCollection.createdBy as repo (repo.id) }
+		<Repo {repo}/>
+	{/each}
+
+
+	<h3>Starred</h3>
+	{#each myCollection.starred as repo (repo.id) }
 		<Repo {repo}/>
 	{/each}
 

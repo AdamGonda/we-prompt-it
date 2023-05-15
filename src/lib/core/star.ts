@@ -1,7 +1,7 @@
 import { PrismaClient } from '@prisma/client';
 const prisma = new PrismaClient();
 
-async function addStar(userId, repoId) {
+export async function addStar(userId, repoId) {
 	// check if user already starred the repo before
 	const starInDB = await prisma.star.findUnique({
 		where: {
@@ -27,15 +27,15 @@ async function addStar(userId, repoId) {
 	}
 }
 
-async function getStarById(id) {
+export async function getStarById(id) {
 	return await prisma.star.findUnique({ where: { id } });
 }
 
-async function updateStar(id, data) {
+export async function updateStar(id, data) {
 	return await prisma.star.update({ where: { id }, data });
 }
 
-async function deleteStar(id) {
+export async function deleteStar(id) {
 	return await prisma.star.update({
 		where: {
 			id
@@ -46,7 +46,7 @@ async function deleteStar(id) {
 	});
 }
 
-async function reactivateStar(id) {
+export async function reactivateStar(id) {
 	return await prisma.star.update({
 		where: {
 			id
@@ -56,5 +56,3 @@ async function reactivateStar(id) {
 		}
 	});
 }
-
-export { addStar, getStarById, updateStar, deleteStar };

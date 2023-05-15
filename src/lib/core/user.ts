@@ -1,34 +1,55 @@
 import { PrismaClient } from '@prisma/client'
 const prisma = new PrismaClient()
 
-async function createUser(data) {
+export async function createUser(data) {
   return await prisma.user.create({
     data,
   })
 }
 
-async function getUserByEmail(email) {
+export async function getUserByEmail(email) {
   return await prisma.user.findUnique({
     where: { email },
   })
 }
 
-async function updateUser(id, data) {
+export async function getDBUser(event) {
+  const userEmail = (await event.locals.getSession()).user.email;
+  return await getUserByEmail(userEmail)
+}
+
+export async function getUsersCollection(event) {
+  const dbUser = await getDBUser(event)
+
+  const createdBy = await prisma.repo.findMany({
+    where: {
+      authorId: dbUser.id
+    }
+  })
+
+  const stars = await prisma.star.findMany({
+    where: {
+      userId: dbUser.id,
+      isDeleted: false,
+    },
+    include: { repo: true }
+  })
+  
+  return {
+    createdBy,
+    starred: stars?.map(star => star.repo),
+  }
+}
+
+export async function updateUser(id, data) {
   return await prisma.user.update({
     where: { id },
     data,
   })
 }
 
-async function deleteUser(id) {
+export async function deleteUser(id) {
   return await prisma.user.delete({
     where: { id },
   })
-}
-
-export {
-  createUser,
-  getUserByEmail,
-  updateUser,
-  deleteUser,
 }

@@ -1,7 +1,7 @@
 import { PrismaClient } from '@prisma/client';
 const prisma = new PrismaClient();
 
-async function createRepo(event, data) {
+export async function createRepo(event, data) {
 	const session = event.locals.getSession();
 	const userEmail = (await session).user.email;
 
@@ -37,7 +37,7 @@ async function createRepo(event, data) {
 	});
 }
 
-async function getRepoById(id) {
+export async function getRepoById(id) {
 	return await prisma.repo.findUnique({
 		where: { id },
 		include: {
@@ -53,14 +53,14 @@ async function getRepoById(id) {
 	});
 }
 
-async function getAllRepos() {
+export async function getAllRepos() {
 	return await prisma.repo.findMany({
 		where: { isDeleted: false },
 		include: { stars: { where: { isDeleted: false } } }
 	});
 }
 
-async function updateRepo(id, data) {
+export async function updateRepo(id, data) {
 	const repo = await prisma.repo.findUnique({
 		where: { id },
 		include: { prompt: true }
@@ -84,8 +84,6 @@ async function updateRepo(id, data) {
 	});
 }
 
-async function deleteRepo(id) {
+export async function deleteRepo(id) {
 	return await prisma.repo.update({ where: { id }, data: { isDeleted: true } });
 }
-
-export { createRepo, getRepoById, updateRepo, deleteRepo, getAllRepos };
