@@ -4,8 +4,9 @@
 
 	let data = {
 		action: 'createPrompt',
-		title: 'some title goes here',
-		description: 'some description goes here'
+		title: 'some title goes here todocopy',
+		description: 'some description goes here todocopy',
+		content: 'some prompt contnet todocopy'
 	};
 
 	if (type == 'edit') {
@@ -13,7 +14,8 @@
 			action: 'editPrompt',
 			title: $page.data.prompt.title,
 			description: $page.data.prompt.description,
-			aiModel: $page.data.prompt.content.aiModel.name
+			aiModel: $page.data.prompt.content.aiModel.name,
+			content: $page.data.prompt.content.text
 		};
 	}
 </script>
@@ -27,6 +29,11 @@
 	<label for="description">
 		Description
 		<textarea name="description" rows="4" cols="50" placeholder={data.description} />
+	</label>
+	
+	<label for="content">
+		Prompt
+		<textarea name="content" rows="4" cols="50" placeholder={data.content} />
 	</label>
 
 	<label for="model">

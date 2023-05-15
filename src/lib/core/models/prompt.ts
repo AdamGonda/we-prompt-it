@@ -1,8 +1,41 @@
 import { PrismaClient } from '@prisma/client';
 const prisma = new PrismaClient();
 
-async function createPrompt(data) {
-	return await prisma.prompt.create({ data });
+async function createPrompt(event, data) {
+	const session = event.locals.getSession();
+	const userEmail = (await session).user.email;
+
+	const user = await prisma.user.findUnique({
+		where: {
+			email: userEmail
+		}
+	});
+
+	if (!user) {
+		throw Error('No user found');
+	}
+
+	return await prisma.prompt.create({
+		data: {
+			description: data.description,
+			title: data.title,
+			author: {
+				connect: {
+					id: user.id
+				}
+			},
+			content: {
+				create: {
+					version: '1.0',
+					content: data.content,
+					aIModelId: 1
+				}
+			}
+			// tags: {
+			// 	connect: [{ id: tag1.id }]
+			// },
+		}
+	});
 }
 
 async function getPromptById(id) {
@@ -12,7 +45,7 @@ async function getPromptById(id) {
 			author: true,
 			content: {
 				include: {
-					aiModel: true,
+					aiModel: true
 				}
 			}
 		}
