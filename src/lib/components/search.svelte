@@ -27,8 +27,6 @@
 		const formData = new FormData(form);
 		const query = formData.get('query');
 
-		// todo autocomplete
-
 		if ($page.route.id.indexOf('explore') === -1) {
 			goto(`/app/explore?q=${query}`);
 		}
@@ -40,7 +38,6 @@
 		
 		params.set('q', query as string);
 
-		// Change the actual URL in the browser
 		history.pushState({}, '', `${location.pathname}?${params}`);
 	}
 </script>
