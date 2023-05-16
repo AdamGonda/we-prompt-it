@@ -40,12 +40,13 @@
 			return;
 		}
 
-		const data = await fetchResults(query);
-		results.update((value) => (value = data));
+		fetchResults(query).then((data) => {
+			results.update((value) => (value = data));
+		});
 		updateUrl(query);
 	}
 
-	async function fetchResults(query){
+	async function fetchResults(query) {
 		const r = await fetch(`/api/search?q=${query}`);
 		return await r.json();
 	}
@@ -54,9 +55,13 @@
 		let searchParams = new URLSearchParams(window.location.search);
 		let q = searchParams.get('q');
 		inputValue = q;
+
+		fetchResults(q).then((data) => {
+			results.update((value) => (value = data));
+		});
 	}
 
-	function updateUrl(query){
+	function updateUrl(query) {
 		let params = new URLSearchParams(location.search);
 		params.set('q', query as string);
 		history.pushState({}, '', `${location.pathname}?${params}`);
