@@ -1,8 +1,13 @@
 <script>
 	import { page } from '$app/stores';
+	import { results } from '$lib/stores/search'
 	import RepoCard from '$lib/components/repo-card.svelte';
 
-	const { results } = $page.data;
+	const { initialLoadResults } = $page.data;
+	let resultsToHow = initialLoadResults;
+
+	results.subscribe((value) => resultsToHow = value);
+
 </script>
 
 <main>
@@ -10,7 +15,7 @@
 
 	<h3>All prompts</h3>
 	<div class="all">
-		{#each results as repo (repo.id)}
+		{#each resultsToHow as repo (repo.id)}
 			<RepoCard {repo} />
 		{/each}
 	</div>
