@@ -2,7 +2,7 @@
 	// todo
 	// when focused, dimm the rest of the page
 	// autocomplete, get matches from db (just text) and display them in a dropdown normal, and your search in bold
-	// search on enter or cta click
+	// search on cta click
 	// clear functionality
 
 	import { page } from '$app/stores';
