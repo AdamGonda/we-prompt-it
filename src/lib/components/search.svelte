@@ -37,9 +37,9 @@
 			goto(`/app/explore?q=${query}`);
 		}
 
-		const r = await fetch('/api/search');
+		const r = await fetch(`/api/search?q=${query}`);
 		const data = await r.json();
-		results.update(value => value = data.results)
+		results.update(value => value = data)
 	}
 </script>
 
