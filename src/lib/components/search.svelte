@@ -12,7 +12,7 @@
 
 	let form = null;
 	let inputValue = '';
-  let placeholder = '';
+	let placeholder = '';
 
 	afterNavigate(() => {
 		if (form && $page.route.id === '/app') {
@@ -24,30 +24,27 @@
 		if ($page.route.id.includes('explore')) {
 			let params = new URLSearchParams(window.location.search);
 			inputValue = params.get('q');
-		}else {
-      placeholder = 'Search by name, description, content, tags, or AI model.'
-    }
+		} else {
+			placeholder = 'Search by name, description, content, tags, or AI model.';
+		}
 	});
 
-	function handleSubmit({ data, cancel }) {
-		const query = data.get('query');
+	async function handleSubmit() {
+		const formData = new FormData(form);
+		const query = formData.get('query');
 
 		// todo autocomplete
 
 		if ($page.route.id.indexOf('explore') === -1) {
 			goto(`/app/explore?q=${query}`);
-			cancel();
 		} else {
-			location.href = `/app/explore?q=${query}`;
+			console.log('log ');
+			const r = await fetch('/api/search');
 		}
-
-		return async ({ update }) => {
-			await update({ reset: false });
-		};
 	}
 </script>
 
-<form autocomplete="off" method="POST" bind:this={form} use:enhance={handleSubmit}>
+<form autocomplete="off" bind:this={form} on:submit|preventDefault={handleSubmit}>
 	<input name="query" type="text" {placeholder} bind:value={inputValue} />
 </form>
 
