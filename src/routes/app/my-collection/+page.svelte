@@ -1,6 +1,6 @@
 <script>
 	import { page } from '$app/stores';
-	import Repo from '$lib/components/repo.svelte';
+	import RepoCard from '$lib/components/repo-card.svelte';
 
 	const { myCollection } = $page.data;
 </script>
@@ -11,21 +11,21 @@
 	<h3>Created by me</h3>
 	<div class="all">
 		{#each myCollection.createdBy as repo (repo.id)}
-			<Repo {repo} />
+			<RepoCard {repo} />
 		{/each}
 	</div>
 
 	<h3>Forked</h3>
 	<div class="all">
 		{#each myCollection.forked as repo (repo.id)}
-			<Repo {repo} />
+			<RepoCard {repo} />
 		{/each}
 	</div>
 
 	<h3>Starred</h3>
 	<div class="all">
 		{#each myCollection.starred as repo (repo.id)}
-			<Repo {repo} />
+			<RepoCard {repo} />
 		{/each}
 	</div>
 </main>
