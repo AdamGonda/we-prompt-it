@@ -40,11 +40,14 @@
 			return;
 		}
 
-		const r = await fetch(`/api/search?q=${query}`);
-		const data = await r.json();
-		
+		const data = await fetchResults(query);
 		results.update((value) => (value = data));
 		updateUrl(query);
+	}
+
+	async function fetchResults(query){
+		const r = await fetch(`/api/search?q=${query}`);
+		return await r.json();
 	}
 
 	function handlePropstate() {
