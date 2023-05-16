@@ -6,6 +6,7 @@
 	// clear functionality
 
 	import { page } from '$app/stores';
+  import { results } from '$lib/stores/search';
 	import { goto, afterNavigate } from '$app/navigation';
 
 	let form = null;
@@ -28,12 +29,16 @@
       return
     }
 
-		// do autocomplete
+		// todo autocomplete
 
-    // do search
+    // hit search
     const r = await fetch(`/api/search?q=${query}`)
     const json = await r.json()
-    console.log('log r', json)
+
+    // update results
+    results.update(() => json)
+    // updare search params in url
+    // todo
 	}
 </script>
 
