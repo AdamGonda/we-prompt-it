@@ -22,7 +22,10 @@
       goto(`/app/explore?query=${query}`);
       cancel()
     }
-    
+
+    return async ({ update }) => {
+      await update({ reset: false });
+    };
 	}
 </script>
 
