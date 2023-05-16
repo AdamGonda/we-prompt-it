@@ -6,48 +6,37 @@
 	// clear functionality
 
 	import { page } from '$app/stores';
-  import { results } from '$lib/stores/search';
+	import { enhance } from '$app/forms';
 	import { goto, afterNavigate } from '$app/navigation';
 
 	let form = null;
 
-	afterNavigate(() => {
-		if (form && $page.route.id === '/app') {
-			form.reset();
-		}
-	});
+  afterNavigate(() => {
+    if (form && $page.route.id === '/app') {
+      form.reset();
+    }
+  })
 
 	const placeholder = 'Search by name, description, content, tags, or AI model.';
 
-	async function handleSubmit() {
-		const formData = new FormData(form);
-    const query = formData.get('query');
-
-    
-    if ($page.route.id.indexOf('explore') === -1) {
-      goto(`/app/explore?q=${query}`);
-      return
-    }
+	function handleSubmit({ data, cancel }) {
+		const query = data.get('query');
 
 		// todo autocomplete
 
-    // hit search
-    const r = await fetch(`/api/search?q=${query}`)
-    const json = await r.json()
+    if ($page.route.id.indexOf('explore') === -1) {
+      goto(`/app/explore?q=${query}`);
+      cancel();
+    }
 
-    // update results
-    results.update(() => json)
-    // updare search params in url
-    // todo
+
+		return async ({ update }) => {
+			await update({ reset: false });
+		};
 	}
 </script>
 
-<form
-	autocomplete="off"
-	bind:this={form}
-	action="/api/search"
-	on:submit|preventDefault={handleSubmit}
->
+<form autocomplete="off" method="POST" bind:this={form} use:enhance={handleSubmit}>
 	<input name="query" type="text" {placeholder} />
 </form>
 
