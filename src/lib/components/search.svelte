@@ -27,8 +27,11 @@
 		const formData = new FormData(form);
 		const query = formData.get('query');
 
+		if(!query) return;
+
 		if ($page.route.id.indexOf('explore') === -1) {
 			goto(`/app/explore?q=${query}`);
+			return
 		}
 
 		const r = await fetch(`/api/search?q=${query}`);
