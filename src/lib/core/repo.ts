@@ -44,18 +44,21 @@ export async function searchRepos(query) {
 			OR: [
 				{
 					name: {
-						contains: query
+						contains: query,
+						mode: 'insensitive',
 					}
 				},
 				{
 					description: {
-						contains: query
+						contains: query,
+						mode: 'insensitive',
 					}
 				},
 				{
 					prompt: {
 						content: {
-							contains: query
+							contains: query,
+							mode: 'insensitive',
 						}
 					}
 				},
@@ -63,12 +66,18 @@ export async function searchRepos(query) {
 					tags: {
 						some: {
 							name: {
-								contains: query
+								contains: query,
+								mode: 'insensitive',
 							}
 						}
 					}
 				}
-			]
+			],
+			isDeleted: false
+		},
+		include: {
+			tags: { where: { isDeleted: false } },
+			stars: { where: { isDeleted: false } }
 		}
 	});
 }
