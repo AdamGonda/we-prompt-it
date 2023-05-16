@@ -5,6 +5,7 @@
 	import RepoCard from '$lib/components/repo-card.svelte';
 
 	async function onSearch(q) {
+		isLoading = true;
 		const r = await fetch('/api/search', {
 			method: 'POST',
 			headers: {
@@ -16,22 +17,28 @@
 		const newValue = await r.json();
 		results.update((value) => (value = newValue));
 		query.update((value) => (value = q));
+		isLoading = false;
 	}
-
-
 
 	const searchPlaceholder =
 		'Search prompts by name, description, content, tags, or AI model.';
+	let isLoading = false;
 </script>
 
 <main>
-	<SearchField query={$query} {onSearch} placeholder={searchPlaceholder}/>
+	<SearchField query={$query} {onSearch} placeholder={searchPlaceholder} />
 
-	<div class="all">
-		{#each $results as repo (repo.id)}
-			<RepoCard {repo} />
-		{/each}
-	</div>
+	{#if isLoading}
+		<p>Loading...</p>
+	{:else if $results.length === 0}
+		<p>No results found.</p>
+	{:else}
+		<div class="all">
+			{#each $results as repo (repo.id)}
+				<RepoCard {repo} />
+			{/each}
+		</div>
+	{/if}
 </main>
 
 <style>
