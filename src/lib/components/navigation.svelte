@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { signOut } from '@auth/sveltekit/client';
+	import Search from './search.svelte';
 
 	export let user = null;
 </script>
@@ -9,9 +10,7 @@
 		<div>Logo</div>
 	</a>
 	{#if user}
-		<a href={`/app/explore`}>
-			<div>Explore</div>
-		</a>
+		<Search />
 
 		<a href={`/app/my-collection`}>
 			<div>My collection</div>
@@ -42,7 +41,7 @@
 			<div>Edit change request</div>
 		</a> -->
 		<div style="cursor: pointer;" on:click={() => signOut()}>{user?.firstName}</div>
-		{/if}
+	{/if}
 </nav>
 
 <style>
