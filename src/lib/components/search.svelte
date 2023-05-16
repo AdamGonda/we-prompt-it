@@ -8,18 +8,24 @@
 	import { page } from '$app/stores';
 	import { results } from '$lib/stores/search';
 	import { goto, afterNavigate } from '$app/navigation';
+	import { browser } from '$app/environment';
 
 	let form = null;
 	let inputValue = '';
 	let placeholder = 'Search by name, description, content, tags, or AI model.';
 
 	if ($page.route.id.includes('explore') && $page.url.searchParams.get('q')) {
-		inputValue = $page.url.searchParams.get('q')
+		inputValue = $page.url.searchParams.get('q');
+	}
+
+	if (browser) {
+		window.addEventListener('popstate', handlePropstate);
 	}
 
 	afterNavigate(() => {
 		if (form && $page.route.id === '/app') {
 			form.reset();
+			inputValue = '';
 		}
 	});
 
@@ -27,20 +33,29 @@
 		const formData = new FormData(form);
 		const query = formData.get('query');
 
-		if(!query) return;
+		if (!query) return;
 
 		if ($page.route.id.indexOf('explore') === -1) {
 			goto(`/app/explore?q=${query}`);
-			return
+			return;
 		}
 
 		const r = await fetch(`/api/search?q=${query}`);
 		const data = await r.json();
-		results.update((value) => (value = data));
-		let params = new URLSearchParams(location.search);
 		
-		params.set('q', query as string);
+		results.update((value) => (value = data));
+		updateUrl(query);
+	}
 
+	function handlePropstate() {
+		let searchParams = new URLSearchParams(window.location.search);
+		let q = searchParams.get('q');
+		inputValue = q;
+	}
+
+	function updateUrl(query){
+		let params = new URLSearchParams(location.search);
+		params.set('q', query as string);
 		history.pushState({}, '', `${location.pathname}?${params}`);
 	}
 </script>
