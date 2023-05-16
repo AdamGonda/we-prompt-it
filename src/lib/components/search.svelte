@@ -14,16 +14,13 @@
 	let inputValue = '';
 	let placeholder = 'Search by name, description, content, tags, or AI model.';
 
+	if ($page.route.id.includes('explore') && $page.url.searchParams.get('q')) {
+		inputValue = $page.url.searchParams.get('q')
+	}
+
 	afterNavigate(() => {
 		if (form && $page.route.id === '/app') {
 			form.reset();
-		}
-	});
-
-	onMount(() => {
-		if ($page.route.id.includes('explore')) {
-			let params = new URLSearchParams(window.location.search);
-			inputValue = params.get('q');
 		}
 	});
 
@@ -39,12 +36,12 @@
 
 		const r = await fetch(`/api/search?q=${query}`);
 		const data = await r.json();
-		results.update(value => value = data)
+		results.update((value) => (value = data));
 		let params = new URLSearchParams(location.search);
-    params.set('q', query);
-    
-    // Change the actual URL in the browser
-    history.pushState({}, '', `${location.pathname}?${params}`);
+		params.set('q', query);
+
+		// Change the actual URL in the browser
+		history.pushState({}, '', `${location.pathname}?${params}`);
 	}
 </script>
 
