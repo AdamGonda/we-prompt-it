@@ -6,13 +6,13 @@
 	// clear functionality
 
 	import { page } from '$app/stores';
-	import { enhance } from '$app/forms';
+	import { results } from '$lib/stores/search';
 	import { goto, afterNavigate } from '$app/navigation';
 	import { onMount } from 'svelte';
 
 	let form = null;
 	let inputValue = '';
-	let placeholder = '';
+	let placeholder = 'Search by name, description, content, tags, or AI model.';
 
 	afterNavigate(() => {
 		if (form && $page.route.id === '/app') {
@@ -24,8 +24,6 @@
 		if ($page.route.id.includes('explore')) {
 			let params = new URLSearchParams(window.location.search);
 			inputValue = params.get('q');
-		} else {
-			placeholder = 'Search by name, description, content, tags, or AI model.';
 		}
 	});
 
@@ -37,10 +35,11 @@
 
 		if ($page.route.id.indexOf('explore') === -1) {
 			goto(`/app/explore?q=${query}`);
-		} else {
-			console.log('log ');
-			const r = await fetch('/api/search');
 		}
+
+		const r = await fetch('/api/search');
+		const data = await r.json();
+		results.update(value => value = data.results)
 	}
 </script>
 
