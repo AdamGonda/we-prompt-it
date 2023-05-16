@@ -1,8 +1,6 @@
 <script lang="ts">
 	// todo
 	// autocomplete, get matches from db (just text) and display them in a dropdown normal, and your search in bold
-	// search on cta click
-	// clear functionality
 
 	import { page } from '$app/stores';
 	import { results, searchFocused } from '$lib/stores/search';
@@ -40,7 +38,7 @@
 			return;
 		}
 
-		updateResults(query)
+		updateResults(query);
 		updateUrl(query);
 	}
 
@@ -56,7 +54,7 @@
 		let q = searchParams.get('q');
 		inputValue = q;
 
-		updateResults(q)
+		updateResults(q);
 	}
 
 	function updateUrl(query) {
@@ -84,16 +82,37 @@
 		on:focus={handleFocus}
 		on:blur={handleBlur}
 	/>
+	<button type="submit">
+		<img alt="search" src="search-icon.svg" />
+	</button>
 </form>
 
 <style>
+	form {
+		display: flex;
+		align-items: center;
+	}
 	input {
 		font-size: 1.5rem;
 		width: 600px;
 		padding: 0.5rem;
+		border: none;
 	}
 
 	input:focus {
 		outline: 3px solid orange;
+	}
+	button {
+		width: 50px;
+		height: 82%;
+		margin-left: 0px;
+		border: none;
+		background-color: lightsalmon;
+		padding: 10px;
+	}
+
+	img {
+		width: 100%;
+		height: 100%;
 	}
 </style>
