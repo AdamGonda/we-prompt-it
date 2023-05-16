@@ -12,7 +12,6 @@
 	let form = null;
 
   afterNavigate(() => {
-    console.log('log $page.route.id', $page.route.id)
     if (form && $page.route.id === '/app') {
       form.reset();
     }
@@ -25,11 +24,8 @@
 
 		// do autocomplete
 
-		// link and calcel if not on explore
-		if ($page.route.id.indexOf('explore') === -1) {
-			goto(`/app/explore?query=${query}`);
-			cancel();
-		}
+		goto(`/app/explore?q=${query}`);
+		cancel();
 
 		return async ({ update }) => {
 			await update({ reset: false });

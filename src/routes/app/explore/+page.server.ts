@@ -1,7 +1,9 @@
-export async function load({params}) {
-	console.log('log load params', params)
+import { searchRepos } from "$lib/core/repo";
 
-	return {  };
+export async function load({ url }) {
+	const results = await searchRepos(url.searchParams.get('q'));
+
+	return { results };
 }
 
 

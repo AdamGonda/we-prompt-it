@@ -2,7 +2,7 @@
 	import { page } from '$app/stores';
 	import RepoCard from '$lib/components/repo-card.svelte';
 
-	const { allRepos } = $page.data;
+	const { results } = $page.data;
 </script>
 
 <main>
@@ -10,7 +10,7 @@
 
 	<h3>All prompts</h3>
 	<div class="all">
-		{#each allRepos as repo (repo.id)}
+		{#each results as repo (repo.id)}
 			<RepoCard {repo} />
 		{/each}
 	</div>
