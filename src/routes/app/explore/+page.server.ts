@@ -5,10 +5,3 @@ export async function load({ url }) {
 
 	return { results };
 }
-
-
-export const actions = {
-	default: async () => {
-		console.log('log default action')
-	}
-};
