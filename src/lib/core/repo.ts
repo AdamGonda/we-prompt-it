@@ -39,7 +39,6 @@ export async function createRepo(event, data, config) {
 }
 
 export async function searchRepos(query) {
-	console.log('log query', query)
 	return await prisma.repo.findMany({
 		where: {
 			OR: [

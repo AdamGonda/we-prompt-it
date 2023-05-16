@@ -40,6 +40,11 @@
 		const r = await fetch(`/api/search?q=${query}`);
 		const data = await r.json();
 		results.update(value => value = data)
+		let params = new URLSearchParams(location.search);
+    params.set('q', query);
+    
+    // Change the actual URL in the browser
+    history.pushState({}, '', `${location.pathname}?${params}`);
 	}
 </script>
 
