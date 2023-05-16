@@ -12,15 +12,17 @@
 
 	let form = null;
 	let inputValue = '';
+  const onLanding = $page.route.id === '/app';
+  const onExplore = $page.route.id.includes('explore');
 
 	afterNavigate(() => {
-		if (form && $page.route.id === '/app') {
+		if (form && onLanding) {
 			form.reset();
 		}
 	});
 
 	onMount(() => {
-		if ($page.route.id.includes('explore')) {
+		if (onExplore) {
 			let params = new URLSearchParams(window.location.search);
 			inputValue = params.get('q');
 		}
@@ -33,7 +35,7 @@
 
 		// todo autocomplete
 
-		if ($page.route.id.indexOf('explore') === -1) {
+		if (!onExplore) {
 			goto(`/app/explore?q=${query}`);
 			cancel();
 		} else {
