@@ -38,6 +38,41 @@ export async function createRepo(event, data, config) {
 	});
 }
 
+export async function queryRepos(query) {
+	return await prisma.repo.findMany({
+		where: {
+			OR: [
+				{
+					name: {
+						contains: query
+					}
+				},
+				{
+					description: {
+						contains: query
+					}
+				},
+				{
+					prompt: {
+						content: {
+							contains: query
+						}
+					}
+				},
+				{
+					tags: {
+						some: {
+							name: {
+								contains: query
+							}
+						}
+					}
+				}
+			]
+		}
+	});
+}
+
 export async function getRepoById(id) {
 	return await prisma.repo.findUnique({
 		where: { id },

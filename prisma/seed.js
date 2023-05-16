@@ -40,7 +40,7 @@ async function main() {
 
 	const tag1 = await prisma.tag.create({
 		data: {
-			name: 'education'
+			name: 'education [key]'
 		}
 	});
 
@@ -52,8 +52,8 @@ async function main() {
 
 	const repo1 = await prisma.repo.create({
 		data: {
-			description: 'Rediscover the forbidden melodies in a world without music',
-			name: 'Melodies Unheard',
+			description: 'Rediscover the forbidden [key] melodies in a world without music',
+			name: 'Melodies Unheard 1',
 			author: {
 				connect: {
 					id: adamUser.id
@@ -79,7 +79,7 @@ async function main() {
 	const repo2 = await prisma.repo.create({
 		data: {
 			description: 'A tale of an unexpected journey',
-			name: 'Second Expedition',
+			name: 'Second [key] Expedition 2',
 			author: {
 				connect: {
 					id: testUser1.id
@@ -105,7 +105,7 @@ async function main() {
 		data: {
 			description:
 				'In the heart of a bustling city, an unexpected discovery changes everything',
-			name: 'Urban Enigma',
+			name: 'Urban Enigma 3',
 			author: {
 				connect: {
 					id: adamUser.id
@@ -114,7 +114,7 @@ async function main() {
 			prompt: {
 				create: {
 					content:
-						"How does the discovery challenge the protagonist's understanding of their city?",
+						"How does the discovery [key] challenge the protagonist's understanding of their city?",
 					aIModelId: aiModel2.id
 				}
 			},
