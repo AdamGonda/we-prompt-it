@@ -25,32 +25,7 @@
 	let isLoading = false;
 </script>
 
-<main>
-	<SearchField query={$query} {onSearch} placeholder={searchPlaceholder} />
-
-	<!-- todo
-		trigger search on page load
-		tigger search on query change
-		tigger search on hitting enter
-		if no results show no results message
-		if loading show loading indicator
-		autocomplite
-		querystring in url to make it linkable
-		what happens on initial load
-	-->
-
-	{#if isLoading}
-		<p>Loading...</p>
-	{:else if $results.length === 0}
-		<p>No results found.</p>
-	{:else}
-		<div class="all">
-			{#each $results as repo (repo.id)}
-				<RepoCard {repo} />
-			{/each}
-		</div>
-	{/if}
-</main>
+Auth landing
 
 <style>
 	.all {
