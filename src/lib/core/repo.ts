@@ -38,7 +38,7 @@ export async function createRepo(event, data, config) {
 	});
 }
 
-export async function queryRepos(query) {
+export async function searchRepos(query) {
 	return await prisma.repo.findMany({
 		where: {
 			OR: [
