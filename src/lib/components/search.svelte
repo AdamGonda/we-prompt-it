@@ -12,6 +12,7 @@
 
 	let form = null;
 	let inputValue = '';
+  let placeholder = '';
 
 	afterNavigate(() => {
 		if (form && $page.route.id === '/app') {
@@ -23,10 +24,10 @@
 		if ($page.route.id.includes('explore')) {
 			let params = new URLSearchParams(window.location.search);
 			inputValue = params.get('q');
-		}
+		}else {
+      placeholder = 'Search by name, description, content, tags, or AI model.'
+    }
 	});
-
-	const placeholder = 'Search by name, description, content, tags, or AI model.';
 
 	function handleSubmit({ data, cancel }) {
 		const query = data.get('query');
