@@ -1,5 +1,6 @@
 <script>
 	import { page } from '$app/stores';
+	import { results } from '$lib/stores';
 	import SearchField from '$lib/components/search-field.svelte';
 	import RepoCard from '$lib/components/repo-card.svelte';
 
@@ -12,17 +13,16 @@
 			body: JSON.stringify({ query })
 		});
 
-		results = await r.json();
+		const newValue = await r.json()
+		results.update(value => value = newValue)
 	}
-
-	let results = [];
 </script>
 
 <main>
 	<SearchField {onSearch} />
 
 	<div class="all">
-		{#each results as repo (repo.id)}
+		{#each $results as repo (repo.id)}
 			<RepoCard {repo} />
 		{/each}
 	</div>
