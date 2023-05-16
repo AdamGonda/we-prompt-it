@@ -8,7 +8,6 @@
 	import { page } from '$app/stores';
 	import { results } from '$lib/stores/search';
 	import { goto, afterNavigate } from '$app/navigation';
-	import { onMount } from 'svelte';
 
 	let form = null;
 	let inputValue = '';
