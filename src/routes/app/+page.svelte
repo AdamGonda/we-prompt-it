@@ -13,13 +13,16 @@
 			body: JSON.stringify({ query })
 		});
 
-		const newValue = await r.json()
-		results.update(value => value = newValue)
+		const newValue = await r.json();
+		results.update((value) => (value = newValue));
 	}
+
+	const searchPlaceholder =
+		'Search prompts by name, description, content, tags, or AI model.';
 </script>
 
 <main>
-	<SearchField {onSearch} />
+	<SearchField {onSearch} placeholder={searchPlaceholder} />
 
 	<div class="all">
 		{#each $results as repo (repo.id)}
