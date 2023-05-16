@@ -1,7 +1,12 @@
-import { searchRepos } from "$lib/core/repo";
-import { json } from "@sveltejs/kit";
+import { searchRepos } from '$lib/core/repo';
+import { json } from '@sveltejs/kit';
 
 export async function GET({ url }) {
-  const results = await searchRepos(url.searchParams.get('q'));
-  return await json(results)
+	const query = url.searchParams.get('q');
+
+	if (query) {
+		return json(await searchRepos(query));
+	}
+
+	return json([]);
 }

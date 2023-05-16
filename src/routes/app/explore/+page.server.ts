@@ -1,7 +1,11 @@
-import { searchRepos } from "$lib/core/repo";
+import { getAllRepos, searchRepos } from '$lib/core/repo';
 
 export async function load({ url }) {
-	const initialLoadResults = await searchRepos(url.searchParams.get('q'));
+	const query = url.searchParams.get('q');
 
-	return { initialLoadResults };
+	if (query) {
+		return { initialLoadResults: await searchRepos(query) };
+	}
+
+	return { initialLoadResults: await getAllRepos() };
 }

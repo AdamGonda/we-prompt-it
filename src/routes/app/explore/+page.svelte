@@ -1,13 +1,22 @@
 <script>
 	import { page } from '$app/stores';
-	import { results } from '$lib/stores/search'
+	import { results } from '$lib/stores/search';
 	import RepoCard from '$lib/components/repo-card.svelte';
+	import { onMount } from 'svelte';
 
 	const { initialLoadResults } = $page.data;
 	let resultsToHow = initialLoadResults;
+	let frontendLoaded = false;
 
-	results.subscribe((value) => resultsToHow = value);
+	results.subscribe((value) => {
+		if (frontendLoaded) {
+			resultsToHow = value;
+		}
+	});
 
+	onMount(() => {
+		frontendLoaded = true;
+	});
 </script>
 
 <main>
