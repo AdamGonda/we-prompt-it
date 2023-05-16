@@ -24,8 +24,11 @@
 
 		// do autocomplete
 
-		goto(`/app/explore?q=${query}`);
-		cancel();
+    if ($page.route.id.indexOf('explore') === -1) {
+      goto(`/app/explore?q=${query}`);
+      cancel();
+    }
+
 
 		return async ({ update }) => {
 			await update({ reset: false });
