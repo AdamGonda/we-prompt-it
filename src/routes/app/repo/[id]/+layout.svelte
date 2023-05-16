@@ -1,8 +1,6 @@
 <script>
 	import { page } from '$app/stores';
 
-	console.log('log $page.data.repo', $page.data.repo)
-
 	const data = {
 		id: $page.data.repo.id,
 		name: $page.data.repo.name,

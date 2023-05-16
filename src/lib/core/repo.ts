@@ -1,7 +1,7 @@
 import { PrismaClient } from '@prisma/client';
 const prisma = new PrismaClient();
 
-export async function createRepo(event, data) {
+export async function createRepo(event, data, config) {
 	const session = event.locals.getSession();
 	const userEmail = (await session).user.email;
 
@@ -19,6 +19,7 @@ export async function createRepo(event, data) {
 		data: {
 			description: data.description,
 			name: data.name,
+			isForked: !!config.isForked,
 			author: {
 				connect: {
 					id: user.id

@@ -19,7 +19,7 @@ export const actions = {
 		const formData = await event.request.formData();
 		const obj = formToObject(formData);
 
-		await createRepo(event, obj);
+		await createRepo(event, obj, {isForked: true});
 		throw redirect(301, '/app/my-collection');
 	}
 };
