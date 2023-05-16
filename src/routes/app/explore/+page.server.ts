@@ -1,14 +1,12 @@
 import { searchRepos } from "$lib/core/repo";
 
 export async function load({ url }) {
-	const results = await searchRepos(url.searchParams.get('q'));
+	const query = url.searchParams.get('q')
+	let results = []
+	
+	if(query){
+		results = await searchRepos(query);
+	}
 
 	return { results };
 }
-
-
-export const actions = {
-	default: async () => {
-		console.log('log default action')
-	}
-};
