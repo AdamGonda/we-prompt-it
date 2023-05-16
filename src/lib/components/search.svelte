@@ -8,25 +8,14 @@
 	import { page } from '$app/stores';
 	import { enhance } from '$app/forms';
 	import { goto, afterNavigate } from '$app/navigation';
-	import { onMount } from 'svelte';
 
 	let form = null;
-	let inputValue = '';
-  const onLanding = $page.route.id === '/app';
-  const onExplore = $page.route.id.includes('explore');
 
-	afterNavigate(() => {
-		if (form && onLanding) {
-			form.reset();
-		}
-	});
-
-	onMount(() => {
-		if (onExplore) {
-			let params = new URLSearchParams(window.location.search);
-			inputValue = params.get('q');
-		}
-	});
+  afterNavigate(() => {
+    if (form && $page.route.id === '/app') {
+      form.reset();
+    }
+  })
 
 	const placeholder = 'Search by name, description, content, tags, or AI model.';
 
@@ -35,12 +24,11 @@
 
 		// todo autocomplete
 
-		if (!onExplore) {
-			goto(`/app/explore?q=${query}`);
-			cancel();
-		} else {
-			location.href = `/app/explore?q=${query}`;
-		}
+    if ($page.route.id.indexOf('explore') === -1) {
+      goto(`/app/explore?q=${query}`);
+      cancel();
+    }
+
 
 		return async ({ update }) => {
 			await update({ reset: false });
@@ -49,7 +37,7 @@
 </script>
 
 <form autocomplete="off" method="POST" bind:this={form} use:enhance={handleSubmit}>
-	<input name="query" type="text" {placeholder} bind:value={inputValue} />
+	<input name="query" type="text" {placeholder} />
 </form>
 
 <style>
