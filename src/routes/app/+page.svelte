@@ -34,6 +34,9 @@
 		tigger search on hitting enter
 		if no results show no results message
 		if loading show loading indicator
+		autocomplite
+		querystring in url to make it linkable
+		what happens on initial load
 	-->
 
 	{#if isLoading}
