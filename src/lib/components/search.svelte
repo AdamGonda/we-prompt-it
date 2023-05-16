@@ -1,16 +1,16 @@
 <script lang="ts">
 	// todo
-	// when focused, dimm the rest of the page
 	// autocomplete, get matches from db (just text) and display them in a dropdown normal, and your search in bold
 	// search on cta click
 	// clear functionality
 
 	import { page } from '$app/stores';
-	import { results } from '$lib/stores/search';
+	import { results, searchFocused } from '$lib/stores/search';
 	import { goto, afterNavigate } from '$app/navigation';
 	import { browser } from '$app/environment';
 
 	let form = null;
+	let input = null;
 	let inputValue = '';
 	let placeholder = 'Search by name, description, content, tags, or AI model.';
 
@@ -40,15 +40,15 @@
 			return;
 		}
 
-		fetchResults(query).then((data) => {
-			results.update((value) => (value = data));
-		});
+		updateResults(query)
 		updateUrl(query);
 	}
 
-	async function fetchResults(query) {
+	async function updateResults(query) {
 		const r = await fetch(`/api/search?q=${query}`);
-		return await r.json();
+		const data = await r.json();
+		results.update((value) => (value = data));
+		input.blur();
 	}
 
 	function handlePropstate() {
@@ -56,9 +56,7 @@
 		let q = searchParams.get('q');
 		inputValue = q;
 
-		fetchResults(q).then((data) => {
-			results.update((value) => (value = data));
-		});
+		updateResults(q)
 	}
 
 	function updateUrl(query) {
@@ -66,10 +64,26 @@
 		params.set('q', query as string);
 		history.pushState({}, '', `${location.pathname}?${params}`);
 	}
+
+	function handleFocus() {
+		searchFocused.update((value) => (value = true));
+	}
+
+	function handleBlur() {
+		searchFocused.update((value) => (value = false));
+	}
 </script>
 
 <form autocomplete="off" bind:this={form} on:submit|preventDefault={handleSubmit}>
-	<input name="query" type="text" {placeholder} bind:value={inputValue} />
+	<input
+		name="query"
+		type="text"
+		{placeholder}
+		bind:this={input}
+		bind:value={inputValue}
+		on:focus={handleFocus}
+		on:blur={handleBlur}
+	/>
 </form>
 
 <style>
@@ -77,5 +91,9 @@
 		font-size: 1.5rem;
 		width: 600px;
 		padding: 0.5rem;
+	}
+
+	input:focus {
+		outline: 3px solid orange;
 	}
 </style>
