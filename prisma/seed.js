@@ -52,8 +52,8 @@ async function main() {
 
 	const repo1 = await prisma.repo.create({
 		data: {
-			description: 'some short description what this prompt is about',
-			name: 'First prompt',
+			description: 'Rediscover the forbidden melodies in a world without music',
+			name: 'Melodies Unheard',
 			author: {
 				connect: {
 					id: adamUser.id
@@ -62,8 +62,8 @@ async function main() {
 			isForked: true,
 			prompt: {
 				create: {
-					version: '1.0',
-					content: 'This is the content of the first prompt',
+					content:
+						'How does the world react when the first note is played after decades of silence?',
 					aIModelId: aiModel1.id
 				}
 			},
@@ -78,8 +78,8 @@ async function main() {
 
 	const repo2 = await prisma.repo.create({
 		data: {
-			description: 'some short description what this prompt is about',
-			name: 'Second prompt',
+			description: 'A tale of an unexpected journey',
+			name: 'Second Expedition',
 			author: {
 				connect: {
 					id: testUser1.id
@@ -87,8 +87,8 @@ async function main() {
 			},
 			prompt: {
 				create: {
-					version: '1.0',
-					content: 'This is the content of the second prompt',
+					content:
+						'What mysteries will the explorers uncover in their unplanned adventure?',
 					aIModelId: aiModel2.id
 				}
 			},
@@ -103,8 +103,9 @@ async function main() {
 
 	const repo3 = await prisma.repo.create({
 		data: {
-			description: 'some short description what this prompt is about',
-			name: 'Third prompt',
+			description:
+				'In the heart of a bustling city, an unexpected discovery changes everything',
+			name: 'Urban Enigma',
 			author: {
 				connect: {
 					id: adamUser.id
@@ -112,8 +113,8 @@ async function main() {
 			},
 			prompt: {
 				create: {
-					version: '1.0',
-					content: 'This is the content of the third prompt',
+					content:
+						"How does the discovery challenge the protagonist's understanding of their city?",
 					aIModelId: aiModel2.id
 				}
 			},
@@ -128,8 +129,8 @@ async function main() {
 
 	const repo4 = await prisma.repo.create({
 		data: {
-			description: 'some short description what this prompt is about',
-			name: 'Fourth prompt',
+			description: 'A journey to the edge of the known universe',
+			name: 'Cosmic Horizon',
 			author: {
 				connect: {
 					id: testUser2.id
@@ -137,8 +138,7 @@ async function main() {
 			},
 			prompt: {
 				create: {
-					version: '1.0',
-					content: 'This is the content of the fourth prompt',
+					content: 'What awaits the astronaut at the frontier of space?',
 					aIModelId: aiModel1.id
 				}
 			},
@@ -153,9 +153,8 @@ async function main() {
 
 	const repo5 = await prisma.repo.create({
 		data: {
-			name: 'Fifth prompt',
-
-			description: 'some short description what this prompt is about',
+			name: 'Fifth Element',
+			description: 'In a world of four elements, a fifth emerges',
 			author: {
 				connect: {
 					id: testUser1.id
@@ -163,8 +162,7 @@ async function main() {
 			},
 			prompt: {
 				create: {
-					version: '1.0',
-					content: 'This is the content of the fifth prompt',
+					content: 'How does the emergence of the fifth element disrupt the balance?',
 					aIModelId: aiModel2.id
 				}
 			},
@@ -177,57 +175,6 @@ async function main() {
 					{ userId: testUser1.id },
 					{ userId: testUser2.id }
 				]
-			}
-		}
-	});
-
-	const repo6 = await prisma.repo.create({
-		data: {
-			name: 'Sixth prompt',
-
-			description: 'some short description what this prompt is about',
-			author: {
-				connect: {
-					id: adamUser.id
-				}
-			},
-			prompt: {
-				create: {
-					version: '1.0',
-					content: 'This is the content of the sixth prompt',
-					aIModelId: aiModel1.id
-				}
-			},
-			tags: {
-				connect: [{ id: tag1.id }, { id: tag2.id }]
-			},
-			stars: {
-				create: [{ userId: testUser1.id }, { userId: testUser2.id }]
-			}
-		}
-	});
-
-	const repo7 = await prisma.repo.create({
-		data: {
-			description: 'some short description what this prompt is about',
-			name: 'Seventh prompt',
-			author: {
-				connect: {
-					id: testUser2.id
-				}
-			},
-			prompt: {
-				create: {
-					version: '1.0',
-					content: 'This is the content of the seventh prompt',
-					aIModelId: aiModel2.id
-				}
-			},
-			tags: {
-				connect: [{ id: tag1.id }]
-			},
-			stars: {
-				create: [{ userId: adamUser.id }]
 			}
 		}
 	});
