@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
 	// todo
 	// when focused, dimm the rest of the page
 	// autocomplete, get matches from db (just text) and display them in a dropdown normal, and your search in bold
@@ -38,7 +38,8 @@
 		const data = await r.json();
 		results.update((value) => (value = data));
 		let params = new URLSearchParams(location.search);
-		params.set('q', query);
+		
+		params.set('q', query as string);
 
 		// Change the actual URL in the browser
 		history.pushState({}, '', `${location.pathname}?${params}`);
