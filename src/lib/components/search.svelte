@@ -2,7 +2,7 @@
 	// TODO autocomplete, get matches from db (just text) and display them in a dropdown normal, and your search in bold
 
 	import { page } from '$app/stores';
-	import { results, searchFocused } from '$lib/stores/search';
+	import { autocompleteOptions, results, searchFocused } from '$lib/stores/search';
 	import { goto, afterNavigate } from '$app/navigation';
 	import { browser } from '$app/environment';
 
@@ -10,6 +10,7 @@
 	let input = null;
 	let inputValue = '';
 	let placeholder = 'Search by name, description, content, tags, or AI model.';
+	let timeoutRef = null;
 
 	if ($page.route.id.includes('explore') && $page.url.searchParams.get('q')) {
 		inputValue = $page.url.searchParams.get('q');
@@ -39,6 +40,24 @@
 
 		updateResults(query);
 		updateUrl(query);
+	}
+
+	async function handleOnInput(v) {
+		delayedAction(v.target.value, 500);
+	}
+
+	function delayedAction(query, delay) {
+		clearTimeout(timeoutRef);
+
+		timeoutRef = setTimeout(() => {
+			if (query) triggerSearchForAutocomplete(query);
+		}, delay);
+	}
+
+	async function triggerSearchForAutocomplete(query) {
+		const r = await fetch(`/api/autocomplete?q=${query}`);
+		const data = await r.json();
+		autocompleteOptions.update((value) => (value = data));
 	}
 
 	async function updateResults(query) {
@@ -78,7 +97,11 @@
 	}
 </script>
 
-<form autocomplete="off" bind:this={form} on:submit|preventDefault={handleSubmit}>
+<form
+	autocomplete="off"
+	bind:this={form}
+	on:submit|preventDefault={handleSubmit}
+>
 	<input
 		name="query"
 		type="text"
@@ -87,6 +110,7 @@
 		bind:value={inputValue}
 		on:focus={handleFocus}
 		on:blur={handleBlur}
+		on:input={handleOnInput}
 	/>
 	<button type="submit">
 		<img alt="search" src="/search-icon.svg" />

@@ -45,20 +45,30 @@ export async function searchRepos(query) {
 				{
 					name: {
 						contains: query,
-						mode: 'insensitive',
+						mode: 'insensitive'
 					}
 				},
 				{
 					description: {
 						contains: query,
-						mode: 'insensitive',
+						mode: 'insensitive'
 					}
 				},
 				{
 					prompt: {
 						content: {
 							contains: query,
-							mode: 'insensitive',
+							mode: 'insensitive'
+						}
+					}
+				},
+				{
+					prompt: {
+						aiModel: {
+							name: {
+								contains: query,
+								mode: 'insensitive'
+							}
 						}
 					}
 				},
@@ -67,7 +77,7 @@ export async function searchRepos(query) {
 						some: {
 							name: {
 								contains: query,
-								mode: 'insensitive',
+								mode: 'insensitive'
 							}
 						}
 					}
