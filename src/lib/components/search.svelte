@@ -1,6 +1,6 @@
 <script lang="ts">
-	// todo
-	// autocomplete, get matches from db (just text) and display them in a dropdown normal, and your search in bold
+	// TODO autocomplete, get matches from db (just text) and display them in a dropdown normal, and your search in bold
+	// TODO fix single and dubble search on navigation
 
 	import { page } from '$app/stores';
 	import { results, searchFocused } from '$lib/stores/search';
