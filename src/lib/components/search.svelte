@@ -83,7 +83,7 @@
 		on:blur={handleBlur}
 	/>
 	<button type="submit">
-		<img alt="search" src="search-icon.svg" />
+		<img alt="search" src="/search-icon.svg" />
 	</button>
 </form>
 
