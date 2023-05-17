@@ -1,46 +1,39 @@
 <script lang="ts">
-	import { signOut } from '@auth/sveltekit/client';
+	import { signIn, signOut } from '@auth/sveltekit/client';
 	import Search from './search.svelte';
+	import { page } from '$app/stores';
 
-	export let user = null;
+	const session = $page.data.session
 </script>
 
 <nav>
-	<a href={`/app`}>
+	<a href={`/`}>
 		<div>Logo</div>
 	</a>
-	{#if user}
-		<Search />
+	<Search />
 
+	{#if session}
 		<a href={`/app/my-collection`}>
 			<div>My collection</div>
 		</a>
+	{:else}
+		<a href={`/signup`}>
+			<div>My collection</div>
+		</a>
+	{/if}
 
-		<!-- Prompt -->
-		<a href={`/app/repo/create`}>
-			<div>Create prompt</div>
-		</a>
+	<a href={`/repo/create`}>
+		<div>Create prompt</div>
+	</a>
 
-		<!-- Profile -->
-		<!-- <a href={`/app/profile/1`}>
-			<div>Profile</div>
+	{#if session}
+		<button style="cursor: pointer;" on:click={() => signOut()}>signout</button>
+	{:else}
+		<button style="cursor: pointer;" on:click={() => signIn()}>Signin</button>
+		/
+		<a href={`/signup`}>
+			<p>Signup</p>
 		</a>
-		<a href={`/app/profile/edit/1`}>
-			<div>Edit profile</div>
-		</a>
-		-->
-
-		<!-- Change request -->
-		<!-- <a href={`/app/change-request/1`}>
-			<div>Change request</div>
-		</a>
-		<a href={`/app/change-request/create`}>
-			<div>Create change request</div>
-		</a>
-		<a href={`/app/change-request/edit/1`}>
-			<div>Edit change request</div>
-		</a> -->
-		<div style="cursor: pointer;" on:click={() => signOut()}>{user?.firstName}</div>
 	{/if}
 </nav>
 
