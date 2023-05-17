@@ -1,9 +1,10 @@
 <script lang="ts">
 	// TODO autocomplete, get matches from db (just text) and display them in a dropdown normal, and your search in bold
 	// TODO navigation bug, if search made on explore, it fucks up the navigation, investigate more
+	// TODO add loader to preSearchResults
 
 	import { page } from '$app/stores';
-	import { autocompleteOptionsNo, results, searchFocused } from '$lib/stores/search';
+	import { preSearchResultsNo, results, searchFocused } from '$lib/stores/search';
 	import { goto, afterNavigate } from '$app/navigation';
 	import { browser } from '$app/environment';
 	import { onMount } from 'svelte';
@@ -14,7 +15,7 @@
 	let inputValue = '';
 	let placeholder = 'Search by name, description, content, tags, or AI model.';
 	let timeoutRef = null;
-	let showAutocomplete = false;
+	let showPreSearchResultsNo = false;
 
 	if ($page.route.id.includes('explore') && $page.url.searchParams.get('q')) {
 		inputValue = $page.url.searchParams.get('q');
@@ -48,7 +49,7 @@
 	async function fetchAutocomplete(query) {
 		const r = await fetch(`/api/autocomplete?q=${query}`);
 		const data = await r.json();
-		autocompleteOptionsNo.update((value) => (value = data));
+		preSearchResultsNo.update((value) => (value = data));
 	}
 
 	async function updateResults(query) {
@@ -103,12 +104,12 @@
 	}
 
 	function handleFocus() {
-		showAutocomplete = true;
+		showPreSearchResultsNo = true;
 		searchFocused.update((value) => (value = true));
 	}
 
 	function handleBlur() {
-		showAutocomplete = false;
+		showPreSearchResultsNo = false;
 		searchFocused.update((value) => (value = false));
 	}
 </script>
@@ -127,11 +128,11 @@
 	<button type="submit">
 		<img alt="search" src="/search-icon.svg" />
 	</button>
-	{#if showAutocomplete && inputValue != ''}
+	{#if showPreSearchResultsNo && inputValue != ''}
 		<div class="autocomplete">
 			<p>
-				<b>{$autocompleteOptionsNo}</b>
-				<span>result{$autocompleteOptionsNo > 1 ? 's' : ''} found</span>
+				<b>{$preSearchResultsNo}</b>
+				<span>result{$preSearchResultsNo > 1 ? 's' : ''} found</span>
 			</p>
 		</div>
 	{/if}

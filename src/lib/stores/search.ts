@@ -4,4 +4,4 @@ export const results = writable([]);
 
 export const searchFocused = writable(false);
 
-export const autocompleteOptionsNo = writable(0);
+export const preSearchResultsNo = writable(0);
