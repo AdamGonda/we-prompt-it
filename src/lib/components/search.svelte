@@ -1,6 +1,5 @@
 <script lang="ts">
 	// TODO autocomplete, get matches from db (just text) and display them in a dropdown normal, and your search in bold
-	// TODO fix single and dubble search on navigation
 
 	import { page } from '$app/stores';
 	import { results, searchFocused } from '$lib/stores/search';
@@ -46,13 +45,17 @@
 		const r = await fetch(`/api/search?q=${query}`);
 		const data = await r.json();
 		results.update((value) => (value = data));
-		
-		if(input) {
+
+		if (input) {
 			input.blur();
 		}
 	}
 
 	function handlePropstate() {
+		if (!window.location.href.includes('explore')) {
+			return;
+		}
+
 		let searchParams = new URLSearchParams(window.location.search);
 		let q = searchParams.get('q');
 		inputValue = q;
