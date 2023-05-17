@@ -21,7 +21,7 @@
 	}
 
 	afterNavigate(() => {
-		if (form && $page.route.id === '/app') {
+		if (form && !$page.route.id.includes('explore')) {
 			form.reset();
 			inputValue = '';
 		}
@@ -46,7 +46,10 @@
 		const r = await fetch(`/api/search?q=${query}`);
 		const data = await r.json();
 		results.update((value) => (value = data));
-		input.blur();
+		
+		if(input) {
+			input.blur();
+		}
 	}
 
 	function handlePropstate() {
