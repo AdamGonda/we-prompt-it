@@ -15,7 +15,6 @@
 	let placeholder = 'Search by name, description, content, tags, or AI model.';
 	let timeoutRef = null;
 	let showPreSearchResultsNo = false;
-	let isPresearchLoading = false;
 
 	if ($page.route.id.includes('explore') && $page.url.searchParams.get('q')) {
 		inputValue = $page.url.searchParams.get('q');
@@ -47,13 +46,9 @@
 	}
 
 	async function fetchPreSearchResultsNo(query) {
-		isPresearchLoading = true;
-
 		const r = await fetch(`/api/pre-search-results-no?q=${query}`);
 		const data = await r.json();
 		preSearchResultsNo.update((value) => (value = data));
-
-		isPresearchLoading = false
 	}
 
 	async function updateResults(query) {
@@ -134,14 +129,10 @@
 	</button>
 	{#if showPreSearchResultsNo && inputValue != ''}
 		<div class="pre-search-results-no">
-			{#if isPresearchLoading}
-				<p>...loading</p>
-			{:else}
-				<p>
-					<b>{$preSearchResultsNo}</b>
-					<span>result{$preSearchResultsNo > 1 ? 's' : ''} found</span>
-				</p>
-			{/if}
+			<p>
+				<b>{$preSearchResultsNo}</b>
+				<span>result{$preSearchResultsNo > 1 ? 's' : ''} found</span>
+			</p>
 		</div>
 	{/if}
 </form>
