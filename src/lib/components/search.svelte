@@ -27,25 +27,6 @@
 		}
 	});
 
-	async function handleSubmit() {
-		const formData = new FormData(form);
-		const query = formData.get('query');
-
-		if (!query) return;
-
-		if ($page.route.id.indexOf('explore') === -1) {
-			goto(`/app/explore?q=${query}`);
-			return;
-		}
-
-		updateResults(query);
-		updateUrl(query);
-	}
-
-	async function handleOnInput(v) {
-		delayedAction(v.target.value, 500);
-	}
-
 	function delayedAction(query, delay) {
 		clearTimeout(timeoutRef);
 
@@ -88,6 +69,29 @@
 		history.pushState({}, '', `${location.pathname}?${params}`);
 	}
 
+	async function handleSubmit() {
+		const formData = new FormData(form);
+		const query = formData.get('query');
+
+		if (!query) return;
+
+		if ($page.route.id.indexOf('explore') === -1) {
+			goto(`/app/explore?q=${query}`);
+			return;
+		}
+
+		updateResults(query);
+		updateUrl(query);
+	}
+
+	async function handleInput(v) {
+		if (!v.target.value) {
+			return;
+		}
+
+		delayedAction(v.target.value, 500);
+	}
+
 	function handleFocus() {
 		searchFocused.update((value) => (value = true));
 	}
@@ -97,11 +101,7 @@
 	}
 </script>
 
-<form
-	autocomplete="off"
-	bind:this={form}
-	on:submit|preventDefault={handleSubmit}
->
+<form autocomplete="off" bind:this={form} on:submit|preventDefault={handleSubmit}>
 	<input
 		name="query"
 		type="text"
@@ -110,16 +110,26 @@
 		bind:value={inputValue}
 		on:focus={handleFocus}
 		on:blur={handleBlur}
-		on:input={handleOnInput}
+		on:input={handleInput}
 	/>
 	<button type="submit">
 		<img alt="search" src="/search-icon.svg" />
 	</button>
+	{#if $autocompleteOptions.length > 0}
+		<ul class="autocomplete">
+			{#each $autocompleteOptions as option}
+				<li>
+					{option}
+				</li>
+			{/each}
+		</ul>
+	{/if}
 </form>
 
 <style>
 	form {
 		display: flex;
+		position: relative;
 		align-items: center;
 	}
 	input {
@@ -144,5 +154,25 @@
 	img {
 		width: 100%;
 		height: 100%;
+	}
+
+	.autocomplete {
+		position: absolute;
+		top: 49px;
+		left: 2px;
+		right: 52px;
+		background-color: white;
+		list-style: none;
+		padding: 8px 16px;
+		margin: 0;
+		display: none;
+		flex-direction: column;
+		gap: 8px;
+		z-index: 1;
+		border-top: 2px solid lightgray;
+	}
+
+	input:focus ~ .autocomplete {
+  display: flex;
 	}
 </style>
