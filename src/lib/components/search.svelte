@@ -27,7 +27,7 @@
 
 	onMount(() => {
 		if ($page.url.searchParams.get('q')) {
-			fetchAutocomplete($page.url.searchParams.get('q'));
+			fetchPreSearchResultsNo($page.url.searchParams.get('q'));
 		}
 	});
 
@@ -42,12 +42,12 @@
 		clearTimeout(timeoutRef);
 
 		timeoutRef = setTimeout(() => {
-			if (query) fetchAutocomplete(query);
+			if (query) fetchPreSearchResultsNo(query);
 		}, delay);
 	}
 
-	async function fetchAutocomplete(query) {
-		const r = await fetch(`/api/autocomplete?q=${query}`);
+	async function fetchPreSearchResultsNo(query) {
+		const r = await fetch(`/api/pre-search-results-no?q=${query}`);
 		const data = await r.json();
 		preSearchResultsNo.update((value) => (value = data));
 	}
@@ -129,7 +129,7 @@
 		<img alt="search" src="/search-icon.svg" />
 	</button>
 	{#if showPreSearchResultsNo && inputValue != ''}
-		<div class="autocomplete">
+		<div class="pre-search-results-no">
 			<p>
 				<b>{$preSearchResultsNo}</b>
 				<span>result{$preSearchResultsNo > 1 ? 's' : ''} found</span>
@@ -168,7 +168,7 @@
 		height: 100%;
 	}
 
-	.autocomplete {
+	.pre-search-results-no {
 		position: absolute;
 		top: 49px;
 		left: 2px;
@@ -184,7 +184,7 @@
 		border-top: 2px solid lightgray;
 	}
 
-	.autocomplete p {
+	.pre-search-results-no p {
 		font-size: 1.2rem;
 		margin: 8px 0;
 		font-weight: normal;
