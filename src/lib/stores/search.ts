@@ -6,6 +6,6 @@ export const searchFocused = writable(false);
 
 export const autocompleteOptions = writable([]);
 
-autocompleteOptions.subscribe((options) => {
-	console.log('log options', options);
-});
+// autocompleteOptions.subscribe((options) => {
+// 	console.log('log options', options);
+// });

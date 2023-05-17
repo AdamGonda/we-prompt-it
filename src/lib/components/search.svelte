@@ -6,12 +6,14 @@
 	import { autocompleteOptions, results, searchFocused } from '$lib/stores/search';
 	import { goto, afterNavigate } from '$app/navigation';
 	import { browser } from '$app/environment';
+	import { onMount } from 'svelte';
 
 	let form = null;
 	let input = null;
 	let inputValue = '';
 	let placeholder = 'Search by name, description, content, tags, or AI model.';
 	let timeoutRef = null;
+	let showAutocomplete = false
 
 	if ($page.route.id.includes('explore') && $page.url.searchParams.get('q')) {
 		inputValue = $page.url.searchParams.get('q');
@@ -20,6 +22,12 @@
 	if (browser) {
 		window.addEventListener('popstate', handlePropstate);
 	}
+
+	onMount(() => {
+		if($page.url.searchParams.get('q')) {
+			fetchAutocomplete($page.url.searchParams.get('q'))
+		}
+	})
 
 	afterNavigate(() => {
 		if (form && !$page.route.id.includes('explore')) {
@@ -94,11 +102,19 @@
 	}
 
 	function handleFocus() {
+		showAutocomplete = true
 		searchFocused.update((value) => (value = true));
 	}
 
 	function handleBlur() {
+		showAutocomplete = false
 		searchFocused.update((value) => (value = false));
+	}
+
+	function getHighlihtedText(option, inputValue) {
+		const regex = new RegExp(inputValue, 'gi');
+		const highlightedText = option.replace(regex, (match) => `<b>${match}</b>`);
+		return highlightedText;
 	}
 </script>
 
@@ -116,11 +132,12 @@
 	<button type="submit">
 		<img alt="search" src="/search-icon.svg" />
 	</button>
-	{#if $autocompleteOptions.length > 0}
+	{#if showAutocomplete && $autocompleteOptions.length > 0}
 		<ul class="autocomplete">
 			{#each $autocompleteOptions as option}
 				<li>
-					{option}
+					<!-- show query in bold in option -->
+					{@html getHighlihtedText(option, inputValue)}
 				</li>
 			{/each}
 		</ul>
@@ -166,14 +183,16 @@
 		list-style: none;
 		padding: 8px 16px;
 		margin: 0;
-		display: none;
+		display: flex;
 		flex-direction: column;
 		gap: 8px;
 		z-index: 1;
 		border-top: 2px solid lightgray;
 	}
 
-	input:focus ~ .autocomplete {
-  display: flex;
+	li {
+		padding: 8px;
+		background-color: lightgray;
+		font-weight: normal;
 	}
 </style>
