@@ -16,13 +16,17 @@ function processResults(rawResults, query) {
 	return rawResults.map((repo) => {
 		const match = (value) => value.toLowerCase().includes(query.toLowerCase());
 
+		const firstTag = repo.tags.find((tag) => match(tag.name))?.name;
+		
 		const bundle = {
 			name: repo.name,
 			description: repo.description,
 			prompt: repo.prompt.content,
 			aiModel: repo.prompt.aiModel.name,
-			tags: repo.tags.map((tag) => tag.name)
+			firstTag: firstTag ? firstTag : '',
 		};
+
+		console.log('log bundle', bundle)
 
 		let firstMatch = null
 		for (const [key, value] of Object.entries(bundle)) {
