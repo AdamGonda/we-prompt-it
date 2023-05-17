@@ -1,6 +1,6 @@
 <script lang="ts">
 	// TODO autocomplete, get matches from db (just text) and display them in a dropdown normal, and your search in bold
-	// TODO navigation bug, if search made on explore, it fucks up the navigation
+	// TODO navigation bug, if search made on explore, it fucks up the navigation, investigate more
 
 	import { page } from '$app/stores';
 	import { autocompleteOptions, results, searchFocused } from '$lib/stores/search';
