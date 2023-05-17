@@ -1,7 +1,6 @@
 <script lang="ts">
 	// TODO autocomplete, get matches from db (just text) and display them in a dropdown normal, and your search in bold
 	// TODO navigation bug, if search made on explore, it fucks up the navigation, investigate more
-	// TODO add loader to preSearchResults
 
 	import { page } from '$app/stores';
 	import { preSearchResultsNo, results, searchFocused } from '$lib/stores/search';
@@ -9,13 +8,14 @@
 	import { browser } from '$app/environment';
 	import { onMount } from 'svelte';
 
-	const PRESEARCH_SEARCH_DELAY = 200
+	const PRESEARCH_SEARCH_DELAY = 200;
 	let form = null;
 	let input = null;
 	let inputValue = '';
 	let placeholder = 'Search by name, description, content, tags, or AI model.';
 	let timeoutRef = null;
 	let showPreSearchResultsNo = false;
+	let isPresearchLoading = false;
 
 	if ($page.route.id.includes('explore') && $page.url.searchParams.get('q')) {
 		inputValue = $page.url.searchParams.get('q');
@@ -47,9 +47,13 @@
 	}
 
 	async function fetchPreSearchResultsNo(query) {
+		isPresearchLoading = true;
+
 		const r = await fetch(`/api/pre-search-results-no?q=${query}`);
 		const data = await r.json();
 		preSearchResultsNo.update((value) => (value = data));
+
+		isPresearchLoading = false
 	}
 
 	async function updateResults(query) {
@@ -130,10 +134,14 @@
 	</button>
 	{#if showPreSearchResultsNo && inputValue != ''}
 		<div class="pre-search-results-no">
-			<p>
-				<b>{$preSearchResultsNo}</b>
-				<span>result{$preSearchResultsNo > 1 ? 's' : ''} found</span>
-			</p>
+			{#if isPresearchLoading}
+				<p>...loading</p>
+			{:else}
+				<p>
+					<b>{$preSearchResultsNo}</b>
+					<span>result{$preSearchResultsNo > 1 ? 's' : ''} found</span>
+				</p>
+			{/if}
 		</div>
 	{/if}
 </form>
