@@ -13,13 +13,7 @@ export async function GET({ url }) {
 }
 
 function processResults(rawResults, query) {
-	// find relevant data in the raw results
-	// where the query matches
-	// name, description, prompt.content, prompt.aiModel.name, tags.name
-	// find where it matches and just return the relevant data
 	return rawResults.map((repo) => {
-		// go through each field and find where is the match
-
 		const match = (value) => value.toLowerCase().includes(query.toLowerCase());
 
 		const bundle = {
@@ -31,7 +25,6 @@ function processResults(rawResults, query) {
 		};
 
 		let firstMatch = null
-		// check each field in the bundle and stop when the first match found
 		for (const [key, value] of Object.entries(bundle)) {
 			if (match(value)) {
 				firstMatch = value
