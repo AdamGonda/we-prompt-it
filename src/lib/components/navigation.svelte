@@ -2,8 +2,17 @@
 	import { signIn, signOut } from '@auth/sveltekit/client';
 	import Search from './search.svelte';
 	import { page } from '$app/stores';
+	import { goto } from '$app/navigation';
 
-	const session = $page.data.session
+	const user = $page.data.session?.user;
+
+	function handleSignout() {
+		signOut();
+	}
+
+	function handleSignin() {
+		signIn('google');
+	}
 </script>
 
 <nav>
@@ -12,7 +21,7 @@
 	</a>
 	<Search />
 
-	{#if session}
+	{#if user}
 		<a href={`/app/my-collection`}>
 			<div>My collection</div>
 		</a>
@@ -22,14 +31,20 @@
 		</a>
 	{/if}
 
-	<a href={`/repo/create`}>
-		<div>Create prompt</div>
-	</a>
-
-	{#if session}
-		<button style="cursor: pointer;" on:click={() => signOut()}>signout</button>
+	{#if user}
+		<a href={`/app/repo/create`}>
+			<div>Create prompt</div>
+		</a>
 	{:else}
-		<button style="cursor: pointer;" on:click={() => signIn()}>Signin</button>
+		<a href={`/signup`}>
+			<div>Create prompt</div>
+		</a>
+	{/if}
+
+	{#if user}
+		<button style="cursor: pointer;" on:click={handleSignout}>signout</button>
+	{:else}
+		<button style="cursor: pointer;" on:click={handleSignin}>Signin</button>
 		/
 		<a href={`/signup`}>
 			<p>Signup</p>

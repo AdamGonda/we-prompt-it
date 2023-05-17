@@ -2,7 +2,7 @@
 	export let repo;
 </script>
 
-<a href={`/app/repo/${repo.id}`}>
+<a href={`/repo/${repo.id}`}>
 	<div>
 		<p>id: <span>{repo.id}</span></p>
 		<p>name: <span>{repo.name}</span></p>
