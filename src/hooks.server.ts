@@ -10,7 +10,7 @@ async function authorization({ event, resolve }) {
     
     const session = await event.locals.getSession();
     if (!session) {
-      throw redirect(303, "/");
+      throw redirect(308, "/");
     }
   }
 

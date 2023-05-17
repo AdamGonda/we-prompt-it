@@ -19,10 +19,10 @@ export const actions = {
 		const obj = formToObject(formData);
 
 		await updateRepo(Number(params.id), obj);
-		throw redirect(301, `/app/repo/${params.id}`);
+		throw redirect(308, `/app/repo/${params.id}`);
 	},
 	delete: async ({ request, params }) => {
 		await deleteRepo(Number(params.id))
-		throw redirect(301, `/app/my-collection`);
+		throw redirect(308, `/app/my-collection`);
 	}
 };

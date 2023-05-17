@@ -3,6 +3,7 @@
 	import RepoCard from '$lib/components/repo-card.svelte';
 
 	const { myCollection } = $page.data;
+	console.log('log my-collection loaded',)
 </script>
 
 <main>
