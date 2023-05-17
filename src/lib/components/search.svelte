@@ -86,7 +86,7 @@
 		if (!query) return;
 
 		if ($page.route.id.indexOf('explore') === -1) {
-			goto(`/app/explore?q=${query}`);
+			goto(`/explore?q=${query}`);
 			return;
 		}
 
