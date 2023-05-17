@@ -50,11 +50,11 @@
 		clearTimeout(timeoutRef);
 
 		timeoutRef = setTimeout(() => {
-			if (query) triggerSearchForAutocomplete(query);
+			if (query) getAutocomplete(query);
 		}, delay);
 	}
 
-	async function triggerSearchForAutocomplete(query) {
+	async function getAutocomplete(query) {
 		const r = await fetch(`/api/autocomplete?q=${query}`);
 		const data = await r.json();
 		autocompleteOptions.update((value) => (value = data));
