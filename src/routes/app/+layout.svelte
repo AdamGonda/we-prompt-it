@@ -28,6 +28,7 @@
 
 	.content {
 		padding: 0 16px;
+		height: calc(100vh - 93px);
 	}
 
 	.overlay-ref {
