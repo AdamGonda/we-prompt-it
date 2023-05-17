@@ -3,17 +3,18 @@
 	// TODO navigation bug, if search made on explore, it fucks up the navigation, investigate more
 
 	import { page } from '$app/stores';
-	import { autocompleteOptions, results, searchFocused } from '$lib/stores/search';
+	import { autocompleteOptionsNo, results, searchFocused } from '$lib/stores/search';
 	import { goto, afterNavigate } from '$app/navigation';
 	import { browser } from '$app/environment';
 	import { onMount } from 'svelte';
 
+	const PRESEARCH_SEARCH_DELAY = 200
 	let form = null;
 	let input = null;
 	let inputValue = '';
 	let placeholder = 'Search by name, description, content, tags, or AI model.';
 	let timeoutRef = null;
-	let showAutocomplete = false
+	let showAutocomplete = false;
 
 	if ($page.route.id.includes('explore') && $page.url.searchParams.get('q')) {
 		inputValue = $page.url.searchParams.get('q');
@@ -24,10 +25,10 @@
 	}
 
 	onMount(() => {
-		if($page.url.searchParams.get('q')) {
-			fetchAutocomplete($page.url.searchParams.get('q'))
+		if ($page.url.searchParams.get('q')) {
+			fetchAutocomplete($page.url.searchParams.get('q'));
 		}
-	})
+	});
 
 	afterNavigate(() => {
 		if (form && !$page.route.id.includes('explore')) {
@@ -47,7 +48,7 @@
 	async function fetchAutocomplete(query) {
 		const r = await fetch(`/api/autocomplete?q=${query}`);
 		const data = await r.json();
-		autocompleteOptions.update((value) => (value = data));
+		autocompleteOptionsNo.update((value) => (value = data));
 	}
 
 	async function updateResults(query) {
@@ -98,23 +99,17 @@
 			return;
 		}
 
-		delayedAction(v.target.value, 500);
+		delayedAction(v.target.value, PRESEARCH_SEARCH_DELAY);
 	}
 
 	function handleFocus() {
-		showAutocomplete = true
+		showAutocomplete = true;
 		searchFocused.update((value) => (value = true));
 	}
 
 	function handleBlur() {
-		showAutocomplete = false
+		showAutocomplete = false;
 		searchFocused.update((value) => (value = false));
-	}
-
-	function getHighlihtedText(option, inputValue) {
-		const regex = new RegExp(inputValue, 'gi');
-		const highlightedText = option.replace(regex, (match) => `<b>${match}</b>`);
-		return highlightedText;
 	}
 </script>
 
@@ -132,15 +127,13 @@
 	<button type="submit">
 		<img alt="search" src="/search-icon.svg" />
 	</button>
-	{#if showAutocomplete && $autocompleteOptions.length > 0}
-		<ul class="autocomplete">
-			{#each $autocompleteOptions as option}
-				<li>
-					<!-- show query in bold in option -->
-					{@html getHighlihtedText(option, inputValue)}
-				</li>
-			{/each}
-		</ul>
+	{#if showAutocomplete && inputValue != ''}
+		<div class="autocomplete">
+			<p>
+				<b>{$autocompleteOptionsNo}</b>
+				<span>result{$autocompleteOptionsNo > 1 ? 's' : ''} found</span>
+			</p>
+		</div>
 	{/if}
 </form>
 
@@ -181,7 +174,7 @@
 		right: 52px;
 		background-color: white;
 		list-style: none;
-		padding: 8px 16px;
+		padding: 0 16px;
 		margin: 0;
 		display: flex;
 		flex-direction: column;
@@ -190,9 +183,9 @@
 		border-top: 2px solid lightgray;
 	}
 
-	li {
-		padding: 8px;
-		background-color: lightgray;
+	.autocomplete p {
+		font-size: 1.2rem;
+		margin: 8px 0;
 		font-weight: normal;
 	}
 </style>
