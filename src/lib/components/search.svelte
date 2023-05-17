@@ -144,8 +144,8 @@
 		align-items: center;
 	}
 	input {
-		font-size: 1.5rem;
-		width: 600px;
+		font-size: 1.1rem;
+		width: 500px;
 		padding: 0.5rem;
 		border: none;
 	}
@@ -154,8 +154,8 @@
 		outline: 3px solid orange;
 	}
 	button {
-		width: 50px;
-		height: 82%;
+		width: 40px;
+		height: 46%;
 		margin-left: 0px;
 		border: none;
 		background-color: lightsalmon;
@@ -169,9 +169,9 @@
 
 	.pre-search-results-no {
 		position: absolute;
-		top: 49px;
-		left: 2px;
-		right: 52px;
+		bottom: -20px;
+		left: 0px;
+		right: 50px;
 		background-color: white;
 		list-style: none;
 		padding: 0 16px;

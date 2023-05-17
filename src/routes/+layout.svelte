@@ -1,13 +1,7 @@
 <script lang="ts">
-	import { browser } from '$app/environment';
-	import { goto } from '$app/navigation';
-	import { page } from '$app/stores';
 	import Navigation from '$lib/components/navigation.svelte';
 	import { searchFocused } from '$lib/stores/search';
 
-	if(browser && $page.data.session) {
-		goto('/')
-	}
 </script>
 
 <Navigation />

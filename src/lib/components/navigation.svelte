@@ -17,27 +17,27 @@
 
 <nav>
 	<a href={`/`}>
-		<div>Logo</div>
+		<p>Logo</p>
 	</a>
 	<Search />
 
 	{#if user}
 		<a href={`/app/my-collection`}>
-			<div>My collection</div>
+			<p>My collection</p>
 		</a>
 	{:else}
 		<a href={`/signup`}>
-			<div>My collection</div>
+			<p>My collection</p>
 		</a>
 	{/if}
 
 	{#if user}
 		<a href={`/app/repo/create`}>
-			<div>Create prompt</div>
+			<p>Create prompt</p>
 		</a>
 	{:else}
 		<a href={`/signup`}>
-			<div>Create prompt</div>
+			<p>Create prompt</p>
 		</a>
 	{/if}
 
@@ -62,11 +62,5 @@
 
 	a {
 		text-decoration: none;
-	}
-
-	div {
-		background: rgb(112, 112, 112);
-		padding: 10px 20px;
-		color: whitesmoke;
 	}
 </style>

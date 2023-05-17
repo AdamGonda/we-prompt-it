@@ -8,6 +8,8 @@
 		stars: $page.data.repo.stars,
 		author: $page.data.repo.author
 	};
+
+	const user = $page.data.session?.user;
 </script>
 
 <div>
@@ -21,31 +23,28 @@
 </div>
 
 <div class="location">
-	<a href={`/app/profile/${$page.params.id}`}>
+	<a href={`/profile/${$page.params.id}`}>
 		<span>{data.author.firstName}</span>
 	</a>
 	/
-	<a href={`/app/repo/${data.id}`}>
+	<a href={`/repo/${data.id}`}>
 		<span>{data.name}</span>
 	</a>
 </div>
 
 <ul>
-	<li>
-		<a href={`/app/repo/${$page.params.id}`}>
-			<span>Prompt</span>
-		</a>
-	</li>
-	<li>
-		<a href={`/app/repo/${$page.params.id}/change-requests`}>
-			<span>Change requests - {data.changeRequests?.length}</span>
-		</a>
-	</li>
-	<li>
-		<a href={`/app/repo/${$page.params.id}/edit`}>
-			<span>Edit</span>
-		</a>
-	</li>
+	{#if user}
+		<li>
+			<a href={`/repo/${$page.params.id}`}>
+				<span>Content</span>
+			</a>
+		</li>
+		<li>
+			<a href={`/app/repo/${$page.params.id}/edit`}>
+				<span>Edit</span>
+			</a>
+		</li>
+	{/if}
 </ul>
 
 <main>
@@ -53,7 +52,7 @@
 </main>
 
 <style>
-	form[name="add-star"] input[type="submit"] {
+	form[name='add-star'] input[type='submit'] {
 		cursor: pointer;
 	}
 </style>
