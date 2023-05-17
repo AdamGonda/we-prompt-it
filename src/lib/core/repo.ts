@@ -87,7 +87,8 @@ export async function searchRepos(query) {
 		},
 		include: {
 			tags: { where: { isDeleted: false } },
-			stars: { where: { isDeleted: false } }
+			stars: { where: { isDeleted: false } },
+			prompt: { include: { aiModel: true } },
 		}
 	});
 }
