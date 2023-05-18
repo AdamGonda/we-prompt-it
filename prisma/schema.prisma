@@ -1,5 +1,5 @@
 generator client {
-  provider        = "prisma-client-js"
+  provider = "prisma-client-js"
 }
 
 datasource db {
@@ -42,6 +42,10 @@ model Repo {
   tags           Tag[]
   comments       Comment[]
   changeRequests ChangeRequest[]
+
+  parentId   Int?
+  parentRepo Repo?  @relation("ChildRepos", fields: [parentId], references: [id])
+  childRepos Repo[] @relation("ChildRepos")
 }
 
 model Prompt {
