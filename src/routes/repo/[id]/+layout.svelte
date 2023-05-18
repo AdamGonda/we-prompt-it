@@ -20,12 +20,13 @@
 
 <div>
 	<button>
-		<a href={`/repo/${data.id}/fork`}>Create new based on this</a>
+		<a href={`/signup`}>Create new based on this</a>
 	</button>
-
-	<form name="add-star" method="POST" action="?/addStar">
-		<input type="submit" value={`Stars: ${data.stars?.length}`} />
-	</form>
+	
+	<button>
+		<a href={`/signup`}>Stars: {data.stars?.length}</a>
+	</button>
+	
 </div>
 
 <div class="location">
