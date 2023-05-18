@@ -1,8 +1,8 @@
-import { createRepo } from '$lib/context/repo.js';
 import { formToObject } from '$lib/utils';
 import { getAllAIModels } from '$lib/context/ai-model';
 import { getRepoById } from '$lib/context/repo';
 import { getAllTags } from '$lib/context/tag';
+import { forkRepo } from '$lib/feature/fork-repo';
 
 export function load({ params }) {
 	const id = Number(params.id);
@@ -19,7 +19,7 @@ export const actions = {
 			const formData = await event.request.formData();
 			const obj = formToObject(formData);
 
-			const newRepo = await createRepo(event, obj, { isForked: true });
+			const newRepo = await forkRepo(event, obj);
 
 			return { id: newRepo.id };
 		}

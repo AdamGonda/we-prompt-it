@@ -4,6 +4,7 @@
 	import { page } from '$app/stores';
 
 	let data = {
+		id: $page.data.repo.id,
 		name: $page.data.repo.name,
 		description: $page.data.repo.description,
 		content: $page.data.repo.prompt.content,
@@ -16,13 +17,15 @@
 
 	function handleSubmit() {
 		return async ({ result, update }) => {
-			goto(`/repo/${result.data.id}`);
+			goto(`/app/repo/${result.data.id}`);
 		};
 	}
 </script>
 
 Fork
 <form name="create-prompt-form" method="POST" use:enhance={handleSubmit}>
+	<input name="id" type="hidden" value={data.id} />
+
 	<label for="name">
 		Name
 		<input name="name" type="text" value={data.name} />

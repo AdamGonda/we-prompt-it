@@ -1,17 +1,11 @@
 import { PrismaClient } from '@prisma/client';
+import { getDBUser } from './user';
 const prisma = new PrismaClient();
 
-export async function createRepo(event, data, config) {
-	const session = event.locals.getSession();
-	const userEmail = (await session).user.email;
+export async function createRepo(event, data) {
+	const dbUser = await getDBUser(event);
 
-	const user = await prisma.user.findUnique({
-		where: {
-			email: userEmail
-		}
-	});
-
-	if (!user) {
+	if (!dbUser) {
 		throw Error('No user found');
 	}
 
@@ -19,10 +13,10 @@ export async function createRepo(event, data, config) {
 		data: {
 			description: data.description,
 			name: data.name,
-			isForked: !!config.isForked,
+			isForked: false,
 			author: {
 				connect: {
-					id: user.id
+					id: dbUser.id
 				}
 			},
 			prompt: {

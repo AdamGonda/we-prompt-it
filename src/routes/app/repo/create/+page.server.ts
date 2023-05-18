@@ -16,7 +16,7 @@ export const actions = {
 			const formData = await event.request.formData();
 			const obj = formToObject(formData);
 
-			const newRepo = await createRepo(event, obj, { isForked: false });
+			const newRepo = await createRepo(event, obj);
 
 			return { id: newRepo.id };
 		}
