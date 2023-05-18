@@ -14,6 +14,7 @@ export function load({ params }) {
 }
 
 export const actions = {
+	// TODO check if user is the owner
 	edit: async ({ request, params }) => {
 		const formData = await request.formData();
 		const obj = formToObject(formData);

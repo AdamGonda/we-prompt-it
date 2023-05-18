@@ -11,6 +11,7 @@
 	};
 
 	const user = $page.data.session?.user;
+	const isOwner = $page.data.repo.author.email === user.email
 
 	async function handleAddRemoveStar() {
 		const r = await fetch(`/api/add-remove-star?id=${data.id}`, {
@@ -42,7 +43,7 @@
 </div>
 
 <ul>
-	{#if user}
+	{#if isOwner}
 		<li>
 			<a href={`/app/repo/${$page.params.id}`}>
 				<span>Content</span>
