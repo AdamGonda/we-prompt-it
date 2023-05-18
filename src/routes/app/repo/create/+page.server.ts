@@ -1,5 +1,5 @@
 import { getAllAIModels } from '$lib/context/ai-model.js';
-import { createRepo } from '$lib/context/repo.js';
+import { createRepo } from '$lib/feature/create-repo.js';
 import { getAllTags } from '$lib/context/tag.js';
 import { formToObject } from '$lib/utils';
 
