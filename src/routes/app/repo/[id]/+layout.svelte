@@ -61,7 +61,4 @@
 </main>
 
 <style>
-	form[name='add-star'] input[type='submit'] {
-		cursor: pointer;
-	}
 </style>
