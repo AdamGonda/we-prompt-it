@@ -10,6 +10,11 @@ export async function forkRepo(event, data) {
 		throw Error('No user found');
 	}
 
+	await prisma.repo.update({
+		where: { id: data.id },
+		data: { isForked: true }
+	});
+
 	return await prisma.repo.create({
 		data: {
 			parentRepo: {
@@ -19,7 +24,6 @@ export async function forkRepo(event, data) {
 			},
 			description: data.description,
 			name: data.name,
-			isForked: true,
 			author: {
 				connect: {
 					id: dbUser.id

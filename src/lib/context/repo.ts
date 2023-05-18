@@ -78,7 +78,3 @@ export async function updateRepo(id, data) {
 		data: { content: data.content, aIModelId: data.model }
 	});
 }
-
-export async function deleteRepo(id) {
-	return await prisma.repo.update({ where: { id }, data: { isDeleted: true } });
-}
