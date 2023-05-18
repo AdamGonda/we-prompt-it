@@ -1,7 +1,7 @@
 import { PrismaClient } from '@prisma/client';
 const prisma = new PrismaClient();
 
-export async function addStar(userId, repoId) {
+export async function addRemoveStar(userId, repoId) {
 	// check if user already starred the repo before
 	const starInDB = await prisma.star.findUnique({
 		where: {
@@ -21,9 +21,11 @@ export async function addStar(userId, repoId) {
 
 	// if yes based on isDeleted, reactivate or delete
 	if (starInDB.isDeleted) {
-		return await reactivateStar(starInDB.id);
+		await reactivateStar(starInDB.id);
+		return 1
 	} else {
-		return await deleteStar(starInDB.id);
+		await deleteStar(starInDB.id);
+		return -1
 	}
 }
 

@@ -1,8 +1,6 @@
 import { getAllAIModels } from '$lib/core/ai-model';
 import { getRepoById } from '$lib/core/repo';
-import { addStar } from '$lib/core/star';
 import { getAllTags } from '$lib/core/tag';
-import { getDBUser } from '$lib/core/user.js';
 
 export function load({ params }) {
 	const id = Number(params.id);
@@ -12,12 +10,3 @@ export function load({ params }) {
 
 	return { repo, aiModels, tags };
 }
-
-export const actions = {
-	addStar: async (event) => {
-		if((await event.locals.getSession()).user) {
-			const user = await getDBUser(event);
-			await addStar(user.id, Number(event.params.id));
-		}
-	}
-};
