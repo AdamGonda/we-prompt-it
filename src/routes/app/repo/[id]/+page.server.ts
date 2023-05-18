@@ -15,7 +15,9 @@ export function load({ params }) {
 
 export const actions = {
 	addStar: async (event) => {
-		const user = await getDBUser(event);
-		await addStar(user.id, Number(event.params.id));
+		if((await event.locals.getSession()).user) {
+			const user = await getDBUser(event);
+			await addStar(user.id, Number(event.params.id));
+		}
 	}
 };
