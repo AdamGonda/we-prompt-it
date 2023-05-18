@@ -23,7 +23,8 @@ export async function getUsersCollection(event) {
 
 	const createdBy = await prisma.repo.findMany({
 		where: {
-			authorId: dbUser.id
+			authorId: dbUser.id,
+			isDeleted: false,
 		},
 		include: { stars: { where: { isDeleted: false } } }
 	});
