@@ -1,4 +1,6 @@
 <script>
+	import { enhance } from '$app/forms';
+	import { goto } from '$app/navigation';
 	import { page } from '$app/stores';
 
 	let data = {
@@ -11,10 +13,17 @@
 	function isSelected(model) {
 		return model.id == $page.data.repo.prompt.aiModel.id;
 	}
+
+	function handleSubmit({ form, data, action, cancel, submitter }) {
+		return async ({ result, update }) => {
+			console.log('log result', result)
+			goto(`/repo/${result.data.id}`);
+		};
+	}
 </script>
 
 Fork
-<form name="create-prompt-form" method="POST">
+<form name="create-prompt-form" method="POST" use:enhance={handleSubmit}>
 	<label for="name">
 		Name
 		<input name="name" type="text" value={data.name} />
