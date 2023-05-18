@@ -15,6 +15,7 @@
 		<p>id: <span>{repo.id}</span></p>
 		<p>name: <span>{repo.name}</span></p>
 		<p>stars: <span>{repo.stars?.length}</span></p>
+		<p>forked: <span>{repo.noTimesForked}</span></p>
 	</div>
 </a>
 

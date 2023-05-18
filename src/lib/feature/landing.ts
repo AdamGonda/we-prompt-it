@@ -21,6 +21,9 @@ export async function getLandingData() {
 		where: {
 			isDeleted: false,
 		},
+		include: {
+			stars: true
+		},
 		orderBy: {
 			noTimesForked: 'desc',
 		},
