@@ -15,22 +15,14 @@
 		return model.id == $page.data.repo.prompt.aiModel.id;
 	}
 
-	function handleEdit() {
-		return async () => {
-			console.log('log navigate');
-			goto(`/app/repo/${data.id}`);
-		};
-	}
-
 	function handleDelete() {
 		return async () => {
-			console.log('log navigate');
 			goto(`/app/my-collection`);
 		};
 	}
 </script>
 
-<form name="edit-prompt-form" method="POST" action="?/edit" use:enhance={handleEdit}>
+<form name="edit-prompt-form" method="POST" action="?/edit">
 	<label for="name">
 		Name
 		<input name="name" type="text" value={data.name} />
