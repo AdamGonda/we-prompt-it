@@ -17,7 +17,15 @@ export async function getLandingData() {
 		take: 10
 	});
 
-	
+	const mostForked = await prisma.repo.findMany({
+		where: {
+			isDeleted: false,
+		},
+		orderBy: {
+			noTimesForked: 'desc',
+		},
+		take: 10,
+	});
 
-	return { mostLiked }
+	return { mostLiked, mostForked }
 }
