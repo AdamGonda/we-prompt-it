@@ -1,7 +1,10 @@
 <script>
+	import { enhance } from '$app/forms';
+	import { goto } from '$app/navigation';
 	import { page } from '$app/stores';
 
 	let data = {
+		id: $page.data.repo.id,
 		name: $page.data.repo.name,
 		description: $page.data.repo.description,
 		content: $page.data.repo.prompt.content,
@@ -11,9 +14,23 @@
 	function isSelected(model) {
 		return model.id == $page.data.repo.prompt.aiModel.id;
 	}
+
+	function handleEdit() {
+		return async () => {
+			console.log('log navigate');
+			goto(`/app/repo/${data.id}`);
+		};
+	}
+
+	function handleDelete() {
+		return async () => {
+			console.log('log navigate');
+			goto(`/app/my-collection`);
+		};
+	}
 </script>
 
-<form name="create-prompt-form" method="POST" action="?/edit">
+<form name="edit-prompt-form" method="POST" action="?/edit" use:enhance={handleEdit}>
 	<label for="name">
 		Name
 		<input name="name" type="text" value={data.name} />
@@ -21,12 +38,7 @@
 
 	<label for="description">
 		Description
-		<textarea
-			name="description"
-			rows="4"
-			cols="50"
-			value={data.description}
-		/>
+		<textarea name="description" rows="4" cols="50" value={data.description} />
 	</label>
 
 	<label for="content">
@@ -46,9 +58,9 @@
 	<input type="submit" />
 </form>
 
-<form method="POST" action="?/delete">
+<form method="POST" action="?/delete" use:enhance={handleDelete}>
 	Danger zone
-	<input type="submit" value="Delete">
+	<input type="submit" value="Delete" />
 </form>
 
 <style>

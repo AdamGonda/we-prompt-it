@@ -94,8 +94,8 @@ export async function searchRepos(query) {
 }
 
 export async function getRepoById(id) {
-	return await prisma.repo.findUnique({
-		where: { id },
+	return await prisma.repo.findFirst({
+		where: { id, isDeleted: false },
 		include: {
 			author: true,
 			stars: { where: { isDeleted: false } },

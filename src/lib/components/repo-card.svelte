@@ -10,7 +10,7 @@
 	}	
 </script>
 
-<a href={`/${inApp ? 'app' : ''}repo/${repo.id}`}>
+<a href={`${inApp ? '/app' : ''}/repo/${repo.id}`}>
 	<div>
 		<p>id: <span>{repo.id}</span></p>
 		<p>name: <span>{repo.name}</span></p>
