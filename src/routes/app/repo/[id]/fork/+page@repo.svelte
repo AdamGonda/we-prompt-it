@@ -14,9 +14,8 @@
 		return model.id == $page.data.repo.prompt.aiModel.id;
 	}
 
-	function handleSubmit({ form, data, action, cancel, submitter }) {
+	function handleSubmit() {
 		return async ({ result, update }) => {
-			console.log('log result', result)
 			goto(`/repo/${result.data.id}`);
 		};
 	}

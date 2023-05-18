@@ -11,9 +11,8 @@
 		models: $page.data.aiModels
 	};
 
-	function handleSubmit({ form, data, action, cancel, submitter }) {
-		return async ({ result, update }) => {
-			console.log('log result', result)
+	function handleSubmit() {
+		return async ({ result }) => {
 			goto(`/repo/${result.data.id}`);
 		};
 	}

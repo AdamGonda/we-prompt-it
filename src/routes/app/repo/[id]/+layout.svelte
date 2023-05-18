@@ -1,6 +1,5 @@
 <script>
-	import { enhance } from '$app/forms';
-	import { goto } from '$app/navigation';
+
 	import { page } from '$app/stores';
 
 	const data = {
@@ -19,6 +18,7 @@
 		})
 		const json = await r.json()
 		if(json.status == 200) {
+			console.log('log data', data)
 			data.stars += json.diff
 		}
 	}
