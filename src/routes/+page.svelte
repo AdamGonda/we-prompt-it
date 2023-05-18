@@ -3,8 +3,6 @@
 	import RepoCard from '$lib/components/repo-card.svelte';
 
 	const { session, mostLiked } = $page.data;
-
-	console.log('log $page.data', $page.data)
 </script>
 
 <div>
