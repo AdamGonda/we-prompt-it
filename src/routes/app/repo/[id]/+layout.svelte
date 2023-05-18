@@ -35,7 +35,7 @@
 <ul>
 	{#if user}
 		<li>
-			<a href={`/repo/${$page.params.id}`}>
+			<a href={`/app/repo/${$page.params.id}`}>
 				<span>Content</span>
 			</a>
 		</li>
