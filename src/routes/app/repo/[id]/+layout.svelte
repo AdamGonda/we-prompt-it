@@ -38,9 +38,7 @@
 		<span>{data.author.firstName}</span>
 	</a>
 	/
-	<a href={`/repo/${data.id}`}>
-		<span>{data.name}</span>
-	</a>
+	<span>{data.name}</span>
 </div>
 
 <ul>

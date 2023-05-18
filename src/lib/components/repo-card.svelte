@@ -1,8 +1,16 @@
 <script>
+	import { browser } from "$app/environment";
+	import { page } from "$app/stores";
+
 	export let repo;
+	let inApp = false
+
+	if(browser && $page.data.session?.user) {
+		inApp = true
+	}	
 </script>
 
-<a href={`/repo/${repo.id}`}>
+<a href={`/${inApp ? 'app' : ''}/repo/${repo.id}`}>
 	<div>
 		<p>id: <span>{repo.id}</span></p>
 		<p>name: <span>{repo.name}</span></p>
