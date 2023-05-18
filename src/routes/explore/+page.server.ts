@@ -1,4 +1,5 @@
-import { getAllRepos, searchRepos } from '$lib/core/repo';
+import { getAllRepos } from '$lib/context/repo';
+import { searchRepos } from '$lib/feature/search';
 
 export async function load({ url }) {
 	const query = url.searchParams.get('q');

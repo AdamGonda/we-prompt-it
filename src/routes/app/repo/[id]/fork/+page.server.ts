@@ -1,8 +1,8 @@
-import { createRepo } from '$lib/core/repo.js';
+import { createRepo } from '$lib/context/repo.js';
 import { formToObject } from '$lib/utils';
-import { getAllAIModels } from '$lib/core/ai-model';
-import { getRepoById } from '$lib/core/repo';
-import { getAllTags } from '$lib/core/tag';
+import { getAllAIModels } from '$lib/context/ai-model';
+import { getRepoById } from '$lib/context/repo';
+import { getAllTags } from '$lib/context/tag';
 
 export function load({ params }) {
 	const id = Number(params.id);

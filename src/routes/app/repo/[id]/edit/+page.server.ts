@@ -1,6 +1,6 @@
-import { getAllAIModels } from '$lib/core/ai-model';
-import { deleteRepo, getRepoById, updateRepo } from '$lib/core/repo';
-import { getAllTags } from '$lib/core/tag';
+import { getAllAIModels } from '$lib/context/ai-model';
+import { deleteRepo, getRepoById, updateRepo } from '$lib/context/repo';
+import { getAllTags } from '$lib/context/tag';
 import { formToObject } from '$lib/utils';
 import { redirect } from '@sveltejs/kit';
 

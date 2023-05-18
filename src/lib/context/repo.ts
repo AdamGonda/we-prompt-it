@@ -38,61 +38,6 @@ export async function createRepo(event, data, config) {
 	});
 }
 
-export async function searchRepos(query) {
-	return await prisma.repo.findMany({
-		where: {
-			OR: [
-				{
-					name: {
-						contains: query,
-						mode: 'insensitive'
-					}
-				},
-				{
-					description: {
-						contains: query,
-						mode: 'insensitive'
-					}
-				},
-				{
-					prompt: {
-						content: {
-							contains: query,
-							mode: 'insensitive'
-						}
-					}
-				},
-				{
-					prompt: {
-						aiModel: {
-							name: {
-								contains: query,
-								mode: 'insensitive'
-							}
-						}
-					}
-				},
-				{
-					tags: {
-						some: {
-							name: {
-								contains: query,
-								mode: 'insensitive'
-							}
-						}
-					}
-				}
-			],
-			isDeleted: false
-		},
-		include: {
-			tags: { where: { isDeleted: false } },
-			stars: { where: { isDeleted: false } },
-			prompt: { include: { aiModel: true } },
-		}
-	});
-}
-
 export async function getRepoById(id) {
 	return await prisma.repo.findFirst({
 		where: { id, isDeleted: false },

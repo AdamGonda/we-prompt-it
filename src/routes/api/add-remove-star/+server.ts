@@ -1,5 +1,5 @@
-import { addRemoveStar } from '$lib/core/star';
-import { getDBUser } from '$lib/core/user';
+import { addRemoveStar } from '$lib/context/star';
+import { getDBUser } from '$lib/context/user';
 
 export async function POST(event) {
 	const id = event.url.searchParams.get('id');
