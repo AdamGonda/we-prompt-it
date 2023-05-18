@@ -59,7 +59,6 @@ async function main() {
 					id: adamUser.id
 				}
 			},
-			isForked: true,
 			prompt: {
 				create: {
 					content:

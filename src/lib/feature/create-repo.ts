@@ -13,7 +13,6 @@ export async function createRepo(event, data) {
 		data: {
 			description: data.description,
 			name: data.name,
-			isForked: false,
 			author: {
 				connect: {
 					id: dbUser.id

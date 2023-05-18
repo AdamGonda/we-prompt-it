@@ -11,8 +11,14 @@ export async function forkRepo(event, data) {
 	}
 
 	await prisma.repo.update({
-		where: { id: data.id },
-		data: { isForked: true }
+		where: {
+			id: data.id,
+		},
+		data: {
+			noTimesForked: {
+				increment: 1,
+			},
+		},
 	});
 
 	return await prisma.repo.create({

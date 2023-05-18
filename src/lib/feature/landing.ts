@@ -17,20 +17,7 @@ export async function getLandingData() {
 		take: 10
 	});
 
-	// const mostRehased = await prisma.repo.findMany({
-	// 	where: {
-	// 		isDeleted: false
-	// 	},
-	// 	include: {
-	// 		stars: true
-	// 	},
-	// 	orderBy: {
-	// 		stars: {
-	// 			_count: 'desc'
-	// 		}
-	// 	},
-	// 	take: 10
-	// });
+	
 
 	return { mostLiked }
 }
