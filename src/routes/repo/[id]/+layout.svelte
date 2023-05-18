@@ -14,7 +14,7 @@
 	const user = $page.data.session?.user;
 
 	if(browser && user) {
-		goto(`/app/repo/${1}`)
+		goto(`/app/repo/${data.id}`)
 	}	
 </script>
 
