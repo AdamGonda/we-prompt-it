@@ -11,12 +11,14 @@ export async function addRemoveStar(userId, repoId) {
 
 	// if not create new start
 	if (!starInDB) {
-		return await prisma.star.create({
+		await prisma.star.create({
 			data: {
 				userId,
 				repoId
 			}
 		});
+
+		return 1
 	}
 
 	// if yes based on isDeleted, reactivate or delete

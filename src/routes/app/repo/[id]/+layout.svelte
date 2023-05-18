@@ -18,7 +18,6 @@
 		})
 		const json = await r.json()
 		if(json.status == 200) {
-			console.log('log data', data)
 			data.stars += json.diff
 		}
 	}
