@@ -1,7 +1,6 @@
 # Tech
 TODO form validation front
 TODO form validation back
-TODO 404 page
 TODO 500 page
 TODO add paywrigh tests
 
