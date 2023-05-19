@@ -1,14 +1,6 @@
-import { getAllAIModels } from '$lib/context/ai-model';
-import { getRepoById } from '$lib/context/repo';
-import { getAllTags } from '$lib/context/tag';
+import loadRepo from '$lib/feature/load-repo.js';
 
-// TODO abstract this to a function {get repo suff}
-export function load({ params }) {
-	const id = Number(params.id);
-	const repo = getRepoById(id);
-	const aiModels = getAllAIModels();
-	const tags = getAllTags();
-
-	return { repo, aiModels, tags };
+export async function load(event) {
+	return await loadRepo(event);
 }
 

@@ -1,18 +1,11 @@
-import { getAllAIModels } from '$lib/context/ai-model';
-import {  getRepoById, updateRepo } from '$lib/context/repo';
-import { getAllTags } from '$lib/context/tag';
+import loadRepo from '$lib/feature/load-repo.js';
+import { updateRepo } from '$lib/context/repo';
 import { deleteRepo } from '$lib/feature/delete-repo';
 import { formToObject } from '$lib/utils';
 import { redirect } from '@sveltejs/kit';
 
-// TODO abstract this to a function {get repo suff}
-export function load({ params }) {
-	const id = Number(params.id);
-	const repo = getRepoById(id);
-	const aiModels = getAllAIModels();
-	const tags = getAllTags();
-
-	return { repo, aiModels, tags };
+export async function load(event) {
+	return await loadRepo(event);
 }
 
 export const actions = {
@@ -24,12 +17,12 @@ export const actions = {
 		try {
 			await updateRepo(Number(params.id), obj);
 
-			throw redirect(302, `/app/repo/${params.id}`)
+			throw redirect(302, `/app/repo/${params.id}`);
 		} catch (error) {
-			throw redirect(302, `/app`)
+			throw redirect(302, `/app`);
 		}
 	},
 	delete: async ({ params }) => {
-		await deleteRepo(Number(params.id))
+		await deleteRepo(Number(params.id));
 	}
 };
