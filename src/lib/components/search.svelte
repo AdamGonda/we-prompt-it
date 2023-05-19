@@ -13,7 +13,7 @@
 	let timeoutRef = null;
 	let showPreSearchResultsNo = false;
 
-	if ($page.route.id.includes('explore') && $page.url.searchParams.get('q')) {
+	if ($page.route?.id?.includes('explore') && $page.url.searchParams.get('q')) {
 		inputValue = $page.url.searchParams.get('q');
 	}
 
@@ -28,7 +28,7 @@
 	});
 
 	afterNavigate(() => {
-		if (form && !$page.route.id.includes('explore')) {
+		if (form && !$page.route?.id?.includes('explore')) {
 			form.reset();
 			inputValue = '';
 		}
@@ -82,7 +82,7 @@
 
 		if (!query) return;
 
-		if ($page.route.id.indexOf('explore') === -1) {
+		if ($page.route?.id?.indexOf('explore') === -1) {
 			goto(`/explore?q=${query}`);
 			return;
 		}

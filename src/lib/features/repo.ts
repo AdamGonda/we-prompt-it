@@ -128,6 +128,13 @@ export async function forkRepo(event, data) {
 
 export async function repoLoad({ params }) {
 	const id = Number(params.id);
+
+	if (!id) {
+		throw error(404, {
+			message: 'Not found'
+		});
+	}
+
 	const repo = await getRepoById(id);
 	const aiModels = await getAllAIModels();
 	const tags = await getAllTags();
