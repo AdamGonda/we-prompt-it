@@ -3,6 +3,7 @@ TODO form validation front
 TODO form validation back
 TODO 500 page
 TODO add paywrigh tests
+TODO use uuids for ids
 
 # Product
 TODO tag selection on create/edit
