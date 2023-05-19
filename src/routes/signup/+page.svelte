@@ -1,3 +1,3 @@
-<!-- TODO open ai style -->
+<!-- open ai style -->
 
 Signup / Login
