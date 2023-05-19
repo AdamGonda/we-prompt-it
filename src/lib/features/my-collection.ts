@@ -13,7 +13,7 @@ export async function getUsersCollection(event) {
 		include: { stars: { where: { isDeleted: false } } }
 	});
 
-	const forked = createdBy.filter((repo) => repo.noTimesForked > 0);
+	const forked = createdBy.filter((repo) => repo.parentId !== null);
 
 	const stars = await prisma.star.findMany({
 		where: {
