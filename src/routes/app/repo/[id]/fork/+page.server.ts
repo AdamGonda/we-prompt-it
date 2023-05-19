@@ -1,9 +1,17 @@
 import { formToObject } from '$lib/utils';
 import { getAllAIModels, getAllTags, getRepoById } from '$lib/features/shared';
 import { forkRepo } from '$lib/features/repo';
+import { error } from '@sveltejs/kit';
 
 export function load({ params }) {
 	const id = Number(params.id);
+	
+	if (!id) {
+    throw error(404, {
+			message: 'Not found'
+		});
+	}
+	
 	const repo = getRepoById(id);
 	const aiModels = getAllAIModels();
 	const tags = getAllTags();

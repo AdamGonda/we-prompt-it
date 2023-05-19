@@ -1,9 +1,6 @@
 # Tech
-TODO form validation
-TODO handle empty id's
-TODO handle empty form values
-TODO handle wrong types in form values
-TODO handle server errors
+TODO form validation front
+TODO form validation back
 TODO 404 page
 TODO 500 page
 TODO add paywrigh tests
