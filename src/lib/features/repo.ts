@@ -1,6 +1,7 @@
 import { getDBUser } from '$lib/features/user';
 import { PrismaClient } from '@prisma/client';
 import { getAllAIModels, getAllTags, getRepoById } from '$lib/features/shared';
+import { error } from '@sveltejs/kit';
 
 const prisma = new PrismaClient();
 
@@ -130,6 +131,12 @@ export async function repoLoad({ params }) {
 	const repo = await getRepoById(id);
 	const aiModels = await getAllAIModels();
 	const tags = await getAllTags();
+
+	if (!repo) {
+		throw error(404, {
+			message: 'Not found'
+		});
+	}
 
 	return { repo, aiModels, tags };
 }
