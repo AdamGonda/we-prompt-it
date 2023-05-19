@@ -9,19 +9,18 @@ export async function load(event) {
 }
 
 export const actions = {
-	// TODO check if user is the owner
-	edit: async ({ request, params }) => {
-		const formData = await request.formData();
-		const obj = formToObject(formData);
+	edit: async (event) => {
+		const raw = await event.request.formData();
+		const formData = formToObject(raw);
 
 		try {
-			await updateRepo(Number(params.id), obj);
+			await updateRepo(event, formData);
 		} catch (error) {
 			console.log('log error', error)
 			throw redirect(302, `/`);
 		}
 
-		throw redirect(302, `/app/repo/${params.id}`);
+		throw redirect(302, `/app/repo/${event.params.id}`);
 	},
 	delete: async ({ params }) => {
 		await deleteRepo(Number(params.id));

@@ -1,4 +1,5 @@
 import { PrismaClient } from '@prisma/client';
+import { getDBUser } from './user';
 const prisma = new PrismaClient();
 
 
@@ -25,7 +26,10 @@ export async function getAllRepos() {
 	});
 }
 
-export async function updateRepo(id, data) {
+export async function updateRepo(event, formData) {
+	const id = Number(event.params.id);
+	const user = await getDBUser(event);
+
 	const repo = await prisma.repo.findUnique({
 		where: { id },
 		include: { prompt: true }
@@ -39,16 +43,20 @@ export async function updateRepo(id, data) {
 		throw new Error(`Repo with id ${id} is deleted`);
 	}
 
+	if (repo.authorId !== user.id) {
+		throw new Error(`User ${user.id} is not the author of repo ${id}`);
+	}
+
 	await prisma.repo.update({
 		where: { id },
 		data: {
-			name: data.name,
-			description: data.description
+			name: formData.name,
+			description: formData.description
 		}
 	});
 
 	await prisma.prompt.update({
 		where: { id: repo.prompt.id },
-		data: { content: data.content, aIModelId: data.model }
+		data: { content: formData.content, aIModelId: formData.model }
 	});
 }
