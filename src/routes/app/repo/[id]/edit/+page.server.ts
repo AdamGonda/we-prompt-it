@@ -1,11 +1,10 @@
-import loadRepo from '$lib/feature/load-repo.js';
-import { deleteRepo } from '$lib/feature/delete-repo';
+import { deleteRepo, editRepo, repoLoad } from '$lib/features/repo';
 import { formToObject } from '$lib/utils';
 import { redirect } from '@sveltejs/kit';
-import { editRepo } from '$lib/feature/edit-repo';
+
 
 export async function load(event) {
-	return await loadRepo(event);
+	return await repoLoad(event);
 }
 
 export const actions = {

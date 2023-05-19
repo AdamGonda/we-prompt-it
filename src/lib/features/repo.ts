@@ -125,7 +125,7 @@ export async function forkRepo(event, data) {
 	});
 }
 
-export async function load({ params }) {
+export async function repoLoad({ params }) {
 	const id = Number(params.id);
 	const repo = await getRepoById(id);
 	const aiModels = await getAllAIModels();

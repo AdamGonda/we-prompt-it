@@ -1,5 +1,5 @@
-import loadRepo from '$lib/feature/load-repo.js';
+import { repoLoad } from "$lib/features/repo";
 
 export async function load(event) {
-	return await loadRepo(event);
+	return await repoLoad(event);
 }
