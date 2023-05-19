@@ -16,11 +16,12 @@ export const actions = {
 
 		try {
 			await updateRepo(Number(params.id), obj);
-
-			throw redirect(302, `/app/repo/${params.id}`);
 		} catch (error) {
-			throw redirect(302, `/app`);
+			console.log('log error', error)
+			throw redirect(302, `/`);
 		}
+
+		throw redirect(302, `/app/repo/${params.id}`);
 	},
 	delete: async ({ params }) => {
 		await deleteRepo(Number(params.id));
