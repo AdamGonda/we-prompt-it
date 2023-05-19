@@ -1,5 +1,4 @@
-import { getAllAIModels, getRepoById } from "$lib/feature/shared";
-import { getAllTags } from "$lib/context/tag";
+import { getAllAIModels, getAllTags, getRepoById } from "$lib/feature/shared";
 
 export default async ({ params }) => {
 	const id = Number(params.id);

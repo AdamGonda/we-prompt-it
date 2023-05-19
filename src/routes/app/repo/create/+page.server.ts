@@ -1,7 +1,6 @@
 import { createRepo } from '$lib/feature/create-repo.js';
-import { getAllTags } from '$lib/context/tag.js';
 import { formToObject } from '$lib/utils';
-import { getAllAIModels } from '$lib/feature/shared';
+import { getAllAIModels, getAllTags } from '$lib/feature/shared';
 
 export async function load() {
 	const aiModels = getAllAIModels();

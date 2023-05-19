@@ -1,5 +1,5 @@
 import type { RequestEvent } from '@sveltejs/kit';
-import { getUserByEmail } from '$lib/context/user';
+import { getUserByEmail } from '$lib/feature/user';
 import { getAllRepos } from '$lib/feature/shared';
 
 export async function load(event: RequestEvent) {

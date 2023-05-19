@@ -1,6 +1,5 @@
 import { formToObject } from '$lib/utils';
-import { getAllAIModels, getRepoById } from '$lib/feature/shared';
-import { getAllTags } from '$lib/context/tag';
+import { getAllAIModels, getAllTags, getRepoById } from '$lib/feature/shared';
 import { forkRepo } from '$lib/feature/fork-repo';
 
 export function load({ params }) {
