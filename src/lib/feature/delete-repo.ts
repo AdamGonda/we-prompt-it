@@ -2,7 +2,6 @@ import { PrismaClient } from '@prisma/client';
 const prisma = new PrismaClient();
 
 export async function deleteRepo(id) {
-  console.log('log id', id)
 	await prisma.repo.updateMany({
 		where: { parentId: id },
 		data: { parentId: null }
