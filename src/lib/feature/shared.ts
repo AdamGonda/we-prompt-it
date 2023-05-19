@@ -25,4 +25,6 @@ export async function getAllRepos() {
 	});
 }
 
-
+export async function getAllAIModels() {
+	return await prisma.aIModel.findMany();
+}
