@@ -1,6 +1,4 @@
 # Tech
-TODO resolve import errors
-
 TODO handle non existent repo case
 TODO form validation
 TODO handle empty id's
@@ -9,6 +7,7 @@ TODO handle wrong types in form values
 TODO handle server errors
 TODO 404 page
 TODO 500 page
+TODO add paywrigh tests
 
 # Product
 TODO tag selection on create/edit
@@ -23,5 +22,3 @@ TODO add a button to copy the prompt to clipboard
 TODO add popup dialog to delete prompt
 TODO image uploads
 TODO autocomplete get matches from db (just text) and display them in a dropdown normal, and your search in bold
-
-TODO add paywrigh tests
