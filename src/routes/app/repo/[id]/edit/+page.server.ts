@@ -9,7 +9,7 @@ export async function load(event) {
 export const actions = {
 	edit: async (event) => {
 		const formData = await event.request.formData();
-		const pojo = formToObject(formData, ['name', 'description', 'content', 'model']);
+		const pojo = formToObject(formData);
 
 		try {
 			await editRepo(event, pojo);

@@ -23,7 +23,7 @@ export const actions = {
 	default: async (event) => {
 		if ((await event.locals.getSession()).user) {
 			const formData = await event.request.formData();
-			const pojo = formToObject(formData, ['id', 'content']);
+			const pojo = formToObject(formData);
 
 			const newRepo = await forkRepo(event, pojo);
 
