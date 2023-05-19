@@ -2,20 +2,19 @@ import { deleteRepo, editRepo, repoLoad } from '$lib/features/repo';
 import { formToObject } from '$lib/utils';
 import { redirect } from '@sveltejs/kit';
 
-
 export async function load(event) {
 	return await repoLoad(event);
 }
 
 export const actions = {
 	edit: async (event) => {
-		const raw = await event.request.formData();
-		const formData = formToObject(raw);
+		const formData = await event.request.formData();
+		const pojo = formToObject(formData, ['name', 'description', 'content', 'model']);
 
 		try {
-			await editRepo(event, formData);
+			await editRepo(event, pojo);
 		} catch (error) {
-			console.log('log error', error)
+			console.log('log error', error);
 			throw redirect(302, `/`);
 		}
 

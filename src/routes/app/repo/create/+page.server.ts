@@ -13,9 +13,9 @@ export const actions = {
 	default: async (event) => {
 		if ((await event.locals.getSession()).user) {
 			const formData = await event.request.formData();
-			const obj = formToObject(formData);
+			const pojo = formToObject(formData, ['description', 'name', 'content']);
 
-			const newRepo = await createRepo(event, obj);
+			const newRepo = await createRepo(event, pojo);
 
 			return { id: newRepo.id };
 		}
