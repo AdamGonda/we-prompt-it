@@ -2,6 +2,7 @@ import { getAllAIModels } from '$lib/context/ai-model';
 import { getRepoById } from '$lib/context/repo';
 import { getAllTags } from '$lib/context/tag';
 
+// TODO abstract this to a function {get repo suff}
 export function load({ params }) {
 	const id = Number(params.id);
 	const repo = getRepoById(id);

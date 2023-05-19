@@ -5,6 +5,7 @@ import { deleteRepo } from '$lib/feature/delete-repo';
 import { formToObject } from '$lib/utils';
 import { redirect } from '@sveltejs/kit';
 
+// TODO abstract this to a function {get repo suff}
 export function load({ params }) {
 	const id = Number(params.id);
 	const repo = getRepoById(id);
@@ -20,8 +21,13 @@ export const actions = {
 		const formData = await request.formData();
 		const obj = formToObject(formData);
 
-		await updateRepo(Number(params.id), obj);
-		throw redirect(302, `/app/repo/${params.id}`)
+		try {
+			await updateRepo(Number(params.id), obj);
+
+			throw redirect(302, `/app/repo/${params.id}`)
+		} catch (error) {
+			throw redirect(302, `/app`)
+		}
 	},
 	delete: async ({ params }) => {
 		await deleteRepo(Number(params.id))

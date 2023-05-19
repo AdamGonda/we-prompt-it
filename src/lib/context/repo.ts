@@ -35,6 +35,10 @@ export async function updateRepo(id, data) {
 		throw new Error(`No repo found with id: ${id}`);
 	}
 
+	if(repo.isDeleted) {
+		throw new Error(`Repo with id ${id} is deleted`);
+	}
+
 	await prisma.repo.update({
 		where: { id },
 		data: {
