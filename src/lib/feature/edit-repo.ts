@@ -1,32 +1,8 @@
+import { getDBUser } from '$lib/context/user';
 import { PrismaClient } from '@prisma/client';
-import { getDBUser } from './user';
 const prisma = new PrismaClient();
 
-
-export async function getRepoById(id) {
-	return await prisma.repo.findFirst({
-		where: { id, isDeleted: false },
-		include: {
-			author: true,
-			stars: { where: { isDeleted: false } },
-			prompt: {
-				include: {
-					aiModel: true
-				}
-			},
-			changeRequests: true
-		}
-	});
-}
-
-export async function getAllRepos() {
-	return await prisma.repo.findMany({
-		where: { isDeleted: false },
-		include: { stars: { where: { isDeleted: false } } }
-	});
-}
-
-export async function updateRepo(event, formData) {
+export async function editRepo(event, formData) {
 	const id = Number(event.params.id);
 	const user = await getDBUser(event);
 

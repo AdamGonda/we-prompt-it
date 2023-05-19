@@ -1,4 +1,4 @@
-import { searchRepos } from '$lib/feature/search';
+import { searchRepos } from '$lib/feature/explore';
 import { json } from '@sveltejs/kit';
 
 export async function GET({ url }) {

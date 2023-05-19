@@ -1,8 +1,8 @@
 import loadRepo from '$lib/feature/load-repo.js';
-import { updateRepo } from '$lib/context/repo';
 import { deleteRepo } from '$lib/feature/delete-repo';
 import { formToObject } from '$lib/utils';
 import { redirect } from '@sveltejs/kit';
+import { editRepo } from '$lib/feature/edit-repo';
 
 export async function load(event) {
 	return await loadRepo(event);
@@ -14,7 +14,7 @@ export const actions = {
 		const formData = formToObject(raw);
 
 		try {
-			await updateRepo(event, formData);
+			await editRepo(event, formData);
 		} catch (error) {
 			console.log('log error', error)
 			throw redirect(302, `/`);
