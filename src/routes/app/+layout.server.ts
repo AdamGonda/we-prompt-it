@@ -1,6 +1,6 @@
 import type { RequestEvent } from '@sveltejs/kit';
-import { getUserByEmail } from '$lib/feature/user';
-import { getAllRepos } from '$lib/feature/shared';
+import { getUserByEmail } from '$lib/features/user';
+import { getAllRepos } from '$lib/features/shared';
 
 export async function load(event: RequestEvent) {
 	const session = await event.locals.getSession()

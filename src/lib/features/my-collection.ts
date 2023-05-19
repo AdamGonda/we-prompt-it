@@ -1,4 +1,4 @@
-import { getDBUser } from '$lib/feature/user';
+import { getDBUser } from '$lib/features/user';
 import { PrismaClient } from '@prisma/client';
 const prisma = new PrismaClient();
 

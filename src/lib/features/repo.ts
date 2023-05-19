@@ -1,6 +1,6 @@
-import { getDBUser } from '$lib/feature/user';
+import { getDBUser } from '$lib/features/user';
 import { PrismaClient } from '@prisma/client';
-import { getAllAIModels, getAllTags, getRepoById } from '$lib/feature/shared';
+import { getAllAIModels, getAllTags, getRepoById } from '$lib/features/shared';
 
 const prisma = new PrismaClient();
 

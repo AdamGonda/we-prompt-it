@@ -1,5 +1,5 @@
-import { searchRepos } from "$lib/feature/explore";
-import { getAllRepos } from "$lib/feature/shared";
+import { searchRepos } from "$lib/features/explore";
+import { getAllRepos } from "$lib/features/shared";
 
 export async function load({ url }) {
 	const query = url.searchParams.get('q');
