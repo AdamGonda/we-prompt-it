@@ -1,5 +1,5 @@
-import { getDBUser } from '$lib/features/user';
-import { getAllAIModels, getAllTags, getRepoById } from '$lib/features/shared';
+import { getDBUser } from '$lib/controllers/user';
+import { getAllAIModels, getAllTags, getRepoById } from '$lib/controllers/shared';
 import type { RequestEvent } from '@sveltejs/kit';
 
 import { error } from '@sveltejs/kit';

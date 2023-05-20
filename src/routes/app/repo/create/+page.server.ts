@@ -1,6 +1,6 @@
 import { formToObject } from '$lib/utils';
-import { getAllAIModels, getAllTags } from '$lib/features/shared';
-import { createRepo } from '$lib/features/repo';
+import { getAllAIModels, getAllTags } from '$lib/controllers/shared';
+import { createRepo } from '$lib/controllers/repo';
 
 export async function load() {
 	const aiModels = getAllAIModels();

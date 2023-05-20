@@ -1,6 +1,6 @@
 import { formToObject } from '$lib/utils';
-import { getAllAIModels, getAllTags, getRepoById } from '$lib/features/shared';
-import { forkRepo } from '$lib/features/repo';
+import { getAllAIModels, getAllTags, getRepoById } from '$lib/controllers/shared';
+import { forkRepo } from '$lib/controllers/repo';
 import { error } from '@sveltejs/kit';
 
 export function load({ params }) {

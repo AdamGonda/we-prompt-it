@@ -1,4 +1,4 @@
-import { deleteRepo, editRepo, repoLoad } from '$lib/features/repo';
+import { deleteRepo, editRepo, repoLoad } from '$lib/controllers/repo';
 import { formDataToObject, zodCheck } from '$lib/utils';
 import { editSchema } from '$lib/zod-schemas.js';
 import { redirect, type RequestEvent } from '@sveltejs/kit';
