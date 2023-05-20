@@ -4,7 +4,7 @@
 	const data = {
 		name: $page.data.repo.name,
 		description: $page.data.repo.description,
-		content: $page.data.repo.prompt.content,
+		content: $page.data.repo.prompts[0].content
 	}
 </script>
 

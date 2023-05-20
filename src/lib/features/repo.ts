@@ -127,7 +127,7 @@ export async function forkRepo(event, data) {
 }
 
 export async function repoLoad({ params }) {
-	const id = Number(params.id);
+	const id = params.id;
 
 	if (!id) {
 		throw error(404, {
