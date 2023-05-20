@@ -1,4 +1,4 @@
-# Current value: HUF 500k
+# Current value: HUF 500k+
 
 # Tech
 TODO form validation front use zod 
