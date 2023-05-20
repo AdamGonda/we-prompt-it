@@ -3,7 +3,6 @@
 # Tech
 TODO form validation front use zod 
 TODO form validation back use zod
-TODO 500 page
 TODO add playwrigh tests
 
 # Product
