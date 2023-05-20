@@ -1,4 +1,4 @@
-import { formToObject } from '$lib/utils';
+import { formDataToObject } from '$lib/utils';
 import { getAllAIModels, getAllTags } from '$lib/controllers/shared';
 import { createRepo } from '$lib/controllers/repo';
 
@@ -13,7 +13,7 @@ export const actions = {
 	default: async (event) => {
 		if ((await event.locals.getSession()).user) {
 			const formData = await event.request.formData();
-			const pojo = formToObject(formData);
+			const pojo = formDataToObject(formData);
 
 			const newRepo = await createRepo(event, pojo);
 
