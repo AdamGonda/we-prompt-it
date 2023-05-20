@@ -21,6 +21,6 @@ export const actions = {
 		throw redirect(302, `/app/repo/${event.params.id}`);
 	},
 	delete: async ({ params }) => {
-		await deleteRepo(Number(params.id));
+		await deleteRepo(params.id);
 	}
 };

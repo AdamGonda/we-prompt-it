@@ -1,9 +1,8 @@
-import { PrismaClient } from '@prisma/client';
-const prisma = new PrismaClient();
+import mpClient from '$lib/mp-client';
 
 
 export async function getRepoById(id) {
-  const repo = await prisma.repo.findFirst({
+  const repo = await mpClient.repo.findFirst({
     where: { id, isDeleted: false },
     include: {
       author: true, // TODO is this ok?
@@ -19,16 +18,16 @@ export async function getRepoById(id) {
 }
 
 export async function getAllRepos() {
-	return await prisma.repo.findMany({
+	return await mpClient.repo.findMany({
 		where: { isDeleted: false },
 		include: { stars: { where: { isDeleted: false } } }
 	});
 }
 
 export async function getAllAIModels() {
-	return await prisma.aIModel.findMany();
+	return await mpClient.aIModel.findMany();
 }
 
 export async function getAllTags() {
-	return await prisma.tag.findMany();
+	return await mpClient.tag.findMany();
 }

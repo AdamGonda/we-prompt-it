@@ -7,7 +7,7 @@ export async function POST(event) {
 
 	if (id && session.user) {
 		const user = await getDBUser(event);
-		const diff = await addRemoveStar(user.id, Number(id));
+		const diff = await addRemoveStar(user.id, id);
 
 		return new Response(JSON.stringify({ status: 200, diff }));
 	}

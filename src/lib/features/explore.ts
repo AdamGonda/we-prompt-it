@@ -1,8 +1,7 @@
-import { PrismaClient } from '@prisma/client';
-const prisma = new PrismaClient();
+import mpClient from '$lib/mp-client';
 
 export async function searchRepos(query) {
-	return await prisma.repo.findMany({
+	return await mpClient.repo.findMany({
 		where: {
 			OR: [
 				{

@@ -7,12 +7,12 @@
 		id: $page.data.repo.id,
 		name: $page.data.repo.name,
 		description: $page.data.repo.description,
-		content: $page.data.repo.prompt.content,
+		content: $page.data.repo.prompts[0].content,
 		models: $page.data.aiModels
 	};
 
 	function isSelected(model) {
-		return model.id == $page.data.repo.prompt.aiModel.id;
+		return model.id == $page.data.repo.prompts[0].aiModel.id;
 	}
 
 	function handleDelete() {

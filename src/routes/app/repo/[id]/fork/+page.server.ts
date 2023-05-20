@@ -4,7 +4,7 @@ import { forkRepo } from '$lib/features/repo';
 import { error } from '@sveltejs/kit';
 
 export function load({ params }) {
-	const id = Number(params.id);
+	const id = params.id;
 	
 	if (!id) {
     throw error(404, {

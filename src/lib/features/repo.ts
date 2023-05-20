@@ -1,9 +1,8 @@
+import mpClient from '$lib/mp-client';
 import { getDBUser } from '$lib/features/user';
-import { PrismaClient } from '@prisma/client';
 import { getAllAIModels, getAllTags, getRepoById } from '$lib/features/shared';
 import { error } from '@sveltejs/kit';
-
-const prisma = new PrismaClient();
+import { nanoid } from 'nanoid';
 
 export async function createRepo(event, data) {
 	const dbUser = await getDBUser(event);
@@ -12,8 +11,9 @@ export async function createRepo(event, data) {
 		throw Error('No user found');
 	}
 
-	return await prisma.repo.create({
+	return await mpClient.repo.create({
 		data: {
+			id: nanoid(),
 			description: data.description,
 			name: data.name,
 			author: {
@@ -21,10 +21,11 @@ export async function createRepo(event, data) {
 					id: dbUser.id
 				}
 			},
-			prompt: {
+			prompts: {
 				create: {
+					id: nanoid(),
 					content: data.content,
-					aIModelId: 1
+					aIModelId: "o8I0W95Mqf"
 				}
 			}
 			// tags: {
@@ -35,12 +36,12 @@ export async function createRepo(event, data) {
 }
 
 export async function editRepo(event, formData) {
-	const id = Number(event.params.id);
+	const id = event.params.id;
 	const user = await getDBUser(event);
 
-	const repo = await prisma.repo.findUnique({
+	const repo = await mpClient.repo.findUnique({
 		where: { id },
-		include: { prompt: true }
+		include: { prompts: true }
 	});
 
 	if (!repo) {
@@ -55,7 +56,7 @@ export async function editRepo(event, formData) {
 		throw new Error(`User ${user.id} is not the author of repo ${id}`);
 	}
 
-	await prisma.repo.update({
+	await mpClient.repo.update({
 		where: { id },
 		data: {
 			name: formData.name,
@@ -63,19 +64,19 @@ export async function editRepo(event, formData) {
 		}
 	});
 
-	await prisma.prompt.update({
+	await mpClient.prompt.update({
 		where: { id: repo.prompt.id },
 		data: { content: formData.content, aIModelId: formData.model }
 	});
 }
 
 export async function deleteRepo(id) {
-	await prisma.repo.updateMany({
+	await mpClient.repo.updateMany({
 		where: { parentId: id },
 		data: { parentId: null }
 	});
 
-	await prisma.repo.update({
+	await mpClient.repo.update({
 		where: { id: id },
 		data: { isDeleted: true }
 	});
@@ -88,7 +89,7 @@ export async function forkRepo(event, data) {
 		throw Error('No user found');
 	}
 
-	await prisma.repo.update({
+	await mpClient.repo.update({
 		where: {
 			id: data.id
 		},
@@ -99,7 +100,7 @@ export async function forkRepo(event, data) {
 		}
 	});
 
-	return await prisma.repo.create({
+	return await mpClient.repo.create({
 		data: {
 			parentRepo: {
 				connect: {
@@ -113,7 +114,7 @@ export async function forkRepo(event, data) {
 					id: dbUser.id
 				}
 			},
-			prompt: {
+			prompts: {
 				create: {
 					content: data.content,
 					aIModelId: 1

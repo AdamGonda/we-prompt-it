@@ -3,16 +3,20 @@
 	import { goto } from '$app/navigation';
 	import { page } from '$app/stores';
 
+	
+
 	let data = {
 		id: $page.data.repo.id,
 		name: $page.data.repo.name,
 		description: $page.data.repo.description,
-		content: $page.data.repo.prompt.content,
+		content: $page.data.repo.prompts[0].content,
 		models: $page.data.aiModels
 	};
 
+	console.log('log data', data)
+
 	function isSelected(model) {
-		return model.id == $page.data.repo.prompt.aiModel.id;
+		return model.id == $page.data.repo.prompts[0].aIModelId;
 	}
 
 	function handleSubmit() {
