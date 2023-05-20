@@ -5,11 +5,9 @@ TODO form validation front use zod
 TODO form validation back use zod
 TODO 500 page
 TODO add playwrigh tests
-TODO use uuids for ids
 
 # Product
 TODO tag selection on create/edit
-TODO create new versions on edit
 TODO explore page filtering
 TODO explore page sorting
 TODO landing page
