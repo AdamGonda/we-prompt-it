@@ -2,7 +2,7 @@
 TODO form validation front use zod 
 TODO form validation back use zod
 TODO 500 page
-TODO add paywrigh tests
+TODO add playwrigh tests
 TODO use uuids for ids
 
 # Product
