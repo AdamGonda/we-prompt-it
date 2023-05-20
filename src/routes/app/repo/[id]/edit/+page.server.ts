@@ -1,7 +1,7 @@
 import { deleteRepo, editRepo, repoLoad } from '$lib/features/repo';
 import { formDataToObject, zodCheck } from '$lib/utils';
 import { editSchema } from '$lib/zod-schemas.js';
-import { error, redirect, type RequestEvent } from '@sveltejs/kit';
+import { redirect, type RequestEvent } from '@sveltejs/kit';
 
 export async function load(event) {
 	return await repoLoad(event);
