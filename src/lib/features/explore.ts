@@ -1,7 +1,9 @@
-import mpClient from '$lib/mp-client';
+import { PrismaClient } from "@prisma/client";
+
+const prisma = new PrismaClient();
 
 export async function searchRepos(query) {
-	return await mpClient.repo.findMany({
+	return await prisma.repo.findMany({
 		where: {
 			OR: [
 				{
@@ -17,7 +19,7 @@ export async function searchRepos(query) {
 					}
 				},
 				{
-					prompt: {
+					prompts: {
 						content: {
 							contains: query,
 							mode: 'insensitive'

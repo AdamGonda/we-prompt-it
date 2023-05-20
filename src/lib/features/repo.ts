@@ -1,8 +1,10 @@
-import mpClient from '$lib/mp-client';
 import { getDBUser } from '$lib/features/user';
 import { getAllAIModels, getAllTags, getRepoById } from '$lib/features/shared';
 import { error } from '@sveltejs/kit';
+import { PrismaClient } from "@prisma/client";
 import { nanoid } from 'nanoid';
+
+const prisma = new PrismaClient();
 
 export async function createRepo(event, data) {
 	const dbUser = await getDBUser(event);
@@ -11,7 +13,7 @@ export async function createRepo(event, data) {
 		throw Error('No user found');
 	}
 
-	return await mpClient.repo.create({
+	return await prisma.repo.create({
 		data: {
 			id: nanoid(),
 			description: data.description,
@@ -39,7 +41,7 @@ export async function editRepo(event, formData) {
 	const id = event.params.id;
 	const user = await getDBUser(event);
 
-	const repo = await mpClient.repo.findUnique({
+	const repo = await prisma.repo.findUnique({
 		where: { id },
 		include: { prompts: true }
 	});
@@ -56,7 +58,7 @@ export async function editRepo(event, formData) {
 		throw new Error(`User ${user.id} is not the author of repo ${id}`);
 	}
 
-	await mpClient.repo.update({
+	await prisma.repo.update({
 		where: { id },
 		data: {
 			name: formData.name,
@@ -64,19 +66,19 @@ export async function editRepo(event, formData) {
 		}
 	});
 
-	await mpClient.prompt.update({
+	await prisma.prompt.update({
 		where: { id: repo.prompt.id },
 		data: { content: formData.content, aIModelId: formData.model }
 	});
 }
 
 export async function deleteRepo(id) {
-	await mpClient.repo.updateMany({
+	await prisma.repo.updateMany({
 		where: { parentId: id },
 		data: { parentId: null }
 	});
 
-	await mpClient.repo.update({
+	await prisma.repo.update({
 		where: { id: id },
 		data: { isDeleted: true }
 	});
@@ -89,7 +91,7 @@ export async function forkRepo(event, data) {
 		throw Error('No user found');
 	}
 
-	await mpClient.repo.update({
+	await prisma.repo.update({
 		where: {
 			id: data.id
 		},
@@ -100,7 +102,7 @@ export async function forkRepo(event, data) {
 		}
 	});
 
-	return await mpClient.repo.create({
+	return await prisma.repo.create({
 		data: {
 			parentRepo: {
 				connect: {

@@ -30,14 +30,14 @@ CREATE TABLE "Repo" (
 
 -- CreateTable
 CREATE TABLE "Prompt" (
-    "id" TEXT NOT NULL,
-    "version" TEXT NOT NULL DEFAULT '0.0.1',
+    "id" SERIAL NOT NULL,
+    "version" INTEGER NOT NULL DEFAULT 1,
     "description" TEXT NOT NULL DEFAULT '',
     "content" TEXT NOT NULL,
     "isDeleted" BOOLEAN NOT NULL DEFAULT false,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
-    "aIModelId" TEXT,
+    "aIModelId" INTEGER,
     "repoId" TEXT NOT NULL,
 
     CONSTRAINT "Prompt_pkey" PRIMARY KEY ("id")
@@ -45,7 +45,7 @@ CREATE TABLE "Prompt" (
 
 -- CreateTable
 CREATE TABLE "AIModel" (
-    "id" TEXT NOT NULL,
+    "id" SERIAL NOT NULL,
     "name" TEXT NOT NULL,
     "isDeleted" BOOLEAN NOT NULL DEFAULT false,
 
@@ -54,7 +54,7 @@ CREATE TABLE "AIModel" (
 
 -- CreateTable
 CREATE TABLE "ChangeRequest" (
-    "id" TEXT NOT NULL,
+    "id" SERIAL NOT NULL,
     "title" TEXT NOT NULL,
     "description" TEXT NOT NULL,
     "content" TEXT NOT NULL,
@@ -69,13 +69,13 @@ CREATE TABLE "ChangeRequest" (
 
 -- CreateTable
 CREATE TABLE "Comment" (
-    "id" TEXT NOT NULL,
+    "id" SERIAL NOT NULL,
     "content" TEXT NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
     "authorId" TEXT NOT NULL,
     "repoId" TEXT,
-    "changeRequestId" TEXT,
+    "changeRequestId" INTEGER,
     "isDeleted" BOOLEAN NOT NULL DEFAULT false,
 
     CONSTRAINT "Comment_pkey" PRIMARY KEY ("id")
@@ -83,7 +83,7 @@ CREATE TABLE "Comment" (
 
 -- CreateTable
 CREATE TABLE "Star" (
-    "id" TEXT NOT NULL,
+    "id" SERIAL NOT NULL,
     "userId" TEXT NOT NULL,
     "repoId" TEXT NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -94,7 +94,7 @@ CREATE TABLE "Star" (
 
 -- CreateTable
 CREATE TABLE "Follower" (
-    "id" TEXT NOT NULL,
+    "id" SERIAL NOT NULL,
     "userId" TEXT NOT NULL,
     "followingId" TEXT NOT NULL,
     "isDeleted" BOOLEAN NOT NULL DEFAULT false,
@@ -105,7 +105,7 @@ CREATE TABLE "Follower" (
 
 -- CreateTable
 CREATE TABLE "Tag" (
-    "id" TEXT NOT NULL,
+    "id" SERIAL NOT NULL,
     "name" TEXT NOT NULL,
     "isDeleted" BOOLEAN NOT NULL DEFAULT false,
 
@@ -115,7 +115,7 @@ CREATE TABLE "Tag" (
 -- CreateTable
 CREATE TABLE "_RepoToTag" (
     "A" TEXT NOT NULL,
-    "B" TEXT NOT NULL
+    "B" INTEGER NOT NULL
 );
 
 -- CreateIndex

@@ -1,8 +1,8 @@
-import mpClient from "$lib/mp-client"
+import prisma from "$lib/mp-client"
 
 export async function addRemoveStar(userId, repoId) {
 	// check if user already starred the repo before
-	const starInDB = await mpClient.star.findUnique({
+	const starInDB = await prisma.star.findUnique({
 		where: {
 			userId_repoId: { userId, repoId }
 		}
@@ -10,7 +10,7 @@ export async function addRemoveStar(userId, repoId) {
 
 	// if not create new start
 	if (!starInDB) {
-		await mpClient.star.create({
+		await prisma.star.create({
 			data: {
 				userId,
 				repoId
@@ -22,7 +22,7 @@ export async function addRemoveStar(userId, repoId) {
 
 	// if yes based on isDeleted, reactivate or delete
 	if (starInDB.isDeleted) {
-		await mpClient.star.update({
+		await prisma.star.update({
 			where: {
 				id: starInDB.id
 			},
@@ -32,7 +32,7 @@ export async function addRemoveStar(userId, repoId) {
 		});
 		return 1
 	} else {
-		await mpClient.star.update({
+		await prisma.star.update({
 			where: {
 				id: starInDB.id
 			},

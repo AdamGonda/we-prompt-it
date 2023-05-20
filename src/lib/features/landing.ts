@@ -1,7 +1,9 @@
-import mpClient from '$lib/mp-client';
+import { PrismaClient } from "@prisma/client";
+
+const prisma = new PrismaClient();
 
 export async function landingLoad() {
-	const mostLiked = await mpClient.repo.findMany({
+	const mostLiked = await prisma.repo.findMany({
 		where: {
 			isDeleted: false
 		},
@@ -16,7 +18,7 @@ export async function landingLoad() {
 		take: 10
 	});
 
-	const mostForked = await mpClient.repo.findMany({
+	const mostForked = await prisma.repo.findMany({
 		where: {
 			isDeleted: false,
 		},

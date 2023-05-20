@@ -48,29 +48,29 @@ model Repo {
 }
 
 model Prompt {
-  id          String  @id
-  version     Int  @default(1)
+  id          Int     @id @default(autoincrement())
+  version     Int     @default(1)
   description String  @default("")
   content     String
   isDeleted   Boolean @default(false)
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  aIModelId String?
+  aIModelId Int?
   aiModel   AIModel? @relation(fields: [aIModelId], references: [id])
   repoId    String
   repo      Repo     @relation(fields: [repoId], references: [id])
 }
 
 model AIModel {
-  id        String   @id
+  id        Int      @id @default(autoincrement())
   name      String
   Prompt    Prompt[]
   isDeleted Boolean  @default(false)
 }
 
 model ChangeRequest {
-  id          String @id
+  id          Int    @id @default(autoincrement())
   title       String
   description String
   content     String
@@ -86,7 +86,7 @@ model ChangeRequest {
 }
 
 model Comment {
-  id              String         @id
+  id              Int            @id @default(autoincrement())
   content         String
   createdAt       DateTime       @default(now())
   updatedAt       DateTime       @updatedAt
@@ -94,13 +94,13 @@ model Comment {
   author          User           @relation(fields: [authorId], references: [id])
   repoId          String?
   repo            Repo?          @relation(fields: [repoId], references: [id])
-  changeRequestId String?
+  changeRequestId Int?
   changeRequest   ChangeRequest? @relation(fields: [changeRequestId], references: [id])
   isDeleted       Boolean        @default(false)
 }
 
 model Star {
-  id        String   @id
+  id        Int      @id @default(autoincrement())
   userId    String
   user      User     @relation(fields: [userId], references: [id])
   repoId    String
@@ -112,7 +112,7 @@ model Star {
 }
 
 model Follower {
-  id          String  @id
+  id          Int     @id @default(autoincrement())
   userId      String
   followingId String
   user        User    @relation("Followers", fields: [userId], references: [id])
@@ -125,7 +125,7 @@ model Follower {
 }
 
 model Tag {
-  id        String  @id
+  id        Int     @id @default(autoincrement())
   name      String  @unique
   repos     Repo[]
   isDeleted Boolean @default(false)

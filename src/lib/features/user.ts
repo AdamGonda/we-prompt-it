@@ -1,7 +1,9 @@
-import mpClient from '$lib/mp-client';
+import { PrismaClient } from "@prisma/client";
+
+const prisma = new PrismaClient();
 
 export async function getUserByEmail(email) {
-	return await mpClient.user.findUnique({
+	return await prisma.user.findUnique({
 		where: { email }
 	});
 }

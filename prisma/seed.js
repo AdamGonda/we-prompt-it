@@ -33,28 +33,24 @@ async function main() {
 
 	const aiModel1 = await prisma.aIModel.create({
 		data: {
-			id: nanoid(10),
 			name: 'GPT-4'
 		}
 	});
 
 	const aiModel2 = await prisma.aIModel.create({
 		data: {
-			id: nanoid(10),
 			name: 'GPT-5'
 		}
 	});
 
 	const tag1 = await prisma.tag.create({
 		data: {
-			id: nanoid(10),
 			name: 'education [key]'
 		}
 	});
 
 	const tag2 = await prisma.tag.create({
 		data: {
-			id: nanoid(10),
 			name: 'OpenAI'
 		}
 	});
@@ -72,28 +68,22 @@ async function main() {
 			prompts: {
 				create: [
 					{
-						id: nanoid(10),
 						content:
 							'How does the world react when the first note is played after decades of silence?',
 						aIModelId: aiModel1.id
 					},
 					{
-						id: nanoid(10),
 						version: 2,
-						content:
-							'How change1 when the first note is change 2 of silence?',
+						content: 'How change1 when the first note is change 2 of silence?',
 						aIModelId: aiModel1.id
 					}
-				],
+				]
 			},
 			tags: {
 				connect: [{ id: tag1.id }]
 			},
 			stars: {
-				create: [
-					{ id: nanoid(10), userId: testUser1.id },
-					{ id: nanoid(10), userId: testUser2.id }
-				]
+				create: [{ userId: testUser1.id }, { userId: testUser2.id }]
 			}
 		}
 	});
@@ -107,7 +97,6 @@ async function main() {
 			authorId: adamUser.id,
 			prompts: {
 				create: {
-					id: nanoid(10),
 					content:
 						'What happens when the artist reveals the first painting full of colors in a monochrome world?',
 					aIModelId: aiModel1.id
@@ -117,10 +106,7 @@ async function main() {
 				connect: [{ id: tag1.id }]
 			},
 			stars: {
-				create: [
-					{ id: nanoid(10), userId: testUser1.id },
-					{ id: nanoid(10), userId: testUser2.id }
-				]
+				create: [{ userId: testUser1.id }, { userId: testUser2.id }]
 			}
 		}
 	});
@@ -134,7 +120,6 @@ async function main() {
 			authorId: adamUser.id,
 			prompts: {
 				create: {
-					id: nanoid(10),
 					content:
 						'What happens when the librarian deciphers the first message in the ancient language?',
 					aIModelId: aiModel2.id
@@ -144,17 +129,13 @@ async function main() {
 				connect: [{ id: tag2.id }]
 			},
 			stars: {
-				create: [
-					{ id: nanoid(10), userId: adamUser.id },
-					{ id: nanoid(10), userId: testUser1.id }
-				]
+				create: [{ userId: adamUser.id }, { userId: testUser1.id }]
 			}
 		}
 	});
 
 	const changeRequest1 = await prisma.changeRequest.create({
 		data: {
-			id: nanoid(10),
 			title: 'First change request',
 			description: 'This is the first change request',
 			content: 'Proposed change for first change request',
@@ -168,7 +149,6 @@ async function main() {
 
 	const changeRequest2 = await prisma.changeRequest.create({
 		data: {
-			id: nanoid(10),
 			title: 'Second change request',
 			description: 'This is the second change request',
 			content: 'Proposed change for second change request',
@@ -187,7 +167,6 @@ async function main() {
 
 	const comment1 = await prisma.comment.create({
 		data: {
-			id: nanoid(10),
 			content: 'This is a comment on the first change request',
 			author: {
 				connect: {
@@ -204,7 +183,6 @@ async function main() {
 
 	const comment2 = await prisma.comment.create({
 		data: {
-			id: nanoid(10),
 			content: 'This is a comment on the second change request',
 			author: {
 				connect: {
@@ -221,7 +199,6 @@ async function main() {
 
 	const follower1 = await prisma.follower.create({
 		data: {
-			id: nanoid(10),
 			userId: adamUser.id,
 			followingId: testUser1.id
 		}
@@ -229,7 +206,6 @@ async function main() {
 
 	const follower2 = await prisma.follower.create({
 		data: {
-			id: nanoid(10),
 			userId: testUser1.id,
 			followingId: testUser2.id
 		}
@@ -237,7 +213,6 @@ async function main() {
 
 	const follower3 = await prisma.follower.create({
 		data: {
-			id: nanoid(10),
 			userId: testUser2.id,
 			followingId: adamUser.id
 		}
