@@ -25,9 +25,9 @@ export async function createRepo(event, data) {
 			},
 			prompts: {
 				create: {
-					id: nanoid(),
+					
 					content: data.content,
-					aIModelId: "o8I0W95Mqf"
+					aIModelId: 1
 				}
 			}
 			// tags: {
@@ -104,6 +104,7 @@ export async function forkRepo(event, data) {
 
 	return await prisma.repo.create({
 		data: {
+			id: nanoid(),
 			parentRepo: {
 				connect: {
 					id: data.id

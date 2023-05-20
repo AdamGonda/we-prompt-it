@@ -12,7 +12,7 @@
 	};
 
 	function isSelected(model) {
-		return model.id == $page.data.repo.prompts[0].aiModel.id;
+		return model.id == $page.data.repo.prompts[0].aiModelId;
 	}
 
 	function handleDelete() {

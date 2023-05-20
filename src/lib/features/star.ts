@@ -1,4 +1,6 @@
-import prisma from "$lib/mp-client"
+import { PrismaClient } from "@prisma/client";
+
+const prisma = new PrismaClient();
 
 export async function addRemoveStar(userId, repoId) {
 	// check if user already starred the repo before
