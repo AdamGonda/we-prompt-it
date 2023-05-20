@@ -19,23 +19,27 @@ export async function searchRepos(query) {
 					}
 				},
 				{
-					prompts: {
-						content: {
-							contains: query,
-							mode: 'insensitive'
-						}
-					}
-				},
-				{
-					prompt: {
-						aiModel: {
-							name: {
-								contains: query,
-								mode: 'insensitive'
-							}
-						}
-					}
-				},
+          prompts: {
+            some: {
+              content: {
+                contains: query,
+                mode: 'insensitive'
+              }
+            }
+          }
+        },
+        {
+          prompts: {
+            some: {
+              aiModel: {
+                name: {
+                  contains: query,
+                  mode: 'insensitive'
+                }
+              }
+            }
+          }
+        },
 				{
 					tags: {
 						some: {
@@ -52,7 +56,7 @@ export async function searchRepos(query) {
 		include: {
 			tags: { where: { isDeleted: false } },
 			stars: { where: { isDeleted: false } },
-			prompt: { include: { aiModel: true } },
+			prompts: { include: { aiModel: true } },
 		}
 	});
 }
