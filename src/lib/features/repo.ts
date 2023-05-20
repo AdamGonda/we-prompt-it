@@ -1,7 +1,7 @@
 import { getDBUser } from '$lib/features/user';
 import { getAllAIModels, getAllTags, getRepoById } from '$lib/features/shared';
 import { error } from '@sveltejs/kit';
-import { PrismaClient } from "@prisma/client";
+import { PrismaClient } from '@prisma/client';
 import { nanoid } from 'nanoid';
 
 const prisma = new PrismaClient();
@@ -25,7 +25,6 @@ export async function createRepo(event, data) {
 			},
 			prompts: {
 				create: {
-					
 					content: data.content,
 					aIModelId: 1
 				}
@@ -62,13 +61,15 @@ export async function editRepo(event, formData) {
 		where: { id },
 		data: {
 			name: formData.name,
-			description: formData.description
+			description: formData.description,
+			prompts: {
+				create: {
+					version: repo.prompts.length + 1,
+					content: formData.content,
+					aIModelId: formData.model
+				}
+			}
 		}
-	});
-
-	await prisma.prompt.update({
-		where: { id: repo.prompt.id },
-		data: { content: formData.content, aIModelId: formData.model }
 	});
 }
 
