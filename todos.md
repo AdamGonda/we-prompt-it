@@ -18,4 +18,5 @@ TODO add a button to copy the prompt to clipboard
 TODO loading indicators
 TODO add popup dialog to delete prompt flow
 TODO image uploads
-TODO autocomplete get matches from db (just text) and display them in a dropdown normal, and your search in bold
+TODO proper autocomplete, like at amazon
+TODO optimaze autocomplete, so we query 1x, (preserch, search)
