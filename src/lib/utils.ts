@@ -1,5 +1,3 @@
-import { error } from '@sveltejs/kit';
-
 export function formDataToObject(formData) {
 	const formValues = {};
 	for (const [key, value] of formData.entries()) {
@@ -12,7 +10,7 @@ export function formDataToObject(formData) {
 	return formValues;
 }
 
-export function zodCheck(parseResult) {
+export function zodCheck(parseResult, onError) {
 	if (!parseResult.success) {
 		// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 		// @ts-ignore
@@ -23,7 +21,7 @@ export function zodCheck(parseResult) {
 			};
 		});
 
-		throw error(400, JSON.stringify(errors));
+		onError(errors);
 	}
 
 	return parseResult.data;

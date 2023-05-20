@@ -1,7 +1,7 @@
 import { deleteRepo, editRepo, repoLoad } from '$lib/controllers/repo';
 import { formDataToObject, zodCheck } from '$lib/utils';
 import { editSchema } from '$lib/zod-schemas.js';
-import { redirect, type RequestEvent } from '@sveltejs/kit';
+import { error, redirect, type RequestEvent } from '@sveltejs/kit';
 
 export async function load(event) {
 	return await repoLoad(event);
@@ -12,7 +12,9 @@ export const actions = {
 		const formData = formDataToObject(await event.request.formData());
 
 		const parseResult = (await editSchema).safeParse(formData);
-		const data = zodCheck(parseResult);
+		const data = zodCheck(parseResult, (errors) => {
+			throw error(400, JSON.stringify(errors));
+		});
 
 		try {
 			await editRepo(event, data);
