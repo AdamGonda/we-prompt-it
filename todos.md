@@ -20,3 +20,7 @@ TODO add popup dialog to delete prompt flow
 TODO image uploads
 TODO proper autocomplete, like at amazon
 TODO optimaze autocomplete, so we query 1x, (preserch, search)
+
+# Tech
+TODO 500 page
+TODO 404 page
