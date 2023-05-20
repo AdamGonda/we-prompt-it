@@ -50,7 +50,6 @@ model Repo {
 model Prompt {
   id          Int     @id @default(autoincrement())
   version     Int     @default(1)
-  description String  @default("")
   content     String
   isDeleted   Boolean @default(false)
 
