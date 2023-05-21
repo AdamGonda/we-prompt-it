@@ -48,7 +48,7 @@
 		});
 	}
 
-	function onInput(event) {
+	function onBlur(event) {
 		isTouched[event.target.name] = true;
 	}
 </script>
@@ -67,7 +67,7 @@ Create
 			name="name"
 			type="text"
 			placeholder={data.namePlaceholder}
-			on:input={onInput}
+			on:input={onBlur}
 		/>
 		<span>{isTouched.name && errors.name ? errors.name : ''}</span>
 	</label>
@@ -79,7 +79,7 @@ Create
 			rows="4"
 			cols="50"
 			placeholder={data.descriptionPlaceholder}
-			on:input={onInput}
+			on:input={onBlur}
 		/>
 		<span>{isTouched.description && errors.description ? errors.description : ''}</span>
 	</label>
@@ -91,7 +91,7 @@ Create
 			rows="4"
 			cols="50"
 			placeholder={data.contentPlaceholder}
-			on:input={onInput}
+			on:input={onBlur}
 		/>
 		<span>{isTouched.content && errors.content ? errors.content : ''}</span>
 	</label>
