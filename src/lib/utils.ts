@@ -28,3 +28,7 @@ export function zodCheck(parseResult, onError) {
 
 	return parseResult.data;
 }
+
+export function convertToSlug(username, text) {
+	return username + '-' + text.toLowerCase().replace(/ /g, '-');
+}

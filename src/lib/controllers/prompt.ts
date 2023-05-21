@@ -5,6 +5,7 @@ import type { RequestEvent } from '@sveltejs/kit';
 import { error } from '@sveltejs/kit';
 import { PrismaClient } from '@prisma/client';
 import type { EditForm, ForkForm } from '$lib/zod-schemas';
+import { convertToSlug } from '$lib/utils';
 
 const prisma = new PrismaClient();
 
@@ -15,6 +16,8 @@ export async function createRepo(event, data: EditForm) {
 		throw Error('No user found');
 	}
 
+	console.log('log convertToSlug(data.name)', convertToSlug(dbUser.username, data.name))
+
 	return await prisma.repo.create({
 		data: {
 			description: data.description,
@@ -24,6 +27,7 @@ export async function createRepo(event, data: EditForm) {
 					id: dbUser.id
 				}
 			},
+			slug: convertToSlug(dbUser.username, data.name),
 			prompts: {
 				create: {
 					content: data.content,

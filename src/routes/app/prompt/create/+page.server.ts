@@ -28,7 +28,7 @@ export const actions = {
 
 		try {
 			const newRepo = await createRepo(event, data);
-			return { id: newRepo.id };
+			return { ...newRepo };
 		} catch (error) {
 			console.log('log error', error);
 			throw error(400, {

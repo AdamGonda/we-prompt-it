@@ -30,6 +30,7 @@
 			}
 
 			// TODO show some success toser then navigate
+			console.log('log result.data', result.data)
 			goto(`/app/prompt/${result.data.slug}`);
 		};
 	}
