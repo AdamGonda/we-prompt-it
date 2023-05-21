@@ -7,7 +7,7 @@ async function main() {
 		data: {
 			firstName: 'Adam',
 			lastName: 'Gonda',
-			slug: 'adam-gonda',
+			username: 'adamgonda',
 			email: 'adamgondagyula@gmail.com'
 		}
 	});
@@ -16,7 +16,7 @@ async function main() {
 		data: {
 			firstName: 'test1 f',
 			lastName: 'test1 l',
-			slug: 'test1-f-test1 l',
+			username: 'test1',
 			email: 'testshareloop1@gmail.com'
 		}
 	});
@@ -25,7 +25,7 @@ async function main() {
 		data: {
 			firstName: 'test2 f',
 			lastName: 'test2 l',
-			slug: 'test2-f-test2 l',
+			username: 'test2',
 			email: 'testshareloop2@gmail.com'
 		}
 	});

@@ -52,7 +52,7 @@
 </div>
 
 <div class="location">
-	<a href={`/profile/${$page.params.id}`}>
+	<a href={`/profile/${data.author.username}`}>
 		<span>{data.author.firstName}</span>
 	</a>
 	/
