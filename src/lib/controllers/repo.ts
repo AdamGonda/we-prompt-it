@@ -5,7 +5,7 @@ import type { RequestEvent } from '@sveltejs/kit';
 import { error } from '@sveltejs/kit';
 import { PrismaClient } from '@prisma/client';
 import { nanoid } from 'nanoid';
-import type { EditForm, ForkSchema } from '$lib/zod-schemas';
+import type { EditForm, ForkForm } from '$lib/zod-schemas';
 
 const prisma = new PrismaClient();
 
@@ -88,7 +88,7 @@ export async function deleteRepo(id) {
 	});
 }
 
-export async function forkRepo(event: RequestEvent, data: ForkSchema) {
+export async function forkRepo(event: RequestEvent, data: ForkForm) {
 	const dbUser = await getDBUser(event);
 	const parentRepo = await getRepoById(data.id);
 

@@ -26,7 +26,7 @@
 		};
 	}
 
-	function onInput() {
+	function handleInput() {
 		errors = {};
 		const formData = formDataToObject(new FormData(form));
 		const parseResult = editSchema.safeParse(formData);
@@ -45,7 +45,7 @@
 	name="edit-prompt-form"
 	method="POST"
 	action="?/edit"
-	on:input={onInput}
+	on:input={handleInput}
 	bind:this={form}
 >
 	<label for="name">

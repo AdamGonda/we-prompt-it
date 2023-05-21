@@ -2,7 +2,12 @@
 	import { enhance } from '$app/forms';
 	import { goto } from '$app/navigation';
 	import { page } from '$app/stores';
+	import { formDataToObject, zodCheck } from '$lib/utils';
+	import { forkSchema } from '$lib/zod-schemas';
+	import _ from 'lodash';
 
+	let form;
+	let errors = {};
 	let data = {
 		namePlaceholder: 'name placeholder todocopy',
 		descriptionPlaceholder: 'description placeholder todocopy',
@@ -12,17 +17,46 @@
 	};
 
 	function handleSubmit() {
-		return async ({ result }) => {
-			goto(`/repo/${result.data.id}`);
+		return async ({ result, update }) => {
+			if (result.error) {
+				console.log('[FRONTEND ERROR] create', result.error);
+				// TODO show some error toser
+				return;
+			}
+
+			// TODO show some success toser then navigate
+			goto(`/app/repo/${result.data.id}`);
 		};
+	}
+
+	function handleInput() {
+		errors = {};
+		const formData = formDataToObject(new FormData(form));
+		const parseResult = forkSchema.safeParse(formData);
+
+		zodCheck(parseResult, (_errors) => {
+			errors = _.keyBy(_errors, 'field');
+
+			for (let key in errors) {
+				errors[key] = errors[key].message;
+			}
+		});
 	}
 </script>
 
 Create
-<form name="create-prompt-form" method="POST" use:enhance={handleSubmit}>
+<form
+	name="create-prompt-form"
+	method="POST"
+	use:enhance={handleSubmit}
+	on:input={handleInput}
+	bind:this={form}
+>
 	<label for="name">
 		Name
 		<input name="name" type="text" placeholder={data.namePlaceholder} />
+		<span>{errors.name ? errors.name : ''}</span>
+
 	</label>
 
 	<label for="description">
@@ -33,11 +67,14 @@ Create
 			cols="50"
 			placeholder={data.descriptionPlaceholder}
 		/>
+		<span>{errors.description ? errors.description : ''}</span>
+
 	</label>
 
 	<label for="content">
 		Prompt
 		<textarea name="content" rows="4" cols="50" placeholder={data.contentPlaceholder} />
+		<span>{errors.content ? errors.content : ''}</span>
 	</label>
 
 	<label for="model">
@@ -49,7 +86,7 @@ Create
 		</select>
 	</label>
 
-	<input type="submit" />
+	<input type="submit" disabled={Object.keys(errors).length > 0} />
 </form>
 
 <style>
@@ -64,5 +101,9 @@ Create
 		display: flex;
 		flex-direction: column;
 		gap: 4px;
+	}
+	span {
+		font-size: 1rem;
+		color: red;
 	}
 </style>

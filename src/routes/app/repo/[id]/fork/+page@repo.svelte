@@ -22,7 +22,6 @@
 
 	function handleSubmit() {
 		return async ({ result, update }) => {
-			console.log('log result', result);
 			if (result.error) {
 				console.log('[FRONTEND ERROR] fork', result.error);
 				// TODO show some error toser
@@ -34,7 +33,7 @@
 		};
 	}
 
-	function onInput() {
+	function handleInput() {
 		errors = {};
 		const formData = formDataToObject(new FormData(form));
 		const parseResult = forkSchema.safeParse(formData);
@@ -54,7 +53,7 @@ Fork
 	name="create-prompt-form"
 	method="POST"
 	use:enhance={handleSubmit}
-	on:input={onInput}
+	on:input={handleInput}
 	bind:this={form}
 >
 	<input name="id" type="hidden" value={data.id} />
