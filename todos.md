@@ -1,5 +1,10 @@
 # Current value: HUF 550k+
 
+# Tech
+TODO fix issues with slug, username, routing changes
+TODO chekc name on create, edit, fork
+TODO on signup ask for username
+
 # Product (functional)
 TODO tag selection, creation on create/edit
 TODO model selection, creatinon on create/edit
