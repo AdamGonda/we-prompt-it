@@ -46,7 +46,7 @@ test('open - {repo-card} -> repo-details [like] -> login', async ({ page }) => {
   expect(await page.title()).toBe('Login | We Prompt');
 });
 
-test.only('open - {repo-card} -> repo-details [fork] -> login', async ({ page }) => {
+test('open - {repo-card} -> repo-details [fork] -> login', async ({ page }) => {
   await page.goto('http://127.0.0.1:5173/');
 
   const elements = await page.$$('[data-testid="repo-card"]')
