@@ -3,7 +3,7 @@
 	import { goto } from '$app/navigation';
 	import { page } from '$app/stores';
 	import { formDataToObject, zodCheck } from '$lib/utils';
-	import { forkSchema } from '$lib/zod-schemas';
+	import { createSchema } from '$lib/zod-schemas';
 	import _ from 'lodash';
 
 	let form;
@@ -34,10 +34,10 @@
 		};
 	}
 
-	function handleInput() {
+	function validateForm() {
 		errors = {};
 		const formData = formDataToObject(new FormData(form));
-		const parseResult = forkSchema.safeParse(formData);
+		const parseResult = createSchema.safeParse(formData);
 
 		zodCheck(parseResult, (_errors) => {
 			errors = _.keyBy(_errors, 'field');
@@ -48,8 +48,9 @@
 		});
 	}
 
-	function onBlur(event) {
+	function handleTouched(event) {
 		isTouched[event.target.name] = true;
+		validateForm();
 	}
 </script>
 
@@ -58,7 +59,7 @@ Create
 	name="create-prompt-form"
 	method="POST"
 	use:enhance={handleSubmit}
-	on:input={handleInput}
+	on:input={validateForm}
 	bind:this={form}
 >
 	<label for="name">
@@ -67,7 +68,8 @@ Create
 			name="name"
 			type="text"
 			placeholder={data.namePlaceholder}
-			on:input={onBlur}
+			on:blur={handleTouched}
+			on:input={handleTouched}
 		/>
 		<span>{isTouched.name && errors.name ? errors.name : ''}</span>
 	</label>
@@ -79,7 +81,8 @@ Create
 			rows="4"
 			cols="50"
 			placeholder={data.descriptionPlaceholder}
-			on:input={onBlur}
+			on:blur={handleTouched}
+			on:input={handleTouched}
 		/>
 		<span>{isTouched.description && errors.description ? errors.description : ''}</span>
 	</label>
@@ -91,7 +94,8 @@ Create
 			rows="4"
 			cols="50"
 			placeholder={data.contentPlaceholder}
-			on:input={onBlur}
+			on:blur={handleTouched}
+			on:input={handleTouched}
 		/>
 		<span>{isTouched.content && errors.content ? errors.content : ''}</span>
 	</label>
@@ -105,7 +109,10 @@ Create
 		</select>
 	</label>
 
-	<input type="submit" disabled={Object.keys(errors).length > 0} />
+	<input
+		type="submit"
+		disabled={Object.keys(errors).length > 0 || _.some(isTouched, (v) => !v)}
+	/>
 </form>
 
 <style>
