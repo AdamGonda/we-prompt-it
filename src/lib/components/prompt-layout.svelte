@@ -18,10 +18,10 @@
 
 	const user = $page.data.session?.user;
 	const isOwner = user ? $page.data.repo.author.email === user.email : false;
-	const forkLink = user ? `/app/repo/${data.slug}/fork` : `/login`;
+	const forkLink = user ? `/app/prompt/${data.slug}/fork` : `/login`;
 
 	if (browser && user) {
-		goto(`/app/repo/${data.slug}`);
+		goto(`/app/prompt/${data.slug}`);
 	}
 
 	async function handleAddRemoveStar() {
@@ -62,12 +62,12 @@
 <ul>
 	{#if isOwner}
 		<li>
-			<a href={`/app/repo/${$page.params.slug}`}>
+			<a href={`/app/prompt/${$page.params.slug}`}>
 				<span>Content</span>
 			</a>
 		</li>
 		<li>
-			<a href={`/app/repo/${$page.params.slug}/edit`}>
+			<a href={`/app/prompt/${$page.params.slug}/edit`}>
 				<span>Edit</span>
 			</a>
 		</li>

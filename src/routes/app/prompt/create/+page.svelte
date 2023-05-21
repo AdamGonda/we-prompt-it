@@ -30,7 +30,7 @@
 			}
 
 			// TODO show some success toser then navigate
-			goto(`/app/repo/${result.data.slug}`);
+			goto(`/app/prompt/${result.data.slug}`);
 		};
 	}
 

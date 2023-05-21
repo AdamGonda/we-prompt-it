@@ -5,7 +5,7 @@
 <script>
 	import { page } from '$app/stores';
 	import { results } from '$lib/stores/search';
-	import RepoCard from '$lib/components/repo-card.svelte';
+	import RepoCard from '$lib/components/prompt-card.svelte';
 	import { onMount } from 'svelte';
 
 	const { initialLoadResults } = $page.data;

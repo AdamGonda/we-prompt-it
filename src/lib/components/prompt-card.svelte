@@ -10,7 +10,7 @@
 	}
 </script>
 
-<a href={`${inApp ? '/app' : ''}/repo/${repo.slug}`} data-testid="repo-card">
+<a href={`${inApp ? '/app' : ''}/prompt/${repo.slug}`} data-testid="repo-card">
 	<div>
 		<p>id: <span>{repo.id}</span></p>
 		<p>name: <span>{repo.name}</span></p>

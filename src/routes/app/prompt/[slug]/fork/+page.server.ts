@@ -1,14 +1,15 @@
 import { formDataToObject, zodCheck } from '$lib/utils';
-import { getAllAIModels, getAllTags } from '$lib/controllers/shared';
-import { createRepo } from '$lib/controllers/repo';
-import { createSchema } from '$lib/zod-schemas.js';
+import { getAllAIModels, getAllTags, getRepoBySlug } from '$lib/controllers/shared';
+import { forkRepo } from '$lib/controllers/prompt';
 import { error } from '@sveltejs/kit';
+import { forkSchema } from '$lib/zod-schemas';
 
-export async function load() {
+export function load({ params }) {
+	const repo = getRepoBySlug(params.name);
 	const aiModels = getAllAIModels();
 	const tags = getAllTags();
 
-	return { aiModels, tags };
+	return { repo, aiModels, tags };
 }
 
 export const actions = {
@@ -21,18 +22,19 @@ export const actions = {
 
 		const formData = formDataToObject(await event.request.formData());
 
-		const parseResult = createSchema.safeParse(formData);
+		const parseResult = forkSchema.safeParse(formData);
 		const data = zodCheck(parseResult, (errors) => {
 			throw error(400, JSON.stringify(errors));
 		});
 
 		try {
-			const newRepo = await createRepo(event, data);
+			const newRepo = await forkRepo(event, data);
 			return { id: newRepo.id };
 		} catch (error) {
 			console.log('log error', error);
+
 			throw error(400, {
-				message: 'Error creating repo'
+				message: 'Error forking repo'
 			});
 		}
 	}

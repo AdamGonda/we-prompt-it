@@ -1,4 +1,4 @@
-import { deleteRepo, editRepo, repoLoad } from '$lib/controllers/repo';
+import { deleteRepo, editRepo, repoLoad } from '$lib/controllers/prompt';
 import { formDataToObject, zodCheck } from '$lib/utils';
 import { editSchema } from '$lib/zod-schemas.js';
 import { error, redirect, type RequestEvent } from '@sveltejs/kit';
@@ -29,7 +29,7 @@ export const actions = {
 			throw redirect(302, `/`);
 		}
 
-		throw redirect(302, `/app/repo/${event.params.slug}`);
+		throw redirect(302, `/app/prompt/${event.params.slug}`);
 	},
 	delete: async ({ params }) => {
 		await deleteRepo(params.id);

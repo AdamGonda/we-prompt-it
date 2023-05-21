@@ -4,7 +4,7 @@
 
 <script>
 	import { page } from '$app/stores';
-	import RepoCard from '$lib/components/repo-card.svelte';
+	import RepoCard from '$lib/components/prompt-card.svelte';
 
 	const { session, mostLiked, mostForked } = $page.data;
 </script>

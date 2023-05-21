@@ -31,7 +31,7 @@
 	{/if}
 
 	{#if user}
-		<a href={`/app/repo/create`} data-testid="create-prompt">
+		<a href={`/app/prompt/create`} data-testid="create-prompt">
 			<p>Create prompt</p>
 		</a>
 	{:else}
