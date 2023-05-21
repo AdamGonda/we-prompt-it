@@ -3,7 +3,7 @@
 # Tech
 TODO fix issues with slug, username, routing changes
 TODO chekc name on create, edit, fork
-TODO on signup ask for username
+TODO on first signup ask for username
 
 # Product (functional)
 TODO tag selection, creation on create/edit
