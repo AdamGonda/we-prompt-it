@@ -5,7 +5,7 @@ TODO form validation front use zod
 TODO form validation back use zod
 TODO add playwrigh tests
 
-# Product
+# Product (functional)
 TODO tag selection on create/edit
 TODO explore page filtering
 TODO explore page sorting
