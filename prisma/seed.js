@@ -58,7 +58,7 @@ async function main() {
 		data: {
 			description: 'Rediscover the forbidden [key] melodies in a world without music',
 			name: 'Melodies Unheard 1',
-			slug: 'melodies-unheard-1',
+			slug: 'adamgonda-melodies-unheard-1',
 			author: {
 				connect: {
 					id: adamUser.id
@@ -92,8 +92,8 @@ async function main() {
 			description:
 				'In a world where colors have been forgotten, one artist has discovered the secret of the rainbow',
 			name: 'Colors Rediscovered 2',
-			slug: 'colors-rediscovered-2',
-			authorId: adamUser.id,
+			slug: 'test1-colors-rediscovered-2',
+			authorId: testUser1.id,
 			prompts: {
 				create: {
 					content:
@@ -115,8 +115,8 @@ async function main() {
 			description:
 				'An ancient language long lost to history has been rediscovered by an unassuming librarian',
 			name: 'Language Unearthed 3',
-			slug: 'language-unearthed-3',
-			authorId: adamUser.id,
+			slug: 'test2-language-unearthed-3',
+			authorId: testUser2.id,
 			prompts: {
 				create: {
 					content:
