@@ -1,3 +1,7 @@
+<svelte:head>
+    <title>Home | We Prompt</title> 
+</svelte:head>
+
 <script>
 	import { page } from '$app/stores';
 	import RepoCard from '$lib/components/repo-card.svelte';

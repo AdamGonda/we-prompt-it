@@ -2,7 +2,6 @@
 	import { signIn, signOut } from '@auth/sveltekit/client';
 	import Search from './search.svelte';
 	import { page } from '$app/stores';
-	import { goto } from '$app/navigation';
 
 	const user = $page.data.session?.user;
 
@@ -16,38 +15,36 @@
 </script>
 
 <nav>
-	<a href={`/`}>
+	<a href={`/`} data-testid="logo">
 		<p>Logo</p>
 	</a>
 	<Search />
 
 	{#if user}
-		<a href={`/app/my-collection`}>
+		<a href={`/app/my-collection`} data-testid="my-collection">
 			<p>My collection</p>
 		</a>
 	{:else}
-		<a href={`/signup`}>
+		<a href={`/login`} data-testid="my-collection">
 			<p>My collection</p>
 		</a>
 	{/if}
 
 	{#if user}
-		<a href={`/app/repo/create`}>
+		<a href={`/app/repo/create`} data-testid="create-prompt">
 			<p>Create prompt</p>
 		</a>
 	{:else}
-		<a href={`/signup`}>
+		<a href={`/login`} data-testid="create-prompt">
 			<p>Create prompt</p>
 		</a>
 	{/if}
 
 	{#if user}
-		<button style="cursor: pointer;" on:click={handleSignout}>signout</button>
+		<button style="cursor: pointer;" on:click={handleSignout} data-testid="logout">signout</button>
 	{:else}
-		<button style="cursor: pointer;" on:click={handleSignin}>Signin</button>
-		/
-		<a href={`/signup`}>
-			<p>Signup</p>
+	<a href={`/login`} data-testid="login">
+		<p>Signup/Login</p>
 		</a>
 	{/if}
 </nav>
