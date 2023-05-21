@@ -4,7 +4,6 @@ import type { RequestEvent } from '@sveltejs/kit';
 
 import { error } from '@sveltejs/kit';
 import { PrismaClient } from '@prisma/client';
-import { nanoid } from 'nanoid';
 import type { EditForm, ForkForm } from '$lib/zod-schemas';
 
 const prisma = new PrismaClient();
@@ -18,7 +17,6 @@ export async function createRepo(event, data: EditForm) {
 
 	return await prisma.repo.create({
 		data: {
-			id: nanoid(),
 			description: data.description,
 			name: data.name,
 			author: {
@@ -109,7 +107,6 @@ export async function forkRepo(event: RequestEvent, data: ForkForm) {
 
 	return await prisma.repo.create({
 		data: {
-			id: nanoid(),
 			parentRepo: {
 				connect: {
 					id: data.id
@@ -136,9 +133,9 @@ export async function forkRepo(event: RequestEvent, data: ForkForm) {
 }
 
 export async function repoLoad({ params }) {
-	const id = params.id;
-
-	if (!id) {
+	const id = Number(params.id);
+	
+	if(isNaN(id) || !id) {
 		throw error(404, {
 			message: 'Not found'
 		});

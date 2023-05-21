@@ -1,9 +1,10 @@
 -- CreateTable
 CREATE TABLE "User" (
-    "id" TEXT NOT NULL,
+    "id" SERIAL NOT NULL,
     "email" TEXT NOT NULL,
     "firstName" TEXT NOT NULL,
     "lastName" TEXT NOT NULL,
+    "username" TEXT NOT NULL,
     "picture" TEXT NOT NULL DEFAULT '',
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
@@ -15,15 +16,15 @@ CREATE TABLE "User" (
 
 -- CreateTable
 CREATE TABLE "Repo" (
-    "id" TEXT NOT NULL,
-    "name" TEXT NOT NULL DEFAULT '',
+    "id" SERIAL NOT NULL,
+    "name" TEXT NOT NULL,
     "description" TEXT NOT NULL DEFAULT '',
     "noTimesForked" INTEGER NOT NULL DEFAULT 0,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
     "isDeleted" BOOLEAN NOT NULL DEFAULT false,
-    "authorId" TEXT NOT NULL,
-    "parentId" TEXT,
+    "authorId" INTEGER NOT NULL,
+    "parentId" INTEGER,
 
     CONSTRAINT "Repo_pkey" PRIMARY KEY ("id")
 );
@@ -32,13 +33,12 @@ CREATE TABLE "Repo" (
 CREATE TABLE "Prompt" (
     "id" SERIAL NOT NULL,
     "version" INTEGER NOT NULL DEFAULT 1,
-    "description" TEXT NOT NULL DEFAULT '',
     "content" TEXT NOT NULL,
     "isDeleted" BOOLEAN NOT NULL DEFAULT false,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
     "aIModelId" INTEGER,
-    "repoId" TEXT NOT NULL,
+    "repoId" INTEGER NOT NULL,
 
     CONSTRAINT "Prompt_pkey" PRIMARY KEY ("id")
 );
@@ -58,10 +58,10 @@ CREATE TABLE "ChangeRequest" (
     "title" TEXT NOT NULL,
     "description" TEXT NOT NULL,
     "content" TEXT NOT NULL,
-    "repoId" TEXT,
+    "repoId" INTEGER,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
-    "authorId" TEXT NOT NULL,
+    "authorId" INTEGER NOT NULL,
     "isDeleted" BOOLEAN NOT NULL DEFAULT false,
 
     CONSTRAINT "ChangeRequest_pkey" PRIMARY KEY ("id")
@@ -73,8 +73,8 @@ CREATE TABLE "Comment" (
     "content" TEXT NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
-    "authorId" TEXT NOT NULL,
-    "repoId" TEXT,
+    "authorId" INTEGER NOT NULL,
+    "repoId" INTEGER,
     "changeRequestId" INTEGER,
     "isDeleted" BOOLEAN NOT NULL DEFAULT false,
 
@@ -84,8 +84,8 @@ CREATE TABLE "Comment" (
 -- CreateTable
 CREATE TABLE "Star" (
     "id" SERIAL NOT NULL,
-    "userId" TEXT NOT NULL,
-    "repoId" TEXT NOT NULL,
+    "userId" INTEGER NOT NULL,
+    "repoId" INTEGER NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "isDeleted" BOOLEAN NOT NULL DEFAULT false,
 
@@ -95,8 +95,8 @@ CREATE TABLE "Star" (
 -- CreateTable
 CREATE TABLE "Follower" (
     "id" SERIAL NOT NULL,
-    "userId" TEXT NOT NULL,
-    "followingId" TEXT NOT NULL,
+    "userId" INTEGER NOT NULL,
+    "followingId" INTEGER NOT NULL,
     "isDeleted" BOOLEAN NOT NULL DEFAULT false,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
@@ -114,12 +114,18 @@ CREATE TABLE "Tag" (
 
 -- CreateTable
 CREATE TABLE "_RepoToTag" (
-    "A" TEXT NOT NULL,
+    "A" INTEGER NOT NULL,
     "B" INTEGER NOT NULL
 );
 
 -- CreateIndex
 CREATE UNIQUE INDEX "User_email_key" ON "User"("email");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "User_username_key" ON "User"("username");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "Repo_name_key" ON "Repo"("name");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "Star_userId_repoId_key" ON "Star"("userId", "repoId");

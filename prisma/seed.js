@@ -1,32 +1,31 @@
 import { PrismaClient } from '@prisma/client';
-import { nanoid } from 'nanoid';
 
 const prisma = new PrismaClient();
 
 async function main() {
 	const adamUser = await prisma.user.create({
 		data: {
-			id: nanoid(10),
 			firstName: 'Adam',
 			lastName: 'Gonda',
+			username: 'adamgonda',
 			email: 'adamgondagyula@gmail.com'
 		}
 	});
 
 	const testUser1 = await prisma.user.create({
 		data: {
-			id: nanoid(10),
 			firstName: 'test1 f',
 			lastName: 'test1 l',
+			username: 'test1',
 			email: 'testshareloop1@gmail.com'
 		}
 	});
 
 	const testUser2 = await prisma.user.create({
 		data: {
-			id: nanoid(10),
 			firstName: 'test2 f',
 			lastName: 'test2 l',
+			username: 'test2',
 			email: 'testshareloop2@gmail.com'
 		}
 	});
@@ -57,7 +56,6 @@ async function main() {
 
 	const repo1 = await prisma.repo.create({
 		data: {
-			id: nanoid(10),
 			description: 'Rediscover the forbidden [key] melodies in a world without music',
 			name: 'Melodies Unheard 1',
 			author: {
@@ -90,7 +88,6 @@ async function main() {
 
 	const repo2 = await prisma.repo.create({
 		data: {
-			id: nanoid(10),
 			description:
 				'In a world where colors have been forgotten, one artist has discovered the secret of the rainbow',
 			name: 'Colors Rediscovered 2',
@@ -113,7 +110,6 @@ async function main() {
 
 	const repo3 = await prisma.repo.create({
 		data: {
-			id: nanoid(10),
 			description:
 				'An ancient language long lost to history has been rediscovered by an unassuming librarian',
 			name: 'Language Unearthed 3',
