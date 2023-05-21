@@ -1,8 +1,6 @@
 # Current value: HUF 550k+
 
 # Tech
-TODO form validation front use zod 
-TODO form validation back use zod
 TODO add playwrigh tests
 
 # Product (functional)
