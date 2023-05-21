@@ -1,20 +1,22 @@
-<svelte:head>
-    <title>Login | We Prompt</title> 
-</svelte:head>
-
 <script>
 	import { browser } from '$app/environment';
 	import { goto } from '$app/navigation';
 	import { page } from '$app/stores';
-    import { signIn, signOut } from '@auth/sveltekit/client';
+	import { signIn, signOut } from '@auth/sveltekit/client';
 
-    const user = $page.data.session?.user;
+	const user = $page.data.session?.user;
 
-    if(browser && user) {
-        goto('/')
-    }
+	if (browser && user) {
+		goto('/');
+	}
 </script>
+
+<svelte:head>
+	<title>Login | We Prompt</title>
+</svelte:head>
 
 <!-- open ai style -->
 
-<button style="cursor: pointer;" on:click={() => signIn("google")} data-testid="login">Continue with google</button>
+<button style="cursor: pointer;" on:click={() => signIn('google')} data-testid="continue-with-google"
+	>Continue with google</button
+>
