@@ -8,6 +8,11 @@
 
 	let form;
 	let errors = {};
+	let isTouched = {
+		name: false,
+		description: false,
+		content: false
+	};
 	let data = {
 		namePlaceholder: 'name placeholder todocopy',
 		descriptionPlaceholder: 'description placeholder todocopy',
@@ -42,6 +47,10 @@
 			}
 		});
 	}
+
+	function onInput(event) {
+		isTouched[event.target.name] = true;
+	}
 </script>
 
 Create
@@ -54,9 +63,13 @@ Create
 >
 	<label for="name">
 		Name
-		<input name="name" type="text" placeholder={data.namePlaceholder} />
-		<span>{errors.name ? errors.name : ''}</span>
-
+		<input
+			name="name"
+			type="text"
+			placeholder={data.namePlaceholder}
+			on:input={onInput}
+		/>
+		<span>{isTouched.name && errors.name ? errors.name : ''}</span>
 	</label>
 
 	<label for="description">
@@ -66,15 +79,21 @@ Create
 			rows="4"
 			cols="50"
 			placeholder={data.descriptionPlaceholder}
+			on:input={onInput}
 		/>
-		<span>{errors.description ? errors.description : ''}</span>
-
+		<span>{isTouched.description && errors.description ? errors.description : ''}</span>
 	</label>
 
 	<label for="content">
 		Prompt
-		<textarea name="content" rows="4" cols="50" placeholder={data.contentPlaceholder} />
-		<span>{errors.content ? errors.content : ''}</span>
+		<textarea
+			name="content"
+			rows="4"
+			cols="50"
+			placeholder={data.contentPlaceholder}
+			on:input={onInput}
+		/>
+		<span>{isTouched.content && errors.content ? errors.content : ''}</span>
 	</label>
 
 	<label for="model">
