@@ -2,7 +2,12 @@
 	import { enhance } from '$app/forms';
 	import { goto } from '$app/navigation';
 	import { page } from '$app/stores';
+	import { formDataToObject, zodCheck } from '$lib/utils';
+	import { editSchema } from '$lib/zod-schemas';
+	import _ from 'lodash';
 
+	let form;
+	let errors = {};
 	let data = {
 		id: $page.data.repo.id,
 		name: $page.data.repo.name,
@@ -20,22 +25,45 @@
 			goto(`/app/my-collection`);
 		};
 	}
+
+	function onChange(e) {
+		errors = {};
+		const formData = formDataToObject(new FormData(form));
+		const parseResult = editSchema.safeParse(formData);
+
+		zodCheck(parseResult, (_errors) => {
+			errors = _.keyBy(_errors, 'field');
+
+			for (let key in errors) {
+				errors[key] = errors[key].message;
+			}
+		});
+	}
 </script>
 
-<form name="edit-prompt-form" method="POST" action="?/edit">
+<form
+	name="edit-prompt-form"
+	method="POST"
+	action="?/edit"
+	on:input={onChange}
+	bind:this={form}
+>
 	<label for="name">
 		Name
 		<input name="name" type="text" value={data.name} />
+		<span>{errors.name ? errors.name : ''}</span>
 	</label>
 
 	<label for="description">
 		Description
 		<textarea name="description" rows="4" cols="50" value={data.description} />
+		<span>{errors.description ? errors.description : ''}</span>
 	</label>
 
 	<label for="content">
 		Prompt
 		<textarea name="content" rows="4" cols="50" value={data.content} />
+		<span>{errors.content ? errors.content : ''}</span>
 	</label>
 
 	<label for="model">
@@ -47,7 +75,7 @@
 		</select>
 	</label>
 
-	<input type="submit" />
+	<input type="submit" disabled={Object.keys(errors).length > 0} />
 </form>
 
 <form method="POST" action="?/delete" use:enhance={handleDelete}>
@@ -67,5 +95,10 @@
 		display: flex;
 		flex-direction: column;
 		gap: 4px;
+	}
+
+	span {
+		font-size: 1rem;
+		color: red;
 	}
 </style>

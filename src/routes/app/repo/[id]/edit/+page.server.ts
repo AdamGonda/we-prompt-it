@@ -11,7 +11,7 @@ export const actions = {
 	edit: async (event: RequestEvent) => {
 		const formData = formDataToObject(await event.request.formData());
 
-		const parseResult = (await editSchema).safeParse(formData);
+		const parseResult = editSchema.safeParse(formData);
 		const data = zodCheck(parseResult, (errors) => {
 			throw error(400, JSON.stringify(errors));
 		});
