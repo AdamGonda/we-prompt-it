@@ -17,6 +17,7 @@ TODO loading indicators
 TODO add popup dialog to delete prompt flow
 
 # Tech
+TODO fix not found errors
 TODO 500 page
 TODO 404 page
 TODO db env vars for prod with vercel
