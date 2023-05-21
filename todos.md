@@ -1,8 +1,5 @@
 # Current value: HUF 550k+
 
-# Tech
-TODO add playwrigh tests
-
 # Product (functional)
 TODO tag selection on create/edit
 TODO explore page filtering
