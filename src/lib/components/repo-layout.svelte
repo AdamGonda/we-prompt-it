@@ -12,15 +12,16 @@
 		name: $page.data.repo.name,
 		changeRequests: $page.data.repo.changeRequests,
 		stars: $page.data.repo.stars.length,
-		author: $page.data.repo.author
+		author: $page.data.repo.author,
+		slug: $page.data.repo.slug
 	};
 
 	const user = $page.data.session?.user;
 	const isOwner = user ? $page.data.repo.author.email === user.email : false;
-	const forkLink = user ? `/app/repo/${data.id}/fork` : `/login`;
+	const forkLink = user ? `/app/repo/${data.slug}/fork` : `/login`;
 
 	if (browser && user) {
-		goto(`/app/repo/${data.id}`);
+		goto(`/app/repo/${data.slug}`);
 	}
 
 	async function handleAddRemoveStar() {
@@ -61,12 +62,12 @@
 <ul>
 	{#if isOwner}
 		<li>
-			<a href={`/app/repo/${$page.params.id}`}>
+			<a href={`/app/repo/${$page.params.slug}`}>
 				<span>Content</span>
 			</a>
 		</li>
 		<li>
-			<a href={`/app/repo/${$page.params.id}/edit`}>
+			<a href={`/app/repo/${$page.params.slug}/edit`}>
 				<span>Edit</span>
 			</a>
 		</li>

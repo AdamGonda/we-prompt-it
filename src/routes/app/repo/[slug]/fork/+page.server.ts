@@ -1,19 +1,11 @@
 import { formDataToObject, zodCheck } from '$lib/utils';
-import { getAllAIModels, getAllTags, getRepoById } from '$lib/controllers/shared';
+import { getAllAIModels, getAllTags, getRepoBySlug } from '$lib/controllers/shared';
 import { forkRepo } from '$lib/controllers/repo';
 import { error } from '@sveltejs/kit';
 import { forkSchema } from '$lib/zod-schemas';
 
 export function load({ params }) {
-	const id = params.id;
-
-	if (!id) {
-		throw error(404, {
-			message: 'Not found'
-		});
-	}
-
-	const repo = getRepoById(id);
+	const repo = getRepoBySlug(params.name);
 	const aiModels = getAllAIModels();
 	const tags = getAllTags();
 

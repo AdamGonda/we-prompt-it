@@ -29,7 +29,7 @@ export const actions = {
 			throw redirect(302, `/`);
 		}
 
-		throw redirect(302, `/app/repo/${event.params.id}`);
+		throw redirect(302, `/app/repo/${event.params.slug}`);
 	},
 	delete: async ({ params }) => {
 		await deleteRepo(params.id);

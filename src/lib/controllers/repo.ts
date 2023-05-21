@@ -1,5 +1,5 @@
 import { getDBUser } from '$lib/controllers/user';
-import { getAllAIModels, getAllTags, getRepoById } from '$lib/controllers/shared';
+import { getAllAIModels, getAllTags, getRepoBySlug } from '$lib/controllers/shared';
 import type { RequestEvent } from '@sveltejs/kit';
 
 import { error } from '@sveltejs/kit';
@@ -88,7 +88,7 @@ export async function deleteRepo(id) {
 
 export async function forkRepo(event: RequestEvent, data: ForkForm) {
 	const dbUser = await getDBUser(event);
-	const parentRepo = await getRepoById(data.id);
+	const parentRepo = await getRepoBySlug(data.slug);
 
 	if (!dbUser || !parentRepo) {
 		throw Error('No user or parent repo found');
@@ -96,7 +96,7 @@ export async function forkRepo(event: RequestEvent, data: ForkForm) {
 
 	await prisma.repo.update({
 		where: {
-			id: data.id
+			name: data.name
 		},
 		data: {
 			noTimesForked: {
@@ -132,16 +132,8 @@ export async function forkRepo(event: RequestEvent, data: ForkForm) {
 	});
 }
 
-export async function repoLoad({ params }) {
-	const id = Number(params.id);
-	
-	if(isNaN(id) || !id) {
-		throw error(404, {
-			message: 'Not found'
-		});
-	}
-
-	const repo = await getRepoById(id);
+export async function repoLoad({ params }) {	
+	const repo = await getRepoBySlug(params.slug);
 	const aiModels = await getAllAIModels();
 	const tags = await getAllTags();
 

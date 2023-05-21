@@ -7,10 +7,12 @@
 
 	if(browser && $page.data.session?.user) {
 		inApp = true
-	}	
+	}
+
+	console.log('log repo', repo)
 </script>
 
-<a href={`${inApp ? '/app' : ''}/repo/${repo.id}`} data-testid="repo-card">
+<a href={`${inApp ? '/app' : ''}/repo/${repo.slug}`} data-testid="repo-card">
 	<div>
 		<p>id: <span>{repo.id}</span></p>
 		<p>name: <span>{repo.name}</span></p>

@@ -7,7 +7,7 @@ async function main() {
 		data: {
 			firstName: 'Adam',
 			lastName: 'Gonda',
-			username: 'adamgonda',
+			slug: 'adam-gonda',
 			email: 'adamgondagyula@gmail.com'
 		}
 	});
@@ -16,7 +16,7 @@ async function main() {
 		data: {
 			firstName: 'test1 f',
 			lastName: 'test1 l',
-			username: 'test1',
+			slug: 'test1-f-test1 l',
 			email: 'testshareloop1@gmail.com'
 		}
 	});
@@ -25,7 +25,7 @@ async function main() {
 		data: {
 			firstName: 'test2 f',
 			lastName: 'test2 l',
-			username: 'test2',
+			slug: 'test2-f-test2 l',
 			email: 'testshareloop2@gmail.com'
 		}
 	});
@@ -58,6 +58,7 @@ async function main() {
 		data: {
 			description: 'Rediscover the forbidden [key] melodies in a world without music',
 			name: 'Melodies Unheard 1',
+			slug: 'melodies-unheard-1',
 			author: {
 				connect: {
 					id: adamUser.id
@@ -91,6 +92,7 @@ async function main() {
 			description:
 				'In a world where colors have been forgotten, one artist has discovered the secret of the rainbow',
 			name: 'Colors Rediscovered 2',
+			slug: 'colors-rediscovered-2',
 			authorId: adamUser.id,
 			prompts: {
 				create: {
@@ -113,6 +115,7 @@ async function main() {
 			description:
 				'An ancient language long lost to history has been rediscovered by an unassuming librarian',
 			name: 'Language Unearthed 3',
+			slug: 'language-unearthed-3',
 			authorId: adamUser.id,
 			prompts: {
 				create: {

@@ -29,7 +29,7 @@
 			}
 
 			// TODO show some success toser then navigate
-			goto(`/app/repo/${result.data.id}`);
+			goto(`/app/repo/${result.data.slug}`);
 		};
 	}
 

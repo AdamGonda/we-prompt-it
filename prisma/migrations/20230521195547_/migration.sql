@@ -4,7 +4,6 @@ CREATE TABLE "User" (
     "email" TEXT NOT NULL,
     "firstName" TEXT NOT NULL,
     "lastName" TEXT NOT NULL,
-    "username" TEXT NOT NULL,
     "picture" TEXT NOT NULL DEFAULT '',
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
@@ -18,6 +17,7 @@ CREATE TABLE "User" (
 CREATE TABLE "Repo" (
     "id" SERIAL NOT NULL,
     "name" TEXT NOT NULL,
+    "slug" TEXT NOT NULL,
     "description" TEXT NOT NULL DEFAULT '',
     "noTimesForked" INTEGER NOT NULL DEFAULT 0,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -122,10 +122,7 @@ CREATE TABLE "_RepoToTag" (
 CREATE UNIQUE INDEX "User_email_key" ON "User"("email");
 
 -- CreateIndex
-CREATE UNIQUE INDEX "User_username_key" ON "User"("username");
-
--- CreateIndex
-CREATE UNIQUE INDEX "Repo_name_key" ON "Repo"("name");
+CREATE UNIQUE INDEX "Repo_slug_key" ON "Repo"("slug");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "Star_userId_repoId_key" ON "Star"("userId", "repoId");
