@@ -32,4 +32,5 @@ TODO communicating versioning
 TODO subscribtions
 TODO notifications
 TODO user settings
+TODO follow users
 TODO example blocks on prompt page to see it in action (example prompt (maybe just params, versioning issue? current prompt+params) results of a prompt)
