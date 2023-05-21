@@ -93,7 +93,7 @@ export async function forkRepo(event: RequestEvent, data: ForkSchema) {
 	const parentRepo = await getRepoById(data.id);
 
 	if (!dbUser || !parentRepo) {
-		throw Error('No user or repo found');
+		throw Error('No user or parent repo found');
 	}
 
 	await prisma.repo.update({
