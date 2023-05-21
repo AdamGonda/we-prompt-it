@@ -56,3 +56,7 @@ test('open - {repo-card} -> repo-details [fork] -> login', async ({ page }) => {
   expect(await page.title()).toBe('Login | We Prompt');
 });
 
+test('open -> explore', async ({ page }) => {
+  await page.goto('http://127.0.0.1:5173/explore?query=key');
+  expect(await page.title()).toBe('Explore | We Prompt');
+});

@@ -1,3 +1,7 @@
+<svelte:head>
+    <title>Explore | We Prompt</title> 
+</svelte:head>
+
 <script>
 	import { page } from '$app/stores';
 	import { results } from '$lib/stores/search';
