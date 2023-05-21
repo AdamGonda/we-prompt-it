@@ -14,9 +14,6 @@ export async function getRepoBySlug(slug) {
     },
   });
 
-  console.log('log slug', slug)
-  console.log('log repo', repo)
-
 	repo.prompts.sort((a, b) => b.version - a.version);
 	
   return repo;

@@ -1,6 +1,6 @@
 import { formDataToObject, zodCheck } from '$lib/utils';
 import { getAllAIModels, getAllTags, getRepoBySlug } from '$lib/controllers/shared';
-import { forkRepo } from '$lib/controllers/prompt';
+import { forkRepo } from '$lib/controllers/repo';
 import { error } from '@sveltejs/kit';
 import { forkSchema } from '$lib/zod-schemas';
 

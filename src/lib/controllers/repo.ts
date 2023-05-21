@@ -16,8 +16,6 @@ export async function createRepo(event, data: EditForm) {
 		throw Error('No user found');
 	}
 
-	console.log('log convertToSlug(data.name)', convertToSlug(dbUser.username, data.name))
-
 	return await prisma.repo.create({
 		data: {
 			description: data.description,
@@ -42,11 +40,11 @@ export async function createRepo(event, data: EditForm) {
 }
 
 export async function editRepo(event: RequestEvent, data: EditForm) {
-	const id = event.params.id;
+	const slug = event.params.slug;
 	const user = await getDBUser(event);
 
-	const repo = await prisma.repo.findUnique({
-		where: { id },
+	const repo = await prisma.repo.findFirst({
+		where: { slug, isDeleted: false },
 		include: { prompts: true }
 	});
 
@@ -55,7 +53,7 @@ export async function editRepo(event: RequestEvent, data: EditForm) {
 	}
 
 	if (repo.isDeleted) {
-		throw new Error(`Repo with id ${id} is deleted`);
+		throw new Error(`Repo with id ${slug} is deleted`);
 	}
 
 	if (repo.authorId !== user.id) {
@@ -63,7 +61,7 @@ export async function editRepo(event: RequestEvent, data: EditForm) {
 	}
 
 	await prisma.repo.update({
-		where: { id },
+		where: { slug },
 		data: {
 			name: data.name,
 			description: data.description,
@@ -136,7 +134,7 @@ export async function forkRepo(event: RequestEvent, data: ForkForm) {
 	});
 }
 
-export async function repoLoad({ params }) {	
+export async function repoLoad({ params }) {
 	const repo = await getRepoBySlug(params.slug);
 	const aiModels = await getAllAIModels();
 	const tags = await getAllTags();

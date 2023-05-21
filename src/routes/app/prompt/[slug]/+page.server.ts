@@ -1,4 +1,4 @@
-import { repoLoad } from "$lib/controllers/prompt";
+import { repoLoad } from "$lib/controllers/repo";
 
 export async function load(event) {
 	return await repoLoad(event);
