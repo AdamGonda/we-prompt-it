@@ -17,7 +17,7 @@
 
 	const user = $page.data.session?.user;
 	const isOwner = user ? $page.data.repo.author.email === user.email : false;
-	const forkLink = user ? `/app/repo/${data.id}/fork` : `/signup`;
+	const forkLink = user ? `/app/repo/${data.id}/fork` : `/login`;
 
 	if (browser && user) {
 		goto(`/app/repo/${data.id}`);
@@ -36,16 +36,16 @@
 
 <div>
 	<button>
-		<a href={forkLink}>Create new based on this</a>
+		<a href={forkLink} data-testid="create-fork">Create new based on this</a>
 	</button>
 
 	{#if user}
-		<button on:click={handleAddRemoveStar}>
+		<button on:click={handleAddRemoveStar} data-testid="add-remove-star">
 			{`Stars: ${data.stars}`}
 		</button>
 	{:else}
 		<button>
-			<a href={`/signup`}>Stars: {data.stars}</a>
+			<a href={`/login`} data-testid="add-remove-star">Stars: {data.stars}</a>
 		</button>
 	{/if}
 </div>
