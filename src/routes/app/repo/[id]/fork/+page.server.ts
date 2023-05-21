@@ -1,7 +1,7 @@
 import { formDataToObject, zodCheck } from '$lib/utils';
 import { getAllAIModels, getAllTags, getRepoById } from '$lib/controllers/shared';
 import { forkRepo } from '$lib/controllers/repo';
-import { error, redirect } from '@sveltejs/kit';
+import { error } from '@sveltejs/kit';
 import { forkSchema } from '$lib/zod-schemas';
 
 export function load({ params }) {
