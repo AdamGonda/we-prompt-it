@@ -3,6 +3,7 @@
 # Product (functional)
 TODO tag selection, creation on create/edit
 TODO model selection, creatinon on create/edit
+TODO add popup dialog to delete / edit prompt flow
 TODO explore page filtering
 TODO explore page sorting
 TODO landing page
@@ -10,7 +11,6 @@ TODO signup/login page
 TODO profile page
 TODO add a button to copy the prompt to clipboard
 TODO loading indicators
-TODO add popup dialog to delete / edit prompt flow
 
 # Tech
 TODO unify exeption & error handling, levels, where they check what and where they thrown and caught
