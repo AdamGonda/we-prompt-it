@@ -28,3 +28,12 @@ test('open - {login} -> login', async ({ page }) => {
   expect(await page.title()).toBe('Login | We Prompt');
 });
 
+test('open - {repo-card} -> repo-details', async ({ page }) => {
+  await page.goto('http://127.0.0.1:5173/');
+
+  const elements = await page.$$('[data-testid="repo-card"]')
+  console.log('log elements[0]', elements[0])
+  await elements[0].click()
+  expect(await page.title()).toBe('Repo details | We Prompt');
+});
+
