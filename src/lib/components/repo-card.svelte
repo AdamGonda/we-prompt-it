@@ -8,8 +8,6 @@
 	if(browser && $page.data.session?.user) {
 		inApp = true
 	}
-
-	console.log('log repo', repo)
 </script>
 
 <a href={`${inApp ? '/app' : ''}/repo/${repo.slug}`} data-testid="repo-card">
