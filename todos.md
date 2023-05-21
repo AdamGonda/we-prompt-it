@@ -18,6 +18,20 @@ TODO 500 page
 TODO 404 page
 TODO db env vars for prod with vercel
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 # MVP out of scope
 TODO process variables in prompts content and show them as fillable filds on deails page
 TODO image uploads
