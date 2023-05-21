@@ -2,9 +2,12 @@
 	import { enhance } from '$app/forms';
 	import { goto } from '$app/navigation';
 	import { page } from '$app/stores';
+	import { formDataToObject, zodCheck } from '$lib/utils';
+	import { forkSchema } from '$lib/zod-schemas';
+	import _ from 'lodash';
 
-	
-
+	let form;
+	let errors = {};
 	let data = {
 		id: $page.data.repo.id,
 		name: $page.data.repo.name,
@@ -13,41 +16,62 @@
 		models: $page.data.aiModels
 	};
 
-	console.log('log data', data)
-
 	function isSelected(model) {
 		return model.id == $page.data.repo.prompts[0].aIModelId;
 	}
 
 	function handleSubmit() {
 		return async ({ result, update }) => {
+			if (result.error) {
+				console.log('[FRONTEND ERROR] fork', result.error);
+				return;
+			}
+
 			goto(`/app/repo/${result.data.id}`);
 		};
+	}
+
+	function onInput() {
+		errors = {};
+		const formData = formDataToObject(new FormData(form));
+		const parseResult = forkSchema.safeParse(formData);
+
+		zodCheck(parseResult, (_errors) => {
+			errors = _.keyBy(_errors, 'field');
+
+			for (let key in errors) {
+				errors[key] = errors[key].message;
+			}
+		});
 	}
 </script>
 
 Fork
-<form name="create-prompt-form" method="POST" use:enhance={handleSubmit}>
+<form
+	name="create-prompt-form"
+	method="POST"
+	use:enhance={handleSubmit}
+	on:input={onInput}
+	bind:this={form}
+>
 	<input name="id" type="hidden" value={data.id} />
 
 	<label for="name">
 		Name
 		<input name="name" type="text" value={data.name} />
+		<span>{errors.name ? errors.name : ''}</span>
 	</label>
 
 	<label for="description">
 		Description
-		<textarea
-			name="description"
-			rows="4"
-			cols="50"
-			value={data.description}
-		/>
+		<textarea name="description" rows="4" cols="50" value={data.description} />
+		<span>{errors.description ? errors.description : ''}</span>
 	</label>
 
 	<label for="content">
 		Prompt
 		<textarea name="content" rows="4" cols="50" value={data.content} />
+		<span>{errors.content ? errors.content : ''}</span>
 	</label>
 
 	<label for="model">
@@ -59,7 +83,7 @@ Fork
 		</select>
 	</label>
 
-	<input type="submit" />
+	<input type="submit" disabled={Object.keys(errors).length > 0} />
 </form>
 
 <style>
@@ -74,5 +98,9 @@ Fork
 		display: flex;
 		flex-direction: column;
 		gap: 4px;
+	}
+	span {
+		font-size: 1rem;
+		color: red;
 	}
 </style>

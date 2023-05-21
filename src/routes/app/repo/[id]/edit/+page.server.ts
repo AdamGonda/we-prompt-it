@@ -9,6 +9,12 @@ export async function load(event) {
 
 export const actions = {
 	edit: async (event: RequestEvent) => {
+		if (!(await event.locals.getSession()).user) {
+			throw error(400, {
+				message: 'Not logged in'
+			});
+		}
+		
 		const formData = formDataToObject(await event.request.formData());
 
 		const parseResult = editSchema.safeParse(formData);

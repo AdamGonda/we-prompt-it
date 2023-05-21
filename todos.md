@@ -17,6 +17,7 @@ TODO loading indicators
 TODO add popup dialog to delete prompt flow
 
 # Tech
+TODO unify exeption & error handling
 TODO fix not found errors, for load functions for sure
 TODO 500 page
 TODO 404 page

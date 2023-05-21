@@ -5,7 +5,7 @@ import type { RequestEvent } from '@sveltejs/kit';
 import { error } from '@sveltejs/kit';
 import { PrismaClient } from '@prisma/client';
 import { nanoid } from 'nanoid';
-import type { EditForm } from '$lib/zod-schemas';
+import type { EditForm, ForkSchema } from '$lib/zod-schemas';
 
 const prisma = new PrismaClient();
 
@@ -88,11 +88,16 @@ export async function deleteRepo(id) {
 	});
 }
 
-export async function forkRepo(event, data) {
+export async function forkRepo(event: RequestEvent, data: ForkSchema) {
 	const dbUser = await getDBUser(event);
+	const parentRepo = await getRepoById(data.id);
 
 	if (!dbUser) {
 		throw Error('No user found');
+	}
+
+	if(!parentRepo) {
+		throw Error('No repo found');
 	}
 
 	await prisma.repo.update({
@@ -124,7 +129,7 @@ export async function forkRepo(event, data) {
 			prompts: {
 				create: {
 					content: data.content,
-					aIModelId: 1
+					aIModelId: data.model
 				}
 			}
 			// tags: {
