@@ -1,7 +1,7 @@
 import { formDataToObject, zodCheck } from '$lib/utils';
 import { getAllAIModels, getAllTags, getRepoById } from '$lib/controllers/shared';
 import { forkRepo } from '$lib/controllers/repo';
-import { error } from '@sveltejs/kit';
+import { error, redirect } from '@sveltejs/kit';
 import { forkSchema } from '$lib/zod-schemas';
 
 export function load({ params }) {
@@ -35,8 +35,15 @@ export const actions = {
 			throw error(400, JSON.stringify(errors));
 		});
 
-		const newRepo = await forkRepo(event, data);
+		try {
+			const newRepo = await forkRepo(event, data);
+			return { id: newRepo.id };
+		} catch (error) {
+			console.log('log error', error);
 
-		return { id: newRepo.id };
+			throw error(400, {
+				message: 'Error forking repo'
+			});
+		}
 	}
 };

@@ -22,11 +22,14 @@
 
 	function handleSubmit() {
 		return async ({ result, update }) => {
+			console.log('log result', result);
 			if (result.error) {
 				console.log('[FRONTEND ERROR] fork', result.error);
+				// TODO show some error toser
 				return;
 			}
 
+			// TODO show some success toser then navigate
 			goto(`/app/repo/${result.data.id}`);
 		};
 	}
