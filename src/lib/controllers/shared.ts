@@ -33,3 +33,10 @@ export async function getAllAIModels() {
 export async function getAllTags() {
 	return await prisma.tag.findMany();
 }
+
+export async function getDBUser(event) {
+	const email = (await event.locals.getSession()).user.email;
+	return await prisma.user.findUnique({
+		where: { email }
+	});
+}

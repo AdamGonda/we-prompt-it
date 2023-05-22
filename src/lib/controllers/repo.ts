@@ -1,4 +1,4 @@
-import { getDBUser } from '$lib/controllers/user';
+import { getDBUser } from '$lib/controllers/shared';
 import { getAllAIModels, getAllTags, getRepoBySlug } from '$lib/controllers/shared';
 import type { RequestEvent } from '@sveltejs/kit';
 
