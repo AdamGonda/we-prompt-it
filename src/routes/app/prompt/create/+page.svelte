@@ -10,6 +10,9 @@
 
 Create
 <RepoForm
+	{onSuccess}
+	action="?/create"
+	formName="create-prompt-form"
 	data={{
 		placeholder: {
 			name: 'name placeholder todocopy',
@@ -18,7 +21,4 @@ Create
 		},
 		allModels: $page.data.allModels
 	}}
-	action="?/create"
-	formName="create-prompt-form"
-	{onSuccess}
 />

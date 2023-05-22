@@ -10,15 +10,17 @@
 			goto(`/app/my-collection`);
 		};
 	}
+
+	function onSuccess(data) {
+		goto(`/app/prompt/${data.slug}`);
+	}
 </script>
 
 <RepoForm
-	formName="edit-prompt-form"
+	{onSuccess}
 	type="edit"
 	action={`?/edit`}
-	onSuccess={(data) => {
-		goto(`/app/prompt/${data.slug}`);
-	}}
+	formName="edit-prompt-form"
 	data={{
 		prefill: {
 			name: $page.data.repo.name,
