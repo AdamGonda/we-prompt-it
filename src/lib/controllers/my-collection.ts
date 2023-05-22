@@ -1,9 +1,9 @@
-import { getDBUser } from '$lib/controllers/user';
+import { getDBUser } from '$lib/controllers/shared';
 import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
-export async function getUsersCollection(event) {
+export async function loadMyCollection(event) {
 	const dbUser = await getDBUser(event);
 
 	const createdBy = await prisma.repo.findMany({

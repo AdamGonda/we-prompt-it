@@ -1,8 +1,46 @@
 import { PrismaClient } from "@prisma/client";
+import { json } from "@sveltejs/kit";
+import { getAllRepos } from "./shared";
 
 const prisma = new PrismaClient();
 
-export async function searchRepos(query) {
+export async function preSearchResultsNo(event) {
+	const query = event.url.searchParams.get('q');
+	const rawResults = await _search(query);
+
+	if (query) {
+		if(rawResults.length === 0) {
+			json(0)
+		}
+	
+		return json(rawResults.length)
+	}
+
+	return json([]);
+}
+
+export async function search(event) {
+	const query = event.url.searchParams.get('q');
+
+	if (query) {
+		return json(await _search(query));
+	}
+
+	return json([]);
+}
+
+export async function loadExplore(event) {
+	const query = event.url.searchParams.get('q');
+
+	if (query) {
+		return { initialLoadResults: await _search(query) };
+	}
+
+	return { initialLoadResults: await getAllRepos() };
+}
+
+// #region PRIVATE 
+async function _search(query) {
 	return await prisma.repo.findMany({
 		where: {
 			OR: [
@@ -60,4 +98,4 @@ export async function searchRepos(query) {
 		}
 	});
 }
-
+// #endregion

@@ -1,8 +1,19 @@
 import { PrismaClient } from "@prisma/client";
+import { getDBUser } from "./shared";
 
 const prisma = new PrismaClient();
 
-export async function addRemoveStar(userId, repoId) {
+export async function addRemoveStar(event) {
+	const id = event.url.searchParams.get('id');
+	const session = await event.locals.getSession();
+	const user = await getDBUser(event);
+	const userId = user.id;
+	const repoId = Number(id);
+
+	if (!id || !session.user) {
+		return new Response(JSON.stringify({ status: 400 }));
+	}
+
 	// check if user already starred the repo before
 	const starInDB = await prisma.star.findUnique({
 		where: {
@@ -10,7 +21,7 @@ export async function addRemoveStar(userId, repoId) {
 		}
 	});
 
-	// if not create new start
+	// if not create new star
 	if (!starInDB) {
 		await prisma.star.create({
 			data: {
@@ -19,7 +30,7 @@ export async function addRemoveStar(userId, repoId) {
 			}
 		});
 
-		return 1
+		return new Response(JSON.stringify({ status: 200, diff: 1 }));
 	}
 
 	// if yes based on isDeleted, reactivate or delete
@@ -32,7 +43,7 @@ export async function addRemoveStar(userId, repoId) {
 				isDeleted: false
 			}
 		});
-		return 1
+		return new Response(JSON.stringify({ status: 200, diff: 1 }));
 	} else {
 		await prisma.star.update({
 			where: {
@@ -42,6 +53,6 @@ export async function addRemoveStar(userId, repoId) {
 				isDeleted: true
 			}
 		});
-		return -1
+		return new Response(JSON.stringify({ status: 200, diff: -1 }));
 	}
 }

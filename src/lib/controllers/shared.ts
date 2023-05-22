@@ -1,4 +1,5 @@
 import { PrismaClient } from "@prisma/client";
+import { error } from "@sveltejs/kit";
 
 const prisma = new PrismaClient();
 
@@ -32,4 +33,26 @@ export async function getAllAIModels() {
 
 export async function getAllTags() {
 	return await prisma.tag.findMany();
+}
+
+export async function getDBUser(event) {
+	const session = await event.locals.getSession();
+
+	if (!session || !session.user) {
+		throw error(400, {
+			message: 'Not logged in'
+		});
+	}
+
+	const dbUser = await prisma.user.findUnique({
+		where: { email: session.user.email }
+	});
+
+	if (!dbUser) {
+		throw error(400, {
+			message: 'User not found'
+		});
+	}
+
+	return dbUser;
 }

@@ -2,7 +2,7 @@
 	import { page } from '$app/stores';
 	import RepoCard from '$lib/components/prompt-card.svelte';
 
-	const { myCollection } = $page.data;
+	const myCollection = $page.data;
 </script>
 
 <main>

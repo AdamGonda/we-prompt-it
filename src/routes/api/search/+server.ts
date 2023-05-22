@@ -1,12 +1,3 @@
-import { searchRepos } from '$lib/controllers/explore';
-import { json } from '@sveltejs/kit';
+import { search } from '$lib/controllers/explore';
 
-export async function GET({ url }) {
-	const query = url.searchParams.get('q');
-
-	if (query) {
-		return json(await searchRepos(query));
-	}
-
-	return json([]);
-}
+export const GET = search

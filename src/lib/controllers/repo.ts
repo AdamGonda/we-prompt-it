@@ -1,20 +1,27 @@
-import { getDBUser } from '$lib/controllers/user';
+import { getDBUser } from '$lib/controllers/shared';
 import { getAllAIModels, getAllTags, getRepoBySlug } from '$lib/controllers/shared';
 import type { RequestEvent } from '@sveltejs/kit';
 
-import { error } from '@sveltejs/kit';
+import { error, redirect } from '@sveltejs/kit';
 import { PrismaClient } from '@prisma/client';
-import type { EditForm, ForkForm } from '$lib/zod-schemas';
-import { convertToSlug } from '$lib/utils';
+import {
+	createSchema,
+	editSchema,
+	forkSchema
+} from '$lib/zod-schemas';
+import { convertToSlug, formDataToObject, zodCheck } from '$lib/utils';
 
 const prisma = new PrismaClient();
 
-export async function createRepo(event, data: EditForm) {
-	const dbUser = await getDBUser(event);
+// #region Actions
+export async function createRepo(event: RequestEvent) {
+	const user = await getDBUser(event);
 
-	if (!dbUser) {
-		throw Error('No user found');
-	}
+	const formData = formDataToObject(await event.request.formData());
+	const parseResult = createSchema.safeParse(formData);
+	const data = zodCheck(parseResult, (errors) => {
+		throw error(400, JSON.stringify(errors));
+	});
 
 	return await prisma.repo.create({
 		data: {
@@ -22,10 +29,10 @@ export async function createRepo(event, data: EditForm) {
 			name: data.name,
 			author: {
 				connect: {
-					id: dbUser.id
+					id: user.id
 				}
 			},
-			slug: convertToSlug(dbUser.username, data.name),
+			slug: convertToSlug(user.username, data.name),
 			prompts: {
 				create: {
 					content: data.content,
@@ -39,28 +46,30 @@ export async function createRepo(event, data: EditForm) {
 	});
 }
 
-export async function editRepo(event: RequestEvent, data: EditForm) {
+export async function editRepo(event: RequestEvent) {
 	const slug = event.params.slug;
 	const user = await getDBUser(event);
+
+	const formData = formDataToObject(await event.request.formData());
+	const parseResult = editSchema.safeParse(formData);
+	const data = zodCheck(parseResult, (errors) => {
+		throw error(400, JSON.stringify(errors));
+	});
 
 	const repo = await prisma.repo.findFirst({
 		where: { slug, isDeleted: false },
 		include: { prompts: true }
 	});
 
-	if (!repo) {
-		throw new Error(`No repo found with id: ${id}`);
-	}
-
-	if (repo.isDeleted) {
-		throw new Error(`Repo with id ${slug} is deleted`);
+	if (!repo || repo.isDeleted) {
+		throw error(404, { message: 'Not found' });
 	}
 
 	if (repo.authorId !== user.id) {
-		throw new Error(`User ${user.id} is not the author of repo ${id}`);
+		throw error(405, { message: 'Not allowed' });
 	}
 
-	return await prisma.repo.update({
+	const editedRepo = await prisma.repo.update({
 		where: { slug },
 		data: {
 			name: data.name,
@@ -75,9 +84,12 @@ export async function editRepo(event: RequestEvent, data: EditForm) {
 			}
 		}
 	});
+
+	throw redirect(302, `/app/prompt/${editedRepo.slug}`);
 }
 
-export async function deleteRepo(slug) {
+export async function deleteRepo(event: RequestEvent) {
+	const slug = event.params.slug;
 	const parent = await getRepoBySlug(slug);
 
 	await prisma.repo.updateMany({
@@ -91,13 +103,18 @@ export async function deleteRepo(slug) {
 	});
 }
 
-export async function forkRepo(event: RequestEvent, data: ForkForm) {
+export async function forkRepo(event: RequestEvent) {
 	const dbUser = await getDBUser(event);
-	const parentRepo = await getRepoBySlug(data.slug);
 
-	if (!dbUser || !parentRepo) {
+	if (!dbUser) {
 		throw Error('No user or parent repo found');
 	}
+
+	const formData = formDataToObject(await event.request.formData());
+	const parseResult = forkSchema.safeParse(formData);
+	const data = zodCheck(parseResult, (errors) => {
+		throw error(400, JSON.stringify(errors));
+	});
 
 	await prisma.repo.update({
 		where: {
@@ -137,8 +154,10 @@ export async function forkRepo(event: RequestEvent, data: ForkForm) {
 		}
 	});
 }
+// #endregion
 
-export async function repoLoad({ params }) {
+// #region LOADERS
+export async function loadRepo({ params }) {
 	const repo = await getRepoBySlug(params.slug);
 	const aiModels = await getAllAIModels();
 	const tags = await getAllTags();
@@ -151,3 +170,11 @@ export async function repoLoad({ params }) {
 
 	return { repo, aiModels, tags };
 }
+
+export async function loadCreateRepo() {
+	const aiModels = await getAllAIModels();
+	const tags = await getAllTags();
+
+	return { aiModels, tags };
+}
+// #endregion

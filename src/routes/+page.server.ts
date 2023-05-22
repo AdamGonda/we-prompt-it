@@ -1,6 +1,3 @@
-import { landingLoad } from "$lib/controllers/landing"
-import type { PageServerLoad } from "./explore/$types"
+import { loadLanding } from "$lib/controllers/landing"
 
-export const load: PageServerLoad = async () => {
-  return await landingLoad()
-}
+export const load = loadLanding
