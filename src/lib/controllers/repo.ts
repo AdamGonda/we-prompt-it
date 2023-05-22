@@ -67,11 +67,10 @@ export async function editRepo(event: RequestEvent) {
 		throw error(405, { message: 'Not allowed' });
 	}
 
-	const editedRepo = await prisma.repo.update({
+	return await prisma.repo.update({
 		where: { slug },
 		data: {
 			name: data.name,
-			slug: convertToSlug(user.username, data.name),
 			description: data.description,
 			prompts: {
 				create: {
@@ -82,8 +81,6 @@ export async function editRepo(event: RequestEvent) {
 			}
 		}
 	});
-
-	return editedRepo;
 }
 
 export async function deleteRepo(event: RequestEvent) {
