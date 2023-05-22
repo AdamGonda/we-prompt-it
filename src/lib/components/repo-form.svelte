@@ -2,20 +2,22 @@
 	import { enhance } from '$app/forms';
 	import { formDataToObject, zodCheck } from '$lib/utils';
 	import _ from 'lodash';
+	import Page from '../../routes/+page.svelte';
 
-  export let onSuccess = (data) => {};
-  export let onError = (error) => {};
+	export let onSuccess = (data) => {};
+	export let onError = (error) => {};
 	export let formName;
 	export let schema;
 	export let data;
+	export let type = 'create';
 
 	let form;
 	let errors = {};
 	let isTouched = {
-    name: false,
-    description: false,
-    content: false,
-  }
+		name: false,
+		description: false,
+		content: false
+	};
 
 	function isSelected(model) {
 		return model.id == data.selectedModelId;
@@ -26,12 +28,12 @@
 			if (result.error) {
 				console.log(`[FRONTEND ERROR] in ${formName} form`, result.error);
 				// TODO show some error toser
-        onError(result.error)
+				onError(result.error);
 				return;
 			}
 
 			// TODO show some success toser then navigate
-			onSuccess(result.data)
+			onSuccess(result.data);
 		};
 	}
 
@@ -47,8 +49,12 @@
 				errors[key] = errors[key].message;
 			}
 		});
+    
+    checkRepoNameUniqueness(formData)
+	}
 
-		if (formData.name) {
+	async function checkRepoNameUniqueness(formData) {
+		if (type !== 'edit' && formData.name) {
 			const r = await fetch(
 				`/api/check-repo-name-uniqueness?proposedName=${formData.name}`
 			);
@@ -58,8 +64,6 @@
 				errors.name = 'Name is not unique';
 			}
 		}
-
-    console.log('log isTouched', isTouched)
 	}
 
 	function handleTouched(event) {
@@ -84,9 +88,10 @@
 		<input
 			name="name"
 			type="text"
-			placeholder={data.placeholder.name}
+			placeholder={data.placeholder?.name}
 			on:blur={handleTouched}
 			on:input={handleTouched}
+			value={_.get(data, 'prefill.name', '')}
 		/>
 		<span>{isTouched.name && errors.name ? errors.name : ''}</span>
 	</label>
@@ -97,9 +102,10 @@
 			name="description"
 			rows="4"
 			cols="50"
-			placeholder={data.placeholder.description}
+			placeholder={data.placeholder?.description}
 			on:blur={handleTouched}
 			on:input={handleTouched}
+			value={_.get(data, 'prefill.description', '')}
 		/>
 		<span>{isTouched.description && errors.description ? errors.description : ''}</span>
 	</label>
@@ -110,9 +116,10 @@
 			name="content"
 			rows="4"
 			cols="50"
-			placeholder={data.placeholder.content}
+			placeholder={data.placeholder?.content}
 			on:blur={handleTouched}
 			on:input={handleTouched}
+			value={_.get(data, 'prefill.content', '')}
 		/>
 		<span>{isTouched.content && errors.content ? errors.content : ''}</span>
 	</label>

@@ -19,4 +19,4 @@
 </script>
 
 Create
-<RepoForm {data} formName="create-repo-form" schema={createSchema} {onSuccess} />
+<RepoForm {data} formName="create-prompt-form" schema={createSchema} {onSuccess} />
