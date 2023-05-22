@@ -7,8 +7,6 @@ import { PrismaClient } from '@prisma/client';
 import {
 	createSchema,
 	editSchema,
-	type EditForm,
-	type ForkForm,
 	forkSchema
 } from '$lib/zod-schemas';
 import { convertToSlug, formDataToObject, zodCheck } from '$lib/utils';
