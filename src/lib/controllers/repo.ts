@@ -77,14 +77,16 @@ export async function editRepo(event: RequestEvent, data: EditForm) {
 	});
 }
 
-export async function deleteRepo(id) {
+export async function deleteRepo(slug) {
+	const parent = getRepoBySlug(slug);
+
 	await prisma.repo.updateMany({
-		where: { parentId: id },
+		where: { parentId: parent.id },
 		data: { parentId: null }
 	});
 
 	await prisma.repo.update({
-		where: { id: id },
+		where: { slug },
 		data: { isDeleted: true }
 	});
 }

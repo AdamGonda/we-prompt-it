@@ -38,6 +38,6 @@ export const actions = {
 		throw redirect(302, `/app/prompt/${newRepo.slug}`);
 	},
 	delete: async ({ params }) => {
-		await deleteRepo(params.id);
+		await deleteRepo(params.slug);
 	}
 };
