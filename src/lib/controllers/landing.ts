@@ -8,7 +8,7 @@ export async function landingLoad() {
 			isDeleted: false
 		},
 		include: {
-			stars: true
+			stars: { where: { isDeleted: false } }
 		},
 		orderBy: {
 			stars: {
