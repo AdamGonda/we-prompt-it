@@ -4,13 +4,19 @@ import type { RequestEvent } from '@sveltejs/kit';
 
 import { error, redirect } from '@sveltejs/kit';
 import { PrismaClient } from '@prisma/client';
-import { createSchema, editSchema, type EditForm, type ForkForm } from '$lib/zod-schemas';
+import {
+	createSchema,
+	editSchema,
+	type EditForm,
+	type ForkForm,
+	forkSchema
+} from '$lib/zod-schemas';
 import { convertToSlug, formDataToObject, zodCheck } from '$lib/utils';
 
 const prisma = new PrismaClient();
 
 // #region Actions
-export async function createRepo(event) {
+export async function createRepo(event: RequestEvent) {
 	const user = await getDBUser(event);
 
 	const formData = formDataToObject(await event.request.formData());
@@ -58,11 +64,11 @@ export async function editRepo(event: RequestEvent) {
 	});
 
 	if (!repo || repo.isDeleted) {
-		throw error(404, { message: 'Not found' })
+		throw error(404, { message: 'Not found' });
 	}
 
 	if (repo.authorId !== user.id) {
-		throw error(405, { message: 'Not allowed' })
+		throw error(405, { message: 'Not allowed' });
 	}
 
 	const editedRepo = await prisma.repo.update({
@@ -81,10 +87,10 @@ export async function editRepo(event: RequestEvent) {
 		}
 	});
 
-	throw redirect(302, `/app/prompt/${editedRepo.slug}`)
+	throw redirect(302, `/app/prompt/${editedRepo.slug}`);
 }
 
-export async function deleteRepo(event) {
+export async function deleteRepo(event: RequestEvent) {
 	const slug = event.params.slug;
 	const parent = await getRepoBySlug(slug);
 
@@ -99,13 +105,18 @@ export async function deleteRepo(event) {
 	});
 }
 
-export async function forkRepo(event: RequestEvent, data: ForkForm) {
+export async function forkRepo(event: RequestEvent) {
 	const dbUser = await getDBUser(event);
-	const parentRepo = await getRepoBySlug(data.slug);
 
-	if (!dbUser || !parentRepo) {
+	if (!dbUser) {
 		throw Error('No user or parent repo found');
 	}
+
+	const formData = formDataToObject(await event.request.formData());
+	const parseResult = forkSchema.safeParse(formData);
+	const data = zodCheck(parseResult, (errors) => {
+		throw error(400, JSON.stringify(errors));
+	});
 
 	await prisma.repo.update({
 		where: {
@@ -147,7 +158,6 @@ export async function forkRepo(event: RequestEvent, data: ForkForm) {
 }
 // #endregion
 
-
 // #region LOADERS
 export async function loadRepo({ params }) {
 	const repo = await getRepoBySlug(params.slug);
@@ -167,8 +177,6 @@ export async function loadCreateRepo() {
 	const aiModels = await getAllAIModels();
 	const tags = await getAllTags();
 
-
 	return { aiModels, tags };
 }
 // #endregion
-
