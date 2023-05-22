@@ -50,7 +50,6 @@
 			}
 		});
 
-		// @ts-ignore
 		if(formData.name) {			
 			const r = await fetch(`/api/check-repo-name-uniqueness?proposedName=${formData.name}`)
 			const json = await r.json()
