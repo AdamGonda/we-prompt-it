@@ -2,7 +2,7 @@
 	import { enhance } from '$app/forms';
 	import { goto } from '$app/navigation';
 	import { page } from '$app/stores';
-	import RepoForm from '$lib/components/repo-form.svelte';
+	import PromptForm from '$lib/components/prompt-form.svelte';
 	import _ from 'lodash';
 
 	function handleDelete() {
@@ -16,7 +16,7 @@
 	}
 </script>
 
-<RepoForm
+<PromptForm
 	{onSuccess}
 	type="edit"
 	action={`?/edit`}

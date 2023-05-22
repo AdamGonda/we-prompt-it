@@ -22,7 +22,7 @@
 
 	onMount(() => {
 		if (type === 'fork') {
-			checkRepoNameUniqueness(formDataToObject(new FormData(form)));
+			validateForm()
 		}
 	});
 
@@ -105,7 +105,7 @@
 	bind:this={form}
 >
 	<label for="name">
-		Name
+		Name {['create', 'fork'].includes(type) ? '*' : ''}
 		<input
 			name="name"
 			type="text"
@@ -118,7 +118,7 @@
 	</label>
 
 	<label for="description">
-		Description
+		Description {type == 'create' ? '*' : ''}
 		<textarea
 			name="description"
 			rows="4"
@@ -132,7 +132,7 @@
 	</label>
 
 	<label for="content">
-		Prompt
+		Prompt {type == 'create' ? '*' : ''}
 		<textarea
 			name="content"
 			rows="4"

@@ -1,7 +1,7 @@
 <script>
 	import { goto } from '$app/navigation';
 	import { page } from '$app/stores';
-	import RepoForm from '$lib/components/repo-form.svelte';
+	import PromptForm from '$lib/components/prompt-form.svelte';
 
 	function onSuccess(data) {
 		goto(`/app/prompt/${data.slug}`);
@@ -9,7 +9,7 @@
 </script>
 
 Create
-<RepoForm
+<PromptForm
 	{onSuccess}
 	action="?/create"
 	formName="create-prompt-form"
