@@ -5,9 +5,7 @@ import type { RequestEvent } from '@sveltejs/kit';
 import { error, json, redirect } from '@sveltejs/kit';
 import { PrismaClient } from '@prisma/client';
 import {
-	createSchema,
-	editSchema,
-	forkSchema
+	repoSchema,
 } from '$lib/zod-schemas';
 import { convertToSlug, formDataToObject, zodCheck } from '$lib/utils';
 
@@ -18,7 +16,7 @@ export async function createRepo(event: RequestEvent) {
 	const user = await getDBUser(event);
 
 	const formData = formDataToObject(await event.request.formData());
-	const parseResult = createSchema.safeParse(formData);
+	const parseResult = repoSchema.safeParse(formData);
 	const data = zodCheck(parseResult, (errors) => {
 		throw error(400, JSON.stringify(errors));
 	});
@@ -51,7 +49,7 @@ export async function editRepo(event: RequestEvent) {
 	const user = await getDBUser(event);
 
 	const formData = formDataToObject(await event.request.formData());
-	const parseResult = editSchema.safeParse(formData);
+	const parseResult = repoSchema.safeParse(formData);
 	const data = zodCheck(parseResult, (errors) => {
 		throw error(400, JSON.stringify(errors));
 	});
@@ -113,7 +111,7 @@ export async function forkRepo(event: RequestEvent) {
 	const formData = formDataToObject(await event.request.formData());
 	const slug = event.params.slug;
 
-	const parseResult = forkSchema.safeParse(formData);
+	const parseResult = repoSchema.safeParse(formData);
 	const data = zodCheck(parseResult, (errors) => {
 		throw error(400, JSON.stringify(errors));
 	});

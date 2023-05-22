@@ -3,8 +3,6 @@
 	import { goto } from '$app/navigation';
 	import { page } from '$app/stores';
 	import RepoForm from '$lib/components/repo-form.svelte';
-	import { formDataToObject, zodCheck } from '$lib/utils';
-	import { editSchema } from '$lib/zod-schemas';
 	import _ from 'lodash';
 
 	function handleDelete() {
@@ -16,7 +14,6 @@
 
 <RepoForm
 	formName="edit-prompt-form"
-	schema={editSchema}
 	type="edit"
 	action={`?/edit`}
 	onSuccess={(data) => {

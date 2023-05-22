@@ -1,13 +1,13 @@
 <script>
 	import { enhance } from '$app/forms';
 	import { formDataToObject, zodCheck } from '$lib/utils';
+	import { repoSchema } from '$lib/zod-schemas';
 	import _ from 'lodash';
 	import { onMount } from 'svelte';
 
 	export let onSuccess = (data) => {};
 	export let onError = (error) => {};
 	export let formName;
-	export let schema;
 	export let data;
 	export let action;
 	export let type = 'create';
@@ -47,7 +47,7 @@
 	async function validateForm() {
 		errors = {};
 		const formData = formDataToObject(new FormData(form));
-		const parseResult = schema.safeParse(formData);
+		const parseResult = repoSchema.safeParse(formData);
 
 		zodCheck(parseResult, (_errors) => {
 			errors = _.keyBy(_errors, 'field');
