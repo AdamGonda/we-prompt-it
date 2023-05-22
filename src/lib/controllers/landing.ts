@@ -2,7 +2,7 @@ import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
-export async function landingLoad() {
+export async function loadLanding() {
 	const mostLiked = await prisma.repo.findMany({
 		where: {
 			isDeleted: false
