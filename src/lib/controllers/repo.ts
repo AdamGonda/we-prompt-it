@@ -79,7 +79,8 @@ export async function editRepo(event: RequestEvent, data: EditForm) {
 	});
 }
 
-export async function deleteRepo(slug) {
+export async function deleteRepo(event) {
+	const slug = event.params.slug;
 	const parent = await getRepoBySlug(slug);
 
 	await prisma.repo.updateMany({
