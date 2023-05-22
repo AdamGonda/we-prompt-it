@@ -36,7 +36,7 @@ export async function createRepo(event: RequestEvent) {
 			prompts: {
 				create: {
 					content: data.content,
-					aIModelId: 1
+					aiModelId: data.model
 				}
 			}
 			// tags: {
@@ -79,7 +79,7 @@ export async function editRepo(event: RequestEvent) {
 				create: {
 					version: repo.prompts.length + 1,
 					content: data.content,
-					aIModelId: data.model
+					aiModelId: data.model
 				}
 			}
 		}
@@ -145,7 +145,7 @@ export async function forkRepo(event: RequestEvent) {
 			prompts: {
 				create: {
 					content: data.content,
-					aIModelId: data.model
+					aiModelId: data.model
 				}
 			}
 			// tags: {

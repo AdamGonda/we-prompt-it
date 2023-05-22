@@ -18,7 +18,7 @@
 	};
 
 	function isSelected(model) {
-		return model.id == $page.data.repo.prompts[0].aIModelId;
+		return model.id == $page.data.repo.prompts[0].aiModelId;
 	}
 
 	function handleSubmit() {

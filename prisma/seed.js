@@ -69,12 +69,12 @@ async function main() {
 					{
 						content:
 							'How does the world react when the first note is played after decades of silence?',
-						aIModelId: aiModel1.id
+						aiModelId: aiModel1.id
 					},
 					{
 						version: 2,
 						content: 'How change1 when the first note is change 2 of silence?',
-						aIModelId: aiModel1.id
+						aiModelId: aiModel1.id
 					}
 				]
 			},
@@ -98,7 +98,7 @@ async function main() {
 				create: {
 					content:
 						'What happens when the artist reveals the first painting full of colors in a monochrome world?',
-					aIModelId: aiModel1.id
+					aiModelId: aiModel1.id
 				}
 			},
 			tags: {
@@ -121,7 +121,7 @@ async function main() {
 				create: {
 					content:
 						'What happens when the librarian deciphers the first message in the ancient language?',
-					aIModelId: aiModel2.id
+					aiModelId: aiModel2.id
 				}
 			},
 			tags: {

@@ -13,11 +13,14 @@
 		name: $page.data.repo.name,
 		description: $page.data.repo.description,
 		content: $page.data.repo.prompts[0].content,
-		models: $page.data.aiModels
+		selectedModelId: $page.data.repo.prompts[0].aiModelId,
+		allModels: $page.data.aiModels
 	};
 
+
 	function isSelected(model) {
-		return model.id == $page.data.repo.prompts[0].aiModelId;
+
+		return model.id == data.selectedModelId;
 	}
 
 	function handleDelete() {
@@ -69,7 +72,7 @@
 	<label for="model">
 		Model
 		<select name="model">
-			{#each data.models as model}
+			{#each data.allModels as model}
 				<option selected={isSelected(model)} value={model.id}>{model.name}</option>
 			{/each}
 		</select>
