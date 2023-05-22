@@ -1,4 +1,5 @@
 import { PrismaClient } from "@prisma/client";
+import { json } from "@sveltejs/kit";
 
 const prisma = new PrismaClient();
 
@@ -61,3 +62,17 @@ export async function searchRepos(query) {
 	});
 }
 
+export async function preSearchResultsNo(event) {
+	const query = event.url.searchParams.get('q');
+	const rawResults = await searchRepos(query);
+
+	if (query) {
+		if(rawResults.length === 0) {
+			json(0)
+		}
+	
+		return json(rawResults.length)
+	}
+
+	return json([]);
+}
