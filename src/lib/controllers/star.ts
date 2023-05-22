@@ -1,5 +1,5 @@
 import { PrismaClient } from "@prisma/client";
-import { getDBUser } from "./user";
+import { getDBUser } from "./shared";
 
 const prisma = new PrismaClient();
 
