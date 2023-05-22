@@ -140,7 +140,7 @@ export async function forkRepo(event: RequestEvent, data: ForkForm) {
 	});
 }
 
-export async function repoLoad({ params }) {
+export async function loadRepo({ params }) {
 	const repo = await getRepoBySlug(params.slug);
 	const aiModels = await getAllAIModels();
 	const tags = await getAllTags();
@@ -153,3 +153,13 @@ export async function repoLoad({ params }) {
 
 	return { repo, aiModels, tags };
 }
+
+export async function loadCreateRepo() {
+	const aiModels = await getAllAIModels();
+	const tags = await getAllTags();
+
+
+	return { aiModels, tags };
+}
+
+

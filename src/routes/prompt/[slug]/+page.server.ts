@@ -1,6 +1,6 @@
-import { repoLoad } from '$lib/controllers/repo.js';
+import { loadRepo } from '$lib/controllers/repo.js';
 
 export async function load(event) {
-	return await repoLoad(event);
+	return await loadRepo(event);
 }
 
