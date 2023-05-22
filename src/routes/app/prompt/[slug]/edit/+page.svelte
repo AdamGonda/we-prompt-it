@@ -5,23 +5,23 @@
 	import PromptForm from '$lib/components/prompt-form.svelte';
 	import _ from 'lodash';
 
-	function handleDelete() {
+	let confirmEditDialog;;
+	let confirmDeleteDialog;
+	let form;
+
+	function onDelete() {
 		return async () => {
 			goto(`/app/my-collection`);
 		};
 	}
 
-	function onSuccess(data) {
+	function onEditSuccess(data) {
 		goto(`/app/prompt/${data.slug}`);
 	}
-
-	let confirmEditDialog;;
-	let confirmDeleteDialog;
-	let form;
 </script>
 
 <PromptForm
-	{onSuccess}
+	onSuccess={onEditSuccess}
 	type="edit"
 	bind:form={form}
 	let:disabled
@@ -49,7 +49,7 @@
 <button on:click={() => {confirmDeleteDialog.showModal()}}>Delete</button>
 <dialog bind:this={confirmDeleteDialog}>
 	<button on:click={() => confirmDeleteDialog.close()}>Close</button>
-	<form method="POST" action="?/delete" use:enhance={handleDelete}>
+	<form method="POST" action="?/delete" use:enhance={onDelete}>
 		Danger zone
 		<input type="submit" value="Delete" />
 	</form>
