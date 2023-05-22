@@ -21,7 +21,7 @@ export async function addRemoveStar(event) {
 		}
 	});
 
-	// if not create new start
+	// if not create new star
 	if (!starInDB) {
 		await prisma.star.create({
 			data: {
