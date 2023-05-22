@@ -46,10 +46,10 @@
 <button on:click={() => showDialog()}>Delete</button>
 
 <dialog bind:this={dialog}>
+	<button on:click={() => hideDialog()}>Close</button>
 	<form method="POST" action="?/delete" use:enhance={handleDelete}>
 		Danger zone
 		<input type="submit" value="Delete" />
-		<button on:click={() => hideDialog()}>Close</button>
 	</form>
 </dialog>
 
