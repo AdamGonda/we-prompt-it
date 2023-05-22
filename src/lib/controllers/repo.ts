@@ -98,7 +98,7 @@ export async function forkRepo(event: RequestEvent, data: ForkForm) {
 
 	await prisma.repo.update({
 		where: {
-			name: data.name
+			slug: data.slug
 		},
 		data: {
 			noTimesForked: {
@@ -111,11 +111,12 @@ export async function forkRepo(event: RequestEvent, data: ForkForm) {
 		data: {
 			parentRepo: {
 				connect: {
-					id: data.id
+					slug: data.slug
 				}
 			},
 			description: data.description,
 			name: data.name,
+			slug: convertToSlug(dbUser.username, data.name),
 			author: {
 				connect: {
 					id: dbUser.id

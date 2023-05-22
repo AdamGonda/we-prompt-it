@@ -13,7 +13,8 @@
 		name: $page.data.repo.name,
 		description: $page.data.repo.description,
 		content: $page.data.repo.prompts[0].content,
-		models: $page.data.aiModels
+		models: $page.data.aiModels,
+		slug: $page.data.repo.slug
 	};
 
 	function isSelected(model) {
@@ -56,7 +57,7 @@ Fork
 	on:input={handleInput}
 	bind:this={form}
 >
-	<input name="id" type="hidden" value={data.id} />
+	<input name="slug" type="hidden" value={data.slug} />
 
 	<label for="name">
 		Name

@@ -29,7 +29,7 @@ export const actions = {
 
 		try {
 			const newRepo = await forkRepo(event, data);
-			return { id: newRepo.id };
+			return { ...newRepo };
 		} catch (error) {
 			console.log('log error', error);
 
