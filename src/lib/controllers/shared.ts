@@ -55,7 +55,7 @@ export async function getDBUser(event) {
 	});
 
 	if (!dbUser) {
-		throw error(400, {
+		throw error(404, {
 			message: 'User not found'
 		});
 	}
