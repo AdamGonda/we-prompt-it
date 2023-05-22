@@ -19,7 +19,6 @@
 
 
 	function isSelected(model) {
-
 		return model.id == data.selectedModelId;
 	}
 

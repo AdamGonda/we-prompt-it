@@ -13,6 +13,7 @@
 		description: false,
 		content: false
 	};
+	
 	let data = {
 		namePlaceholder: 'name placeholder todocopy',
 		descriptionPlaceholder: 'description placeholder todocopy',
