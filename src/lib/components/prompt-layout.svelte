@@ -3,30 +3,20 @@
 </svelte:head>
 
 <script>
-	import { browser } from '$app/environment';
-	import { goto } from '$app/navigation';
 	import { page } from '$app/stores';
-
-	const data = {
-		id: $page.data.repo.id,
-		name: $page.data.repo.name,
-		changeRequests: $page.data.repo.changeRequests,
-		stars: $page.data.repo.stars.length,
-		author: $page.data.repo.author,
-		slug: $page.data.repo.slug
-	};
 
 	const user = $page.data.session?.user;
 	const isOwner = user ? $page.data.repo.author.email === user.email : false;
-	const forkLink = user ? `/app/prompt/${data.slug}/fork` : `/login`;
+	const forkLink = user ? `/app/prompt/${$page.data.repo.slug}/fork` : `/login`;
+	let stars = $page.data.repo.stars.length
 
 	async function handleAddRemoveStar() {
-		const r = await fetch(`/api/add-remove-star?id=${data.id}`, {
+		const r = await fetch(`/api/add-remove-star?id=${$page.data.repo.id}`, {
 			method: 'POST'
 		});
 		const json = await r.json();
 		if (json.status == 200) {
-			data.stars += json.diff;
+			stars += json.diff;
 		}
 	}
 </script>
@@ -38,7 +28,7 @@
 
 	{#if user}
 		<button on:click={handleAddRemoveStar} data-testid="add-remove-star">
-			{`Stars: ${data.stars}`}
+			{`Stars: ${stars}`}
 		</button>
 	{:else}
 		<button>
@@ -48,11 +38,11 @@
 </div>
 
 <div class="location">
-	<a href={`/profile/${data.author.username}`}>
-		<span>{data.author.firstName}</span>
+	<a href={`/profile/${$page.data.repo.author.username}`}>
+		<span>{$page.data.repo.author.firstName}</span>
 	</a>
 	/
-	<span>{data.name}</span>
+	<span>{$page.data.repo.name}</span>
 </div>
 
 <ul>

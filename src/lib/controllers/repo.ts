@@ -85,7 +85,7 @@ export async function editRepo(event: RequestEvent) {
 		}
 	});
 
-	throw redirect(302, `/app/prompt/${editedRepo.slug}`);
+	return editedRepo;
 }
 
 export async function deleteRepo(event: RequestEvent) {
@@ -183,8 +183,6 @@ export async function loadCreateRepo() {
 export async function checkRepoNameUniqueness(event) {
 	const proposedName = event.url.searchParams.get('proposedName');
 	const user = await getDBUser(event);
-
-	console.log('log proposedName', proposedName)
 
 	if(!proposedName) {
 		throw error(400, {

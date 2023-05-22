@@ -9,6 +9,7 @@
 	export let formName;
 	export let schema;
 	export let data;
+  export let action;
 	export let type = 'create';
 
 	let form;
@@ -74,11 +75,25 @@
 		isTouched[event.target.name] = true;
 		validateForm();
 	}
+
+  function getDisabled(errors, isTouched){
+    const anyError = Object.keys(errors).length > 0
+    const hasUntouched = _.every(isTouched, (v) => !v)
+
+    if(type === 'edit'){
+      return anyError
+    }
+
+    return anyError || hasUntouched
+  }
+
+  $: disabled = getDisabled(errors, isTouched)
 </script>
 
 <form
 	name={formName}
 	method="POST"
+  action={action}
 	use:enhance={handleSubmit}
 	on:input={validateForm}
 	bind:this={form}
@@ -135,7 +150,7 @@
 
 	<input
 		type="submit"
-		disabled={Object.keys(errors).length > 0 || _.some(isTouched, (v) => !v)}
+		disabled={disabled}
 	/>
 </form>
 
