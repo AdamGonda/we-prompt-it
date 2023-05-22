@@ -15,6 +15,12 @@ export async function getRepoBySlug(slug) {
     },
   });
 
+	if (!repo) {
+		throw error(404, {
+			message: 'Repo not found'
+		});
+	}
+
 	repo.prompts.sort((a, b) => b.version - a.version);
 	
   return repo;
