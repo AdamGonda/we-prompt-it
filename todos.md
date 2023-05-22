@@ -4,6 +4,7 @@
 TODO fix issues with slug, username, routing changes
 TODO chekc name on create, edit, fork
 TODO on first signup ask for username
+TODO bugfix: navigation, subsequest searches on explore corrup navigation history
 
 # Product (functional)
 TODO tag selection, creation on create/edit
