@@ -2,14 +2,14 @@
 	import { enhance } from '$app/forms';
 	import { formDataToObject, zodCheck } from '$lib/utils';
 	import _ from 'lodash';
-	import Page from '../../routes/+page.svelte';
+	import { onMount } from 'svelte';
 
 	export let onSuccess = (data) => {};
 	export let onError = (error) => {};
 	export let formName;
 	export let schema;
 	export let data;
-  export let action;
+	export let action;
 	export let type = 'create';
 
 	let form;
@@ -19,6 +19,12 @@
 		description: false,
 		content: false
 	};
+
+	onMount(() => {
+		if (type === 'fork') {
+			checkRepoNameUniqueness(formDataToObject(new FormData(form)));
+		}
+	});
 
 	function isSelected(model) {
 		return model.id == data.selectedModelId;
@@ -50,8 +56,8 @@
 				errors[key] = errors[key].message;
 			}
 		});
-    
-    checkRepoNameUniqueness(formData)
+
+		checkRepoNameUniqueness(formData);
 	}
 
 	async function checkRepoNameUniqueness(formData) {
@@ -76,24 +82,25 @@
 		validateForm();
 	}
 
-  function getDisabled(errors, isTouched){
-    const anyError = Object.keys(errors).length > 0
-    const hasUntouched = _.every(isTouched, (v) => !v)
+	function getDisabled(errors, isTouched) {
+		const anyError = Object.keys(errors).length > 0;
+		const hasUntouched = _.every(isTouched, (v) => !v);
 
-    if(type === 'edit'){
-      return anyError
-    }
+		if (['edit', 'fork'].includes(type)) {
+			return anyError;
+		}
 
-    return anyError || hasUntouched
-  }
+		return anyError || hasUntouched;
+	}
 
-  $: disabled = getDisabled(errors, isTouched)
+	$: disabled = getDisabled(errors, isTouched);
+	$: console.log('log errors', errors)
 </script>
 
 <form
 	name={formName}
 	method="POST"
-  action={action}
+	{action}
 	use:enhance={handleSubmit}
 	on:input={validateForm}
 	bind:this={form}
@@ -148,10 +155,7 @@
 		</select>
 	</label>
 
-	<input
-		type="submit"
-		disabled={disabled}
-	/>
+	<input type="submit" {disabled} />
 </form>
 
 <style>

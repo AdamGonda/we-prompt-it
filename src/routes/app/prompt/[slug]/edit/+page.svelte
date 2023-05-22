@@ -20,7 +20,6 @@
 	type="edit"
 	action={`?/edit`}
 	onSuccess={(data) => {
-		console.log('log data', data)
 		goto(`/app/prompt/${data.slug}`);
 	}}
 	data={{

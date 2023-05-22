@@ -111,6 +111,8 @@ export async function forkRepo(event: RequestEvent) {
 	}
 
 	const formData = formDataToObject(await event.request.formData());
+	const slug = event.params.slug;
+
 	const parseResult = forkSchema.safeParse(formData);
 	const data = zodCheck(parseResult, (errors) => {
 		throw error(400, JSON.stringify(errors));
@@ -118,7 +120,7 @@ export async function forkRepo(event: RequestEvent) {
 
 	await prisma.repo.update({
 		where: {
-			slug: data.slug
+			slug
 		},
 		data: {
 			noTimesForked: {
@@ -131,7 +133,7 @@ export async function forkRepo(event: RequestEvent) {
 		data: {
 			parentRepo: {
 				connect: {
-					slug: data.slug
+					slug
 				}
 			},
 			description: data.description,
