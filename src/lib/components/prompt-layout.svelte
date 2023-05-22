@@ -20,10 +20,6 @@
 	const isOwner = user ? $page.data.repo.author.email === user.email : false;
 	const forkLink = user ? `/app/prompt/${data.slug}/fork` : `/login`;
 
-	if (browser && user) {
-		goto(`/app/prompt/${data.slug}`);
-	}
-
 	async function handleAddRemoveStar() {
 		const r = await fetch(`/api/add-remove-star?id=${data.id}`, {
 			method: 'POST'
