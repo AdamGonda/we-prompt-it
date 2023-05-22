@@ -2,7 +2,6 @@
 	import { page } from '$app/stores';
 	import { preSearchResultsNo, results, searchFocused } from '$lib/stores/search';
 	import { goto, afterNavigate } from '$app/navigation';
-	import { browser } from '$app/environment';
 	import { onMount } from 'svelte';
 
 	const PRESEARCH_SEARCH_DELAY = 200;
@@ -17,10 +16,6 @@
 		inputValue = $page.url.searchParams.get('q');
 	}
 
-	if (browser) {
-		window.addEventListener('popstate', handlePropstate);
-	}
-
 	onMount(() => {
 		if ($page.url.searchParams.get('q')) {
 			fetchPreSearchResultsNo($page.url.searchParams.get('q'));
@@ -28,7 +23,13 @@
 	});
 
 	afterNavigate(() => {
-		if (form && !$page.route?.id?.includes('explore')) {
+		if ($page.route?.id?.includes('explore')) {
+			let searchParams = new URLSearchParams($page.url.search);
+			let q = searchParams.get('q');
+			inputValue = q;
+
+			updateResults(q);
+		} else if (form) {
 			form.reset();
 			inputValue = '';
 		}
@@ -58,24 +59,6 @@
 		}
 	}
 
-	function handlePropstate() {
-		if (!window.location.href.includes('explore')) {
-			return;
-		}
-
-		let searchParams = new URLSearchParams(window.location.search);
-		let q = searchParams.get('q');
-		inputValue = q;
-
-		updateResults(q);
-	}
-
-	function updateUrl(query) {
-		let params = new URLSearchParams(location.search);
-		params.set('q', query as string);
-		history.pushState({}, '', `${location.pathname}?${params}`);
-	}
-
 	async function handleSubmit() {
 		const formData = new FormData(form);
 		const query = formData.get('query');
@@ -88,7 +71,7 @@
 		}
 
 		updateResults(query);
-		updateUrl(query);
+		goto(`/explore?q=${query}`);
 	}
 
 	async function handleInput(v) {
