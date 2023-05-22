@@ -4,17 +4,19 @@ import type { RequestEvent } from '@sveltejs/kit';
 
 import { error } from '@sveltejs/kit';
 import { PrismaClient } from '@prisma/client';
-import type { EditForm, ForkForm } from '$lib/zod-schemas';
-import { convertToSlug } from '$lib/utils';
+import { createSchema, type EditForm, type ForkForm } from '$lib/zod-schemas';
+import { convertToSlug, formDataToObject, zodCheck } from '$lib/utils';
 
 const prisma = new PrismaClient();
 
-export async function createRepo(event, data: EditForm) {
-	const dbUser = await getDBUser(event);
+export async function createRepo(event) {
+	const user = await getDBUser(event);
 
-	if (!dbUser) {
-		throw Error('No user found');
-	}
+	const formData = formDataToObject(await event.request.formData());
+	const parseResult = createSchema.safeParse(formData);
+	const data = zodCheck(parseResult, (errors) => {
+		throw error(400, JSON.stringify(errors));
+	});
 
 	return await prisma.repo.create({
 		data: {
@@ -22,10 +24,10 @@ export async function createRepo(event, data: EditForm) {
 			name: data.name,
 			author: {
 				connect: {
-					id: dbUser.id
+					id: user.id
 				}
 			},
-			slug: convertToSlug(dbUser.username, data.name),
+			slug: convertToSlug(user.username, data.name),
 			prompts: {
 				create: {
 					content: data.content,
