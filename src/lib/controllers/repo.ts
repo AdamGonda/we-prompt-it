@@ -172,10 +172,10 @@ export async function loadRepo({ params }) {
 }
 
 export async function loadCreateRepo() {
-	const aiModels = await getAllAIModels();
+	const allModels = await getAllAIModels();
 	const tags = await getAllTags();
 
-	return { aiModels, tags };
+	return { allModels, tags };
 }
 // #endregion
 

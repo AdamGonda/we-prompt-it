@@ -1,151 +1,22 @@
 <script>
-	import { enhance } from '$app/forms';
 	import { goto } from '$app/navigation';
 	import { page } from '$app/stores';
-	import { formDataToObject, zodCheck } from '$lib/utils';
+	import RepoForm from '$lib/components/repo-form.svelte';
 	import { createSchema } from '$lib/zod-schemas';
-	import _ from 'lodash';
-
-	let form;
-	let errors = {};
-	let isTouched = {
-		name: false,
-		description: false,
-		content: false
-	};
 
 	let data = {
-		namePlaceholder: 'name placeholder todocopy',
-		descriptionPlaceholder: 'description placeholder todocopy',
-		contentPlaceholder: 'content placeholder todocopy',
-
-		models: $page.data.aiModels
+		placeholder: {
+			name: 'name placeholder todocopy',
+			description: 'description placeholder todocopy',
+			content: 'content placeholder todocopy'
+		},
+		allModels: $page.data.allModels
 	};
 
-	function handleSubmit() {
-		return async ({ result, update }) => {
-			if (result.error) {
-				console.log('[FRONTEND ERROR] create', result.error);
-				// TODO show some error toser
-				return;
-			}
-
-			// TODO show some success toser then navigate
-			goto(`/app/prompt/${result.data.slug}`);
-		};
-	}
-
-	
-
-	async function validateForm() {
-		errors = {};
-		const formData = formDataToObject(new FormData(form));
-		const parseResult = createSchema.safeParse(formData);
-
-		zodCheck(parseResult, (_errors) => {
-			errors = _.keyBy(_errors, 'field');
-
-			for (let key in errors) {
-				errors[key] = errors[key].message;
-			}
-		});
-
-		if(formData.name) {			
-			const r = await fetch(`/api/check-repo-name-uniqueness?proposedName=${formData.name}`)
-			const json = await r.json()
-			
-			if(!json.isUnique) {
-				errors.name = 'Name is not unique'
-			}
-		}	
-	}
-
-	function handleTouched(event) {
-		if(isTouched[event.target.name]){
-			return
-		}
-
-		isTouched[event.target.name] = true;
-		validateForm();
+	function onSuccess(data) {
+		goto(`/app/prompt/${data.slug}`);
 	}
 </script>
 
 Create
-<form
-	name="create-prompt-form"
-	method="POST"
-	use:enhance={handleSubmit}
-	on:input={validateForm}
-	bind:this={form}
->
-	<label for="name">
-		Name
-		<input
-			name="name"
-			type="text"
-			placeholder={data.namePlaceholder}
-			on:blur={handleTouched}
-			on:input={handleTouched}
-		/>
-		<span>{isTouched.name && errors.name ? errors.name : ''}</span>
-	</label>
-
-	<label for="description">
-		Description
-		<textarea
-			name="description"
-			rows="4"
-			cols="50"
-			placeholder={data.descriptionPlaceholder}
-			on:blur={handleTouched}
-			on:input={handleTouched}
-		/>
-		<span>{isTouched.description && errors.description ? errors.description : ''}</span>
-	</label>
-
-	<label for="content">
-		Prompt
-		<textarea
-			name="content"
-			rows="4"
-			cols="50"
-			placeholder={data.contentPlaceholder}
-			on:blur={handleTouched}
-			on:input={handleTouched}
-		/>
-		<span>{isTouched.content && errors.content ? errors.content : ''}</span>
-	</label>
-
-	<label for="model">
-		Model
-		<select name="model">
-			{#each data.models as model}
-				<option value={model.id}>{model.name}</option>
-			{/each}
-		</select>
-	</label>
-
-	<input
-		type="submit"
-		disabled={Object.keys(errors).length > 0 || _.some(isTouched, (v) => !v)}
-	/>
-</form>
-
-<style>
-	form {
-		display: flex;
-		flex-direction: column;
-		align-items: start;
-		gap: 8px;
-	}
-
-	label {
-		display: flex;
-		flex-direction: column;
-		gap: 4px;
-	}
-	span {
-		font-size: 1rem;
-		color: red;
-	}
-</style>
+<RepoForm {data} formName="create-repo-form" schema={createSchema} {onSuccess} />
