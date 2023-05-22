@@ -2,7 +2,7 @@ import { getDBUser } from '$lib/controllers/shared';
 import { getAllAIModels, getAllTags, getRepoBySlug } from '$lib/controllers/shared';
 import type { RequestEvent } from '@sveltejs/kit';
 
-import { error, redirect } from '@sveltejs/kit';
+import { error, json, redirect } from '@sveltejs/kit';
 import { PrismaClient } from '@prisma/client';
 import {
 	createSchema,
@@ -180,3 +180,29 @@ export async function loadCreateRepo() {
 // #endregion
 
 // #region API
+export async function checkRepoNameUniqueness(event) {
+	const proposedName = event.url.searchParams.get('proposedName');
+	const user = await getDBUser(event);
+
+	console.log('log proposedName', proposedName)
+
+	if(!proposedName) {
+		throw error(400, {
+			message: `Missing parameter proposedName`
+		});
+	}
+
+	const existingRepo = await prisma.repo.findFirst({
+		where: {
+			slug: convertToSlug(user.username, proposedName),
+			authorId: user.id
+		}
+	});
+
+	if(existingRepo) {
+		return json({isUnique: false})
+	}
+
+	return json({isUnique: true})
+}
+// #endregion

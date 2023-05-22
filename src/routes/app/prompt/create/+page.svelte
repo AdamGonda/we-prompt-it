@@ -13,7 +13,7 @@
 		description: false,
 		content: false
 	};
-	
+
 	let data = {
 		namePlaceholder: 'name placeholder todocopy',
 		descriptionPlaceholder: 'description placeholder todocopy',
@@ -35,7 +35,9 @@
 		};
 	}
 
-	function validateForm() {
+	
+
+	async function validateForm() {
 		errors = {};
 		const formData = formDataToObject(new FormData(form));
 		const parseResult = createSchema.safeParse(formData);
@@ -47,9 +49,23 @@
 				errors[key] = errors[key].message;
 			}
 		});
+
+		// @ts-ignore
+		if(formData.name) {			
+			const r = await fetch(`/api/check-repo-name-uniqueness?proposedName=${formData.name}`)
+			const json = await r.json()
+			
+			if(!json.isUnique) {
+				errors.name = 'Name is not unique'
+			}
+		}	
 	}
 
 	function handleTouched(event) {
+		if(isTouched[event.target.name]){
+			return
+		}
+
 		isTouched[event.target.name] = true;
 		validateForm();
 	}
