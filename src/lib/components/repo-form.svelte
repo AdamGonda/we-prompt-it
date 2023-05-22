@@ -94,7 +94,6 @@
 	}
 
 	$: disabled = getDisabled(errors, isTouched);
-	$: console.log('log errors', errors)
 </script>
 
 <form
