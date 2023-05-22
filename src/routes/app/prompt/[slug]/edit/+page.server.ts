@@ -22,14 +22,20 @@ export const actions = {
 			throw error(400, JSON.stringify(errors));
 		});
 
+		let newRepo = null;
+
 		try {
-			await editRepo(event, data);
+			newRepo = await editRepo(event, data);
 		} catch (error) {
 			console.log('log error', error);
 			throw redirect(302, `/`);
 		}
 
-		throw redirect(302, `/app/prompt/${event.params.slug}`);
+		if(!newRepo){
+			throw redirect(302, `/`);
+		}
+
+		throw redirect(302, `/app/prompt/${newRepo.slug}`);
 	},
 	delete: async ({ params }) => {
 		await deleteRepo(params.id);

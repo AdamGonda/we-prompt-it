@@ -60,10 +60,11 @@ export async function editRepo(event: RequestEvent, data: EditForm) {
 		throw new Error(`User ${user.id} is not the author of repo ${id}`);
 	}
 
-	await prisma.repo.update({
+	return await prisma.repo.update({
 		where: { slug },
 		data: {
 			name: data.name,
+			slug: convertToSlug(user.username, data.name),
 			description: data.description,
 			prompts: {
 				create: {
