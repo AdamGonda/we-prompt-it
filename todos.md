@@ -1,7 +1,6 @@
 # Current value: HUF 550k+
 
 # Tech
-TODO chekc name on create, edit, fork
 TODO on first signup ask for username
 
 # Product (functional)
@@ -17,8 +16,6 @@ TODO add a button to copy the prompt to clipboard
 TODO loading indicators
 
 # Tech
-TODO unify exeption & error handling, levels, where they check what and where they thrown and caught
-TODO fix not found errors, for load functions for sure
 TODO 500 page
 TODO 404 page
 TODO db env vars for prod with vercel
