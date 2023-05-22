@@ -6,7 +6,6 @@ TODO on first signup ask for username
 # Product (functional)
 TODO tag selection, creation on create/edit
 TODO model selection, creatinon on create/edit
-TODO add popup dialog to delete / edit prompt flow
 TODO explore page filtering
 TODO explore page sorting
 TODO landing page

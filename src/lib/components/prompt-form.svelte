@@ -11,8 +11,9 @@
 	export let data;
 	export let action;
 	export let type = 'create';
+	export let form = null;
 
-	let form;
+	let _form;
 	let errors = {};
 	let isTouched = {
 		name: false,
@@ -20,9 +21,12 @@
 		content: false
 	};
 
+	$: disabled = getDisabled(errors, isTouched);
+	$: form = _form;
+
 	onMount(() => {
 		if (type === 'fork') {
-			validateForm()
+			validateForm();
 		}
 	});
 
@@ -46,7 +50,7 @@
 
 	async function validateForm() {
 		errors = {};
-		const formData = formDataToObject(new FormData(form));
+		const formData = formDataToObject(new FormData(_form));
 		const parseResult = repoSchema.safeParse(formData);
 
 		zodCheck(parseResult, (_errors) => {
@@ -92,8 +96,6 @@
 
 		return anyError || hasUntouched;
 	}
-
-	$: disabled = getDisabled(errors, isTouched);
 </script>
 
 <form
@@ -102,7 +104,7 @@
 	{action}
 	use:enhance={handleSubmit}
 	on:input={validateForm}
-	bind:this={form}
+	bind:this={_form}
 >
 	<label for="name">
 		Name {['create', 'fork'].includes(type) ? '*' : ''}
@@ -154,7 +156,9 @@
 		</select>
 	</label>
 
-	<input type="submit" {disabled} />
+	<slot {disabled}>
+		<input type="submit" {disabled} />
+	</slot>
 </form>
 
 <style>
