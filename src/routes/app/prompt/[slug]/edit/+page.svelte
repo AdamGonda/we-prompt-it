@@ -14,6 +14,17 @@
 	function onSuccess(data) {
 		goto(`/app/prompt/${data.slug}`);
 	}
+
+	let showDeleteDialog = false;
+	let dialog
+
+	function showDialog() {
+		dialog.showModal()
+	}
+
+	function hideDialog() {
+		dialog.close()
+	}
 </script>
 
 <PromptForm
@@ -32,10 +43,15 @@
 	}}
 />
 
-<form method="POST" action="?/delete" use:enhance={handleDelete}>
-	Danger zone
-	<input type="submit" value="Delete" />
-</form>
+<button on:click={() => showDialog()}>Delete</button>
+
+<dialog bind:this={dialog}>
+	<form method="POST" action="?/delete" use:enhance={handleDelete}>
+		Danger zone
+		<input type="submit" value="Delete" />
+		<button on:click={() => hideDialog()}>Close</button>
+	</form>
+</dialog>
 
 <style>
 </style>
