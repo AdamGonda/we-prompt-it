@@ -39,7 +39,7 @@
 				return;
 			}
 
-			// TODO show some success toser then navigate
+			// TODO show some success toser
 			onSuccess(result.data);
 		};
 	}
