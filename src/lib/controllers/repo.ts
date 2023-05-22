@@ -9,6 +9,7 @@ import { convertToSlug, formDataToObject, zodCheck } from '$lib/utils';
 
 const prisma = new PrismaClient();
 
+// #region Actions
 export async function createRepo(event) {
 	const user = await getDBUser(event);
 
@@ -140,7 +141,10 @@ export async function forkRepo(event: RequestEvent, data: ForkForm) {
 		}
 	});
 }
+// #endregion
 
+
+// #region LOADERS
 export async function loadRepo({ params }) {
 	const repo = await getRepoBySlug(params.slug);
 	const aiModels = await getAllAIModels();
@@ -162,5 +166,5 @@ export async function loadCreateRepo() {
 
 	return { aiModels, tags };
 }
-
+// #endregion
 
