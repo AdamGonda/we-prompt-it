@@ -4,6 +4,7 @@ import { getAllRepos } from "./shared";
 
 const prisma = new PrismaClient();
 
+// #region API
 export async function preSearchResultsNo(event) {
 	const query = event.url.searchParams.get('q');
 	const rawResults = await _search(query);
@@ -28,7 +29,9 @@ export async function search(event) {
 
 	return json([]);
 }
+// #endregion
 
+// #region LOADERS
 export async function loadExplore(event) {
 	const query = event.url.searchParams.get('q');
 
@@ -38,6 +41,7 @@ export async function loadExplore(event) {
 
 	return { initialLoadResults: await getAllRepos() };
 }
+// #endregion
 
 // #region PRIVATE 
 async function _search(query) {
