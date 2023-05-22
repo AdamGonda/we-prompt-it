@@ -3,9 +3,7 @@ import { formDataToObject, zodCheck } from '$lib/utils';
 import { editSchema } from '$lib/zod-schemas.js';
 import { error, redirect, type RequestEvent } from '@sveltejs/kit';
 
-export async function load(event) {
-	return await loadRepo(event);
-}
+export const load = loadRepo
 
 export const actions = {
 	edit: async (event: RequestEvent) => {
