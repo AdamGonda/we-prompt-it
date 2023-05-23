@@ -46,13 +46,19 @@ async function main() {
 
 	const tag1 = await prisma.tag.create({
 		data: {
-			name: 'education [key]'
+			name: 'education'
 		}
 	});
 
 	const tag2 = await prisma.tag.create({
 		data: {
 			name: 'OpenAI'
+		}
+	});
+
+	const tag3 = await prisma.tag.create({
+		data: {
+			name: 'Midjuarny'
 		}
 	});
 
@@ -81,7 +87,7 @@ async function main() {
 				]
 			},
 			tags: {
-				connect: [{ id: tag1.id }]
+				connect: [{ id: tag1.id }, { id: tag3.id}]
 			},
 			stars: {
 				create: [{ userId: testUser1.id }, { userId: testUser2.id }]

@@ -64,7 +64,7 @@ export async function getDBUser(event) {
 
 export async function getAiModel(data) {
 	if (data.model != -1) {
-		return data.model
+		return data.model;
 	}
 
 	const whithSameName = await prisma.aiModel.findFirst({
@@ -84,5 +84,42 @@ export async function getAiModel(data) {
 		}
 	});
 
-	return newModel.id
+	return newModel.id;
+}
+
+export async function getTagIds(data) {
+	if (data.tags == '') {
+		return;
+	}
+
+	const tags = data.tags.split(', ');
+
+	if (tags.lenght > 5) {
+		throw error(400, {
+			message: 'Too many tags'
+		});
+	}
+
+	// check for existing tags by name
+	// if they exist, use the existing tag id
+	// if they don't exist, create them and use the new tag id
+	const tagIdPromises = tags.map(async (tag) => {
+		const existingTag = await prisma.tag.findFirst({
+			where: { name: tag }
+		});
+
+		if (existingTag) {
+			return existingTag.id;
+		}
+
+		const newTag = await prisma.tag.create({
+			data: {
+				name: tag
+			}
+		});
+
+		return newTag.id;
+	});
+
+	return await Promise.all(tagIdPromises);
 }

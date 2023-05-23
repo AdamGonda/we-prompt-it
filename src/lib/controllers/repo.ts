@@ -1,4 +1,4 @@
-import { getAiModel, getDBUser } from '$lib/controllers/shared';
+import { getAiModel, getDBUser, getTagIds } from '$lib/controllers/shared';
 import { getAllAIModels, getAllTags, getRepoBySlug } from '$lib/controllers/shared';
 import type { RequestEvent } from '@sveltejs/kit';
 
@@ -42,12 +42,11 @@ export async function editRepo(event: RequestEvent) {
 	const user = await getDBUser(event);
 	const data = await validateForm(event);
 	const aiModelId = await getAiModel(data)
-
-	console.log('log data', data)
-
+	const tagsIds = await getTagIds(data)
+	
 	const repoToEdit = await prisma.repo.findFirst({
 		where: { slug, isDeleted: false },
-		include: { prompts: true }
+		include: { prompts: true, tags: true }
 	});
 
 	if (!repoToEdit || repoToEdit.isDeleted) {
@@ -60,21 +59,27 @@ export async function editRepo(event: RequestEvent) {
 
 	const updateSlug = repoToEdit.name !== data.name;
 
+	console.log('log repoToEdit.tags', repoToEdit.tags)
+
 	return await prisma.repo.update({
 		where: { slug },
 		data: {
 			name: data.name,
 			slug: updateSlug ? convertToSlug(user.username, data.name) : repoToEdit.slug,
 			description: data.description,
+			tags: {
+				connect: tagsIds.map((tagId) => ({ id: tagId })),
+			},
 			prompts: {
 				create: {
 					version: repoToEdit.prompts.length + 1,
 					content: data.content,
-					aiModelId
-				}
-			}
-		}
+					aiModelId,
+				},
+			},
+		},
 	});
+	
 }
 
 export async function forkRepo(event: RequestEvent) {
