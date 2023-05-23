@@ -26,7 +26,6 @@
 
 	$: disabled = getDisabled(errors, isTouched);
 	$: form = _form;
-	$: console.log('log errors', errors)
 
 	onMount(() => {
 		if (type === 'fork') {
