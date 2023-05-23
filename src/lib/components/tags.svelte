@@ -3,7 +3,7 @@
 	let _tags = [];
 	let input = '';
 	let selectsFromSuggested = false;
-	let selectedIdx = 0;
+	let selectedIdx = -1;
 	$: tags = _tags.join(', ');
 	$: matches = existingTags
 		.filter((tag) => input && tag.includes(input))
@@ -50,6 +50,11 @@
 				return;
 			}
 
+			if(selectedIdx === -1){
+				selectedIdx = matches.length - 1;
+				return;
+			}
+
 			selectedIdx = Math.max(selectedIdx - 1, 0);
 		} else if (event.key === 'ArrowDown') {
 			if (selectedIdx === matches.length - 1) {
@@ -88,7 +93,10 @@
 		<ul class="matches">
 			{#each matches as match, idx}
 				<!-- svelte-ignore a11y-click-events-have-key-events -->
-				<li class:selected={selectedIdx == idx} on:click={selectSuggested}>
+				<li
+					class:selected={selectedIdx == idx}
+					on:click={selectSuggested}
+				>
 					{@html match}
 				</li>
 			{/each}
