@@ -74,21 +74,6 @@ export async function editRepo(event: RequestEvent) {
 	});
 }
 
-export async function deleteRepo(event: RequestEvent) {
-	const slug = event.params.slug;
-	const parent = await getRepoBySlug(slug);
-
-	await prisma.repo.updateMany({
-		where: { parentId: parent.id },
-		data: { parentId: null }
-	});
-
-	await prisma.repo.update({
-		where: { slug },
-		data: { isDeleted: true }
-	});
-}
-
 export async function forkRepo(event: RequestEvent) {
 	const dbUser = await getDBUser(event);
 	const slug = event.params.slug;
@@ -135,6 +120,21 @@ export async function forkRepo(event: RequestEvent) {
 			// 	connect: [{ id: tag1.id }]
 			// },
 		}
+	});
+}
+
+export async function deleteRepo(event: RequestEvent) {
+	const slug = event.params.slug;
+	const parent = await getRepoBySlug(slug);
+
+	await prisma.repo.updateMany({
+		where: { parentId: parent.id },
+		data: { parentId: null }
+	});
+
+	await prisma.repo.update({
+		where: { slug },
+		data: { isDeleted: true }
 	});
 }
 // #endregion
