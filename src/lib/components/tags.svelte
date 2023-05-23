@@ -9,25 +9,47 @@
 		.filter((tag) => input && tag.includes(input))
 		.map((tag) => tag.replace(input, `<b>${input}</b>`));
 
+	function validateNewTag(tag) {
+		// Check length
+		const isTooShort = tag.length < 3;
+		const isAlreadyAdded = _tags.includes(tag);
+		
+		if (isTooShort) {
+			input = '';
+			// TODO: toaster - tag too short
+			return;
+		}
+
+		// Check if not already in tags
+		if (isAlreadyAdded) {
+			input = '';
+			// TODO: toaster - tag already added
+			return;
+		}
+
+		// it can be just one word
+		if (tag.includes(' ')) {
+			input = '';
+			// TODO: toaster - it can be just one word
+			return;
+		}
+
+		return true;
+	}
+
 	function cleanTag(tag) {
 		return tag.replace(/<b>|<\/b>/g, '');
 	}
 
 	function addTag(tag) {
 		const clean = cleanTag(tag);
-		// not add if already in tags
-		if (_tags.includes(clean)) {
-			input = '';
-			// TODO toster: tag already in added
-			return;
-		}
 
-		if (clean !== '') {
+		if (validateNewTag(clean)) {
 			_tags = [..._tags, clean];
 			input = '';
 		}
 
-		resetStates()
+		resetStates();
 	}
 
 	function removeTag(index) {
@@ -39,8 +61,8 @@
 			selectsFromSuggested = true;
 		}
 
-		if(input === ''){
-			return
+		if (input === '') {
+			return;
 		}
 
 		if (event.key === 'Enter') {
@@ -56,7 +78,7 @@
 				return;
 			}
 
-			if(selectedIdx === -1){
+			if (selectedIdx === -1) {
 				selectedIdx = matches.length - 1;
 				return;
 			}
@@ -79,7 +101,7 @@
 	}
 
 	function resetStates() {
-		selectedIdx = -1
+		selectedIdx = -1;
 		selectsFromSuggested = false;
 	}
 </script>
@@ -105,10 +127,7 @@
 		<ul class="matches">
 			{#each matches as match, idx}
 				<!-- svelte-ignore a11y-click-events-have-key-events -->
-				<li
-					class:selected={selectedIdx == idx}
-					on:click={selectSuggested}
-				>
+				<li class:selected={selectedIdx == idx} on:click={selectSuggested}>
 					{@html match}
 				</li>
 			{/each}

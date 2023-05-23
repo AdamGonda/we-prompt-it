@@ -43,6 +43,8 @@ export async function editRepo(event: RequestEvent) {
 	const data = await validateForm(event);
 	const aiModelId = await getAiModel(data)
 
+	console.log('log data', data)
+
 	const repoToEdit = await prisma.repo.findFirst({
 		where: { slug, isDeleted: false },
 		include: { prompts: true }
