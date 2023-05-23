@@ -115,6 +115,11 @@
 			on:blur={handleTouched}
 			on:input={handleTouched}
 			value={_.get(data, 'prefill.name', '')}
+			on:keypress={(e) => {
+				if ($$slots.default && e.key === 'Enter') {
+					e.preventDefault();
+				}
+			}}
 		/>
 		<span>{isTouched.name && errors.name ? errors.name : ''}</span>
 	</label>
