@@ -4,6 +4,7 @@
 	import { repoSchema } from '$lib/yup-schemas';
 	import _ from 'lodash';
 	import { onMount } from 'svelte';
+	import Tags from './tags.svelte';
 
 	export let onSuccess = (data) => {};
 	export let onError = (error) => {};
@@ -47,6 +48,8 @@
 				errors[err.path] = err.errors[0];
 			});
 		}
+
+		console.log('log errors', errors)
 		checkRepoNameUniqueness(formData);
 	}
 
@@ -88,7 +91,7 @@
 		};
 	}
 
-	function handleTouched(event) {
+	function handleFieldChange(event) {
 		if (isTouched[event.target.name]) {
 			return;
 		}
@@ -120,8 +123,8 @@
 			name="name"
 			type="text"
 			placeholder={data.placeholder?.name}
-			on:blur={handleTouched}
-			on:input={handleTouched}
+			on:blur={handleFieldChange}
+			on:input={handleFieldChange}
 			value={_.get(data, 'prefill.name', '')}
 			on:keypress={(e) => {
 				if ($$slots.default && e.key === 'Enter') {
@@ -139,8 +142,8 @@
 			rows="4"
 			cols="50"
 			placeholder={data.placeholder?.description}
-			on:blur={handleTouched}
-			on:input={handleTouched}
+			on:blur={handleFieldChange}
+			on:input={handleFieldChange}
 			value={_.get(data, 'prefill.description', '')}
 		/>
 		<span>{isTouched.description && errors.description ? errors.description : ''}</span>
@@ -153,8 +156,8 @@
 			rows="4"
 			cols="50"
 			placeholder={data.placeholder?.content}
-			on:blur={handleTouched}
-			on:input={handleTouched}
+			on:blur={handleFieldChange}
+			on:input={handleFieldChange}
 			value={_.get(data, 'prefill.content', '')}
 		/>
 		<span>{isTouched.content && errors.content ? errors.content : ''}</span>
@@ -170,6 +173,11 @@
 		</select>
 	</label>
 
+	<label for="tags">
+		Tags
+		<Tags />
+	</label>
+
 	{#if showAddNewModel}
 		<div>
 			<label for="newModelName">
@@ -178,8 +186,8 @@
 					type="text"
 					name="newModelName"
 					placeholder="Name"
-					on:blur={handleTouched}
-					on:input={handleTouched}
+					on:blur={handleFieldChange}
+					on:input={handleFieldChange}
 				/>
 				<span
 					>{isTouched.newModelName && errors.newModelName
@@ -193,8 +201,8 @@
 					type="text"
 					name="newModelLink"
 					placeholder="Link"
-					on:blur={handleTouched}
-					on:input={handleTouched}
+					on:blur={handleFieldChange}
+					on:input={handleFieldChange}
 				/>
 				<span
 					>{isTouched.newModelLink && errors.newModelLink
