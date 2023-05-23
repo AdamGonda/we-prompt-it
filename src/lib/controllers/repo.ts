@@ -4,7 +4,7 @@ import type { RequestEvent } from '@sveltejs/kit';
 
 import { error, json, redirect } from '@sveltejs/kit';
 import { PrismaClient } from '@prisma/client';
-import { repoSchema } from '$lib/zod-schemas';
+import { repoSchema } from '$lib/yup-schemas';
 import { convertToSlug, formDataToObject, zodCheck } from '$lib/utils';
 
 const prisma = new PrismaClient();
@@ -14,10 +14,11 @@ export async function createRepo(event: RequestEvent) {
 	const user = await getDBUser(event);
 
 	const formData = formDataToObject(await event.request.formData());
-	const parseResult = repoSchema.safeParse(formData);
-	const data = zodCheck(parseResult, (errors) => {
-		throw error(400, JSON.stringify(errors));
-	});
+	const data = formData
+	//const parseResult = repoSchema.safeParse(formData);
+	// const data = //zodCheck(parseResult, (errors) => {
+	// 	throw error(400, JSON.stringify(errors));
+	// });
 
 	return await prisma.repo.create({
 		data: {

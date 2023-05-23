@@ -1,7 +1,7 @@
 <script>
 	import { enhance } from '$app/forms';
 	import { formDataToObject, zodCheck } from '$lib/utils';
-	import { repoSchema } from '$lib/zod-schemas';
+	import { repoSchema } from '$lib/yup-schemas';
 	import _ from 'lodash';
 	import { onMount } from 'svelte';
 
@@ -15,6 +15,7 @@
 
 	let _form;
 	let errors = {};
+	let showAddNewModel = false;
 	let isTouched = {
 		name: false,
 		description: false,
@@ -37,15 +38,15 @@
 	async function validateForm() {
 		errors = {};
 		const formData = formDataToObject(new FormData(_form));
-		const parseResult = repoSchema.safeParse(formData);
+		try {
+			repoSchema.validateSync(formData, { abortEarly: false });
+		} catch (error) {
+			error.inner.forEach((err) => {
+				errors[err.path] = err.errors[0];
+			});
+		}
 
-		zodCheck(parseResult, (_errors) => {
-			errors = _.keyBy(_errors, 'field');
-
-			for (let key in errors) {
-				errors[key] = errors[key].message;
-			}
-		});
+		console.log('log errors', errors);
 
 		checkRepoNameUniqueness(formData);
 	}
@@ -97,8 +98,12 @@
 		validateForm();
 	}
 
-	function handleModelChange(event) {
-		console.log('log',event.target.value)
+	function handleAddNewModel(event) {
+		if (event.target.value == '-1') {
+			showAddNewModel = true;
+		} else {
+			showAddNewModel = false;
+		}
 	}
 </script>
 
@@ -158,13 +163,24 @@
 
 	<label for="model">
 		Model
-		<select name="model" on:change={handleModelChange}>
+		<select name="model" on:change={handleAddNewModel} on:focus={handleAddNewModel}>
 			{#each data.allModels as model}
 				<option selected={isSelected(model)} value={model.id}>{model.name}</option>
 			{/each}
-			<option value="new">Create new</option>
+			<option value="-1">Add new model</option>
 		</select>
 	</label>
+
+	{#if showAddNewModel}
+		<div>
+			<label for="new-model-name">
+				<input type="text" name="new-model-name" placeholder="Name" />
+			</label>
+			<label for="new-model-link">
+				<input type="text" name="new-model-link" placeholder="Link" />
+			</label>
+		</div>
+	{/if}
 
 	<slot {disabled}>
 		<input type="submit" {disabled} />
