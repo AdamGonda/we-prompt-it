@@ -49,7 +49,8 @@
 			});
 		}
 
-		console.log('log tags', formData.tags)
+		console.log('log errors', errors)
+		console.log('log formData.tags', formData.tags)
 		checkRepoNameUniqueness(formData);
 	}
 

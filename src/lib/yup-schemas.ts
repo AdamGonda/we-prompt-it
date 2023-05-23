@@ -1,4 +1,4 @@
-import { object, string, number, type InferType } from 'yup';
+import { object, string, number, type InferType, array } from 'yup';
 
 export const repoSchema = object().shape({
 	name: string()
@@ -12,7 +12,7 @@ export const repoSchema = object().shape({
 		.required('Content is required')
 		.min(10, 'Must be 10 or more characters long'),
 	model: number().required('Model is required'),
-	tags: string().optional(),
+	tags: array().of(string()).strict().optional(),
 	newModelName: string().when('model', {
 		is: (value) => value === -1,
 		then: (schema) =>
