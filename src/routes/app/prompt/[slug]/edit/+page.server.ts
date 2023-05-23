@@ -1,6 +1,6 @@
-import { deleteRepo, editRepo, loadRepo } from '$lib/controllers/repo';
+import { deleteRepo, editRepo, loadEdit } from '$lib/controllers/repo';
 
-export const load = loadRepo
+export const load = loadEdit
 
 export const actions = {
 	edit: editRepo,

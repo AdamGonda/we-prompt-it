@@ -1,5 +1,5 @@
 <script>
-	export let existingTags = ['hello', 'world', 'svelte', 'sveltekit'];
+	export let existingTags = [];
 	let _tags = [];
 	let input = '';
 	let selectsFromSuggested = false;

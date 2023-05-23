@@ -155,6 +155,20 @@ export async function loadRepo({ params }) {
 	return { repo, aiModels, tags };
 }
 
+export async function loadEdit({ params }) {
+	const repo = await getRepoBySlug(params.slug);
+	const aiModels = await getAllAIModels();
+	const tags = await getAllTags();
+
+	if (!repo) {
+		throw error(404, {
+			message: 'Not found'
+		});
+	}
+
+	return { repo, aiModels, tags: tags.map(tag => tag.name) };
+}
+
 export async function loadCreateRepo() {
 	const allModels = await getAllAIModels();
 	const tags = await getAllTags();

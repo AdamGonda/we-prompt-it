@@ -175,7 +175,7 @@
 
 	<label for="tags">
 		Tags
-		<Tags />
+		<Tags existingTags={data.allTags} />
 	</label>
 
 	{#if showAddNewModel}
