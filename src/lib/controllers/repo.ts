@@ -11,8 +11,17 @@ const prisma = new PrismaClient();
 // #region ACTIONS
 export async function createRepo(event: RequestEvent) {
 	const user = await getDBUser(event);
-
 	const data = await validateForm(event);
+
+	let newModel = null;
+	if (data.model === -1) {
+		newModel = await prisma.aiModel.create({
+			data: {
+				name: data.newModelName,
+				link: data.newModelLink
+			}
+		});
+	}
 
 	return await prisma.repo.create({
 		data: {
@@ -27,7 +36,7 @@ export async function createRepo(event: RequestEvent) {
 			prompts: {
 				create: {
 					content: data.content,
-					aiModelId: data.model
+					aiModelId: newModel ? newModel.id : data.model
 				}
 			}
 			// tags: {

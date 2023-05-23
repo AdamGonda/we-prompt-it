@@ -38,19 +38,20 @@ CREATE TABLE "Prompt" (
     "isDeleted" BOOLEAN NOT NULL DEFAULT false,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
-    "aIModelId" INTEGER,
+    "aiModelId" INTEGER,
     "repoId" INTEGER NOT NULL,
 
     CONSTRAINT "Prompt_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
-CREATE TABLE "AIModel" (
+CREATE TABLE "AiModel" (
     "id" SERIAL NOT NULL,
     "name" TEXT NOT NULL,
+    "link" TEXT NOT NULL,
     "isDeleted" BOOLEAN NOT NULL DEFAULT false,
 
-    CONSTRAINT "AIModel_pkey" PRIMARY KEY ("id")
+    CONSTRAINT "AiModel_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
@@ -150,7 +151,7 @@ ALTER TABLE "Repo" ADD CONSTRAINT "Repo_authorId_fkey" FOREIGN KEY ("authorId") 
 ALTER TABLE "Repo" ADD CONSTRAINT "Repo_parentId_fkey" FOREIGN KEY ("parentId") REFERENCES "Repo"("id") ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "Prompt" ADD CONSTRAINT "Prompt_aIModelId_fkey" FOREIGN KEY ("aIModelId") REFERENCES "AIModel"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+ALTER TABLE "Prompt" ADD CONSTRAINT "Prompt_aiModelId_fkey" FOREIGN KEY ("aiModelId") REFERENCES "AiModel"("id") ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "Prompt" ADD CONSTRAINT "Prompt_repoId_fkey" FOREIGN KEY ("repoId") REFERENCES "Repo"("id") ON DELETE RESTRICT ON UPDATE CASCADE;

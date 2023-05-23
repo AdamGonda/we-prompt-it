@@ -30,15 +30,17 @@ async function main() {
 		}
 	});
 
-	const aiModel1 = await prisma.aIModel.create({
+	const aiModel1 = await prisma.aiModel.create({
 		data: {
-			name: 'GPT-4'
+			name: 'GPT-4',
+			link: 'https://chat.openai.com/'
 		}
 	});
 
-	const aiModel2 = await prisma.aIModel.create({
+	const aiModel2 = await prisma.aiModel.create({
 		data: {
-			name: 'GPT-5'
+			name: 'GPT-5',
+			link: 'https://chat.openai.com/'
 		}
 	});
 

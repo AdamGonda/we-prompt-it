@@ -34,7 +34,7 @@ export async function getAllRepos() {
 }
 
 export async function getAllAIModels() {
-	return await prisma.aIModel.findMany();
+	return await prisma.aiModel.findMany();
 }
 
 export async function getAllTags() {
