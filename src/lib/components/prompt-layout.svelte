@@ -7,7 +7,7 @@
 
 	const user = $page.data.session?.user;
 	const isOwner = user ? $page.data.repo.author.email === user.email : false;
-	const forkLink = user ? `/app/prompt/${$page.data.repo.slug}/fork` : `/login`;
+	$: forkLink = user ? `/app/prompt/${$page.params.slug}/fork` : `/login`;
 	let stars = $page.data.repo.stars.length
 
 	async function handleAddRemoveStar() {
