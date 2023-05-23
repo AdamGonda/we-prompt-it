@@ -1,7 +1,7 @@
 <script>
 	export let existingTags = ['hello', 'world'];
 	let _tags = [];
-	let input = 'l';
+	let input = '';
 	let selectedIdx = 0;
 	$: tags = getTags(_tags);
 
@@ -30,6 +30,14 @@
 		if (event.key === 'Enter') {
 			addTag();
 			event.preventDefault();
+		} else if (event.key === 'ArrowUp') {
+			selectedIdx = Math.max(selectedIdx - 1, 0);
+		} else if (event.key === 'ArrowDown') {
+			// move down but
+			// handle cicle around to the top if at the end
+			selectedIdx = Math.min(selectedIdx + 1, matches.length - 1);
+		} else if (event.key === 'Escape') {
+			matches = [];			
 		}
 	}
 
