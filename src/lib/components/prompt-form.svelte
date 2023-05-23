@@ -20,7 +20,8 @@
 		name: false,
 		description: false,
 		content: false,
-		newModelName: false
+		newModelName: false,
+		newModelLink: false
 	};
 
 	$: disabled = getDisabled(errors, isTouched);
@@ -46,7 +47,6 @@
 				errors[err.path] = err.errors[0];
 			});
 		}
-
 		checkRepoNameUniqueness(formData);
 	}
 
@@ -173,7 +173,13 @@
 	{#if showAddNewModel}
 		<div>
 			<label for="newModelName">
-				<input type="text" name="newModelName" placeholder="Name" on:blur={handleTouched} on:input={handleTouched}/>
+				<input
+					type="text"
+					name="newModelName"
+					placeholder="Name"
+					on:blur={handleTouched}
+					on:input={handleTouched}
+				/>
 				<span
 					>{isTouched.newModelName && errors.newModelName
 						? errors.newModelName
@@ -181,7 +187,18 @@
 				>
 			</label>
 			<label for="newModelLink">
-				<input type="text" name="newModelLink" placeholder="Link" />
+				<input
+					type="text"
+					name="newModelLink"
+					placeholder="Link"
+					on:blur={handleTouched}
+					on:input={handleTouched}
+				/>
+				<span
+					>{isTouched.newModelLink && errors.newModelLink
+						? errors.newModelLink
+						: ''}</span
+				>
 			</label>
 		</div>
 	{/if}
