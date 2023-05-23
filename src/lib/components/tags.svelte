@@ -31,13 +31,21 @@
 			addTag();
 			event.preventDefault();
 		} else if (event.key === 'ArrowUp') {
+			if (selectedIdx === 0) {
+				selectedIdx = matches.length - 1;
+				return;
+			}
+
 			selectedIdx = Math.max(selectedIdx - 1, 0);
 		} else if (event.key === 'ArrowDown') {
-			// move down but
-			// handle cicle around to the top if at the end
+			if (selectedIdx === matches.length - 1) {
+				selectedIdx = 0;
+				return;
+			}
+
 			selectedIdx = Math.min(selectedIdx + 1, matches.length - 1);
 		} else if (event.key === 'Escape') {
-			matches = [];			
+			matches = [];
 		}
 	}
 
