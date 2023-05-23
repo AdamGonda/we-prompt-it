@@ -26,6 +26,8 @@
 			_tags = [..._tags, clean];
 			input = '';
 		}
+
+		resetStates()
 	}
 
 	function removeTag(index) {
@@ -75,6 +77,11 @@
 	function selectSuggested(event) {
 		addTag(event.target.innerText);
 	}
+
+	function resetStates() {
+		selectedIdx = -1
+		selectsFromSuggested = false;
+	}
 </script>
 
 <div class="tag-selector">
@@ -83,6 +90,7 @@
 		type="text"
 		bind:value={input}
 		on:keydown={handleKeyDown}
+		on:blur={resetStates}
 		placeholder="Enter a tag"
 	/>
 	{#each _tags as tag, index}
