@@ -1,3 +1,6 @@
+import { error } from '@sveltejs/kit';
+import { repoSchema, type RepoSchema } from './yup-schemas';
+
 export function formDataToObject(formData) {
 	const formValues = {};
 	for (const [key, value] of formData.entries()) {
@@ -12,21 +15,23 @@ export function formDataToObject(formData) {
 	return formValues;
 }
 
-export function zodCheck(parseResult, onError) {
-	if (!parseResult.success) {
-		// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-		// @ts-ignore
-		const errors = parseResult.error.errors.map((error) => {
-			return {
-				field: error.path[0],
-				message: error.message
-			};
-		});
+export async function validateForm(event): Promise<RepoSchema> {
+	const formData = formDataToObject(await event.request.formData());
+	const errors = {};
 
-		onError(errors);
+	try {
+		repoSchema.validateSync(formData, { abortEarly: false });
+	} catch (error) {
+		error.inner.forEach((err) => {
+			errors[err.path] = err.errors[0];
+		});
 	}
 
-	return parseResult.data;
+	if(Object.keys(errors).length > 0) {
+		throw error(400, JSON.stringify(errors));
+	}
+
+	return formData;
 }
 
 export function convertToSlug(username, text) {

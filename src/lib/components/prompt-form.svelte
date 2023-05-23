@@ -1,6 +1,6 @@
 <script>
 	import { enhance } from '$app/forms';
-	import { formDataToObject, zodCheck } from '$lib/utils';
+	import { formDataToObject} from '$lib/utils';
 	import { repoSchema } from '$lib/yup-schemas';
 	import _ from 'lodash';
 	import { onMount } from 'svelte';
@@ -26,6 +26,7 @@
 
 	$: disabled = getDisabled(errors, isTouched);
 	$: form = _form;
+	$: console.log('log errors', errors)
 
 	onMount(() => {
 		if (type === 'fork') {

@@ -2,10 +2,9 @@ import { getDBUser } from '$lib/controllers/shared';
 import { getAllAIModels, getAllTags, getRepoBySlug } from '$lib/controllers/shared';
 import type { RequestEvent } from '@sveltejs/kit';
 
-import { error, json, redirect } from '@sveltejs/kit';
+import { error, json } from '@sveltejs/kit';
 import { PrismaClient } from '@prisma/client';
-import { repoSchema } from '$lib/yup-schemas';
-import { convertToSlug, formDataToObject, zodCheck } from '$lib/utils';
+import { convertToSlug, validateForm } from '$lib/utils';
 
 const prisma = new PrismaClient();
 
@@ -13,12 +12,7 @@ const prisma = new PrismaClient();
 export async function createRepo(event: RequestEvent) {
 	const user = await getDBUser(event);
 
-	const formData = formDataToObject(await event.request.formData());
-	const data = formData
-	//const parseResult = repoSchema.safeParse(formData);
-	// const data = //zodCheck(parseResult, (errors) => {
-	// 	throw error(400, JSON.stringify(errors));
-	// });
+	const data = await validateForm(event);
 
 	return await prisma.repo.create({
 		data: {
@@ -46,12 +40,7 @@ export async function createRepo(event: RequestEvent) {
 export async function editRepo(event: RequestEvent) {
 	const slug = event.params.slug;
 	const user = await getDBUser(event);
-
-	const formData = formDataToObject(await event.request.formData());
-	const parseResult = repoSchema.safeParse(formData);
-	const data = zodCheck(parseResult, (errors) => {
-		throw error(400, JSON.stringify(errors));
-	});
+	const data = await validateForm(event);
 
 	const repoToEdit = await prisma.repo.findFirst({
 		where: { slug, isDeleted: false },
@@ -102,18 +91,13 @@ export async function deleteRepo(event: RequestEvent) {
 
 export async function forkRepo(event: RequestEvent) {
 	const dbUser = await getDBUser(event);
+	const slug = event.params.slug;
 
 	if (!dbUser) {
 		throw Error('No user or parent repo found');
 	}
 
-	const formData = formDataToObject(await event.request.formData());
-	const slug = event.params.slug;
-
-	const parseResult = repoSchema.safeParse(formData);
-	const data = zodCheck(parseResult, (errors) => {
-		throw error(400, JSON.stringify(errors));
-	});
+	const data = await validateForm(event);
 
 	await prisma.repo.update({
 		where: {
