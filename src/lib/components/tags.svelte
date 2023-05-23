@@ -13,6 +13,7 @@
 		// Check length
 		const isTooShort = tag.length < 3;
 		const isAlreadyAdded = _tags.includes(tag);
+		const moreThanOneWord = tag.includes(' ');
 		
 		if (isTooShort) {
 			input = '';
@@ -28,7 +29,7 @@
 		}
 
 		// it can be just one word
-		if (tag.includes(' ')) {
+		if (moreThanOneWord) {
 			input = '';
 			// TODO: toaster - it can be just one word
 			return;
