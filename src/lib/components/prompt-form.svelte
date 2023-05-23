@@ -19,7 +19,8 @@
 	let isTouched = {
 		name: false,
 		description: false,
-		content: false
+		content: false,
+		newModelName: false
 	};
 
 	$: disabled = getDisabled(errors, isTouched);
@@ -171,11 +172,16 @@
 
 	{#if showAddNewModel}
 		<div>
-			<label for="new-model-name">
-				<input type="text" name="new-model-name" placeholder="Name" />
+			<label for="newModelName">
+				<input type="text" name="newModelName" placeholder="Name" on:blur={handleTouched} on:input={handleTouched}/>
+				<span
+					>{isTouched.newModelName && errors.newModelName
+						? errors.newModelName
+						: ''}</span
+				>
 			</label>
-			<label for="new-model-link">
-				<input type="text" name="new-model-link" placeholder="Link" />
+			<label for="newModelLink">
+				<input type="text" name="newModelLink" placeholder="Link" />
 			</label>
 		</div>
 	{/if}
