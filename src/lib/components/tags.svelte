@@ -42,7 +42,7 @@
 	{#each _tags as tag, index}
 		<div class="tag">
 			<span class="tag-text">{tag}</span>
-			<button class="tag-remove" on:click={() => removeTag(index)}>&times;</button>
+			<button type="button" class="tag-remove" on:click={() => removeTag(index)}>&times;</button>
 		</div>
 	{/each}
 	{#if matches.length > 0}
@@ -64,6 +64,7 @@
 		padding: 4px;
 		border: 1px solid #ccc;
 		border-radius: 4px;
+    position: relative;
 	}
 
 	.tag {
@@ -85,10 +86,17 @@
 
   .matches {
     padding: 0;
+    position: absolute;
+    top: 0;
+    background: white;
+    left: 0;
+    right: 0;
+    border: 1px solid #ccc;
   }
 
   .matches li {
     font-weight: normal;
     list-style-type: none;
+    padding: 8px;
   }
 </style>
