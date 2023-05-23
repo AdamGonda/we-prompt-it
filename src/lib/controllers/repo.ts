@@ -4,9 +4,7 @@ import type { RequestEvent } from '@sveltejs/kit';
 
 import { error, json, redirect } from '@sveltejs/kit';
 import { PrismaClient } from '@prisma/client';
-import {
-	repoSchema,
-} from '$lib/zod-schemas';
+import { repoSchema } from '$lib/zod-schemas';
 import { convertToSlug, formDataToObject, zodCheck } from '$lib/utils';
 
 const prisma = new PrismaClient();
@@ -54,27 +52,30 @@ export async function editRepo(event: RequestEvent) {
 		throw error(400, JSON.stringify(errors));
 	});
 
-	const repo = await prisma.repo.findFirst({
+	const repoToEdit = await prisma.repo.findFirst({
 		where: { slug, isDeleted: false },
 		include: { prompts: true }
 	});
 
-	if (!repo || repo.isDeleted) {
+	if (!repoToEdit || repoToEdit.isDeleted) {
 		throw error(404, { message: 'Not found' });
 	}
 
-	if (repo.authorId !== user.id) {
+	if (repoToEdit.authorId !== user.id) {
 		throw error(405, { message: 'Not allowed' });
 	}
+
+	const updateSlug = repoToEdit.name !== data.name;
 
 	return await prisma.repo.update({
 		where: { slug },
 		data: {
 			name: data.name,
+			slug: updateSlug ? convertToSlug(user.username, data.name) : repoToEdit.slug,
 			description: data.description,
 			prompts: {
 				create: {
-					version: repo.prompts.length + 1,
+					version: repoToEdit.prompts.length + 1,
 					content: data.content,
 					aiModelId: data.model
 				}
@@ -181,7 +182,7 @@ export async function checkRepoNameUniqueness(event) {
 	const proposedName = event.url.searchParams.get('proposedName');
 	const user = await getDBUser(event);
 
-	if(!proposedName) {
+	if (!proposedName) {
 		throw error(400, {
 			message: `Missing parameter proposedName`
 		});
@@ -194,10 +195,10 @@ export async function checkRepoNameUniqueness(event) {
 		}
 	});
 
-	if(existingRepo) {
-		return json({isUnique: false})
+	if (existingRepo) {
+		return json({ isUnique: false });
 	}
 
-	return json({isUnique: true})
+	return json({ isUnique: true });
 }
 // #endregion
