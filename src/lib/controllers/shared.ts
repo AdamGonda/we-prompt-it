@@ -1,19 +1,18 @@
-import { PrismaClient } from "@prisma/client";
-import { error } from "@sveltejs/kit";
+import { PrismaClient } from '@prisma/client';
+import { error } from '@sveltejs/kit';
 
 const prisma = new PrismaClient();
 
-
 export async function getRepoBySlug(slug) {
-  const repo = await prisma.repo.findFirst({
-    where: { slug, isDeleted: false },
-    include: {
-      author: true, // TODO is this ok?
-      stars: { where: { isDeleted: false } },
-      changeRequests: { where: { isDeleted: false } },
-			prompts: { where: { isDeleted: false } },
-    },
-  });
+	const repo = await prisma.repo.findFirst({
+		where: { slug, isDeleted: false },
+		include: {
+			author: true, // TODO is this ok?
+			stars: { where: { isDeleted: false } },
+			changeRequests: { where: { isDeleted: false } },
+			prompts: { where: { isDeleted: false } }
+		}
+	});
 
 	if (!repo) {
 		throw error(404, {
@@ -22,8 +21,8 @@ export async function getRepoBySlug(slug) {
 	}
 
 	repo.prompts.sort((a, b) => b.version - a.version);
-	
-  return repo;
+
+	return repo;
 }
 
 export async function getAllRepos() {
@@ -61,4 +60,29 @@ export async function getDBUser(event) {
 	}
 
 	return dbUser;
+}
+
+export async function getAiModel(data) {
+	if (data.model != -1) {
+		return data.model
+	}
+
+	const whithSameName = await prisma.aiModel.findFirst({
+		where: { name: data.newModelName }
+	});
+
+	if (whithSameName) {
+		throw error(400, {
+			message: 'Model with this name already exists'
+		});
+	}
+
+	const newModel = await prisma.aiModel.create({
+		data: {
+			name: data.newModelName,
+			link: data.newModelLink
+		}
+	});
+
+	return newModel.id
 }

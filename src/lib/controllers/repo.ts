@@ -1,4 +1,4 @@
-import { getDBUser } from '$lib/controllers/shared';
+import { getAiModel, getDBUser } from '$lib/controllers/shared';
 import { getAllAIModels, getAllTags, getRepoBySlug } from '$lib/controllers/shared';
 import type { RequestEvent } from '@sveltejs/kit';
 
@@ -12,16 +12,7 @@ const prisma = new PrismaClient();
 export async function createRepo(event: RequestEvent) {
 	const user = await getDBUser(event);
 	const data = await validateForm(event);
-
-	let newModel = null;
-	if (data.model === -1) {
-		newModel = await prisma.aiModel.create({
-			data: {
-				name: data.newModelName,
-				link: data.newModelLink
-			}
-		});
-	}
+	const aiModelId = await getAiModel(data)
 
 	return await prisma.repo.create({
 		data: {
@@ -36,7 +27,7 @@ export async function createRepo(event: RequestEvent) {
 			prompts: {
 				create: {
 					content: data.content,
-					aiModelId: newModel ? newModel.id : data.model
+					aiModelId
 				}
 			}
 			// tags: {
@@ -50,6 +41,7 @@ export async function editRepo(event: RequestEvent) {
 	const slug = event.params.slug;
 	const user = await getDBUser(event);
 	const data = await validateForm(event);
+	const aiModelId = await getAiModel(data)
 
 	const repoToEdit = await prisma.repo.findFirst({
 		where: { slug, isDeleted: false },
@@ -76,7 +68,7 @@ export async function editRepo(event: RequestEvent) {
 				create: {
 					version: repoToEdit.prompts.length + 1,
 					content: data.content,
-					aiModelId: data.model
+					aiModelId
 				}
 			}
 		}
@@ -86,12 +78,12 @@ export async function editRepo(event: RequestEvent) {
 export async function forkRepo(event: RequestEvent) {
 	const dbUser = await getDBUser(event);
 	const slug = event.params.slug;
+	const data = await validateForm(event);
+	const aiModelId = await getAiModel(data)
 
 	if (!dbUser) {
 		throw Error('No user or parent repo found');
 	}
-
-	const data = await validateForm(event);
 
 	await prisma.repo.update({
 		where: {
@@ -122,7 +114,7 @@ export async function forkRepo(event: RequestEvent) {
 			prompts: {
 				create: {
 					content: data.content,
-					aiModelId: data.model
+					aiModelId
 				}
 			}
 			// tags: {
