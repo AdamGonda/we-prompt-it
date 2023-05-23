@@ -42,7 +42,6 @@
 		}
 
 		input = clean
-
 		addTag();
 		input = '';
 	}
