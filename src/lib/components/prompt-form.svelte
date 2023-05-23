@@ -34,20 +34,6 @@
 		return model.id == data.selectedModelId;
 	}
 
-	function handleSubmit() {
-		return async ({ result }) => {
-			if (result.error) {
-				console.log(`[FRONTEND ERROR] in ${formName} form`, result.error);
-				// TODO show some error toser
-				onError(result.error);
-				return;
-			}
-
-			// TODO show some success toser
-			onSuccess(result.data);
-		};
-	}
-
 	async function validateForm() {
 		errors = {};
 		const formData = formDataToObject(new FormData(_form));
@@ -77,15 +63,6 @@
 		}
 	}
 
-	function handleTouched(event) {
-		if (isTouched[event.target.name]) {
-			return;
-		}
-
-		isTouched[event.target.name] = true;
-		validateForm();
-	}
-
 	function getDisabled(errors, isTouched) {
 		const anyError = Object.keys(errors).length > 0;
 		const hasUntouched = _.every(isTouched, (v) => !v);
@@ -95,6 +72,33 @@
 		}
 
 		return anyError || hasUntouched;
+	}
+
+	function handleSubmit() {
+		return async ({ result }) => {
+			if (result.error) {
+				console.log(`[FRONTEND ERROR] in ${formName} form`, result.error);
+				// TODO show some error toser
+				onError(result.error);
+				return;
+			}
+
+			// TODO show some success toser
+			onSuccess(result.data);
+		};
+	}
+
+	function handleTouched(event) {
+		if (isTouched[event.target.name]) {
+			return;
+		}
+
+		isTouched[event.target.name] = true;
+		validateForm();
+	}
+
+	function handleModelChange(event) {
+		console.log('log',event.target.value)
 	}
 </script>
 
@@ -154,10 +158,11 @@
 
 	<label for="model">
 		Model
-		<select name="model">
+		<select name="model" on:change={handleModelChange}>
 			{#each data.allModels as model}
 				<option selected={isSelected(model)} value={model.id}>{model.name}</option>
 			{/each}
+			<option value="new">Create new</option>
 		</select>
 	</label>
 
