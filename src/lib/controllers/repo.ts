@@ -58,7 +58,7 @@ export async function editRepo(event: RequestEvent) {
 	}
 
 	const updateSlug = repoToEdit.name !== data.name;
-	const tagIdsToRemove = repoToEdit.tags.map((tag) => tag.id).filter((tagId) => !incomingTagIds.includes(tagId));
+	const tagIdsToRemove = repoToEdit.tags.map((tag) => tag.id).filter((tagId) => !incomingTagIds?.includes(tagId));
 
 	return await prisma.repo.update({
 		where: { slug },
@@ -67,8 +67,8 @@ export async function editRepo(event: RequestEvent) {
 			slug: updateSlug ? convertToSlug(user.username, data.name) : repoToEdit.slug,
 			description: data.description,
 			tags: {
-				connect: incomingTagIds.map((tagId) => ({ id: tagId })),
-				disconnect: tagIdsToRemove.map((tagId) => ({ id: tagId })),
+				connect: incomingTagIds ? incomingTagIds.map((tagId) => ({ id: tagId })): undefined,
+				disconnect: tagIdsToRemove ? tagIdsToRemove.map((tagId) => ({ id: tagId })): undefined,
 			},
 			prompts: {
 				create: {

@@ -6,16 +6,26 @@
 	let selectsFromSuggested = false;
 	let selectedIdx = -1;
 	$: tags = _tags.join(', ');
-	$: matches = allTags
-		.filter((tag) => input && tag.includes(input))
-		.map((tag) => tag.replace(input, `<b>${input}</b>`));
+	$: matches = getMatches(input);
+
+	function getMatches(input) {
+		if (input === '') {
+			return [];
+		}
+
+		const regex = new RegExp(`(${input})`, 'gi');
+
+		return allTags
+			.filter((tag) => tag.toLowerCase().includes(input.toLowerCase()))
+			.map((tag) => tag.replace(regex, '<b>$1</b>'));
+	}
 
 	function validateNewTag(tag) {
 		// Check length
 		const isTooShort = tag.length < 3;
 		const isAlreadyAdded = _tags.includes(tag);
 		const moreThanOneWord = tag.includes(' ');
-		
+
 		if (isTooShort) {
 			input = '';
 			// TODO: toaster - tag too short
@@ -40,7 +50,7 @@
 	}
 
 	function cleanTag(tag) {
-		return tag.replace(/<b>|<\/b>/g, '');
+		return tag.replace(/<b>|<\/b>/g, '').toString().trim();
 	}
 
 	function addTag(tag) {
