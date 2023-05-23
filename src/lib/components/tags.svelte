@@ -1,23 +1,28 @@
 <script>
-	export let existingTags = ['hello', 'world'];
+	export let existingTags = ['hello', 'world', 'svelte', 'sveltekit'];
 	let _tags = [];
-	let input = '';
+	let input = 'l';
 	let selectedIdx = 0;
-	$: tags = getTags(_tags);
-
-	// find matches from existing tags that substring match with input
-	// and highlight matchinkg substring with <b> tag
+	$: tags = _tags.join(', ')
 	$: matches = existingTags
 		.filter((tag) => input && tag.includes(input))
 		.map((tag) => tag.replace(input, `<b>${input}</b>`));
 
-	function getTags(tags) {
-		return tags.join(', ');
+	function cleanTag(tag) {
+		return tag.replace(/<b>|<\/b>/g, '')
 	}
 
-	function addTag() {
-		if (input.trim() !== '') {
-			_tags = [..._tags, input.trim()];
+	function addTag(tag) {
+		const clean = cleanTag(tag)
+		// not add if already in tags
+		if (_tags.includes(clean)) {
+			input = '';
+			// TODO toster: tag already in added
+			return;
+		}
+
+		if (clean !== '') {
+			_tags = [..._tags, clean];
 			input = '';
 		}
 	}
@@ -28,7 +33,7 @@
 
 	function handleKeyDown(event) {
 		if (event.key === 'Enter') {
-			addTag();
+			addTag(matches[selectedIdx]);
 			event.preventDefault();
 		} else if (event.key === 'ArrowUp') {
 			if (selectedIdx === 0) {
@@ -50,17 +55,7 @@
 	}
 
 	function selectSuggested(event) {
-		const clean = event.target.innerText.replace(/<b>|<\/b>/g, '');
-		// not add if already in tags
-		if (_tags.includes(clean)) {
-			input = '';
-			// TODO toster: tag already in added
-			return;
-		}
-
-		input = clean;
-		addTag();
-		input = '';
+		addTag(event.target.innerText)
 	}
 </script>
 
