@@ -2,18 +2,19 @@
 	export let existingTags = ['hello', 'world', 'svelte', 'sveltekit'];
 	let _tags = [];
 	let input = '';
+	let selectsFromSuggested = false;
 	let selectedIdx = 0;
-	$: tags = _tags.join(', ')
+	$: tags = _tags.join(', ');
 	$: matches = existingTags
 		.filter((tag) => input && tag.includes(input))
 		.map((tag) => tag.replace(input, `<b>${input}</b>`));
 
 	function cleanTag(tag) {
-		return tag.replace(/<b>|<\/b>/g, '')
+		return tag.replace(/<b>|<\/b>/g, '');
 	}
 
 	function addTag(tag) {
-		const clean = cleanTag(tag)
+		const clean = cleanTag(tag);
 		// not add if already in tags
 		if (_tags.includes(clean)) {
 			input = '';
@@ -32,8 +33,16 @@
 	}
 
 	function handleKeyDown(event) {
+		if (['ArrowDown', 'ArrowUp'].includes(event.key)) {
+			selectsFromSuggested = true;
+		}
+
 		if (event.key === 'Enter') {
-			addTag(matches[selectedIdx] || input);
+			if (selectsFromSuggested) {
+				addTag(matches[selectedIdx]);
+			} else {
+				addTag(input);
+			}
 			event.preventDefault();
 		} else if (event.key === 'ArrowUp') {
 			if (selectedIdx === 0) {
@@ -55,7 +64,7 @@
 	}
 
 	function selectSuggested(event) {
-		addTag(event.target.innerText)
+		addTag(event.target.innerText);
 	}
 </script>
 
