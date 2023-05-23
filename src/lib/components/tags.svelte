@@ -41,7 +41,6 @@
 			return;
 		}
 
-		// clean up input
 		input = clean
 
 		addTag();
