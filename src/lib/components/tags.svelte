@@ -1,7 +1,7 @@
 <script>
 	export let existingTags = ['hello', 'world', 'svelte', 'sveltekit'];
 	let _tags = [];
-	let input = 'l';
+	let input = '';
 	let selectedIdx = 0;
 	$: tags = _tags.join(', ')
 	$: matches = existingTags
@@ -33,7 +33,7 @@
 
 	function handleKeyDown(event) {
 		if (event.key === 'Enter') {
-			addTag(matches[selectedIdx]);
+			addTag(matches[selectedIdx] || input);
 			event.preventDefault();
 		} else if (event.key === 'ArrowUp') {
 			if (selectedIdx === 0) {
