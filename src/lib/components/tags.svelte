@@ -2,6 +2,7 @@
 	export let existingTags = ['hello', 'world'];
 	let _tags = [];
 	let input = 'l';
+	let selectedIdx = 0;
 	$: tags = getTags(_tags);
 
 	// find matches from existing tags that substring match with input
@@ -32,16 +33,16 @@
 		}
 	}
 
-	function foobar(event) {
+	function selectSuggested(event) {
 		const clean = event.target.innerText.replace(/<b>|<\/b>/g, '');
 		// not add if already in tags
 		if (_tags.includes(clean)) {
-			input = ''
+			input = '';
 			// TODO toster: tag already in added
 			return;
 		}
 
-		input = clean
+		input = clean;
 		addTag();
 		input = '';
 	}
@@ -65,8 +66,11 @@
 	{/each}
 	{#if matches.length > 0}
 		<ul class="matches">
-			{#each matches as match}
-				<li on:click={foobar}>{@html match}</li>
+			{#each matches as match, idx}
+				<!-- svelte-ignore a11y-click-events-have-key-events -->
+				<li class:selected={selectedIdx == idx} on:click={selectSuggested}>
+					{@html match}
+				</li>
 			{/each}
 		</ul>
 	{/if}
@@ -115,9 +119,14 @@
 		font-weight: normal;
 		list-style-type: none;
 		padding: 8px;
+		cursor: pointer;
+	}
+
+	.selected {
+		background-color: #d6d6d6;
 	}
 
 	.matches li:hover {
-		background-color: #eee;
+		background-color: #b4baaa;
 	}
 </style>
