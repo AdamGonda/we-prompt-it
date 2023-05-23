@@ -31,6 +31,22 @@
 			event.preventDefault();
 		}
 	}
+
+	function foobar(event) {
+		const clean = event.target.innerText.replace(/<b>|<\/b>/g, '');
+		// not add if already in tags
+		if (_tags.includes(clean)) {
+			input = ''
+			// TODO toster: tag already in added
+			return;
+		}
+
+		// clean up input
+		input = clean
+
+		addTag();
+		input = '';
+	}
 </script>
 
 <div class="tag-selector">
@@ -52,7 +68,7 @@
 	{#if matches.length > 0}
 		<ul class="matches">
 			{#each matches as match}
-				<li>{@html match}</li>
+				<li on:click={foobar}>{@html match}</li>
 			{/each}
 		</ul>
 	{/if}
@@ -90,7 +106,7 @@
 	.matches {
 		padding: 0;
 		position: absolute;
-		top: 0;
+		top: 20px;
 		background: white;
 		left: 0;
 		right: 0;
@@ -101,5 +117,9 @@
 		font-weight: normal;
 		list-style-type: none;
 		padding: 8px;
+	}
+
+	.matches li:hover {
+		background-color: #eee;
 	}
 </style>
