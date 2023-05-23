@@ -36,6 +36,7 @@
 		selectedModelId: $page.data.repo.prompts[0].aiModelId,
 		allModels: $page.data.aiModels,
 		allTags: $page.data.tags,
+		existingTags: $page.data.repo.tags.map((tag) => tag.name),
 	}}
 >
 	<button type="button" disabled={disabled} on:click={() => (confirmEditDialog.showModal())}>Submit</button>

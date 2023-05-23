@@ -1,11 +1,13 @@
 <script>
+	export let allTags = [];
 	export let existingTags = [];
-	let _tags = [];
+	console.log('log existingTags', existingTags)
+	let _tags = existingTags;
 	let input = '';
 	let selectsFromSuggested = false;
 	let selectedIdx = -1;
 	$: tags = _tags.join(', ');
-	$: matches = existingTags
+	$: matches = allTags
 		.filter((tag) => input && tag.includes(input))
 		.map((tag) => tag.replace(input, `<b>${input}</b>`));
 

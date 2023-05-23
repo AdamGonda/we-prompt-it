@@ -10,7 +10,8 @@ export async function getRepoBySlug(slug) {
 			author: true, // TODO is this ok?
 			stars: { where: { isDeleted: false } },
 			changeRequests: { where: { isDeleted: false } },
-			prompts: { where: { isDeleted: false } }
+			prompts: { where: { isDeleted: false } },
+			tags: { where: { isDeleted: false } }
 		}
 	});
 
