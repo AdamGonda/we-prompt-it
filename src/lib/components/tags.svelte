@@ -37,6 +37,10 @@
 			selectsFromSuggested = true;
 		}
 
+		if(input === ''){
+			return
+		}
+
 		if (event.key === 'Enter') {
 			if (selectsFromSuggested) {
 				addTag(matches[selectedIdx]);
