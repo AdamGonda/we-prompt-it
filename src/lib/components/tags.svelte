@@ -1,7 +1,6 @@
 <script>
 	export let allTags = [];
 	export let existingTags = [];
-	console.log('log existingTags', existingTags)
 	let _tags = existingTags;
 	let input = '';
 	let selectsFromSuggested = false;
