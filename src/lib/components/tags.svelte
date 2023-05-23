@@ -4,9 +4,11 @@
 	let input = 'l';
 	$: tags = getTags(_tags);
 
-  // find matches from existing tags that substring match with input
-  // and highlight matchinkg substring with <b> tag
-  $: matches = existingTags.filter(tag => input && tag.includes(input)).map(tag => tag.replace(input, `<b>${input}</b>`));
+	// find matches from existing tags that substring match with input
+	// and highlight matchinkg substring with <b> tag
+	$: matches = existingTags
+		.filter((tag) => input && tag.includes(input))
+		.map((tag) => tag.replace(input, `<b>${input}</b>`));
 
 	function getTags(tags) {
 		return tags.join(', ');
@@ -42,13 +44,14 @@
 	{#each _tags as tag, index}
 		<div class="tag">
 			<span class="tag-text">{tag}</span>
-			<button type="button" class="tag-remove" on:click={() => removeTag(index)}>&times;</button>
+			<button type="button" class="tag-remove" on:click={() => removeTag(index)}
+				>&times;</button
+			>
 		</div>
 	{/each}
 	{#if matches.length > 0}
 		<ul class="matches">
 			{#each matches as match}
-      
 				<li>{@html match}</li>
 			{/each}
 		</ul>
@@ -64,7 +67,7 @@
 		padding: 4px;
 		border: 1px solid #ccc;
 		border-radius: 4px;
-    position: relative;
+		position: relative;
 	}
 
 	.tag {
@@ -84,19 +87,19 @@
 		font-weight: bold;
 	}
 
-  .matches {
-    padding: 0;
-    position: absolute;
-    top: 0;
-    background: white;
-    left: 0;
-    right: 0;
-    border: 1px solid #ccc;
-  }
+	.matches {
+		padding: 0;
+		position: absolute;
+		top: 0;
+		background: white;
+		left: 0;
+		right: 0;
+		border: 1px solid #ccc;
+	}
 
-  .matches li {
-    font-weight: normal;
-    list-style-type: none;
-    padding: 8px;
-  }
+	.matches li {
+		font-weight: normal;
+		list-style-type: none;
+		padding: 8px;
+	}
 </style>
