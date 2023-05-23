@@ -1,7 +1,12 @@
 <script>
-	$: tags = getTags(_tags);
+	export let existingTags = ['hello', 'world'];
 	let _tags = [];
-	let input = '';
+	let input = 'l';
+	$: tags = getTags(_tags);
+
+  // find matches from existing tags that substring match with input
+  // and highlight matchinkg substring with <b> tag
+  $: matches = existingTags.filter(tag => input && tag.includes(input)).map(tag => tag.replace(input, `<b>${input}</b>`));
 
 	function getTags(tags) {
 		return tags.join(', ');
@@ -40,6 +45,14 @@
 			<button class="tag-remove" on:click={() => removeTag(index)}>&times;</button>
 		</div>
 	{/each}
+	{#if matches.length > 0}
+		<ul class="matches">
+			{#each matches as match}
+      
+				<li>{@html match}</li>
+			{/each}
+		</ul>
+	{/if}
 </div>
 
 <style>
@@ -69,4 +82,13 @@
 		cursor: pointer;
 		font-weight: bold;
 	}
+
+  .matches {
+    padding: 0;
+  }
+
+  .matches li {
+    font-weight: normal;
+    list-style-type: none;
+  }
 </style>
