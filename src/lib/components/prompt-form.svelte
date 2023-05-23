@@ -173,6 +173,7 @@
 	{#if showAddNewModel}
 		<div>
 			<label for="newModelName">
+				Model name
 				<input
 					type="text"
 					name="newModelName"
@@ -187,6 +188,7 @@
 				>
 			</label>
 			<label for="newModelLink">
+				Model link
 				<input
 					type="text"
 					name="newModelLink"
