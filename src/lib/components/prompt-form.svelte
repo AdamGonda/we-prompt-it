@@ -49,7 +49,7 @@
 			});
 		}
 
-		console.log('log errors', errors)
+		console.log('log tags', formData.tags)
 		checkRepoNameUniqueness(formData);
 	}
 
