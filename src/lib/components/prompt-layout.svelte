@@ -32,7 +32,7 @@
 		</button>
 	{:else}
 		<button>
-			<a href={`/login`} data-testid="add-remove-star">Stars: {data.stars}</a>
+			<a href={`/login`} data-testid="add-remove-star">Stars: {stars}</a>
 		</button>
 	{/if}
 </div>
@@ -61,6 +61,7 @@
 </ul>
 
 <main>
+	<button>Copy to clipboard</button>
 	<slot />
 </main>
 
