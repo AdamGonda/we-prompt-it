@@ -7,8 +7,9 @@
 
 	const user = $page.data.session?.user;
 	const isOwner = user ? $page.data.repo.author.email === user.email : false;
-	$: forkLink = user ? `/app/prompt/${$page.params.slug}/fork` : `/login`;
 	let stars = $page.data.repo.stars.length
+	$: forkLink = user ? `/app/prompt/${$page.params.slug}/fork` : `/login`;
+	$: appreciationText = `Likes: ${stars}`
 
 	async function handleAddRemoveStar() {
 		const r = await fetch(`/api/add-remove-star?id=${$page.data.repo.id}`, {
@@ -32,11 +33,11 @@
 
 	{#if user}
 		<button on:click={handleAddRemoveStar} data-testid="add-remove-star">
-			{`Stars: ${stars}`}
+			{appreciationText}
 		</button>
 	{:else}
 		<button>
-			<a href={`/login`} data-testid="add-remove-star">Stars: {stars}</a>
+			<a href={`/login`} data-testid="add-remove-star">{appreciationText}</a>
 		</button>
 	{/if}
 </div>
