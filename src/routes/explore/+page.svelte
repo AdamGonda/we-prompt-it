@@ -8,13 +8,13 @@
 	import RepoCard from '$lib/components/prompt-card.svelte';
 	import { onMount } from 'svelte';
 
-	const { initialLoadResults } = $page.data;
-	let resultsToHow = initialLoadResults;
+	const {r} = $page.data;
+	let resultsToShow = r;
 	let frontendLoaded = false;
 
 	results.subscribe((value) => {
 		if (frontendLoaded) {
-			resultsToHow = value;
+			resultsToShow = value;
 		}
 	});
 
@@ -28,7 +28,7 @@
 
 	<h3>All prompts</h3>
 	<div class="all">
-		{#each resultsToHow as repo (repo.id)}
+		{#each resultsToShow as repo (repo.id)}
 			<RepoCard {repo} />
 		{/each}
 	</div>

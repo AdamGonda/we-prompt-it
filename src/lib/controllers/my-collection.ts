@@ -14,8 +14,6 @@ export async function loadMyCollection(event) {
 		include: { stars: { where: { isDeleted: false } }, prompts: true }
 	});
 
-	console.log('log createdBy', createdBy)
-
 	const forked = createdBy.filter((repo) => repo.parentId !== null);
 
 	const stars = await prisma.star.findMany({

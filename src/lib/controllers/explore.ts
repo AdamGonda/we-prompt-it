@@ -1,3 +1,4 @@
+import { results } from './../stores/search-bar-store';
 import { PrismaClient } from "@prisma/client";
 import { json } from "@sveltejs/kit";
 import { getAllRepos } from "./shared";
@@ -33,18 +34,18 @@ export async function search(event) {
 
 // #region LOADERS
 export async function loadExplore(event) {
-	const query = event.url.searchParams.get('q');
 
-	if (query) {
-		return { initialLoadResults: await _search(query) };
-	}
-
-	return { initialLoadResults: await getAllRepos() };
+	return { r: await getAllRepos() };
 }
 // #endregion
 
 // #region PRIVATE 
-async function _search(query) {
+async function _search(event) {
+	// ?bar=a big fat 123 mag&tas=openai,midjuerny,cool,education&prompt_min_length=10&prompt_max_length=50&sort=most_liked
+	const searchParams = event.url.searchParams;
+	const query = searchParams.get('bar');
+
+
 	return await prisma.repo.findMany({
 		where: {
 			OR: [
