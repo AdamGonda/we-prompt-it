@@ -19,6 +19,10 @@
 			stars += json.diff;
 		}
 	}
+
+	function copyToClipboard() {
+		navigator.clipboard.writeText($page.data.repo.prompts[0].content);
+	}
 </script>
 
 <div>
@@ -61,7 +65,7 @@
 </ul>
 
 <main>
-	<button>Copy to clipboard</button>
+	<button on:click={copyToClipboard}>Copy to clipboard</button>
 	<slot />
 </main>
 
