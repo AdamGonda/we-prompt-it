@@ -41,6 +41,8 @@
 	async function validateForm() {
 		errors = {};
 		const formData = formDataToObject(new FormData(_form));
+		formData.tags = new FormData(_form).get('tags')
+
 		try {
 			repoSchema.validateSync(formData, { abortEarly: false });
 		} catch (error) {
@@ -50,6 +52,7 @@
 		}
 
 		console.log('log tags', formData.tags)
+		console.log('log errors', errors)
 		checkRepoNameUniqueness(formData);
 	}
 

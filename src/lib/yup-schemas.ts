@@ -12,7 +12,7 @@ export const repoSchema = object().shape({
 		.required('Content is required')
 		.min(10, 'Must be 10 or more characters long'),
 	model: number().required('Model is required'),
-	tags: string().optional(),
+	tags: string().strict().optional(),
 	newModelName: string().when('model', {
 		is: (value) => value === -1,
 		then: (schema) =>
