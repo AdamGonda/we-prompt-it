@@ -116,7 +116,7 @@ function handleSearchBar(query, event) {
 
 function handleTags(query, event) {
 	const tags = event.url.searchParams.get('tags')?.split(',') || [];
-	console.log('log tags', tags)
+
 	if (tags?.length > 0) {
 		query.where.AND.push({
 			tags: {
