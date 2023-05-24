@@ -1,21 +1,24 @@
 import { writable } from 'svelte/store';
 import { goto } from '$app/navigation';
 
-function createSearchStore() {
-	const { subscribe, update, set } = writable([]);
+const { subscribe, set } = writable([]);
 
-	return {
-		subscribe,
-		search: async (endpoint, query, updateURL = false) => {
-			const response = await fetch(`${endpoint}?q=${query}`);
-			const data = await response.json();
-			update(() => data);
-			if (updateURL) {
-				goto(`/explore?q=${query}`);
-			}
-		},
-		reset: () => set([]),
-	};
+async function search(endpoint, updateURL = false) {
+	const response = await fetch(`${endpoint}`);
+	const data = await response.json();
+	set(data);
+
+	if (updateURL) {
+		goto(endpoint);
+	}
 }
 
-export const searchStore = createSearchStore();
+function reset() {
+	set([]);
+}
+
+export const searchStore = {
+	subscribe,
+	search,
+	reset
+};

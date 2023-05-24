@@ -18,7 +18,7 @@
 
 	onMount(() => {
 		if ($page.url.searchParams.get('q')) {
-			fetchPreSearchResultsNo($page.url.searchParams.get('q'));
+			// fetchPreSearchResultsNo($page.url.searchParams.get('q'));
 		}
 	});
 
