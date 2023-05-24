@@ -3,7 +3,7 @@
 	import RepoCard from '$lib/components/prompt-card.svelte';
 
 	const myCollection = $page.data;
-	console.log('log myCollection', myCollection)
+	// console.log('log myCollection', myCollection)
 </script>
 
 <main>
