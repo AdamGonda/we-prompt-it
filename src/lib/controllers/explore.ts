@@ -149,16 +149,23 @@ function handleAiModelQuery(query, event) {
 function handleSortQuery(query, event) {
 	const sort = event.url.searchParams.get('sort_by');
 
+	if (sort === null) {
+		return;
+	}
+
+	query.orderBy = []
+
 	if (sort === 'most_liked') {
-		console.log('log ', ) 
-		query.orderBy = {
+		query.orderBy.push({
 			likes: {
-				_count: 'desc'
+				_count: 'desc' 
 			}
-		};
-	} else if (sort === 'most_forked') {
-		query.orderBy = {
+		})	
+	}
+	
+	if (sort === 'most_forked') {
+		query.orderBy.push( {
 			noTimesForked: 'desc'
-		};
+		})
 	}
 }

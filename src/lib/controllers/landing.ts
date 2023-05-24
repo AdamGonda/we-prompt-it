@@ -1,4 +1,4 @@
-import { PrismaClient } from "@prisma/client";
+import { PrismaClient } from '@prisma/client';
 
 const prisma = new PrismaClient();
 
@@ -8,11 +8,16 @@ export async function loadLanding() {
 			isDeleted: false
 		},
 		include: {
-			likes:  { where: { isDeleted: false } },
-			prompts: true,
+			likes: { where: { isDeleted: false } },
+			prompts: {
+				include: {
+					aiModel: true
+				}
+			},
+			tags: true
 		},
 		orderBy: {
-			likes:  {
+			likes: {
 				_count: 'desc'
 			}
 		},
@@ -21,17 +26,22 @@ export async function loadLanding() {
 
 	const mostForked = await prisma.repo.findMany({
 		where: {
-			isDeleted: false,
+			isDeleted: false
 		},
 		include: {
-			likes:  true,
-			prompts: true,
+			likes: true,
+			prompts: {
+				include: {
+					aiModel: true
+				}
+			},
+			tags: true
 		},
 		orderBy: {
-			noTimesForked: 'desc',
+			noTimesForked: 'desc'
 		},
-		take: 10,
+		take: 10
 	});
 
-	return { mostLiked, mostForked }
+	return { mostLiked, mostForked };
 }

@@ -17,6 +17,6 @@
 
 <!-- open ai style -->
 
-<button style="cursor: pointer;" on:click={() => signIn('google')} data-testid="continue-with-google"
+<button style="cursor: pointer;" on:click={() => signIn('google')}
 	>Continue with google</button
 >

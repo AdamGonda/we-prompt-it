@@ -15,35 +15,35 @@
 </script>
 
 <nav>
-	<a href={`/`} data-testid="logo">
+	<a href={`/`} >
 		<p>Logo</p>
 	</a>
 	<!-- <SearchBar /> -->
 
 	{#if user}
-		<a href={`/app/my-collection`} data-testid="my-collection">
+		<a href={`/app/my-collection`} >
 			<p>My collection</p>
 		</a>
 	{:else}
-		<a href={`/login`} data-testid="my-collection">
+		<a href={`/login`} >
 			<p>My collection</p>
 		</a>
 	{/if}
 
 	{#if user}
-		<a href={`/app/prompt/create`} data-testid="create-prompt">
+		<a href={`/app/prompt/create`} >
 			<p>Create prompt</p>
 		</a>
 	{:else}
-		<a href={`/login`} data-testid="create-prompt">
+		<a href={`/login`} >
 			<p>Create prompt</p>
 		</a>
 	{/if}
 
 	{#if user}
-		<button style="cursor: pointer;" on:click={handleSignout} data-testid="logout">signout</button>
+		<button style="cursor: pointer;" on:click={handleSignout} >signout</button>
 	{:else}
-	<a href={`/login`} data-testid="login">
+	<a href={`/login`} >
 		<p>Signup/Login</p>
 		</a>
 	{/if}

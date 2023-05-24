@@ -3,6 +3,7 @@
 	import RepoCard from '$lib/components/prompt-card.svelte';
 
 	const myCollection = $page.data;
+	console.log('log myCollection', myCollection)
 </script>
 
 <main>
@@ -22,9 +23,9 @@
 		{/each}
 	</div>
 
-	<h3>Starred</h3>
+	<h3>Liked</h3>
 	<div class="all">
-		{#each myCollection.starred as repo (repo.id)}
+		{#each myCollection.liked as repo (repo.id)}
 			<RepoCard {repo} />
 		{/each}
 	</div>

@@ -11,7 +11,7 @@
 	$: forkLink = user ? `/app/prompt/${$page.params.slug}/fork` : `/login`;
 	$: appreciationText = `Likes: ${likes}`
 
-	async function handleAddRemoveStar() {
+	async function handleAddRemoveLike() {
 		const r = await fetch(`/api/add-remove-like?id=${$page.data.repo.id}`, {
 			method: 'POST'
 		});
@@ -28,16 +28,16 @@
 
 <div>
 	<button>
-		<a href={forkLink} data-testid="create-fork">Create new based on this</a>
+		<a href={forkLink} >Create new based on this</a>
 	</button>
 
 	{#if user}
-		<button on:click={handleAddRemoveStar} data-testid="add-remove-like">
+		<button on:click={handleAddRemoveLike}>
 			{appreciationText}
 		</button>
 	{:else}
 		<button>
-			<a href={`/login`} data-testid="add-remove-like">{appreciationText}</a>
+			<a href={`/login`}>{appreciationText}</a>
 		</button>
 	{/if}
 </div>

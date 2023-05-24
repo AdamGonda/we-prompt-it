@@ -7,6 +7,7 @@
 	import RepoCard from '$lib/components/prompt-card.svelte';
 
 	const { session, mostLiked, mostForked } = $page.data;
+	// console.log('log $page.data;', $page.data) 
 </script>
 
 <div>

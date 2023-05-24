@@ -11,7 +11,11 @@ export async function loadMyCollection(event) {
 			authorId: dbUser.id,
 			isDeleted: false
 		},
-		include: { likes:  { where: { isDeleted: false } }, prompts: true }
+		include: {
+			likes: { where: { isDeleted: false } },
+			prompts: { include: { aiModel: true } },
+			tags: true
+		}
 	});
 
 	const forked = createdBy.filter((repo) => repo.parentId !== null);
@@ -21,7 +25,15 @@ export async function loadMyCollection(event) {
 			userId: dbUser.id,
 			isDeleted: false
 		},
-		include: { repo: { include: { prompts: true, likes:  { where: { isDeleted: false } } } } }
+		include: {
+			repo: {
+				include: {
+					prompts: { include: { aiModel: true } },
+					likes: { where: { isDeleted: false } },
+					tags: true
+				}
+			}
+		}
 	});
 
 	return {

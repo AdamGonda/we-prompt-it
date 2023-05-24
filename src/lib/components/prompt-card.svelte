@@ -4,14 +4,14 @@
 
 	export let repo;
 	let inApp = false;
-	// console.log('log repo', repo)
+	// console.log('log repo', repo.prompts[0])
 
 	if (browser && $page.data.session?.user) {
 		inApp = true;
 	}
 </script>
 
-<a href={`${inApp ? '/app' : ''}/prompt/${repo.slug}`} data-testid="repo-card">
+<a href={`${inApp ? '/app' : ''}/prompt/${repo.slug}`}>
 	<div>
 		<span><b><u>{repo.name}</u></b></span>
 		
@@ -27,7 +27,7 @@
 		
 		<footer class="footer">
 			<span>{repo.prompts[0].aiModel.name}</span>
-			<span>❤️ {repo.likes.length}</span>
+			<span>❤️ {repo.likes?.length}</span>
 			<span><img src="/fork-icon.png" alt="fork-icon" /> {repo.noTimesForked}</span>
 		</footer>
 	</div>

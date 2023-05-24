@@ -103,9 +103,8 @@
 		on:focus={handleFocus}
 		on:blur={handleBlur}
 		on:input={handleInput}
-		data-testid="explore-search-input"
 	/>
-	<button type="submit" data-testid="explore-search-button">
+	<button type="submit">
 		<img alt="search" src="/search-icon.svg" />
 	</button>
 	{#if showPreSearchResultsNo && inputValue != ''}
