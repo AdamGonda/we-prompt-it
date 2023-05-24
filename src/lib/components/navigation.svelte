@@ -18,7 +18,7 @@
 	<a href={`/`} data-testid="logo">
 		<p>Logo</p>
 	</a>
-	<SearchBar />
+	<!-- <SearchBar /> -->
 
 	{#if user}
 		<a href={`/app/my-collection`} data-testid="my-collection">
