@@ -4,6 +4,7 @@
 
 	export let repo;
 	let inApp = false;
+	console.log('log repo', repo)
 
 	if (browser && $page.data.session?.user) {
 		inApp = true;
@@ -17,8 +18,15 @@
 		<main>
 			<p>{repo.prompts[0].content}</p>
 		</main>
+
+		<sub>
+			{#each repo.tags as tag}
+				<span>{tag.name}</span>
+			{/each}
+		</sub>
 		
 		<footer class="footer">
+			<span>{repo.prompts[0].aiModel.name}</span>
 			<span>❤️ {repo.stars?.length}</span>
 			<span><img src="/fork-icon.png" alt="fork-icon" /> {repo.noTimesForked}</span>
 		</footer>
@@ -56,6 +64,18 @@
 		line-height: 18px;
 		font-size: 16px;
 		font-weight: normal;
+	}
+
+	sub {
+		display: flex;
+		gap: 8px;
+		margin-top: 6px;
+	}
+
+	sub span {
+		border-radius: 10px;
+		padding: 6px;
+		border: 2px solid black;
 	}
 
 	footer {
