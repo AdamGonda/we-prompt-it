@@ -1,21 +1,27 @@
 <script>
-	import { browser } from "$app/environment";
-	import { page } from "$app/stores";
+	import { browser } from '$app/environment';
+	import { page } from '$app/stores';
 
 	export let repo;
-	let inApp = false
+	let inApp = false;
 
-	if(browser && $page.data.session?.user) {
-		inApp = true
+	if (browser && $page.data.session?.user) {
+		inApp = true;
 	}
 </script>
 
 <a href={`${inApp ? '/app' : ''}/prompt/${repo.slug}`} data-testid="repo-card">
 	<div>
-		<p>id: <span>{repo.id}</span></p>
-		<p>name: <span>{repo.name}</span></p>
-		<p>stars: <span>{repo.stars?.length}</span></p>
-		<p>forked: <span>{repo.noTimesForked}</span></p>
+		<span><b><u>{repo.name}</u></b></span>
+		
+		<main>
+			<span>{repo.prompts[0].content}</span>
+		</main>
+		
+		<footer class="footer">
+			<span>❤️ {repo.stars?.length}</span>
+			<span><img src="/fork-icon.png" alt="fork-icon" /> {repo.noTimesForked}</span>
+		</footer>
 	</div>
 </a>
 
@@ -31,5 +37,25 @@
 
 	span {
 		font-size: 16px;
+	}
+
+	a {
+		color: inherit;
+		text-decoration: none;
+	}
+
+	a:focus {
+		outline: none;
+	}
+
+	main {
+		margin-top: 6px;
+	}
+
+	footer {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		margin-top: 16px;
 	}
 </style>

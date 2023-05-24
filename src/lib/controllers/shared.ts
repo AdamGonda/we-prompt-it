@@ -29,7 +29,7 @@ export async function getRepoBySlug(slug) {
 export async function getAllRepos() {
 	return await prisma.repo.findMany({
 		where: { isDeleted: false },
-		include: { stars: { where: { isDeleted: false } } }
+		include: { prompts: true, stars: { where: { isDeleted: false } } }
 	});
 }
 

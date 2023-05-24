@@ -8,7 +8,8 @@ export async function loadLanding() {
 			isDeleted: false
 		},
 		include: {
-			stars: { where: { isDeleted: false } }
+			stars: { where: { isDeleted: false } },
+			prompts: true,
 		},
 		orderBy: {
 			stars: {
@@ -23,7 +24,8 @@ export async function loadLanding() {
 			isDeleted: false,
 		},
 		include: {
-			stars: true
+			stars: true,
+			prompts: true,
 		},
 		orderBy: {
 			noTimesForked: 'desc',

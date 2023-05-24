@@ -1,5 +1,5 @@
 import { getDBUser } from '$lib/controllers/shared';
-import { PrismaClient } from "@prisma/client";
+import { PrismaClient } from '@prisma/client';
 
 const prisma = new PrismaClient();
 
@@ -9,10 +9,12 @@ export async function loadMyCollection(event) {
 	const createdBy = await prisma.repo.findMany({
 		where: {
 			authorId: dbUser.id,
-			isDeleted: false,
+			isDeleted: false
 		},
-		include: { stars: { where: { isDeleted: false } } }
+		include: { stars: { where: { isDeleted: false } }, prompts: true }
 	});
+
+	console.log('log createdBy', createdBy)
 
 	const forked = createdBy.filter((repo) => repo.parentId !== null);
 
@@ -21,7 +23,7 @@ export async function loadMyCollection(event) {
 			userId: dbUser.id,
 			isDeleted: false
 		},
-		include: { repo: { include: { stars: { where: { isDeleted: false } } } } }
+		include: { repo: { include: { prompts: true, stars: { where: { isDeleted: false } } } } }
 	});
 
 	return {
