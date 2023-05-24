@@ -41,7 +41,6 @@
 	async function validateForm() {
 		errors = {};
 		const formData = formDataToObject(new FormData(_form));
-		formData.tags = new FormData(_form).get('tags')
 
 		try {
 			repoSchema.validateSync(formData, { abortEarly: false });
@@ -51,8 +50,6 @@
 			});
 		}
 
-		console.log('log tags', formData.tags)
-		console.log('log errors', errors)
 		checkRepoNameUniqueness(formData);
 	}
 
@@ -83,7 +80,7 @@
 	function handleSubmit() {
 		return async ({ result }) => {
 			if (result.error) {
-				console.log(`[FRONTEND ERROR] in ${formName} form`, result.error);
+				console.log(`[FRONTEND ERROR] in ${formName}`, result.error);
 				// TODO show some error toser
 				onError(result.error);
 				return;

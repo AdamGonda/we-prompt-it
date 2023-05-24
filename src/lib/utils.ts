@@ -6,7 +6,7 @@ export function formDataToObject(formData) {
 	for (const [key, value] of formData.entries()) {
 		if (value === '') {
 			formValues[key] = value;
-		} else if (!isNaN(value)) {
+		} else if (!isNaN(value) && key !== 'tags') {
 			formValues[key] = Number(value);
 		} else {
 			formValues[key] = value;
