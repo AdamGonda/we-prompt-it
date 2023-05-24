@@ -1,6 +1,6 @@
 <script lang="ts">
 	import Navigation from '$lib/components/navigation.svelte';
-	import { searchFocused } from '$lib/stores/search';
+	import { searchFocused } from '$lib/stores/search-bar-store';
 
 </script>
 

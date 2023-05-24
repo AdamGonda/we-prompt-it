@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { page } from '$app/stores';
-	import { preSearchResultsNo, results, searchFocused } from '$lib/stores/search';
+	import { preSearchResultsNo, results, searchFocused } from '$lib/stores/search-bar-store';
 	import { goto, afterNavigate } from '$app/navigation';
 	import { onMount } from 'svelte';
 

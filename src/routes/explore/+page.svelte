@@ -4,7 +4,7 @@
 
 <script>
 	import { page } from '$app/stores';
-	import { results } from '$lib/stores/search';
+	import { results } from '$lib/stores/search-bar-store';
 	import RepoCard from '$lib/components/prompt-card.svelte';
 	import { onMount } from 'svelte';
 
