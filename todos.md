@@ -9,7 +9,7 @@ TODO explore page sorting
 TODO landing page
 TODO signup/login page
 TODO profile page
-TODO loading indicators
+TODO loading, feedback indicators
 
 # Tech
 TODO 500 page
