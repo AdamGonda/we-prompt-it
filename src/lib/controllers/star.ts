@@ -1,5 +1,5 @@
-import { PrismaClient } from "@prisma/client";
-import { getDBUser } from "./shared";
+import { PrismaClient } from '@prisma/client';
+import { getDBUser } from './shared';
 
 const prisma = new PrismaClient();
 
@@ -30,6 +30,17 @@ export async function addRemoveStar(event) {
 			}
 		});
 
+		await prisma.repo.update({
+			where: {
+				id: repoId
+			},
+			data: {
+				likeCount: {
+					increment: 1
+				}
+			}
+		});
+
 		return new Response(JSON.stringify({ status: 200, diff: 1 }));
 	}
 
@@ -43,6 +54,17 @@ export async function addRemoveStar(event) {
 				isDeleted: false
 			}
 		});
+
+		await prisma.repo.update({
+			where: {
+				id: repoId
+			},
+			data: {
+				likeCount: {
+					increment: 1
+				}
+			}
+		});
 		return new Response(JSON.stringify({ status: 200, diff: 1 }));
 	} else {
 		await prisma.star.update({
@@ -51,6 +73,17 @@ export async function addRemoveStar(event) {
 			},
 			data: {
 				isDeleted: true
+			}
+		});
+
+		await prisma.repo.update({
+			where: {
+				id: repoId
+			},
+			data: {
+				likeCount: {
+					increment: -1
+				}
 			}
 		});
 		return new Response(JSON.stringify({ status: 200, diff: -1 }));

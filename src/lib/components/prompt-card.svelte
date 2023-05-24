@@ -4,7 +4,7 @@
 
 	export let repo;
 	let inApp = false;
-	console.log('log repo', repo)
+	// console.log('log repo', repo)
 
 	if (browser && $page.data.session?.user) {
 		inApp = true;
@@ -27,7 +27,7 @@
 		
 		<footer class="footer">
 			<span>{repo.prompts[0].aiModel.name}</span>
-			<span>❤️ {repo.stars?.length}</span>
+			<span>❤️ {repo.likeCount}</span>
 			<span><img src="/fork-icon.png" alt="fork-icon" /> {repo.noTimesForked}</span>
 		</footer>
 	</div>

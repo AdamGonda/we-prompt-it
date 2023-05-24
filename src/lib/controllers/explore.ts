@@ -65,9 +65,7 @@ async function _search(event) {
 	handleAiModelQuery(query, event);
 	handleSortQuery(query, event);
 
-	console.log('log query', JSON.stringify(query, null, 2));
-
-	return await prisma.repo.findMany(query);
+	return await prisma.repo.findMany(query); 
 }
 // #endregion
 
@@ -149,13 +147,12 @@ function handleAiModelQuery(query, event) {
 }
 
 function handleSortQuery(query, event) {
-	const sort = event.url.searchParams.get('sort');
+	const sort = event.url.searchParams.get('sort_by');
 
 	if (sort === 'most_liked') {
+		console.log('log ', ) 
 		query.orderBy = {
-			stars: {
-				count: 'desc'
-			}
+			likeCount: 'desc'
 		};
 	} else if (sort === 'most_forked') {
 		query.orderBy = {
