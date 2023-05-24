@@ -7,6 +7,7 @@
 	import { results } from '$lib/stores/search-bar-store';
 	import RepoCard from '$lib/components/prompt-card.svelte';
 	import { onMount } from 'svelte';
+	import Filters from '$lib/components/filters.svelte';
 
 	const {r} = $page.data;
 	let resultsToShow = r;
@@ -24,6 +25,7 @@
 </script>
 
 <main>
+	<Filters />
 	<h1>Explore</h1>
 
 	<h3>All prompts</h3>
