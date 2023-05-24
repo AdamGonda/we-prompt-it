@@ -1,7 +1,6 @@
-import { results } from './../stores/search-bar-store';
-import { PrismaClient } from "@prisma/client";
-import { json } from "@sveltejs/kit";
-import { getAllRepos } from "./shared";
+import { PrismaClient } from '@prisma/client';
+import { json } from '@sveltejs/kit';
+import { getAllRepos } from './shared';
 
 const prisma = new PrismaClient();
 
@@ -11,11 +10,11 @@ export async function preSearchResultsNo(event) {
 	const rawResults = await _search(query);
 
 	if (query) {
-		if(rawResults.length === 0) {
-			json(0)
+		if (rawResults.length === 0) {
+			json(0);
 		}
-	
-		return json(rawResults.length)
+
+		return json(rawResults.length);
 	}
 
 	return json([]);
@@ -38,73 +37,129 @@ export async function loadExplore(event) {
 }
 // #endregion
 
-// #region PRIVATE 
+// #region PRIVATE
 async function _search(event) {
+	// examples:
 	// search_bar=a big fat 123 mag
-	// &tags=openai,midjuerny,cool,education
-	// &prompt_min_length=10
-	// &prompt_max_length=50
-	// &sort=most_liked
-	const searchParams = event.url.searchParams;
-	console.log('log searchParams', searchParams)
-	const query = searchParams.get('search_bar');
+	// tags=openai,midjuerny,cool,education
+	// ai_model=OpenAI
+	// sort=most_liked | most_forked
 
-
-	return await prisma.repo.findMany({
+	const query = {
 		where: {
-			OR: [
+			AND: [
 				{
-					name: {
-						contains: query,
-						mode: 'insensitive'
-					}
-				},
-				{
-					description: {
-						contains: query,
-						mode: 'insensitive'
-					}
-				},
-				{
-          prompts: {
-            some: {
-              content: {
-                contains: query,
-                mode: 'insensitive'
-              }
-            }
-          }
-        },
-        {
-          prompts: {
-            some: {
-              aiModel: {
-                name: {
-                  contains: query,
-                  mode: 'insensitive'
-                }
-              }
-            }
-          }
-        },
-				{
-					tags: {
-						some: {
-							name: {
-								contains: query,
-								mode: 'insensitive'
-							}
-						}
-					}
+					isDeleted: false
 				}
-			],
-			isDeleted: false
+			]
 		},
 		include: {
 			tags: { where: { isDeleted: false } },
 			stars: { where: { isDeleted: false } },
-			prompts: { include: { aiModel: true } },
+			prompts: { include: { aiModel: true } }
 		}
-	});
+	};
+
+	handleSearchbarQueryes(query, event);
+	handleTagsQueryes(query, event);
+	handleAiModelQuery(query, event);
+	handleSortQuery(query, event);
+
+	console.log('log query', JSON.stringify(query, null, 2));
+
+	return await prisma.repo.findMany(query);
 }
 // #endregion
+
+function handleSearchbarQueryes(query, event) {
+	let searchBar = event.url.searchParams.get('search_bar');
+
+	if (searchBar === null) {
+		return;
+	}
+
+	if (searchBar.includes(' ')) {
+		searchBar = `'${searchBar}'`;
+	}
+
+	const searchInName = {
+		name: {
+			contains: searchBar,
+			mode: 'insensitive'
+		}
+	};
+
+	const searchInDescription = {
+		description: {
+			contains: searchBar,
+			mode: 'insensitive'
+		}
+	};
+
+	const searchInPromptsContent = {
+		prompts: {
+			some: {
+				AND: [
+					{
+						content: {
+							contains: searchBar,
+							mode: 'insensitive'
+						}
+					}
+				]
+			}
+		}
+	};
+
+	if (searchBar) { 
+		query.where.OR = [searchInName, searchInDescription, searchInPromptsContent];
+	}
+}
+
+function handleTagsQueryes(query, event) {
+	const tags = event.url.searchParams.get('tags')?.split(',') || [];
+
+	if (tags?.length > 0) {
+		query.where.AND.push({
+			tags: {
+				every: {
+					name: {
+						in: tags
+					}
+				}
+			}
+		});
+	}
+}
+
+function handleAiModelQuery(query, event) {
+	const aiModel = event.url.searchParams.get('ai_model');
+
+	if (aiModel) {
+		query.where.AND.push({
+			prompts: {
+				some: {
+					aiModel: {
+						name: aiModel
+					}
+				}
+			}
+		});
+	}
+}
+
+function handleSortQuery(query, event) {
+	const sort = event.url.searchParams.get('sort');
+
+	if (sort === 'most_liked') {
+		query.orderBy = {
+			stars: {
+				count: 'desc'
+			}
+		};
+	} else if (sort === 'most_forked') {
+		query.orderBy = {
+			noTimesForked: 'desc'
+		};
+	}
+}
