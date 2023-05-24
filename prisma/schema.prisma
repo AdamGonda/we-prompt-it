@@ -9,59 +9,45 @@ datasource db {
 }
 
 model User {
-  id            Int             @id @default(autoincrement())
-  email         String          @unique
-  firstName     String
-  lastName      String
-  username      String          @unique
-  picture       String          @default("")
-  createdAt     DateTime        @default(now())
-  updatedAt     DateTime        @updatedAt
-  repos         Repo[]
-  likedRepos    Like[]
-  reputation    Int             @default(0)
-  followers     Follower[]      @relation("Followers")
-  followings    Follower[]      @relation("Followings")
-  changeRequest ChangeRequest[]
-  comments      Comment[]
-  isDeleted     Boolean         @default(false)
-}
-
-model Repo {
-  id            Int    @id @default(autoincrement())
-  name          String
-  slug          String @unique
-  description   String @default("")
-  noTimesForked Int    @default(0)
-
-  createdAt      DateTime        @default(now())
-  updatedAt      DateTime        @updatedAt
-  isDeleted      Boolean         @default(false)
-  authorId       Int
-  author         User            @relation(fields: [authorId], references: [id])
-  likes          Like[]
-  tags           Tag[]
-  comments       Comment[]
-  changeRequests ChangeRequest[]
-  prompts        Prompt[]
-
-  parentId   Int?
-  parentRepo Repo?  @relation("ChildRepos", fields: [parentId], references: [id])
-  childRepos Repo[] @relation("ChildRepos")
+  id           Int        @id @default(autoincrement())
+  email        String     @unique
+  firstName    String
+  lastName     String
+  username     String     @unique
+  picture      String     @default("")
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
+  prompts      Prompt[]
+  likedprompts Like[]
+  reputation   Int        @default(0)
+  followers    Follower[] @relation("Followers")
+  followings   Follower[] @relation("Followings")
+  comments     Comment[]
+  isDeleted    Boolean    @default(false)
 }
 
 model Prompt {
-  id        Int     @id @default(autoincrement())
-  version   Int     @default(1)
-  content   String
-  isDeleted Boolean @default(false)
+  id          Int    @id @default(autoincrement())
+  name        String
+  slug        String @unique
+  description String @default("")
+  forkedCount Int    @default(0)
+  content     String
 
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  isDeleted Boolean   @default(false)
   aiModelId Int?
-  aiModel   AiModel? @relation(fields: [aiModelId], references: [id])
-  repoId    Int
-  repo      Repo     @relation(fields: [repoId], references: [id])
+  aiModel   AiModel?  @relation(fields: [aiModelId], references: [id])
+  authorId  Int
+  author    User      @relation(fields: [authorId], references: [id])
+  likes     Like[]
+  tags      Tag[]
+  comments  Comment[]
+
+  parentId      Int?
+  parentPrompts Prompt?  @relation("ChildPrompts", fields: [parentId], references: [id])
+  childPrompts  Prompt[] @relation("ChildPrompts")
 }
 
 model AiModel {
@@ -72,46 +58,28 @@ model AiModel {
   isDeleted Boolean  @default(false)
 }
 
-model ChangeRequest {
-  id          Int    @id @default(autoincrement())
-  title       String
-  description String
-  content     String
-
-  repoId    Int?
-  repo      Repo?     @relation(fields: [repoId], references: [id])
-  createdAt DateTime  @default(now())
-  updatedAt DateTime  @updatedAt
-  authorId  Int
-  author    User      @relation(fields: [authorId], references: [id])
-  comments  Comment[]
-  isDeleted Boolean   @default(false)
-}
-
 model Comment {
-  id              Int            @id @default(autoincrement())
-  content         String
-  createdAt       DateTime       @default(now())
-  updatedAt       DateTime       @updatedAt
-  authorId        Int
-  author          User           @relation(fields: [authorId], references: [id])
-  repoId          Int?
-  repo            Repo?          @relation(fields: [repoId], references: [id])
-  changeRequestId Int?
-  changeRequest   ChangeRequest? @relation(fields: [changeRequestId], references: [id])
-  isDeleted       Boolean        @default(false)
+  id        Int      @id @default(autoincrement())
+  content   String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  authorId  Int
+  author    User     @relation(fields: [authorId], references: [id])
+  promptId  Int?
+  prompt    Prompt?  @relation(fields: [promptId], references: [id])
+  isDeleted Boolean  @default(false)
 }
 
 model Like {
   id        Int      @id @default(autoincrement())
   userId    Int
   user      User     @relation(fields: [userId], references: [id])
-  repoId    Int
-  repo      Repo     @relation(fields: [repoId], references: [id])
+  promptId  Int
+  Prompt    Prompt   @relation(fields: [promptId], references: [id])
   createdAt DateTime @default(now())
   isDeleted Boolean  @default(false)
 
-  @@unique([userId, repoId])
+  @@unique([userId, promptId])
 }
 
 model Follower {
@@ -128,8 +96,8 @@ model Follower {
 }
 
 model Tag {
-  id        Int     @id @default(autoincrement())
-  name      String  @unique
-  repos     Repo[]
-  isDeleted Boolean @default(false)
+  id        Int      @id @default(autoincrement())
+  name      String   @unique
+  prompts   Prompt[]
+  isDeleted Boolean  @default(false)
 }

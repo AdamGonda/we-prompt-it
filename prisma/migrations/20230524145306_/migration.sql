@@ -1,2 +1,0 @@
--- AlterTable
-ALTER TABLE "Repo" ADD COLUMN     "likeCount" INTEGER NOT NULL DEFAULT 0;
