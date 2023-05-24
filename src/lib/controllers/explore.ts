@@ -60,16 +60,16 @@ async function _search(event) {
 		}
 	};
 
-	handleSearchbarQueryes(query, event);
-	handleTagsQueryes(query, event);
-	handleAiModelQuery(query, event);
-	handleSortQuery(query, event);
+	handleSearchBar(query, event);
+	handleTags(query, event);
+	handleAiModel(query, event);
+	handleSortBy(query, event);
 
 	return await prisma.repo.findMany(query); 
 }
 // #endregion
 
-function handleSearchbarQueryes(query, event) {
+function handleSearchBar(query, event) {
 	let searchBar = event.url.searchParams.get('search_bar');
 
 	if (searchBar === null) {
@@ -114,13 +114,13 @@ function handleSearchbarQueryes(query, event) {
 	}
 }
 
-function handleTagsQueryes(query, event) {
+function handleTags(query, event) {
 	const tags = event.url.searchParams.get('tags')?.split(',') || [];
-
+	console.log('log tags', tags)
 	if (tags?.length > 0) {
 		query.where.AND.push({
 			tags: {
-				every: {
+				some: {
 					name: {
 						in: tags
 					}
@@ -130,7 +130,7 @@ function handleTagsQueryes(query, event) {
 	}
 }
 
-function handleAiModelQuery(query, event) {
+function handleAiModel(query, event) {
 	const aiModel = event.url.searchParams.get('ai_model');
 
 	if (aiModel) {
@@ -146,16 +146,18 @@ function handleAiModelQuery(query, event) {
 	}
 }
 
-function handleSortQuery(query, event) {
-	const sort = event.url.searchParams.get('sort_by');
+function handleSortBy(query, event) {
+	const sort = event.url.searchParams.getAll('sort_by');
 
-	if (sort === null) {
+	console.log('log sort', sort)
+
+	if (sort.length === 0) {
 		return;
 	}
 
 	query.orderBy = []
 
-	if (sort === 'most_liked') {
+	if (sort.includes('most_liked')) {
 		query.orderBy.push({
 			likes: {
 				_count: 'desc' 
@@ -163,7 +165,7 @@ function handleSortQuery(query, event) {
 		})	
 	}
 	
-	if (sort === 'most_forked') {
+	if (sort.includes('most_forked')) {
 		query.orderBy.push( {
 			noTimesForked: 'desc'
 		})
