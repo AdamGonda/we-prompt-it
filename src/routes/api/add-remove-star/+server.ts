@@ -1,3 +1,3 @@
-import { addRemoveStar } from '$lib/controllers/star';
+import { addRemoveLike } from '$lib/controllers/like';
 
-export const POST = addRemoveStar;
+export const POST = addRemoveLike;

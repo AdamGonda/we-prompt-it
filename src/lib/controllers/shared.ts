@@ -8,7 +8,7 @@ export async function getRepoBySlug(slug) {
 		where: { slug, isDeleted: false },
 		include: {
 			author: true, // TODO is this ok?
-			stars: { where: { isDeleted: false } },
+			likes:  { where: { isDeleted: false } },
 			changeRequests: { where: { isDeleted: false } },
 			prompts: { where: { isDeleted: false } },
 			tags: { where: { isDeleted: false } }
@@ -29,7 +29,7 @@ export async function getRepoBySlug(slug) {
 export async function getAllRepos() {
 	return await prisma.repo.findMany({
 		where: { isDeleted: false },
-		include: { prompts: true, stars: { where: { isDeleted: false } } }
+		include: { prompts: true, likes:  { where: { isDeleted: false } } }
 	});
 }
 

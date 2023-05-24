@@ -8,11 +8,11 @@ export async function loadLanding() {
 			isDeleted: false
 		},
 		include: {
-			stars: { where: { isDeleted: false } },
+			likes:  { where: { isDeleted: false } },
 			prompts: true,
 		},
 		orderBy: {
-			stars: {
+			likes:  {
 				_count: 'desc'
 			}
 		},
@@ -24,7 +24,7 @@ export async function loadLanding() {
 			isDeleted: false,
 		},
 		include: {
-			stars: true,
+			likes:  true,
 			prompts: true,
 		},
 		orderBy: {

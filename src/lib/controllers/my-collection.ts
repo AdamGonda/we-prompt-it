@@ -11,22 +11,22 @@ export async function loadMyCollection(event) {
 			authorId: dbUser.id,
 			isDeleted: false
 		},
-		include: { stars: { where: { isDeleted: false } }, prompts: true }
+		include: { likes:  { where: { isDeleted: false } }, prompts: true }
 	});
 
 	const forked = createdBy.filter((repo) => repo.parentId !== null);
 
-	const stars = await prisma.star.findMany({
+	const like = await prisma.like.findMany({
 		where: {
 			userId: dbUser.id,
 			isDeleted: false
 		},
-		include: { repo: { include: { prompts: true, stars: { where: { isDeleted: false } } } } }
+		include: { repo: { include: { prompts: true, likes:  { where: { isDeleted: false } } } } }
 	});
 
 	return {
 		forked,
 		createdBy,
-		starred: stars?.map((star) => star.repo)
+		liked: like?.map((like) => like.repo)
 	};
 }

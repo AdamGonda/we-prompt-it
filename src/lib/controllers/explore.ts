@@ -55,7 +55,7 @@ async function _search(event) {
 		},
 		include: {
 			tags: { where: { isDeleted: false } },
-			stars: { where: { isDeleted: false } },
+			likes:  { where: { isDeleted: false } },
 			prompts: { include: { aiModel: true } }
 		}
 	};
@@ -152,7 +152,9 @@ function handleSortQuery(query, event) {
 	if (sort === 'most_liked') {
 		console.log('log ', ) 
 		query.orderBy = {
-			likeCount: 'desc'
+			likes: {
+				_count: 'desc'
+			}
 		};
 	} else if (sort === 'most_forked') {
 		query.orderBy = {

@@ -33,7 +33,6 @@ model Repo {
   slug          String @unique
   description   String @default("")
   noTimesForked Int    @default(0)
-  likeCount     Int    @default(0)
 
   createdAt      DateTime        @default(now())
   updatedAt      DateTime        @updatedAt

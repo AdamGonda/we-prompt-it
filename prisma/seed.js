@@ -67,7 +67,6 @@ async function main() {
 			description: 'Rediscover the forbidden [key] melodies in a world without music',
 			name: 'Melodies Unheard 1',
 			slug: 'adamgonda-melodies-unheard-1',
-			likeCount: 2,
 			author: {
 				connect: {
 					id: adamUser.id
@@ -102,7 +101,6 @@ async function main() {
 				'In a world where colors have been forgotten, one artist has discovered the secret of the rainbow',
 			name: 'Colors Rediscovered 2',
 			slug: 'test1-colors-rediscovered-2',
-			likeCount: 2,
 			authorId: testUser1.id,
 			prompts: {
 				create: {
@@ -126,7 +124,6 @@ async function main() {
 				'An ancient language long lost to history has been rediscovered by an unassuming librarian',
 			name: 'Language Unearthed 3',
 			slug: 'test2-language-unearthed-3',
-			likeCount: 3,
 			authorId: testUser2.id,
 			prompts: {
 				create: {
@@ -153,7 +150,6 @@ async function main() {
 			description: 'Lorem ipsum dolor sit amet',
 			name: 'Repo 4',
 			slug: 'repo-4',
-			likeCount: 2,
 			authorId: adamUser.id,
 			prompts: {
 				create: {
@@ -175,7 +171,6 @@ async function main() {
 			description: 'Lorem ipsum dolor sit amet',
 			name: 'Repo 5',
 			slug: 'repo-5',
-			likeCount: 2,
 			authorId: testUser1.id,
 			prompts: {
 				create: {
@@ -197,7 +192,6 @@ async function main() {
 			description: 'Lorem ipsum dolor sit amet',
 			name: 'Repo 6',
 			slug: 'repo-6',
-			likeCount: 2,
 			authorId: testUser2.id,
 			prompts: {
 				create: {
@@ -219,7 +213,6 @@ async function main() {
 			description: 'Lorem ipsum dolor sit amet',
 			name: 'Repo 7',
 			slug: 'repo-7',
-			likeCount: 3,
 			authorId: adamUser.id,
 			prompts: {
 				create: {
@@ -246,7 +239,6 @@ async function main() {
 			name: 'Repo 8',
 			slug: 'repo-8',
 			authorId: testUser1.id,
-			likeCount: 2,
 			prompts: {
 				create: {
 					content: 'Prompt for Repo 8',
