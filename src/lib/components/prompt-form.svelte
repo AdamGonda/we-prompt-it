@@ -1,6 +1,6 @@
 <script>
 	import { enhance } from '$app/forms';
-	import { formDataToObject} from '$lib/utils';
+	import { formDataToObject } from '$lib/utils';
 	import { repoSchema } from '$lib/yup-schemas';
 	import _ from 'lodash';
 	import { onMount } from 'svelte';
@@ -173,11 +173,6 @@
 		</select>
 	</label>
 
-	<label for="tags">
-		Tags
-		<Tags />
-	</label>
-
 	{#if showAddNewModel}
 		<div>
 			<label for="newModelName">
@@ -212,6 +207,11 @@
 			</label>
 		</div>
 	{/if}
+
+	<label for="tags">
+		Tags
+		<Tags />
+	</label>
 
 	<slot {disabled}>
 		<input type="submit" {disabled} />
