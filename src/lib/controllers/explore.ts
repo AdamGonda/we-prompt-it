@@ -34,16 +34,20 @@ export async function search(event) {
 
 // #region LOADERS
 export async function loadExplore(event) {
-
-	return { r: await getAllRepos() };
+	return { r: await _search(event) };
 }
 // #endregion
 
 // #region PRIVATE 
 async function _search(event) {
-	// ?bar=a big fat 123 mag&tas=openai,midjuerny,cool,education&prompt_min_length=10&prompt_max_length=50&sort=most_liked
+	// search_bar=a big fat 123 mag
+	// &tags=openai,midjuerny,cool,education
+	// &prompt_min_length=10
+	// &prompt_max_length=50
+	// &sort=most_liked
 	const searchParams = event.url.searchParams;
-	const query = searchParams.get('bar');
+	console.log('log searchParams', searchParams)
+	const query = searchParams.get('search_bar');
 
 
 	return await prisma.repo.findMany({
