@@ -39,12 +39,6 @@ export async function loadExplore(event) {
 
 // #region PRIVATE
 async function _search(event) {
-	// examples:
-	// search_bar=a big fat 123 mag
-	// tags=openai,midjuerny,cool,education
-	// ai_model=OpenAI
-	// sort=most_liked | most_forked
-
 	const query = {
 		where: {
 			AND: [
