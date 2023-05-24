@@ -173,7 +173,7 @@ export async function loadEdit({ params }) {
 		});
 	}
 
-	return { repo, aiModels, tags: tags.map(tag => tag.name) };
+	return { repo, aiModels, tags };
 }
 
 export async function loadCreateRepo() {

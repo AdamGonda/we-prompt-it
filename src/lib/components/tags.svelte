@@ -1,12 +1,25 @@
 <script>
-	export let allTags = [];
-	export let existingTags = [];
-	let _tags = existingTags;
+	import { page } from "$app/stores";
+
+	const allTags = getAllTags();
+	let _tags = getExistingRepoTags();
 	let input = '';
 	let selectsFromSuggested = false;
 	let selectedIdx = -1;
 	$: tags = _tags.join(', ');
 	$: matches = getMatches(input);
+
+	function getAllTags() {
+		const tags = $page.data?.tags?.map((tag) => tag.name)
+
+		return tags ? tags : [];
+	}
+
+	function getExistingRepoTags(){
+		const tags = $page.data?.repo?.tags.map((tag) => tag.name)
+
+		return tags ? tags : [];
+	}
 
 	function getMatches(input) {
 		if (input === '') {
