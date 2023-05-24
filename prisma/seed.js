@@ -87,7 +87,7 @@ async function main() {
 				]
 			},
 			tags: {
-				connect: [{ id: tag1.id }, { id: tag3.id}]
+				connect: [{ id: tag1.id }, { id: tag3.id }]
 			},
 			stars: {
 				create: [{ userId: testUser1.id }, { userId: testUser2.id }]
@@ -137,6 +137,111 @@ async function main() {
 			},
 			stars: {
 				create: [{ userId: adamUser.id }, { userId: testUser1.id }]
+			}
+		}
+	});
+
+	const repo4 = await prisma.repo.create({
+		data: {
+			description: 'Lorem ipsum dolor sit amet',
+			name: 'Repo 4',
+			slug: 'repo-4',
+			authorId: adamUser.id,
+			prompts: {
+				create: {
+					content: 'Prompt for Repo 4',
+					aiModelId: aiModel1.id
+				}
+			},
+			tags: {
+				connect: [{ id: tag1.id }, { id: tag2.id }]
+			},
+			stars: {
+				create: [{ userId: testUser1.id }, { userId: testUser2.id }]
+			}
+		}
+	});
+
+	const repo5 = await prisma.repo.create({
+		data: {
+			description: 'Lorem ipsum dolor sit amet',
+			name: 'Repo 5',
+			slug: 'repo-5',
+			authorId: testUser1.id,
+			prompts: {
+				create: {
+					content: 'Prompt for Repo 5',
+					aiModelId: aiModel2.id
+				}
+			},
+			tags: {
+				connect: [{ id: tag2.id }, { id: tag3.id }]
+			},
+			stars: {
+				create: [{ userId: adamUser.id }, { userId: testUser1.id }]
+			}
+		}
+	});
+
+	const repo6 = await prisma.repo.create({
+		data: {
+			description: 'Lorem ipsum dolor sit amet',
+			name: 'Repo 6',
+			slug: 'repo-6',
+			authorId: testUser2.id,
+			prompts: {
+				create: {
+					content: 'Prompt for Repo 6',
+					aiModelId: aiModel1.id
+				}
+			},
+			tags: {
+				connect: [{ id: tag1.id }, { id: tag3.id }]
+			},
+			stars: {
+				create: [{ userId: adamUser.id }, { userId: testUser2.id }]
+			}
+		}
+	});
+
+	const repo7 = await prisma.repo.create({
+		data: {
+			description: 'Lorem ipsum dolor sit amet',
+			name: 'Repo 7',
+			slug: 'repo-7',
+			authorId: adamUser.id,
+			prompts: {
+				create: {
+					content: 'Prompt for Repo 7',
+					aiModelId: aiModel2.id
+				}
+			},
+			tags: {
+				connect: [{ id: tag2.id }, { id: tag3.id }]
+			},
+			stars: {
+				create: [{ userId: testUser1.id }, { userId: testUser2.id }]
+			}
+		}
+	});
+
+	const repo8 = await prisma.repo.create({
+		data: {
+			description: 'Lorem ipsum dolor sit amet',
+			name: 'Repo 8',
+			slug: 'repo-8',
+			authorId: testUser1.id,
+			prompts: {
+				create: {
+					content: 'Prompt for Repo 8',
+					aiModelId: aiModel1.id
+				}
+			},
+			tags: {
+				connect: [{ id: tag1.id }, { id: tag2.id }]
+			},
+			stars: {
+				create: [{ userId: adamUser.id }, { userId: testUser2.id }]
 			}
 		}
 	});
