@@ -18,7 +18,7 @@ model User {
   createdAt     DateTime        @default(now())
   updatedAt     DateTime        @updatedAt
   repos         Repo[]
-  starredRepos  Star[]
+  likedRepos    Like[]
   reputation    Int             @default(0)
   followers     Follower[]      @relation("Followers")
   followings    Follower[]      @relation("Followings")
@@ -33,14 +33,14 @@ model Repo {
   slug          String @unique
   description   String @default("")
   noTimesForked Int    @default(0)
-  likeCount         Int    @default(0)
+  likeCount     Int    @default(0)
 
   createdAt      DateTime        @default(now())
   updatedAt      DateTime        @updatedAt
   isDeleted      Boolean         @default(false)
   authorId       Int
   author         User            @relation(fields: [authorId], references: [id])
-  stars          Star[]
+  likes          Like[]
   tags           Tag[]
   comments       Comment[]
   changeRequests ChangeRequest[]
@@ -103,7 +103,7 @@ model Comment {
   isDeleted       Boolean        @default(false)
 }
 
-model Star {
+model Like {
   id        Int      @id @default(autoincrement())
   userId    Int
   user      User     @relation(fields: [userId], references: [id])
