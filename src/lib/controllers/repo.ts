@@ -95,6 +95,7 @@ export async function forkRepo(event: RequestEvent) {
 	const slug = event.params.slug;
 	const data = await validateForm(event);
 	const aiModelId = await getAiModel(data);
+	const incomingTagIds = await getTagIds(data);
 
 	if (!dbUser) {
 		throw Error('No user or parent repo found');
@@ -131,10 +132,12 @@ export async function forkRepo(event: RequestEvent) {
 					content: data.content,
 					aiModelId
 				}
+			},
+			tags: {
+				connect: incomingTagIds
+					? incomingTagIds.map((tagId) => ({ id: tagId }))
+					: undefined
 			}
-			// tags: {
-			// 	connect: [{ id: tag1.id }]
-			// },
 		}
 	});
 }
