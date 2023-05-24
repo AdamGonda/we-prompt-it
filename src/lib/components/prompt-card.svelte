@@ -27,7 +27,7 @@
 		
 		<footer class="footer">
 			<span>{repo.prompts[0].aiModel.name}</span>
-			<span>❤️ {repo.likeCount}</span>
+			<span>❤️ {repo.likes.length}</span>
 			<span><img src="/fork-icon.png" alt="fork-icon" /> {repo.noTimesForked}</span>
 		</footer>
 	</div>
