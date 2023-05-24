@@ -12,11 +12,17 @@ const prisma = new PrismaClient();
 export async function createRepo(event: RequestEvent) {
 	const user = await getDBUser(event);
 	const data = await validateForm(event);
-	const aiModelId = await getAiModel(data)
+	const aiModelId = await getAiModel(data);
+	const incomingTagIds = await getTagIds(data);
 
 	return await prisma.repo.create({
 		data: {
 			description: data.description,
+			tags: {
+				connect: incomingTagIds
+					? incomingTagIds.map((tagId) => ({ id: tagId }))
+					: undefined
+			},
 			name: data.name,
 			author: {
 				connect: {
@@ -30,9 +36,6 @@ export async function createRepo(event: RequestEvent) {
 					aiModelId
 				}
 			}
-			// tags: {
-			// 	connect: [{ id: tag1.id }]
-			// },
 		}
 	});
 }
@@ -41,9 +44,9 @@ export async function editRepo(event: RequestEvent) {
 	const slug = event.params.slug;
 	const user = await getDBUser(event);
 	const data = await validateForm(event);
-	const aiModelId = await getAiModel(data)
-	const incomingTagIds = await getTagIds(data)
-	
+	const aiModelId = await getAiModel(data);
+	const incomingTagIds = await getTagIds(data);
+
 	const repoToEdit = await prisma.repo.findFirst({
 		where: { slug, isDeleted: false },
 		include: { prompts: true, tags: true }
@@ -58,7 +61,9 @@ export async function editRepo(event: RequestEvent) {
 	}
 
 	const updateSlug = repoToEdit.name !== data.name;
-	const tagIdsToRemove = repoToEdit.tags.map((tag) => tag.id).filter((tagId) => !incomingTagIds?.includes(tagId));
+	const tagIdsToRemove = repoToEdit.tags
+		.map((tag) => tag.id)
+		.filter((tagId) => !incomingTagIds?.includes(tagId));
 
 	return await prisma.repo.update({
 		where: { slug },
@@ -67,26 +72,29 @@ export async function editRepo(event: RequestEvent) {
 			slug: updateSlug ? convertToSlug(user.username, data.name) : repoToEdit.slug,
 			description: data.description,
 			tags: {
-				connect: incomingTagIds ? incomingTagIds.map((tagId) => ({ id: tagId })): undefined,
-				disconnect: tagIdsToRemove ? tagIdsToRemove.map((tagId) => ({ id: tagId })): undefined,
+				connect: incomingTagIds
+					? incomingTagIds.map((tagId) => ({ id: tagId }))
+					: undefined,
+				disconnect: tagIdsToRemove
+					? tagIdsToRemove.map((tagId) => ({ id: tagId }))
+					: undefined
 			},
 			prompts: {
 				create: {
 					version: repoToEdit.prompts.length + 1,
 					content: data.content,
-					aiModelId,
-				},
-			},
-		},
+					aiModelId
+				}
+			}
+		}
 	});
-	
 }
 
 export async function forkRepo(event: RequestEvent) {
 	const dbUser = await getDBUser(event);
 	const slug = event.params.slug;
 	const data = await validateForm(event);
-	const aiModelId = await getAiModel(data)
+	const aiModelId = await getAiModel(data);
 
 	if (!dbUser) {
 		throw Error('No user or parent repo found');
