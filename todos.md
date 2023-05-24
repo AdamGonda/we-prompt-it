@@ -9,7 +9,6 @@ TODO explore page sorting
 TODO landing page
 TODO signup/login page
 TODO profile page
-TODO add a button to copy the prompt to clipboard
 TODO loading indicators
 
 # Tech
