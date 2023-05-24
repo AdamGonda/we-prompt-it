@@ -15,7 +15,7 @@
 		<span><b><u>{repo.name}</u></b></span>
 		
 		<main>
-			<span>{repo.prompts[0].content}</span>
+			<p>{repo.prompts[0].content}</p>
 		</main>
 		
 		<footer class="footer">
@@ -50,6 +50,12 @@
 
 	main {
 		margin-top: 6px;
+	}
+
+	main p {
+		line-height: 18px;
+		font-size: 16px;
+		font-weight: normal;
 	}
 
 	footer {
