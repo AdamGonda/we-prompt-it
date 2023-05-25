@@ -33,7 +33,10 @@ export async function getAllAIModels() {
 }
 
 export async function getAllTags() {
-	return await prisma.tag.findMany();
+	return await prisma.tag.findMany({
+		where: { isDeleted: false },
+		orderBy: { prompts: { _count: 'desc' } },
+	});
 }
 
 export async function getDBUser(event) {

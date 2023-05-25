@@ -3,7 +3,6 @@
 	import { page } from '$app/stores';
 	import { navigationHappendBefore } from '$lib/stores/filters-store';
 	import searchStore from '$lib/stores/search-store';
-	import { formDataToObject } from '$lib/utils';
 	import { onMount } from 'svelte';
 
 	let form;
@@ -12,7 +11,8 @@
 	let sortBy;
 	$: isChecked = {
 		mostLiked: $page.url.search.includes('most_liked'),
-		mostForked: $page.url.search.includes('most_forked')
+		mostForked: $page.url.search.includes('most_forked'),
+		tag: (tagName) => $page.url.search.includes(tagName)
 	};
 
 	onMount(async () => {
@@ -38,6 +38,7 @@
 
 	function mapFormDataToVars() {
 		sortBy = new FormData(form).getAll('sort_by')
+		tag = new FormData(form).getAll('tag')
 	}
 
 	async function handleInput() {
@@ -88,6 +89,16 @@
 			<input checked={isChecked.mostForked} type="checkbox" name="sort_by" value="most_forked" />
 			Most forked
 		</label>
+	</fieldset>
+
+	<fieldset>
+		<legend>Tags</legend>
+		{#each $page.data.tags as tag}
+			<label>
+				<input checked={isChecked.tag(tag.name)} type="checkbox" name="tag" value={tag.name} />
+				{tag.name}
+			</label>
+		{/each}
 	</fieldset>
 </form>
 

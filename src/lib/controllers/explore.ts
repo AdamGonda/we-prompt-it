@@ -1,5 +1,6 @@
 import { PrismaClient } from '@prisma/client';
 import { json } from '@sveltejs/kit';
+import { getAllTags } from './shared';
 
 const prisma = new PrismaClient();
 
@@ -26,7 +27,10 @@ export async function search(event) {
 
 // #region LOADERS
 export async function loadExplore(event) {
-	return { initialResults: await _search(event) };
+	return { 
+		prompts: await _search(event),
+		tags: await getAllTags()
+	};
 }
 // #endregion
 

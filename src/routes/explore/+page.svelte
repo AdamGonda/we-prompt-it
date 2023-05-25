@@ -10,8 +10,8 @@
 	import Filters from '$lib/components/filters.svelte';
 	import searchStore from '$lib/stores/search-store';
 
-	const { initialResults } = $page.data;
-	let resultsToShow = initialResults;
+	const { prompts } = $page.data;
+	let resultsToShow = prompts;
 	let frontendLoaded = false;
 
 	searchStore.subscribe((value) => {
