@@ -49,6 +49,7 @@ async function _search(event) {
 		include: {
 			tags: { where: { isDeleted: false } },
 			likes:  { where: { isDeleted: false } },
+			aiModel: true 
 		}
 	};
 
