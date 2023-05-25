@@ -12,13 +12,11 @@
 	let sortBy;
 
 	onMount(async () => {
-		initFiltersFromURL();
-
-		console.log('log sortBy', sortBy)
+		initVarsFromURL();
 
 		if ($navigationHappendBefore) {
 			await searchStore.search({
-				endpoint: `/api/search?${getSearchParams()}`
+				endpoint: `/api/search?${varsToQuerystring()}`
 			});
 		}
 	});
@@ -27,14 +25,27 @@
 		navigationHappendBefore.set(true);
 	});
 
-	function initFiltersFromURL() {
+	function initVarsFromURL() {
 		let searchParams = new URLSearchParams($page.url.search);
 		tag = searchParams.getAll('tag');
 		aiModel = searchParams.get('ai_model');
 		sortBy = searchParams.getAll('sort_by');
 	}
 
-	function getSearchParams() {
+	function mapFormDataToVars() {
+		sortBy = new FormData(form).getAll('sort_by')
+	}
+
+	async function handleInput() {
+		mapFormDataToVars();
+
+		await searchStore.search({
+			endpoint: `/api/search?${varsToQuerystring()}`,
+			updateURL: `/explore?${varsToQuerystring()}`
+		});
+	}
+
+	function varsToQuerystring() {
 		let searchParams = new URLSearchParams();
 
 		if (tag) {
@@ -54,19 +65,6 @@
 		}
 
 		return searchParams.toString();
-	}
-
-	function mapFormDataToFields() {
-		sortBy = new FormData(form).getAll('sort_by')
-	}
-
-	async function handleInput() {
-		mapFormDataToFields();
-
-		await searchStore.search({
-			endpoint: `/api/search?${getSearchParams()}`,
-			updateURL: `/explore?${getSearchParams()}`
-		});
 	}
 </script>
 
