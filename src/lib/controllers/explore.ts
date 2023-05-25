@@ -148,7 +148,7 @@ function handleSortBy(query, event) {
 
 	if (sort.includes('most_forked')) {
 		query.orderBy.push({
-			noTimesForked: 'desc'
+			forkedCount: 'desc'
 		});
 	}
 }
