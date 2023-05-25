@@ -18,6 +18,7 @@
 	<a href={`/`} >
 		<img src="/weprompt-logo.svg" alt="logo" width="50px" />
 	</a>
+	
 	<SearchBar />
 
 	{#if user}
