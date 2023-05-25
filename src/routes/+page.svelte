@@ -4,7 +4,7 @@
 
 <script>
 	import { page } from '$app/stores';
-	import PromptCard from '$lib/components/prompt-card.svelte';
+	import Card from '$lib/components/card.svelte';
 
 	const { session, mostLiked, mostForked } = $page.data;
 	// console.log('log $page.data;', $page.data) 
@@ -16,12 +16,12 @@
 	{/if}
 	<h2>Most liked</h2>
 	{#each mostLiked as prompt (prompt.id)}
-		<PromptCard {prompt} />
+		<Card {prompt} />
 	{/each}
 
 	<h2>Most forked</h2>
 	{#each mostForked as prompt (prompt.id)}
-		<PromptCard {prompt} />
+		<Card {prompt} />
 	{/each}
 </div>
 

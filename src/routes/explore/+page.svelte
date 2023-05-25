@@ -5,7 +5,7 @@
 <script>
 	import { page } from '$app/stores';
 	import { results } from '$lib/stores/search-bar-store';
-	import PromptCard from '$lib/components/prompt-card.svelte';
+	import Card from '$lib/components/card.svelte';
 	import { onMount } from 'svelte';
 	import Filters from '$lib/components/filters.svelte';
 
@@ -31,7 +31,7 @@
 	<h3>All prompts</h3>
 	<div class="all">
 		{#each resultsToShow as prompt (prompt.id)}
-			<PromptCard {prompt} />
+			<Card {prompt} />
 		{/each}
 	</div>
 </main>
