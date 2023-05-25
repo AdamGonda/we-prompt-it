@@ -74,7 +74,7 @@ function _handlePagination(query, event){
 
 function _handleSearchBar(query, event) {
 	const WORDS_LIMIT = 5;
-	let text = event.url.searchParams.get('text');
+	const text = event.url.searchParams.get('text');
 
 	if (text === null) {
 		return;
@@ -84,25 +84,24 @@ function _handleSearchBar(query, event) {
 		throw new Error(`You can search for a maximum of ${WORDS_LIMIT} words`);
 	}
 
-	if (text.includes(' ')) {
-		text = text.split(' ').join(' | ');
-	}
-
 	const searchInName = {
 		name: {
-			search: text
+			contains: text,
+			mode: 'insensitive'
 		}
 	};
 
 	const searchInDescription = {
 		description: {
-			search: text
+			contains: text,
+			mode: 'insensitive'
 		}
 	};
 
 	const searchInPromptsContent = {
 		content: {
-			search: text
+			contains: text,
+			mode: 'insensitive'
 		}
 	};
 
