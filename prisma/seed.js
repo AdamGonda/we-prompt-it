@@ -44,6 +44,13 @@ async function main() {
 		}
 	});
 
+	const aiModel3 = await prisma.aiModel.create({
+		data: {
+			name: 'GPT-6',
+			link: 'https://chat.openai.com/'
+		}
+	});
+
 	const tag1 = await prisma.tag.create({
 		data: {
 			name: 'education'
@@ -59,6 +66,24 @@ async function main() {
 	const tag3 = await prisma.tag.create({
 		data: {
 			name: 'Midjuarny'
+		}
+	});
+
+	const tag4 = await prisma.tag.create({
+		data: {
+			name: 'technology'
+		}
+	});
+
+	const tag5 = await prisma.tag.create({
+		data: {
+			name: 'science'
+		}
+	});
+
+	const tag6 = await prisma.tag.create({
+		data: {
+			name: 'fiction'
 		}
 	});
 
@@ -80,7 +105,7 @@ async function main() {
 				}
 			},
 			tags: {
-				connect: [{ id: tag1.id }, { id: tag3.id }]
+				connect: [{ id: tag1.id }, { id: tag3.id }, { id: tag6.id }]
 			},
 			likes: {
 				create: [{ userId: testUser1.id }, { userId: testUser2.id }]
@@ -99,7 +124,7 @@ async function main() {
 				'What happens when the artist reveals the first painting full of colors in a monochrome world?',
 			aiModelId: aiModel1.id,
 			tags: {
-				connect: [{ id: tag1.id }]
+				connect: [{ id: tag1.id }, { id: tag4.id }]
 			},
 			likes: {
 				create: [{ userId: testUser1.id }, { userId: testUser2.id }]
@@ -116,9 +141,9 @@ async function main() {
 			authorId: testUser2.id,
 			content:
 				'What happens when the librarian deciphers the first message in the ancient language?',
-			aiModelId: aiModel2.id,
+			aiModelId: aiModel3.id,
 			tags: {
-				connect: [{ id: tag2.id }]
+				connect: [{ id: tag2.id }, { id: tag5.id }]
 			},
 			likes: {
 				create: [
@@ -136,10 +161,10 @@ async function main() {
 			name: 'Prompt 4',
 			slug: 'prompt-4',
 			authorId: adamUser.id,
-			content:'Prompt for Prompt 4',
+			content: 'Prompt for Prompt 4',
 			aiModelId: aiModel1.id,
 			tags: {
-				connect: [{ id: tag1.id }, { id: tag2.id }]
+				connect: [{ id: tag1.id }, { id: tag2.id }, { id: tag4.id }]
 			},
 			likes: {
 				create: [{ userId: testUser1.id }, { userId: testUser2.id }]
@@ -153,10 +178,10 @@ async function main() {
 			name: 'Prompt 5',
 			slug: 'prompt-5',
 			authorId: testUser1.id,
-			content:'Prompt for Prompt 5',
+			content: 'Prompt for Prompt 5',
 			aiModelId: aiModel2.id,
 			tags: {
-				connect: [{ id: tag2.id }, { id: tag3.id }]
+				connect: [{ id: tag2.id }, { id: tag3.id }, { id: tag5.id }]
 			},
 			likes: {
 				create: [{ userId: adamUser.id }, { userId: testUser1.id }]
@@ -170,10 +195,10 @@ async function main() {
 			name: 'Prompt 6',
 			slug: 'prompt-6',
 			authorId: testUser2.id,
-			content:'Prompt for Prompt 6',
+			content: 'Prompt for Prompt 6',
 			aiModelId: aiModel1.id,
 			tags: {
-				connect: [{ id: tag1.id }, { id: tag3.id }]
+				connect: [{ id: tag1.id }, { id: tag3.id }, { id: tag6.id }]
 			},
 			likes: {
 				create: [{ userId: adamUser.id }, { userId: testUser2.id }]
@@ -187,10 +212,10 @@ async function main() {
 			name: 'Prompt 7',
 			slug: 'prompt-7',
 			authorId: adamUser.id,
-			content:'Prompt for Prompt 7',
+			content: 'Prompt for Prompt 7',
 			aiModelId: aiModel2.id,
 			tags: {
-				connect: [{ id: tag2.id }, { id: tag3.id }]
+				connect: [{ id: tag2.id }, { id: tag3.id }, { id: tag5.id }]
 			},
 			likes: {
 				create: [
@@ -208,10 +233,10 @@ async function main() {
 			name: 'Prompt 8',
 			slug: 'prompt-8',
 			authorId: testUser1.id,
-			content:'Prompt for Prompt 8',
+			content: 'Prompt for Prompt 8',
 			aiModelId: aiModel1.id,
 			tags: {
-				connect: [{ id: tag1.id }, { id: tag2.id }]
+				connect: [{ id: tag1.id }, { id: tag2.id }, { id: tag4.id }]
 			},
 			likes: {
 				create: [{ userId: adamUser.id }, { userId: testUser2.id }]
