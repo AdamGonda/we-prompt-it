@@ -54,7 +54,7 @@ model AiModel {
   id        Int      @id @default(autoincrement())
   name      String   @unique
   link      String
-  Prompt    Prompt[]
+  prompt    Prompt[]
   isDeleted Boolean  @default(false)
 }
 
@@ -75,7 +75,7 @@ model Like {
   userId    Int
   user      User     @relation(fields: [userId], references: [id])
   promptId  Int
-  Prompt    Prompt   @relation(fields: [promptId], references: [id])
+  prompt    Prompt   @relation(fields: [promptId], references: [id])
   createdAt DateTime @default(now())
   isDeleted Boolean  @default(false)
 

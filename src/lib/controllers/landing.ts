@@ -9,11 +9,6 @@ export async function loadLanding() {
 		},
 		include: {
 			likes: { where: { isDeleted: false } },
-			prompts: {
-				include: {
-					aiModel: true
-				}
-			},
 			tags: true
 		},
 		orderBy: {
@@ -30,15 +25,11 @@ export async function loadLanding() {
 		},
 		include: {
 			likes: true,
-			prompts: {
-				include: {
-					aiModel: true
-				}
-			},
+			
 			tags: true
 		},
 		orderBy: {
-			noTimesForked: 'desc'
+			forkedCount: 'desc'
 		},
 		take: 10
 	});

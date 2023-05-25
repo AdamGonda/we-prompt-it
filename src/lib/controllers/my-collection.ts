@@ -13,7 +13,6 @@ export async function loadMyCollection(event) {
 		},
 		include: {
 			likes: { where: { isDeleted: false } },
-			prompts: { include: { aiModel: true } },
 			tags: true
 		}
 	});
@@ -28,7 +27,6 @@ export async function loadMyCollection(event) {
 		include: {
 			prompt: {
 				include: {
-					prompts: { include: { aiModel: true } },
 					likes: { where: { isDeleted: false } },
 					tags: true
 				}
