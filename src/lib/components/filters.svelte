@@ -10,6 +10,10 @@
 	let tag;
 	let aiModel;
 	let sortBy;
+	$: isChecked = {
+		mostLiked: $page.url.search.includes('most_liked'),
+		mostForked: $page.url.search.includes('most_forked')
+	};
 
 	onMount(async () => {
 		initVarsFromURL();
@@ -77,11 +81,11 @@
 	<fieldset name="sort-by">
 		<legend>Sort by</legend>
 		<label>
-			<input type="checkbox" name="sort_by" value="most_liked"/>
+			<input checked={isChecked.mostLiked} type="checkbox" name="sort_by" value="most_liked"/>
 			Most liked
 		</label>
 		<label>
-			<input type="checkbox" name="sort_by" value="most_forked" />
+			<input checked={isChecked.mostForked} type="checkbox" name="sort_by" value="most_forked" />
 			Most forked
 		</label>
 	</fieldset>
