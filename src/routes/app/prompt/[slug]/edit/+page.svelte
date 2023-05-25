@@ -28,6 +28,7 @@
 	action={`?/edit`}
 	formName="edit-prompt-form"
 	data={{
+		id: $page.data.prompt.id,
 		prefill: {
 			name: $page.data.prompt.name,
 			description: $page.data.prompt.description,

@@ -14,6 +14,7 @@ Create
 	action="?/create"
 	formName="create-prompt-form"
 	data={{
+		id: $page.data.prompt.id,
 		placeholder: {
 			name: 'name placeholder todocopy',
 			description: 'description placeholder todocopy',

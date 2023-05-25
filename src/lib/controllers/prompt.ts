@@ -191,11 +191,12 @@ export async function loadCreatePrompt() {
 // #region API
 export async function checkPromptNameUniqueness(event) {
 	const proposedName = event.url.searchParams.get('proposedName');
+	const promptId = event.url.searchParams.get('promptId');
 	const user = await getDBUser(event);
 
-	if (!proposedName) {
+	if (!proposedName || !promptId || !Number(promptId)) {
 		throw error(400, {
-			message: `Missing parameter proposedName`
+			message: `Missing parameters`
 		});
 	}
 
@@ -206,7 +207,7 @@ export async function checkPromptNameUniqueness(event) {
 		}
 	});
 
-	if (existingPrompt) {
+	if (existingPrompt && existingPrompt.id !== Number(promptId)) {
 		return json({ isUnique: false });
 	}
 

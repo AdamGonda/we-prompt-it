@@ -54,9 +54,9 @@
 	}
 
 	async function checkPromptNameUniqueness(formData) {
-		if (type !== 'edit' && formData.name) {
+		if (formData.name) {
 			const r = await fetch(
-				`/api/check-prompt-name-uniqueness?proposedName=${formData.name}`
+				`/api/check-prompt-name-uniqueness?proposedName=${formData.name}&promptId=${data.id}`
 			);
 			const json = await r.json();
 
