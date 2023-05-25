@@ -3,7 +3,7 @@ import { goto } from '$app/navigation';
 
 const { subscribe, set } = writable([]);
 
-async function search(endpoint, updateURL = '') {
+async function search({ endpoint, updateURL = '' }) {
 	const response = await fetch(`${endpoint}`);
 	const data = await response.json();
 
@@ -11,8 +11,8 @@ async function search(endpoint, updateURL = '') {
 
 	if (updateURL) {
 		goto(updateURL, {
-			noScroll: true,
-	});
+			noScroll: true
+		});
 	}
 }
 
