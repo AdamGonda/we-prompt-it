@@ -48,8 +48,8 @@ async function _search(event) {
 		},
 		include: {
 			tags: { where: { isDeleted: false } },
-			likes:  { where: { isDeleted: false } },
-			aiModel: true 
+			likes: { where: { isDeleted: false } },
+			aiModel: true
 		}
 	};
 
@@ -58,43 +58,45 @@ async function _search(event) {
 	handleAiModel(query, event);
 	handleSortBy(query, event);
 
-	return await prisma.prompt.findMany(query); 
+	return await prisma.prompt.findMany(query);
 }
 // #endregion
 
 function handleSearchBar(query, event) {
-	let searchBar = event.url.searchParams.get('search_bar');
+	const wordsLimit = 5;
+	let text = event.url.searchParams.get('text');
 
-	if (searchBar === null) {
+	if (text === null) {
 		return;
 	}
 
-	if (searchBar.includes(' ')) {
-		searchBar = `'${searchBar}'`;
+	if(text.includes(' ') && text.split(' ').length > wordsLimit) {
+		throw new Error(`You can search for a maximum of ${wordsLimit} words`);
+	}
+
+	if (text.includes(' ')) {
+		text = text.split(' ').join(' | ');
 	}
 
 	const searchInName = {
 		name: {
-			contains: searchBar,
-			mode: 'insensitive'
+			search: text
 		}
 	};
 
 	const searchInDescription = {
 		description: {
-			contains: searchBar,
-			mode: 'insensitive'
+			search: text
 		}
 	};
 
 	const searchInPromptsContent = {
 		content: {
-			contains: searchBar,
-			mode: 'insensitive'
+			search: text
 		}
 	};
 
-	if (searchBar) { 
+	if (text) {
 		query.where.OR = [searchInName, searchInDescription, searchInPromptsContent];
 	}
 }
@@ -130,25 +132,25 @@ function handleAiModel(query, event) {
 function handleSortBy(query, event) {
 	const sort = event.url.searchParams.getAll('sort_by');
 
-	console.log('log sort', sort)
+	console.log('log sort', sort);
 
 	if (sort.length === 0) {
 		return;
 	}
 
-	query.orderBy = []
+	query.orderBy = [];
 
 	if (sort.includes('most_liked')) {
 		query.orderBy.push({
 			likes: {
-				_count: 'desc' 
+				_count: 'desc'
 			}
-		})	
+		});
 	}
-	
+
 	if (sort.includes('most_forked')) {
-		query.orderBy.push( {
+		query.orderBy.push({
 			noTimesForked: 'desc'
-		})
+		});
 	}
 }
