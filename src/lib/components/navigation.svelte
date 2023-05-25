@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { signIn, signOut } from '@auth/sveltekit/client';
-	import SearchBar from './searchbar.svelte';
+	import SearchBar from './search-bar.svelte';
 	import { page } from '$app/stores';
 
 	const user = $page.data.session?.user;
