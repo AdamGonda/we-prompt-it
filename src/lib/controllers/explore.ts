@@ -51,8 +51,6 @@ async function _search(event) {
 			likes: { where: { isDeleted: false } },
 			aiModel: true
 		},
-		// skip: 2 * 2,
-		// take: 2
 	};
 
 	handleSearchBar(query, event);
