@@ -16,7 +16,7 @@
 
 <nav>
 	<a href={`/`} >
-		<p>Logo</p>
+		<img src="/weprompt-logo.svg" alt="logo" width="50px" />
 	</a>
 	<SearchBar />
 
@@ -53,8 +53,9 @@
 	nav {
 		display: flex;
 		justify-content: space-between;
+		align-items: center;
 		background: rgb(144, 144, 144);
-		padding: 20px 40px;
+		padding: 10px 40px;
 	}
 
 	a {
