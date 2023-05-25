@@ -1,12 +1,11 @@
 <script>
-	import { afterNavigate, beforeNavigate, goto } from '$app/navigation';
+	import { beforeNavigate, goto } from '$app/navigation';
 	import { page } from '$app/stores';
 	import { navigationHappendBefore } from '$lib/stores/filters-store';
 	import searchStore from '$lib/stores/search-store';
 	import { onMount } from 'svelte';
 
 	let form;
-	let text;
 	let tag;
 	let aiModel;
 	let sortBy;
@@ -16,7 +15,7 @@
 
 		if ($navigationHappendBefore) {
 			await searchStore.search({
-				endpoint: `/api/search?${searchParams()}`
+				endpoint: `/api/search?${getSearchParams()}`
 			});
 		}
 	});
@@ -27,19 +26,13 @@
 
 	function initFiltersFromURL() {
 		let searchParams = new URLSearchParams($page.url.search);
-
-		text = searchParams.get('text');
 		tag = searchParams.getAll('tag');
 		aiModel = searchParams.get('ai_model');
 		sortBy = searchParams.getAll('sort_by');
 	}
 
-	function searchParams() {
+	function getSearchParams() {
 		let searchParams = new URLSearchParams();
-
-		if (text) {
-			searchParams.set('text', text);
-		}
 
 		if (tag) {
 			tag.forEach((tagValue) => {
@@ -62,8 +55,8 @@
 
 	async function handleSubmit() {
 		await searchStore.search({
-			endpoint: `/api/search?${searchParams()}`,
-			updateURL: `/explore?${searchParams()}`
+			endpoint: `/api/search?${getSearchParams()}`,
+			updateURL: `/explore?${getSearchParams()}`
 		});
 	}
 </script>
