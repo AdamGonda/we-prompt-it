@@ -102,7 +102,7 @@ function handleSearchBar(query, event) {
 }
 
 function handleTags(query, event) {
-	const tags = event.url.searchParams.get('tags')?.split(',') || [];
+	const tags = event.url.searchParams.getAll('tag')
 
 	if (tags?.length > 0) {
 		query.where.AND.push({
@@ -131,8 +131,6 @@ function handleAiModel(query, event) {
 
 function handleSortBy(query, event) {
 	const sort = event.url.searchParams.getAll('sort_by');
-
-	console.log('log sort', sort);
 
 	if (sort.length === 0) {
 		return;
