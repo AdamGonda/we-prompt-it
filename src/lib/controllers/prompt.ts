@@ -49,9 +49,12 @@ export async function editPrompt(event: RequestEvent) {
 
 	const promptToEdit = await prisma.prompt.findFirst({
 		where: { slug, isDeleted: false },
+		include: {
+			tags: true
+		}
 	});
 
-	if (!promptToEdit || promptToEdit.isDeleted) {
+	if (!promptToEdit) {
 		throw error(404, { message: 'Not found' });
 	}
 
