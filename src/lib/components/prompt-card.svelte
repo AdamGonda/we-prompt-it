@@ -16,7 +16,7 @@
 		<span><b><u>{prompt.name}</u></b></span>
 		
 		<main>
-			<p>{prompt.prompts[0].content}</p>
+			<p>{prompt.content}</p>
 		</main>
 
 		<sub>
@@ -26,7 +26,7 @@
 		</sub>
 		
 		<footer class="footer">
-			<span>{prompt.prompts[0].aiModel.name}</span>
+			<span>{prompt.aiModel.name}</span>
 			<span>❤️ {prompt.likes?.length}</span>
 			<span><img src="/fork-icon.png" alt="fork-icon" /> {prompt.noTimesForked}</span>
 		</footer>

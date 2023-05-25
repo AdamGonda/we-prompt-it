@@ -31,9 +31,9 @@
 		prefill: {
 			name: $page.data.prompt.name,
 			description: $page.data.prompt.description,
-			content: $page.data.prompt.prompts[0].content
+			content: $page.data.prompt.content
 		},
-		selectedModelId: $page.data.prompt.prompts[0].aiModelId,
+		selectedModelId: $page.data.prompt.aiModelId,
 		allModels: $page.data.aiModels,
 	}}
 >

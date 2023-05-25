@@ -22,7 +22,7 @@
 	}
 
 	function copyToClipboard() {
-		navigator.clipboard.writeText($page.data.prompt.prompts[0].content);
+		navigator.clipboard.writeText($page.data.prompt.content);
 	}
 </script>
 

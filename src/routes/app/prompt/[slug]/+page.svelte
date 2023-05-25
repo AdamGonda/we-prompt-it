@@ -4,7 +4,7 @@
 	const data = {
 		name: $page.data.prompt.name,
 		description: $page.data.prompt.description,
-		content: $page.data.prompt.prompts[0].content,
+		content: $page.data.prompt.content,
 	}
 </script>
 
