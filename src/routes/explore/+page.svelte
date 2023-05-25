@@ -8,12 +8,13 @@
 	import Card from '$lib/components/card.svelte';
 	import { onMount } from 'svelte';
 	import Filters from '$lib/components/filters.svelte';
+	import searchStore from '$lib/stores/search-store';
 
-	const {r} = $page.data;
-	let resultsToShow = r;
+	const { initialResults } = $page.data;
+	let resultsToShow = initialResults;
 	let frontendLoaded = false;
 
-	results.subscribe((value) => {
+	searchStore.subscribe((value) => {
 		if (frontendLoaded) {
 			resultsToShow = value;
 		}

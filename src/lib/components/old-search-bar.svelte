@@ -3,6 +3,7 @@
 	import { preSearchResultsNo, results, searchFocused } from '$lib/stores/search-bar-store';
 	import { goto, afterNavigate } from '$app/navigation';
 	import { onMount } from 'svelte';
+	
 
 	const PRESEARCH_SEARCH_DELAY = 200;
 	let form = null;

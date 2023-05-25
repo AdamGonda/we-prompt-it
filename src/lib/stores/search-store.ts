@@ -3,13 +3,16 @@ import { goto } from '$app/navigation';
 
 const { subscribe, set } = writable([]);
 
-async function search(endpoint, updateURL = false) {
+async function search(endpoint, updateURL = '') {
 	const response = await fetch(`${endpoint}`);
 	const data = await response.json();
+
 	set(data);
 
 	if (updateURL) {
-		goto(endpoint);
+		goto(updateURL, {
+			noScroll: true,
+	});
 	}
 }
 
@@ -17,7 +20,7 @@ function reset() {
 	set([]);
 }
 
-export const searchStore = {
+export default {
 	subscribe,
 	search,
 	reset

@@ -20,19 +20,13 @@ export async function preSearchResultsNo(event) {
 }
 
 export async function search(event) {
-	const query = event.url.searchParams.get('q');
-
-	if (query) {
-		return json(await _search(query));
-	}
-
-	return json([]);
+	return json(await _search(event));
 }
 // #endregion
 
 // #region LOADERS
 export async function loadExplore(event) {
-	return { r: await _search(event) };
+	return { initialResults: await _search(event) };
 }
 // #endregion
 
