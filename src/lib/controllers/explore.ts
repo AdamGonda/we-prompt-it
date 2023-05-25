@@ -63,15 +63,15 @@ async function _search(event) {
 // #endregion
 
 function handleSearchBar(query, event) {
-	const wordsLimit = 5;
+	const WORDS_LIMIT = 5;
 	let text = event.url.searchParams.get('text');
 
 	if (text === null) {
 		return;
 	}
 
-	if(text.includes(' ') && text.split(' ').length > wordsLimit) {
-		throw new Error(`You can search for a maximum of ${wordsLimit} words`);
+	if(text.includes(' ') && text.split(' ').length > WORDS_LIMIT) {
+		throw new Error(`You can search for a maximum of ${WORDS_LIMIT} words`);
 	}
 
 	if (text.includes(' ')) {
