@@ -4,7 +4,6 @@
 
 	export let prompt;
 	let inApp = false;
-	// console.log('log prompt', prompt.prompts[0])
 
 	if (browser && $page.data.session?.user) {
 		inApp = true;

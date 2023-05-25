@@ -1,6 +1,5 @@
 import { PrismaClient } from '@prisma/client';
 import { json } from '@sveltejs/kit';
-import { getAllPrompts } from './shared';
 
 const prisma = new PrismaClient();
 
