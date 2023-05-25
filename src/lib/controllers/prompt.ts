@@ -189,8 +189,7 @@ export async function loadCreatePrompt() {
 // #endregion
 
 // #region API
-export async function checkPromptNameUniqueness(event) {
-	// TODO fix if for create
+export async function checkPromptNameUniquenessForExisting(event) {
 	const proposedName = event.url.searchParams.get('proposedName');
 	const promptId = event.url.searchParams.get('promptId');
 	const user = await getDBUser(event);
@@ -208,7 +207,33 @@ export async function checkPromptNameUniqueness(event) {
 		}
 	});
 
+	console.log('log existingPrompt', Number(promptId))
+
 	if (existingPrompt && existingPrompt.id !== Number(promptId)) {
+		return json({ isUnique: false });
+	}
+
+	return json({ isUnique: true });
+}
+
+export async function checkPromptNameUniquenessForNew(event) {
+	const proposedName = event.url.searchParams.get('proposedName');
+	const user = await getDBUser(event);
+
+	if (!proposedName) {
+		throw error(400, {
+			message: `Missing parameters`
+		});
+	}
+
+	const existingPrompt = await prisma.prompt.findFirst({
+		where: {
+			slug: convertToSlug(user.username, proposedName),
+			authorId: user.id
+		}
+	});
+
+	if (existingPrompt) {
 		return json({ isUnique: false });
 	}
 

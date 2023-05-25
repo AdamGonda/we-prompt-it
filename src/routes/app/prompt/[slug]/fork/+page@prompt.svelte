@@ -16,7 +16,6 @@ Fork
 	action="?/fork"
 	formName="fork-prompt-form"
 	data={{
-		id: $page.data.prompt.id,
 		placeholder: {
 			name: 'your uniuqe name todocopy'
 		},

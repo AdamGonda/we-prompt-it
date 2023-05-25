@@ -14,7 +14,6 @@ Create
 	action="?/create"
 	formName="create-prompt-form"
 	data={{
-		id: -1, // TODO fix it in check uniuqeness
 		placeholder: {
 			name: 'name placeholder todocopy',
 			description: 'description placeholder todocopy',
