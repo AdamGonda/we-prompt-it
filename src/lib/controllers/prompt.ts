@@ -31,7 +31,11 @@ export async function createPrompt(event: RequestEvent) {
 			},
 			slug: convertToSlug(user.username, data.name),
 			content: data.content,
-			aiModelId
+			aiModel: {
+				connect: {
+					id: aiModelId
+				}
+			}
 		}
 	});
 }
