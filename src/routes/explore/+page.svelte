@@ -5,7 +5,7 @@
 <script>
 	import { page } from '$app/stores';
 	import { results } from '$lib/stores/search-bar-store';
-	import RepoCard from '$lib/components/prompt-card.svelte';
+	import PromptCard from '$lib/components/prompt-card.svelte';
 	import { onMount } from 'svelte';
 	import Filters from '$lib/components/filters.svelte';
 
@@ -30,8 +30,8 @@
 
 	<h3>All prompts</h3>
 	<div class="all">
-		{#each resultsToShow as repo (repo.id)}
-			<RepoCard {repo} />
+		{#each resultsToShow as prompt (prompt.id)}
+			<PromptCard {prompt} />
 		{/each}
 	</div>
 </main>

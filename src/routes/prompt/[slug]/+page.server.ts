@@ -1,4 +1,4 @@
-import { loadRepo } from '$lib/controllers/repo.js';
+import { loadPrompt } from '$lib/controllers/prompt.js';
 
-export const load = loadRepo
+export const load = loadPrompt
 

@@ -3,8 +3,8 @@ import { error } from '@sveltejs/kit';
 
 const prisma = new PrismaClient();
 
-export async function getRepoBySlug(slug) {
-	const repo = await prisma.repo.findFirst({
+export async function getPromptBySlug(slug) {
+	const prompt = await prisma.prompt.findFirst({
 		where: { slug, isDeleted: false },
 		include: {
 			author: true, // TODO is this ok?
@@ -15,19 +15,19 @@ export async function getRepoBySlug(slug) {
 		}
 	});
 
-	if (!repo) {
+	if (!prompt) {
 		throw error(404, {
-			message: 'Repo not found'
+			message: 'Prompt not found'
 		});
 	}
 
-	repo.prompts.sort((a, b) => b.version - a.version);
+	prompt.prompts.sort((a, b) => b.version - a.version);
 
-	return repo;
+	return prompt;
 }
 
-export async function getAllRepos() {
-	return await prisma.repo.findMany({
+export async function getAllPrompts() {
+	return await prisma.prompt.findMany({
 		where: { isDeleted: false },
 		include: { prompts: true, likes:  { where: { isDeleted: false } } }
 	});

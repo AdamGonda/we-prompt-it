@@ -1,18 +1,18 @@
 <svelte:head>
-    <title>Repo details | We Prompt</title> 
+    <title>Prompt details | We Prompt</title> 
 </svelte:head>
 
 <script>
 	import { page } from '$app/stores';
 
 	const user = $page.data.session?.user;
-	const isOwner = user ? $page.data.repo.author.email === user.email : false;
-	let likes = $page.data.repo.likes.length
+	const isOwner = user ? $page.data.prompt.author.email === user.email : false;
+	let likes = $page.data.prompt.likes.length
 	$: forkLink = user ? `/app/prompt/${$page.params.slug}/fork` : `/login`;
 	$: appreciationText = `Likes: ${likes}`
 
 	async function handleAddRemoveLike() {
-		const r = await fetch(`/api/add-remove-like?id=${$page.data.repo.id}`, {
+		const r = await fetch(`/api/add-remove-like?id=${$page.data.prompt.id}`, {
 			method: 'POST'
 		});
 		const json = await r.json();
@@ -22,7 +22,7 @@
 	}
 
 	function copyToClipboard() {
-		navigator.clipboard.writeText($page.data.repo.prompts[0].content);
+		navigator.clipboard.writeText($page.data.prompt.prompts[0].content);
 	}
 </script>
 
@@ -43,11 +43,11 @@
 </div>
 
 <div class="location">
-	<a href={`/profile/${$page.data.repo.author.username}`}>
-		<span>{$page.data.repo.author.firstName}</span>
+	<a href={`/profile/${$page.data.prompt.author.username}`}>
+		<span>{$page.data.prompt.author.firstName}</span>
 	</a>
 	/
-	<span>{$page.data.repo.name}</span>
+	<span>{$page.data.prompt.name}</span>
 </div>
 
 <ul>

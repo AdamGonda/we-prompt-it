@@ -1,8 +1,8 @@
-import { deleteRepo, editRepo, loadEdit } from '$lib/controllers/repo';
+import { deletePrompt, editPrompt, loadEdit } from '$lib/controllers/prompt';
 
 export const load = loadEdit
 
 export const actions = {
-	edit: editRepo,
-	delete: deleteRepo
+	edit: editPrompt,
+	delete: deletePrompt
 };

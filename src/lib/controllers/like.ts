@@ -8,16 +8,16 @@ export async function addRemoveLike(event) {
 	const session = await event.locals.getSession();
 	const user = await getDBUser(event);
 	const userId = user.id;
-	const repoId = Number(id);
+	const promptId = Number(id);
 
 	if (!id || !session.user) {
 		return new Response(JSON.stringify({ status: 400 }));
 	}
 
-	// check if user already liked the repo before
+	// check if user already liked the prompt before
 	const likeInDB = await prisma.like.findUnique({
 		where: {
-			userId_repoId: { userId, repoId }
+			userId_promptId: { userId, promptId }
 		}
 	});
 
@@ -26,7 +26,7 @@ export async function addRemoveLike(event) {
 		await prisma.like.create({
 			data: {
 				userId,
-				repoId
+				promptId
 			}
 		});
 

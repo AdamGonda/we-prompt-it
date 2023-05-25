@@ -1,3 +1,3 @@
-import { checkRepoNameUniqueness } from "$lib/controllers/repo";
+import { checkPromptNameUniqueness } from "$lib/controllers/prompt";
 
-export const GET = checkRepoNameUniqueness
+export const GET = checkPromptNameUniqueness

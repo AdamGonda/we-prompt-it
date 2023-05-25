@@ -1,5 +1,5 @@
-import { loadRepo } from "$lib/controllers/repo";
+import { loadPrompt } from "$lib/controllers/prompt";
 
 export async function load(event) {
-	return await loadRepo(event);
+	return await loadPrompt(event);
 }

@@ -1,6 +1,6 @@
 import { object, string, number, type InferType } from 'yup';
 
-export const repoSchema = object().shape({
+export const promptSchema = object().shape({
 	name: string()
 		.required('Name is required')
 		.trim()
@@ -30,4 +30,4 @@ export const repoSchema = object().shape({
 		.url()
 });
 
-export type RepoSchema = InferType<typeof repoSchema>;
+export type PromptSchema = InferType<typeof promptSchema>;

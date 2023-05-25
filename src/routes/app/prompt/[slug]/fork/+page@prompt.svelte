@@ -20,10 +20,10 @@ Fork
 			name: 'your uniuqe name todocopy'
 		},
 		prefill: {
-			description: $page.data.repo.description,
-			content: $page.data.repo.prompts[0].content
+			description: $page.data.prompt.description,
+			content: $page.data.prompt.prompts[0].content
 		},
-		selectedModelId: $page.data.repo.prompts[0].aiModelId,
+		selectedModelId: $page.data.prompt.prompts[0].aiModelId,
 		allModels: $page.data.aiModels
 	}}
 />

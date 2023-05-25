@@ -62,7 +62,7 @@ async function main() {
 		}
 	});
 
-	const repo1 = await prisma.prompt.create({
+	const prompt1 = await prisma.prompt.create({
 		data: {
 			description: 'Rediscover the forbidden [key] melodies in a world without music',
 			name: 'Melodies Unheard 1',
@@ -88,7 +88,7 @@ async function main() {
 		}
 	});
 
-	const repo2 = await prisma.prompt.create({
+	const prompt2 = await prisma.prompt.create({
 		data: {
 			description:
 				'In a world where colors have been forgotten, one artist has discovered the secret of the rainbow',
@@ -107,7 +107,7 @@ async function main() {
 		}
 	});
 
-	const repo3 = await prisma.prompt.create({
+	const prompt3 = await prisma.prompt.create({
 		data: {
 			description:
 				'An ancient language long lost to history has been rediscovered by an unassuming librarian',
@@ -130,13 +130,13 @@ async function main() {
 		}
 	});
 
-	const repo4 = await prisma.prompt.create({
+	const prompt4 = await prisma.prompt.create({
 		data: {
 			description: 'Lorem ipsum dolor sit amet',
-			name: 'Repo 4',
-			slug: 'repo-4',
+			name: 'Prompt 4',
+			slug: 'prompt-4',
 			authorId: adamUser.id,
-			content:'Prompt for Repo 4',
+			content:'Prompt for Prompt 4',
 			aiModelId: aiModel1.id,
 			tags: {
 				connect: [{ id: tag1.id }, { id: tag2.id }]
@@ -147,13 +147,13 @@ async function main() {
 		}
 	});
 
-	const repo5 = await prisma.prompt.create({
+	const prompt5 = await prisma.prompt.create({
 		data: {
 			description: 'Lorem ipsum dolor sit amet',
-			name: 'Repo 5',
-			slug: 'repo-5',
+			name: 'Prompt 5',
+			slug: 'prompt-5',
 			authorId: testUser1.id,
-			content:'Prompt for Repo 5',
+			content:'Prompt for Prompt 5',
 			aiModelId: aiModel2.id,
 			tags: {
 				connect: [{ id: tag2.id }, { id: tag3.id }]
@@ -164,13 +164,13 @@ async function main() {
 		}
 	});
 
-	const repo6 = await prisma.prompt.create({
+	const prompt6 = await prisma.prompt.create({
 		data: {
 			description: 'Lorem ipsum dolor sit amet',
-			name: 'Repo 6',
-			slug: 'repo-6',
+			name: 'Prompt 6',
+			slug: 'prompt-6',
 			authorId: testUser2.id,
-			content:'Prompt for Repo 6',
+			content:'Prompt for Prompt 6',
 			aiModelId: aiModel1.id,
 			tags: {
 				connect: [{ id: tag1.id }, { id: tag3.id }]
@@ -181,13 +181,13 @@ async function main() {
 		}
 	});
 
-	const repo7 = await prisma.prompt.create({
+	const prompt7 = await prisma.prompt.create({
 		data: {
 			description: 'Lorem ipsum dolor sit amet',
-			name: 'Repo 7',
-			slug: 'repo-7',
+			name: 'Prompt 7',
+			slug: 'prompt-7',
 			authorId: adamUser.id,
-			content:'Prompt for Repo 7',
+			content:'Prompt for Prompt 7',
 			aiModelId: aiModel2.id,
 			tags: {
 				connect: [{ id: tag2.id }, { id: tag3.id }]
@@ -202,13 +202,13 @@ async function main() {
 		}
 	});
 
-	const repo8 = await prisma.prompt.create({
+	const prompt8 = await prisma.prompt.create({
 		data: {
 			description: 'Lorem ipsum dolor sit amet',
-			name: 'Repo 8',
-			slug: 'repo-8',
+			name: 'Prompt 8',
+			slug: 'prompt-8',
 			authorId: testUser1.id,
-			content:'Prompt for Repo 8',
+			content:'Prompt for Prompt 8',
 			aiModelId: aiModel1.id,
 			tags: {
 				connect: [{ id: tag1.id }, { id: tag2.id }]
@@ -242,9 +242,9 @@ async function main() {
 	// 				id: testUser1.id
 	// 			}
 	// 		},
-	// 		repo: {
+	// 		prompt: {
 	// 			connect: {
-	// 				id: repo1.id
+	// 				id: prompt1.id
 	// 			}
 	// 		}
 	// 	}

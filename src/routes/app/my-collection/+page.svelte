@@ -1,6 +1,6 @@
 <script>
 	import { page } from '$app/stores';
-	import RepoCard from '$lib/components/prompt-card.svelte';
+	import PromptCard from '$lib/components/prompt-card.svelte';
 
 	const myCollection = $page.data;
 	// console.log('log myCollection', myCollection)
@@ -11,22 +11,22 @@
 
 	<h3>Created by me</h3>
 	<div class="all">
-		{#each myCollection.createdBy as repo (repo.id)}
-			<RepoCard {repo} />
+		{#each myCollection.createdBy as prompt (prompt.id)}
+			<PromptCard {prompt} />
 		{/each}
 	</div>
 
 	<h3>Forked</h3>
 	<div class="all">
-		{#each myCollection.forked as repo (repo.id)}
-			<RepoCard {repo} />
+		{#each myCollection.forked as prompt (prompt.id)}
+			<PromptCard {prompt} />
 		{/each}
 	</div>
 
 	<h3>Liked</h3>
 	<div class="all">
-		{#each myCollection.liked as repo (repo.id)}
-			<RepoCard {repo} />
+		{#each myCollection.liked as prompt (prompt.id)}
+			<PromptCard {prompt} />
 		{/each}
 	</div>
 </main>

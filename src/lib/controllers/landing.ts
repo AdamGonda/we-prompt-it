@@ -3,7 +3,7 @@ import { PrismaClient } from '@prisma/client';
 const prisma = new PrismaClient();
 
 export async function loadLanding() {
-	const mostLiked = await prisma.repo.findMany({
+	const mostLiked = await prisma.prompt.findMany({
 		where: {
 			isDeleted: false
 		},
@@ -24,7 +24,7 @@ export async function loadLanding() {
 		take: 10
 	});
 
-	const mostForked = await prisma.repo.findMany({
+	const mostForked = await prisma.prompt.findMany({
 		where: {
 			isDeleted: false
 		},

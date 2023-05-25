@@ -2,7 +2,7 @@
 	import { page } from "$app/stores";
 
 	const allTags = getAllTags();
-	let _tags = getExistingRepoTags();
+	let _tags = getExistingPromptTags();
 	let input = '';
 	let selectsFromSuggested = false;
 	let selectedIdx = -1;
@@ -15,8 +15,8 @@
 		return tags ? tags : [];
 	}
 
-	function getExistingRepoTags(){
-		const tags = $page.data?.repo?.tags.map((tag) => tag.name)
+	function getExistingPromptTags(){
+		const tags = $page.data?.prompt?.tags.map((tag) => tag.name)
 
 		return tags ? tags : [];
 	}

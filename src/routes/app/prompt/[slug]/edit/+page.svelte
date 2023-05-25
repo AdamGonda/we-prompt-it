@@ -29,11 +29,11 @@
 	formName="edit-prompt-form"
 	data={{
 		prefill: {
-			name: $page.data.repo.name,
-			description: $page.data.repo.description,
-			content: $page.data.repo.prompts[0].content
+			name: $page.data.prompt.name,
+			description: $page.data.prompt.description,
+			content: $page.data.prompt.prompts[0].content
 		},
-		selectedModelId: $page.data.repo.prompts[0].aiModelId,
+		selectedModelId: $page.data.prompt.prompts[0].aiModelId,
 		allModels: $page.data.aiModels,
 	}}
 >

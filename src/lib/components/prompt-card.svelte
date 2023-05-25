@@ -2,33 +2,33 @@
 	import { browser } from '$app/environment';
 	import { page } from '$app/stores';
 
-	export let repo;
+	export let prompt;
 	let inApp = false;
-	// console.log('log repo', repo.prompts[0])
+	// console.log('log prompt', prompt.prompts[0])
 
 	if (browser && $page.data.session?.user) {
 		inApp = true;
 	}
 </script>
 
-<a href={`${inApp ? '/app' : ''}/prompt/${repo.slug}`}>
+<a href={`${inApp ? '/app' : ''}/prompt/${prompt.slug}`}>
 	<div>
-		<span><b><u>{repo.name}</u></b></span>
+		<span><b><u>{prompt.name}</u></b></span>
 		
 		<main>
-			<p>{repo.prompts[0].content}</p>
+			<p>{prompt.prompts[0].content}</p>
 		</main>
 
 		<sub>
-			{#each repo.tags as tag}
+			{#each prompt.tags as tag}
 				<span>{tag.name}</span>
 			{/each}
 		</sub>
 		
 		<footer class="footer">
-			<span>{repo.prompts[0].aiModel.name}</span>
-			<span>❤️ {repo.likes?.length}</span>
-			<span><img src="/fork-icon.png" alt="fork-icon" /> {repo.noTimesForked}</span>
+			<span>{prompt.prompts[0].aiModel.name}</span>
+			<span>❤️ {prompt.likes?.length}</span>
+			<span><img src="/fork-icon.png" alt="fork-icon" /> {prompt.noTimesForked}</span>
 		</footer>
 	</div>
 </a>

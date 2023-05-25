@@ -1,7 +1,7 @@
 <script>
 	import { enhance } from '$app/forms';
 	import { formDataToObject } from '$lib/utils';
-	import { repoSchema } from '$lib/yup-schemas';
+	import { promptSchema } from '$lib/yup-schemas';
 	import _ from 'lodash';
 	import { onMount } from 'svelte';
 	import Tags from './tags.svelte';
@@ -43,20 +43,20 @@
 		const formData = formDataToObject(new FormData(_form));
 
 		try {
-			repoSchema.validateSync(formData, { abortEarly: false });
+			promptSchema.validateSync(formData, { abortEarly: false });
 		} catch (error) {
 			error.inner.forEach((err) => {
 				errors[err.path] = err.errors[0];
 			});
 		}
 
-		checkRepoNameUniqueness(formData);
+		checkPromptNameUniqueness(formData);
 	}
 
-	async function checkRepoNameUniqueness(formData) {
+	async function checkPromptNameUniqueness(formData) {
 		if (type !== 'edit' && formData.name) {
 			const r = await fetch(
-				`/api/check-repo-name-uniqueness?proposedName=${formData.name}`
+				`/api/check-prompt-name-uniqueness?proposedName=${formData.name}`
 			);
 			const json = await r.json();
 

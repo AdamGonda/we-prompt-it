@@ -1,7 +1,7 @@
-import { forkRepo, loadRepo } from '$lib/controllers/repo';
+import { forkPrompt, loadPrompt } from '$lib/controllers/prompt';
 
-export const load = loadRepo;
+export const load = loadPrompt;
 
 export const actions = {
-	fork: forkRepo
+	fork: forkPrompt
 };

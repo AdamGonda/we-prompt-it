@@ -1,5 +1,5 @@
 import { getAiModel, getDBUser, getTagIds } from '$lib/controllers/shared';
-import { getAllAIModels, getAllTags, getRepoBySlug } from '$lib/controllers/shared';
+import { getAllAIModels, getAllTags, getPromptBySlug } from '$lib/controllers/shared';
 import type { RequestEvent } from '@sveltejs/kit';
 
 import { error, json } from '@sveltejs/kit';
@@ -9,13 +9,13 @@ import { convertToSlug, validateForm } from '$lib/utils';
 const prisma = new PrismaClient();
 
 // #region ACTIONS
-export async function createRepo(event: RequestEvent) {
+export async function createPrompt(event: RequestEvent) {
 	const user = await getDBUser(event);
 	const data = await validateForm(event);
 	const aiModelId = await getAiModel(data);
 	const incomingTagIds = await getTagIds(data);
 
-	return await prisma.repo.create({
+	return await prisma.prompt.create({
 		data: {
 			description: data.description,
 			tags: {
@@ -40,36 +40,36 @@ export async function createRepo(event: RequestEvent) {
 	});
 }
 
-export async function editRepo(event: RequestEvent) {
+export async function editPrompt(event: RequestEvent) {
 	const slug = event.params.slug;
 	const user = await getDBUser(event);
 	const data = await validateForm(event);
 	const aiModelId = await getAiModel(data);
 	const incomingTagIds = await getTagIds(data);
 
-	const repoToEdit = await prisma.repo.findFirst({
+	const promptToEdit = await prisma.prompt.findFirst({
 		where: { slug, isDeleted: false },
 		include: { prompts: true, tags: true }
 	});
 
-	if (!repoToEdit || repoToEdit.isDeleted) {
+	if (!promptToEdit || promptToEdit.isDeleted) {
 		throw error(404, { message: 'Not found' });
 	}
 
-	if (repoToEdit.authorId !== user.id) {
+	if (promptToEdit.authorId !== user.id) {
 		throw error(405, { message: 'Not allowed' });
 	}
 
-	const updateSlug = repoToEdit.name !== data.name;
-	const tagIdsToRemove = repoToEdit.tags
+	const updateSlug = promptToEdit.name !== data.name;
+	const tagIdsToRemove = promptToEdit.tags
 		.map((tag) => tag.id)
 		.filter((tagId) => !incomingTagIds?.includes(tagId));
 
-	return await prisma.repo.update({
+	return await prisma.prompt.update({
 		where: { slug },
 		data: {
 			name: data.name,
-			slug: updateSlug ? convertToSlug(user.username, data.name) : repoToEdit.slug,
+			slug: updateSlug ? convertToSlug(user.username, data.name) : promptToEdit.slug,
 			description: data.description,
 			tags: {
 				connect: incomingTagIds
@@ -81,7 +81,7 @@ export async function editRepo(event: RequestEvent) {
 			},
 			prompts: {
 				create: {
-					version: repoToEdit.prompts.length + 1,
+					version: promptToEdit.prompts.length + 1,
 					content: data.content,
 					aiModelId
 				}
@@ -90,7 +90,7 @@ export async function editRepo(event: RequestEvent) {
 	});
 }
 
-export async function forkRepo(event: RequestEvent) {
+export async function forkPrompt(event: RequestEvent) {
 	const dbUser = await getDBUser(event);
 	const slug = event.params.slug;
 	const data = await validateForm(event);
@@ -98,10 +98,10 @@ export async function forkRepo(event: RequestEvent) {
 	const incomingTagIds = await getTagIds(data);
 
 	if (!dbUser) {
-		throw Error('No user or parent repo found');
+		throw Error('No user or parent prompt found');
 	}
 
-	await prisma.repo.update({
+	await prisma.prompt.update({
 		where: {
 			slug
 		},
@@ -112,9 +112,9 @@ export async function forkRepo(event: RequestEvent) {
 		}
 	});
 
-	return await prisma.repo.create({
+	return await prisma.prompt.create({
 		data: {
-			parentRepo: {
+			parentPrompt: {
 				connect: {
 					slug
 				}
@@ -142,16 +142,16 @@ export async function forkRepo(event: RequestEvent) {
 	});
 }
 
-export async function deleteRepo(event: RequestEvent) {
+export async function deletePrompt(event: RequestEvent) {
 	const slug = event.params.slug;
-	const parent = await getRepoBySlug(slug);
+	const parent = await getPromptBySlug(slug);
 
-	await prisma.repo.updateMany({
+	await prisma.prompt.updateMany({
 		where: { parentId: parent.id },
 		data: { parentId: null }
 	});
 
-	await prisma.repo.update({
+	await prisma.prompt.update({
 		where: { slug },
 		data: { isDeleted: true }
 	});
@@ -159,35 +159,35 @@ export async function deleteRepo(event: RequestEvent) {
 // #endregion
 
 // #region LOADERS
-export async function loadRepo({ params }) {
-	const repo = await getRepoBySlug(params.slug);
+export async function loadPrompt({ params }) {
+	const prompt = await getPromptBySlug(params.slug);
 	const aiModels = await getAllAIModels();
 	const tags = await getAllTags();
 
-	if (!repo) {
+	if (!prompt) {
 		throw error(404, {
 			message: 'Not found'
 		});
 	}
 
-	return { repo, aiModels, tags };
+	return { prompt, aiModels, tags };
 }
 
 export async function loadEdit({ params }) {
-	const repo = await getRepoBySlug(params.slug);
+	const prompt = await getPromptBySlug(params.slug);
 	const aiModels = await getAllAIModels();
 	const tags = await getAllTags();
 
-	if (!repo) {
+	if (!prompt) {
 		throw error(404, {
 			message: 'Not found'
 		});
 	}
 
-	return { repo, aiModels, tags };
+	return { prompt, aiModels, tags };
 }
 
-export async function loadCreateRepo() {
+export async function loadCreatePrompt() {
 	const allModels = await getAllAIModels();
 	const tags = await getAllTags();
 
@@ -196,7 +196,7 @@ export async function loadCreateRepo() {
 // #endregion
 
 // #region API
-export async function checkRepoNameUniqueness(event) {
+export async function checkPromptNameUniqueness(event) {
 	const proposedName = event.url.searchParams.get('proposedName');
 	const user = await getDBUser(event);
 
@@ -206,14 +206,14 @@ export async function checkRepoNameUniqueness(event) {
 		});
 	}
 
-	const existingRepo = await prisma.repo.findFirst({
+	const existingPrompt = await prisma.prompt.findFirst({
 		where: {
 			slug: convertToSlug(user.username, proposedName),
 			authorId: user.id
 		}
 	});
 
-	if (existingRepo) {
+	if (existingPrompt) {
 		return json({ isUnique: false });
 	}
 

@@ -1,6 +1,6 @@
 import { PrismaClient } from '@prisma/client';
 import { json } from '@sveltejs/kit';
-import { getAllRepos } from './shared';
+import { getAllPrompts } from './shared';
 
 const prisma = new PrismaClient();
 
@@ -59,7 +59,7 @@ async function _search(event) {
 	handleAiModel(query, event);
 	handleSortBy(query, event);
 
-	return await prisma.repo.findMany(query); 
+	return await prisma.prompt.findMany(query); 
 }
 // #endregion
 

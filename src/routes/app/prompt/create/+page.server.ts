@@ -1,7 +1,7 @@
-import { createRepo, loadCreateRepo } from '$lib/controllers/repo';
+import { createPrompt, loadCreatePrompt } from '$lib/controllers/prompt';
 
-export const load = loadCreateRepo
+export const load = loadCreatePrompt
 
 export const actions = {
-	create: createRepo
+	create: createPrompt
 };
