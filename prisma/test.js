@@ -3,11 +3,10 @@ import { PrismaClient } from '@prisma/client';
 const prisma = new PrismaClient();
 
 async function main() {
-	const r = await prisma.repo.findMany({
+	const r = await prisma.prompt.findMany({
 		where: {
-			name: {
-				contains: 'is',
-				mode: 'insensitive'
+			content: {
+				search: 'happens',
 			}
 		}
 	});
