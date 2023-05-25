@@ -49,7 +49,7 @@ async function _search(event) {
 		include: {
 			tags: { where: { isDeleted: false } },
 			likes:  { where: { isDeleted: false } },
-			prompts: { include: { aiModel: true } }
+			prompts: { where: { isDeleted: false } }
 		}
 	};
 
@@ -88,17 +88,9 @@ function handleSearchBar(query, event) {
 	};
 
 	const searchInPromptsContent = {
-		prompts: {
-			some: {
-				AND: [
-					{
-						content: {
-							contains: searchBar,
-							mode: 'insensitive'
-						}
-					}
-				]
-			}
+		content: {
+			contains: searchBar,
+			mode: 'insensitive'
 		}
 	};
 
@@ -128,12 +120,8 @@ function handleAiModel(query, event) {
 
 	if (aiModel) {
 		query.where.AND.push({
-			prompts: {
-				some: {
-					aiModel: {
-						name: aiModel
-					}
-				}
+			aiModel: {
+				name: aiModel
 			}
 		});
 	}
