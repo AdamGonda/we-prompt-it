@@ -6,12 +6,7 @@
 	import { onMount } from 'svelte';
 
 	let form;
-
-	let tags; // selected tags
-	let tagSearchInput;
-	$: filteredTags = getFilterdTags(tagSearchInput);
-	$: console.log('log filteredTags', filteredTags);
-
+	let tags;
 	let aiModels;
 
 	let sortBys;
@@ -81,21 +76,6 @@
 
 		return searchParams.toString();
 	}
-
-	function getFilterdTags(value) {
-		const allTags = $page.data.tags;
-
-		if (!value) {
-			return allTags;
-		}
-
-		return allTags.filter((item) => item.toLowerCase().includes(value.toLowerCase()));
-	}
-
-	function handleTagSearchInput(event) {
-		event.stopPropagation();
-		tagSearchInput = event.target.value;
-	}
 </script>
 
 <form name="filter-explore" method="POST" bind:this={form} on:input={handleInput}>
@@ -123,18 +103,17 @@
 
 	<fieldset class="tags">
 		<legend>Tags</legend>
-		<input type="text" name="tag" on:input={handleTagSearchInput} />
-		{#each filteredTags as tag}
+		{#each $page.data.tags as tag (tag.id)}
 			<label>
-				<input checked={isChecked.tag(tag)} type="checkbox" name="tag" value={tag} />
-				{tag}
+				<input checked={isChecked.tag(tag.name)} type="checkbox" name="tag" value={tag.name} />
+				{tag.name}
 			</label>
 		{/each}
 	</fieldset>
 
 	<fieldset>
 		<legend>AI models</legend>
-		{#each $page.data.aiModels as model}
+		{#each $page.data.aiModels as model (model.id)}
 			<label>
 				<input
 					checked={isChecked.aiModel(model.name)}
