@@ -5,7 +5,7 @@
 	import { onMount } from 'svelte';
 
 	let inputValue;
-	let placeholder = 'Search for images';
+	let placeholder = 'Find the prompt you need';
 
 	afterNavigate(() => {
 		initVarsFromURL();
