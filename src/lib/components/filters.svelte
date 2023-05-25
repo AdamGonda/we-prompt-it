@@ -3,6 +3,7 @@
 	import { page } from '$app/stores';
 	import { navigationHappendBefore } from '$lib/stores/filters-store';
 	import searchStore from '$lib/stores/search-store';
+	import { formDataToObject } from '$lib/utils';
 	import { onMount } from 'svelte';
 
 	let form;
@@ -12,6 +13,8 @@
 
 	onMount(async () => {
 		initFiltersFromURL();
+
+		console.log('log sortBy', sortBy)
 
 		if ($navigationHappendBefore) {
 			await searchStore.search({
@@ -53,7 +56,10 @@
 		return searchParams.toString();
 	}
 
-	async function handleSubmit() {
+	async function handleInput() {
+		// mapFormDataToFields();
+		sortBy = new FormData(form).getAll('sort_by')
+
 		await searchStore.search({
 			endpoint: `/api/search?${getSearchParams()}`,
 			updateURL: `/explore?${getSearchParams()}`
@@ -63,9 +69,23 @@
 
 <form
 	name="filter-explore"
-	bind:this={form}
 	method="POST"
-	on:submit|preventDefault={handleSubmit}
+	bind:this={form}
+	on:input={handleInput}
 >
-	<input type="submit" />
+	<fieldset name="sort-by">
+		<legend>Sort by</legend>
+		<label>
+			<input type="checkbox" name="sort_by" value="most_liked"/>
+			Most liked
+		</label>
+		<label>
+			<input type="checkbox" name="sort_by" value="most_forked" />
+			Most forked
+		</label>
+	</fieldset>
 </form>
+
+<style>
+
+</style>
