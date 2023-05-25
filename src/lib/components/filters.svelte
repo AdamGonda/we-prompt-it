@@ -56,9 +56,12 @@
 		return searchParams.toString();
 	}
 
-	async function handleInput() {
-		// mapFormDataToFields();
+	function mapFormDataToFields() {
 		sortBy = new FormData(form).getAll('sort_by')
+	}
+
+	async function handleInput() {
+		mapFormDataToFields();
 
 		await searchStore.search({
 			endpoint: `/api/search?${getSearchParams()}`,
