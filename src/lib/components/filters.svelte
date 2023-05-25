@@ -6,8 +6,14 @@
 	import { onMount } from 'svelte';
 
 	let form;
-	let tags;
+	
+	let tags; // selected tags
+	let tagSearchInput;
+	$: filteredTags = getFilterdTags(tagSearchInput);
+	$: console.log('log filteredTags', filteredTags)
+	
 	let aiModels;
+	
 	let sortBys;
 	$: isChecked = {
 		mostLiked: $page.url.search.includes('most_liked'),
@@ -75,6 +81,21 @@
 
 		return searchParams.toString();
 	}
+
+	function getFilterdTags(value) {
+		const allTags = $page.data.tags
+
+		if (!value) {
+			return allTags;
+		}
+
+		return allTags.filter(item => item.toLowerCase().includes(value.toLowerCase()));
+	}
+
+	function handleTagSearchInput(event) {
+		event.stopPropagation();
+		tagSearchInput = event.target.value;
+	}
 </script>
 
 <form
@@ -95,12 +116,13 @@
 		</label>
 	</fieldset>
 
-	<fieldset>
+	<fieldset class="tags">
 		<legend>Tags</legend>
-		{#each $page.data.tags as tag}
+		<input type="text" name="tag" on:input={handleTagSearchInput} />
+		{#each filteredTags as tag}
 			<label>
-				<input checked={isChecked.tag(tag.name)} type="checkbox" name="tag" value={tag.name} />
-				{tag.name}
+				<input checked={isChecked.tag(tag)} type="checkbox" name="tag" value={tag} />
+				{tag}
 			</label>
 		{/each}
 	</fieldset>
@@ -117,5 +139,8 @@
 </form>
 
 <style>
-
+.tags {
+	display: flex;
+	flex-direction: column;
+}
 </style>

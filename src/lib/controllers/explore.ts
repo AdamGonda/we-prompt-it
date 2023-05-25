@@ -29,7 +29,7 @@ export async function search(event) {
 export async function loadExplore(event) {
 	return { 
 		prompts: await _search(event),
-		tags: await getAllTags(),
+		tags: (await getAllTags()).map((tag) => tag.name),
 		aiModels: await getAllAIModels()
 	};
 }
