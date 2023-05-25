@@ -27,7 +27,7 @@
 		<footer class="footer">
 			<span>{prompt.aiModel.name}</span>
 			<span>❤️ {prompt.likes?.length}</span>
-			<span><img src="/fork-icon.png" alt="fork-icon" /> {prompt.noTimesForked}</span>
+			<span><img src="/fork-icon.png" alt="fork-icon" /> {prompt.forkedCount}</span>
 		</footer>
 	</div>
 </a>
