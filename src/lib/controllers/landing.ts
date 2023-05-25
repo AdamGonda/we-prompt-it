@@ -9,7 +9,8 @@ export async function loadLanding() {
 		},
 		include: {
 			likes: { where: { isDeleted: false } },
-			tags: true
+			tags: true,
+			aiModel: true
 		},
 		orderBy: {
 			likes: {
@@ -25,7 +26,7 @@ export async function loadLanding() {
 		},
 		include: {
 			likes: true,
-			
+			aiModel: true,
 			tags: true
 		},
 		orderBy: {
