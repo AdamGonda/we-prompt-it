@@ -6,20 +6,20 @@
 	import { onMount } from 'svelte';
 
 	let form;
-	
+
 	let tags; // selected tags
 	let tagSearchInput;
 	$: filteredTags = getFilterdTags(tagSearchInput);
-	$: console.log('log filteredTags', filteredTags)
-	
+	$: console.log('log filteredTags', filteredTags);
+
 	let aiModels;
-	
+
 	let sortBys;
 	$: isChecked = {
 		mostLiked: $page.url.search.includes('most_liked'),
 		mostForked: $page.url.search.includes('most_forked'),
 		tag: (name) => $page.url.search.includes(name),
-		aiModel: (name) => $page.url.search.includes(name),
+		aiModel: (name) => $page.url.search.includes(name)
 	};
 
 	onMount(async () => {
@@ -44,9 +44,9 @@
 	}
 
 	function mapFormDataToVars() {
-		sortBys = new FormData(form).getAll('sort_by')
-		tags = new FormData(form).getAll('tag')
-		aiModels = new FormData(form).getAll('ai_model')
+		sortBys = new FormData(form).getAll('sort_by');
+		tags = new FormData(form).getAll('tag');
+		aiModels = new FormData(form).getAll('ai_model');
 	}
 
 	async function handleInput() {
@@ -83,13 +83,13 @@
 	}
 
 	function getFilterdTags(value) {
-		const allTags = $page.data.tags
+		const allTags = $page.data.tags;
 
 		if (!value) {
 			return allTags;
 		}
 
-		return allTags.filter(item => item.toLowerCase().includes(value.toLowerCase()));
+		return allTags.filter((item) => item.toLowerCase().includes(value.toLowerCase()));
 	}
 
 	function handleTagSearchInput(event) {
@@ -98,20 +98,25 @@
 	}
 </script>
 
-<form
-	name="filter-explore"
-	method="POST"
-	bind:this={form}
-	on:input={handleInput}
->
+<form name="filter-explore" method="POST" bind:this={form} on:input={handleInput}>
 	<fieldset name="sort-by">
 		<legend>Sort by</legend>
 		<label>
-			<input checked={isChecked.mostLiked} type="checkbox" name="sort_by" value="most_liked"/>
+			<input
+				checked={isChecked.mostLiked}
+				type="checkbox"
+				name="sort_by"
+				value="most_liked"
+			/>
 			Most liked
 		</label>
 		<label>
-			<input checked={isChecked.mostForked} type="checkbox" name="sort_by" value="most_forked" />
+			<input
+				checked={isChecked.mostForked}
+				type="checkbox"
+				name="sort_by"
+				value="most_forked"
+			/>
 			Most forked
 		</label>
 	</fieldset>
@@ -131,7 +136,12 @@
 		<legend>AI models</legend>
 		{#each $page.data.aiModels as model}
 			<label>
-				<input checked={isChecked.aiModel(model.name)} type="checkbox" name="ai_model" value={model.name} />
+				<input
+					checked={isChecked.aiModel(model.name)}
+					type="checkbox"
+					name="ai_model"
+					value={model.name}
+				/>
 				{model.name}
 			</label>
 		{/each}
@@ -139,8 +149,8 @@
 </form>
 
 <style>
-.tags {
-	display: flex;
-	flex-direction: column;
-}
+	.tags {
+		display: flex;
+		flex-direction: column;
+	}
 </style>
