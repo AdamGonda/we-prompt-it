@@ -46,7 +46,7 @@ model Prompt {
   comments  Comment[]
 
   parentId      Int?
-  parentPrompts Prompt?  @relation("ChildPrompts", fields: [parentId], references: [id])
+  parentPrompt Prompt?  @relation("ChildPrompts", fields: [parentId], references: [id])
   childPrompts  Prompt[] @relation("ChildPrompts")
 }
 

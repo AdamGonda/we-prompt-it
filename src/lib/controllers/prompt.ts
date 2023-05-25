@@ -30,12 +30,8 @@ export async function createPrompt(event: RequestEvent) {
 				}
 			},
 			slug: convertToSlug(user.username, data.name),
-			prompts: {
-				create: {
-					content: data.content,
-					aiModelId
-				}
-			}
+			content: data.content,
+			aiModelId
 		}
 	});
 }
@@ -49,7 +45,6 @@ export async function editPrompt(event: RequestEvent) {
 
 	const promptToEdit = await prisma.prompt.findFirst({
 		where: { slug, isDeleted: false },
-		include: { prompts: true, tags: true }
 	});
 
 	if (!promptToEdit || promptToEdit.isDeleted) {
@@ -79,13 +74,8 @@ export async function editPrompt(event: RequestEvent) {
 					? tagIdsToRemove.map((tagId) => ({ id: tagId }))
 					: undefined
 			},
-			prompts: {
-				create: {
-					version: promptToEdit.prompts.length + 1,
-					content: data.content,
-					aiModelId
-				}
-			}
+			content: data.content,
+			aiModelId
 		}
 	});
 }
@@ -127,12 +117,8 @@ export async function forkPrompt(event: RequestEvent) {
 					id: dbUser.id
 				}
 			},
-			prompts: {
-				create: {
-					content: data.content,
-					aiModelId
-				}
-			},
+			content: data.content,
+			aiModelId,
 			tags: {
 				connect: incomingTagIds
 					? incomingTagIds.map((tagId) => ({ id: tagId }))

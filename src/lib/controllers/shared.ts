@@ -9,8 +9,6 @@ export async function getPromptBySlug(slug) {
 		include: {
 			author: true, // TODO is this ok?
 			likes:  { where: { isDeleted: false } },
-			changeRequests: { where: { isDeleted: false } },
-			prompts: { where: { isDeleted: false } },
 			tags: { where: { isDeleted: false } }
 		}
 	});
@@ -21,15 +19,12 @@ export async function getPromptBySlug(slug) {
 		});
 	}
 
-	prompt.prompts.sort((a, b) => b.version - a.version);
-
 	return prompt;
 }
 
 export async function getAllPrompts() {
 	return await prisma.prompt.findMany({
 		where: { isDeleted: false },
-		include: { prompts: true, likes:  { where: { isDeleted: false } } }
 	});
 }
 
