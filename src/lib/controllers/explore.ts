@@ -50,17 +50,30 @@ async function _search(event) {
 			tags: { where: { isDeleted: false } },
 			likes: { where: { isDeleted: false } },
 			aiModel: true
-		}
+		},
+		// skip: 2 * 2,
+		// take: 2
 	};
 
 	handleSearchBar(query, event);
 	handleTags(query, event);
 	handleAiModel(query, event);
 	handleSortBy(query, event);
+	handlePagination(query, event);
 
 	return await prisma.prompt.findMany(query);
 }
 // #endregion
+
+function handlePagination(query, event){
+	const page = event.url.searchParams.get('page');
+	const limit = event.url.searchParams.get('limit');
+
+	if (page && limit) {
+		query.skip = parseInt(page) * parseInt(limit);
+		query.take = parseInt(limit);
+	}
+}
 
 function handleSearchBar(query, event) {
 	const WORDS_LIMIT = 5;
