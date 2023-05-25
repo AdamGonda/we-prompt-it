@@ -4,8 +4,6 @@
 TODO on first signup ask for username
 
 # Product (functional)
-TODO explore page filtering
-TODO explore page sorting
 TODO landing page
 TODO signup/login page
 TODO profile page
