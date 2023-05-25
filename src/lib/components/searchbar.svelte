@@ -6,6 +6,8 @@
 	let inputValue;
 	let placeholder = 'Search for images';
 
+  // TODO on navigation prevent unnessesary api call
+
 	onMount(() => {
 		let searchParams = new URLSearchParams($page.url.search);
 		inputValue = searchParams.get('text');
