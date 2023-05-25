@@ -45,16 +45,16 @@ model Prompt {
   tags      Tag[]
   comments  Comment[]
 
-  parentId      Int?
+  parentId     Int?
   parentPrompt Prompt?  @relation("ChildPrompts", fields: [parentId], references: [id])
-  childPrompts  Prompt[] @relation("ChildPrompts")
+  childPrompts Prompt[] @relation("ChildPrompts")
 }
 
 model AiModel {
   id        Int      @id @default(autoincrement())
   name      String   @unique
   link      String
-  prompt    Prompt[]
+  prompts   Prompt[]
   isDeleted Boolean  @default(false)
 }
 

@@ -1,4 +1,4 @@
-import { getAiModel, getDBUser, getTagIds } from '$lib/controllers/shared';
+import { getOrCreateAiModel, getDBUser, getTagIds } from '$lib/controllers/shared';
 import { getAllAIModels, getAllTags, getPromptBySlug } from '$lib/controllers/shared';
 import type { RequestEvent } from '@sveltejs/kit';
 
@@ -12,7 +12,7 @@ const prisma = new PrismaClient();
 export async function createPrompt(event: RequestEvent) {
 	const user = await getDBUser(event);
 	const data = await validateForm(event);
-	const aiModelId = await getAiModel(data);
+	const aiModelId = await getOrCreateAiModel(data);
 	const incomingTagIds = await getTagIds(data);
 
 	return await prisma.prompt.create({
@@ -44,7 +44,7 @@ export async function editPrompt(event: RequestEvent) {
 	const slug = event.params.slug;
 	const user = await getDBUser(event);
 	const data = await validateForm(event);
-	const aiModelId = await getAiModel(data);
+	const aiModelId = await getOrCreateAiModel(data);
 	const incomingTagIds = await getTagIds(data);
 
 	const promptToEdit = await prisma.prompt.findFirst({
@@ -91,7 +91,7 @@ export async function forkPrompt(event: RequestEvent) {
 	const dbUser = await getDBUser(event);
 	const slug = event.params.slug;
 	const data = await validateForm(event);
-	const aiModelId = await getAiModel(data);
+	const aiModelId = await getOrCreateAiModel(data);
 	const incomingTagIds = await getTagIds(data);
 
 	await prisma.prompt.update({

@@ -6,13 +6,14 @@
 	import { onMount } from 'svelte';
 
 	let form;
-	let tag;
-	let aiModel;
-	let sortBy;
+	let tags;
+	let aiModels;
+	let sortBys;
 	$: isChecked = {
 		mostLiked: $page.url.search.includes('most_liked'),
 		mostForked: $page.url.search.includes('most_forked'),
-		tag: (tagName) => $page.url.search.includes(tagName)
+		tag: (name) => $page.url.search.includes(name),
+		aiModel: (name) => $page.url.search.includes(name),
 	};
 
 	onMount(async () => {
@@ -31,14 +32,15 @@
 
 	function initVarsFromURL() {
 		let searchParams = new URLSearchParams($page.url.search);
-		tag = searchParams.getAll('tag');
-		aiModel = searchParams.get('ai_model');
-		sortBy = searchParams.getAll('sort_by');
+		tags = searchParams.getAll('tag');
+		aiModels = searchParams.get('ai_model');
+		sortBys = searchParams.getAll('sort_by');
 	}
 
 	function mapFormDataToVars() {
-		sortBy = new FormData(form).getAll('sort_by')
-		tag = new FormData(form).getAll('tag')
+		sortBys = new FormData(form).getAll('sort_by')
+		tags = new FormData(form).getAll('tag')
+		aiModels = new FormData(form).getAll('ai_model')
 	}
 
 	async function handleInput() {
@@ -53,19 +55,21 @@
 	function varsToQuerystring() {
 		let searchParams = new URLSearchParams();
 
-		if (tag) {
-			tag.forEach((tagValue) => {
-				searchParams.append('tag', tagValue);
+		if (tags) {
+			tags.forEach((tag) => {
+				searchParams.append('tag', tag);
 			});
 		}
 
-		if (aiModel) {
-			searchParams.set('ai_model', aiModel);
+		if (aiModels) {
+			aiModels.forEach((model) => {
+				searchParams.append('ai_model', model);
+			});
 		}
 
-		if (sortBy) {
-			sortBy.forEach((sortValue) => {
-				searchParams.append('sort_by', sortValue);
+		if (sortBys) {
+			sortBys.forEach((sort) => {
+				searchParams.append('sort_by', sort);
 			});
 		}
 
@@ -97,6 +101,16 @@
 			<label>
 				<input checked={isChecked.tag(tag.name)} type="checkbox" name="tag" value={tag.name} />
 				{tag.name}
+			</label>
+		{/each}
+	</fieldset>
+
+	<fieldset>
+		<legend>AI models</legend>
+		{#each $page.data.aiModels as model}
+			<label>
+				<input checked={isChecked.aiModel(model.name)} type="checkbox" name="ai_model" value={model.name} />
+				{model.name}
 			</label>
 		{/each}
 	</fieldset>

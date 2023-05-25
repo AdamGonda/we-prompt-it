@@ -1,6 +1,6 @@
 import { PrismaClient } from '@prisma/client';
 import { json } from '@sveltejs/kit';
-import { getAllTags } from './shared';
+import { getAllAIModels, getAllTags } from './shared';
 
 const prisma = new PrismaClient();
 
@@ -29,7 +29,8 @@ export async function search(event) {
 export async function loadExplore(event) {
 	return { 
 		prompts: await _search(event),
-		tags: await getAllTags()
+		tags: await getAllTags(),
+		aiModels: await getAllAIModels()
 	};
 }
 // #endregion
@@ -51,17 +52,17 @@ async function _search(event) {
 		},
 	};
 
-	handleSearchBar(query, event);
-	handleTags(query, event);
-	handleAiModel(query, event);
-	handleSortBy(query, event);
-	handlePagination(query, event);
+	_handleSearchBar(query, event);
+	_handleTags(query, event);
+	_handleAiModel(query, event);
+	_handleSortBy(query, event);
+	_handlePagination(query, event);
 
 	return await prisma.prompt.findMany(query);
 }
-// #endregion
 
-function handlePagination(query, event){
+
+function _handlePagination(query, event){
 	const page = event.url.searchParams.get('page');
 	const limit = event.url.searchParams.get('limit');
 
@@ -71,7 +72,7 @@ function handlePagination(query, event){
 	}
 }
 
-function handleSearchBar(query, event) {
+function _handleSearchBar(query, event) {
 	const WORDS_LIMIT = 5;
 	let text = event.url.searchParams.get('text');
 
@@ -110,7 +111,7 @@ function handleSearchBar(query, event) {
 	}
 }
 
-function handleTags(query, event) {
+function _handleTags(query, event) {
 	const tags = event.url.searchParams.getAll('tag')
 
 	if (tags?.length > 0) {
@@ -126,7 +127,7 @@ function handleTags(query, event) {
 	}
 }
 
-function handleAiModel(query, event) {
+function _handleAiModel(query, event) {
 	const aiModel = event.url.searchParams.get('ai_model');
 
 	if (aiModel) {
@@ -138,7 +139,7 @@ function handleAiModel(query, event) {
 	}
 }
 
-function handleSortBy(query, event) {
+function _handleSortBy(query, event) {
 	const sort = event.url.searchParams.getAll('sort_by');
 
 	if (sort.length === 0) {
@@ -161,3 +162,4 @@ function handleSortBy(query, event) {
 		});
 	}
 }
+// #endregion

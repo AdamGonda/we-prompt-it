@@ -29,7 +29,10 @@ export async function getAllPrompts() {
 }
 
 export async function getAllAIModels() {
-	return await prisma.aiModel.findMany();
+	return await prisma.aiModel.findMany({
+		where: { isDeleted: false },
+		orderBy: { prompts: { _count: 'desc' } },
+	});
 }
 
 export async function getAllTags() {
@@ -61,7 +64,7 @@ export async function getDBUser(event) {
 	return dbUser;
 }
 
-export async function getAiModel(data) {
+export async function getOrCreateAiModel(data) {
 	if (data.model != -1) {
 		return data.model;
 	}
