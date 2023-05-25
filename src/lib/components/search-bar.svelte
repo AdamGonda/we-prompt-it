@@ -1,9 +1,19 @@
 <script>
+	import { afterNavigate, beforeNavigate } from '$app/navigation';
 	import { page } from '$app/stores';
 	import searchStore from '$lib/stores/search-store';
+	import { onMount } from 'svelte';
 
 	let inputValue;
 	let placeholder = 'Search for images';
+
+	afterNavigate(() => {
+		initVarsFromURL();
+	});
+
+	beforeNavigate(() => {
+		inputValue = '';
+	});
 
 	function initVarsFromURL() {
 		let searchParams = new URLSearchParams($page.url.search);
