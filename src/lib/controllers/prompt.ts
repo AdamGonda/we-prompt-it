@@ -91,16 +91,12 @@ export async function forkPrompt(event: RequestEvent) {
 	const aiModelId = await getAiModel(data);
 	const incomingTagIds = await getTagIds(data);
 
-	if (!dbUser) {
-		throw Error('No user or parent prompt found');
-	}
-
 	await prisma.prompt.update({
 		where: {
 			slug
 		},
 		data: {
-			noTimesForked: {
+			forkedCount: {
 				increment: 1
 			}
 		}
@@ -122,7 +118,11 @@ export async function forkPrompt(event: RequestEvent) {
 				}
 			},
 			content: data.content,
-			aiModelId,
+			aiModel: {
+				connect: {
+					id: aiModelId
+				}
+			},
 			tags: {
 				connect: incomingTagIds
 					? incomingTagIds.map((tagId) => ({ id: tagId }))
