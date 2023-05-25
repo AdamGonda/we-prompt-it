@@ -190,6 +190,7 @@ export async function loadCreatePrompt() {
 
 // #region API
 export async function checkPromptNameUniqueness(event) {
+	// TODO fix if for create
 	const proposedName = event.url.searchParams.get('proposedName');
 	const promptId = event.url.searchParams.get('promptId');
 	const user = await getDBUser(event);
