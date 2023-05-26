@@ -21,6 +21,7 @@
 <nav>
 	<a href={`/`} class="logo">
 		<img src="logo.svg" width="40px" alt="logo" />
+		<!-- <span style="font-weight: bold; font-size: 1.2rem">[we]prompt</span> -->
 	</a>
 
 	<div class="all-but-logo">
@@ -54,6 +55,7 @@
 		align-items: center;
 		background: #34cff2;
 		padding: 20px 40px;
+		padding: 20px 56px;
 		background-image: linear-gradient(to left, #24243e 0%, #302b63 50%, #0f0c29 100%);
 	}
 
@@ -80,7 +82,7 @@
 	}
 
 	.logo {
-		margin-right: 64px;
+		margin-right: 140px;
 	}
 
 	.all-but-logo {
