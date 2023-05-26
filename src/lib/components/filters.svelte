@@ -86,7 +86,7 @@
 </script>
 
 <form name="filter-explore" method="POST" bind:this={form} on:input={handleInput}>
-	<!-- <fieldset name="sort-by">
+	<fieldset name="sort-by">
 		<legend>Sort by</legend>
 		<label>
 			<input
@@ -106,7 +106,7 @@
 			/>
 			Most forked
 		</label>
-	</fieldset> -->
+	</fieldset>
 
 	<fieldset class="tags">
 		<legend>Tags</legend>
@@ -154,5 +154,7 @@
 		border: none;
 		padding: 0;
 		margin: 0;
+		display: flex;
+		flex-direction: column;
 	}
 </style>
