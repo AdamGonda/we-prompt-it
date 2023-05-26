@@ -70,13 +70,12 @@
 	.card {
 		text-decoration: none;
 		border-radius: 5px;
-		/* padding: 20px; */
+		padding: 20px;
 		display: flex;
 		flex-direction: column;
 		gap: 8px;
 		color: #ffffff;
 		max-height: 200px;
-		/* min-width: 250px; */
 		background: linear-gradient(to left, #24243e 0%, #302b63 50%, #0f0c29 100%);
 	}
 
