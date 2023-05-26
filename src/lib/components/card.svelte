@@ -35,7 +35,7 @@
 <a href={`${inApp ? '/app' : ''}/prompt/${prompt.slug}`}>
 	<div class="infos">
 		<p class="model">{prompt.aiModel.name}</p>
-		<div>
+		<div class="stats">
 			<span class="likes">❤️ {prompt.likes?.length}</span>
 			<span class="forked">
 				<img src="/fork-icon.png" alt="fork-icon" />
@@ -108,5 +108,24 @@
 	.name {
 		font-size: 1.1rem;
 		font-weight: bold;
+	}
+
+	.likes {
+		display: flex;
+		align-items: center;
+	}
+
+	.forked {
+		display: flex;
+		align-items: center;
+	}
+
+	.forked img {
+		width: 15px;
+	}
+
+	.stats {
+		display: flex;
+		gap: 10px;
 	}
 </style>
