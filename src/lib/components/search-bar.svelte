@@ -68,6 +68,8 @@
 
 	function handleClear() {
 		inputValue = '';
+
+		handleSubmit();
 	}
 </script>
 
