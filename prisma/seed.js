@@ -8,7 +8,9 @@ async function main() {
 			firstName: 'Adam',
 			lastName: 'Gonda',
 			username: 'adamgonda',
-			email: 'adamgondagyula@gmail.com'
+			email: 'adamgondagyula@gmail.com',
+			// random image from https://thispersondoesnotexist.com/
+			picture: 'https://cdn.cloudflare.steamstatic.com/steamcommunity/public/images/avatars/49/4909a82a493bf33a38205a7ddc71baed32037d9c_full.jpg',
 		}
 	});
 
@@ -17,7 +19,8 @@ async function main() {
 			firstName: 'test1 f',
 			lastName: 'test1 l',
 			username: 'test1',
-			email: 'testshareloop1@gmail.com'
+			email: 'testshareloop1@gmail.com',
+			picture: 'https://cdn.cloudflare.steamstatic.com/steamcommunity/public/images/avatars/45/4578f901a42efc6575484a9a6dbc89a661f2b9d0_full.jpg',
 		}
 	});
 
@@ -26,7 +29,8 @@ async function main() {
 			firstName: 'test2 f',
 			lastName: 'test2 l',
 			username: 'test2',
-			email: 'testshareloop2@gmail.com'
+			email: 'testshareloop2@gmail.com',
+			picture: 'https://cdn.cloudflare.steamstatic.com/steamcommunity/public/images/avatars/2d/2da353a91551c2c67a4f57b4d7d306b9b4b0cf14_full.jpg',
 		}
 	});
 
