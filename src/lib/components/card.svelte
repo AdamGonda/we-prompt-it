@@ -56,7 +56,7 @@
 	</div>
 
 	<div class="excerpt">
-		<p>{_.truncate(prompt.content, { length: 70 })}</p>
+		<p>{_.truncate(prompt.content, { length: 105 })}</p>
 	</div>
 </a>
 
