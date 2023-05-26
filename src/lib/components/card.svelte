@@ -7,11 +7,25 @@
 	export let prompt;
 	let inApp = false;
 	let selectedTags;
+	$: smartTags = getSmartTags(selectedTags, prompt.tags)
 
 	afterNavigate(() => {
 		let searchParams = new URLSearchParams($page.url.search);
 		selectedTags = searchParams.getAll('tag');
 	});
+
+	function getSmartTags(selectedTags, promptTags) {
+		if (!selectedTags) return promptTags;
+
+		let smartTags = promptTags.map((tag) => {
+			return {
+				...tag,
+				isSelected: selectedTags.includes(tag.name),
+			}
+		});
+
+		return smartTags;
+	}
 
 	if (browser && $page.data.session?.user) {
 		inApp = true;
@@ -33,9 +47,8 @@
 	<p class="name">{prompt.name}</p>
 
 	<div class="tags">
-		{#each prompt.tags as tag}
-			<span>{tag.name}</span>
-			{console.log('render ')}
+		{#each smartTags as tag}
+			<span class:highlight={tag.isSelected}>{tag.name}</span>
 		{/each}
 	</div>
 
