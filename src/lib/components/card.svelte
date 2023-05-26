@@ -99,7 +99,7 @@
 			padding: 4px 8px;
 			border-radius: 12px;
 			background-color: #6fcf97;
-			color: #ffffff;
+			color: #000000;
 			font-size: 0.85rem;
 	}
 
