@@ -20,18 +20,20 @@
 
 <nav>
 	<a href={`/`}>
-		<p class="logo">[we]prompt</p>
+		<img src="logo.svg" width="40px" alt="logo" />
 	</a>
 
 	<SearchBar />
 
-	<a href={links.myCollection}>
-		<p>My collection</p>
-	</a>
+	<div>
+		<a href={links.myCollection}>
+			<p>My collection</p>
+		</a>
 
-	<a href={links.create} class="create">
-		<p>Create prompt</p>
-	</a>
+		<a href={links.create} class="create">
+			<p>Create prompt</p>
+		</a>
+	</div>
 
 	{#if user}
 		<button style="cursor: pointer;" on:click={handleSignout}>signout</button>
@@ -47,19 +49,20 @@
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
-		background: #048ba8;
+		background: #34cff2;
 		padding: 20px 40px;
+		background-image: linear-gradient(to left, #24243e 0%, #302b63 50%, #0f0c29 100%);
+	}
+
+	div {
+		display: flex;
+		align-items: center;
+		gap: 34px;
 	}
 
 	a {
 		text-decoration: none;
-		color: #fff;
-	}
-
-	.logo {
-		font-size: 1.2rem;
-		font-weight: bold;
-		color: #fff;
+		color: #ffffff;
 	}
 
 	p {
@@ -67,7 +70,7 @@
 	}
 
 	.create {
-		border: 2px solid white;
 		padding: 7px;
+		border: 2px solid white;
 	}
 </style>

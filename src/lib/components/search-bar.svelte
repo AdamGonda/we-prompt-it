@@ -79,7 +79,7 @@
 		{placeholder}
 	/>
 	<button>
-		<img src="/search-icon.svg" alt="search" />
+		<p>go</p>
 	</button>
 </form>
 
@@ -95,22 +95,35 @@
 		min-width: 300px;
 		height: 38px;
 		font-size: 16px;
-		font-weight: bold;
+		
+		background:rgba(0 ,0,0,0);
+		border: 2px solid #fff;
+		color: #fff;
+	}
+
+	input::placeholder {
+		color: #ffffff;
+		
+		font-size: 1rem;
 	}
 
 	input:focus {
-		outline: 3px solid orange;
+		outline: none
 	}
 
 	button {
 		border: none;
-		background: #FF5E5B;
+		background: #ffffff;
 		cursor: pointer;
-		height: 38px;
+		height: 42px;
 		width: 45px;
+		font-size: 1rem;
+		font-weight: bold;
+		text-transform: uppercase;
+		margin-left: -1px;
 	}
 
-	img {
-		height: 20px;
+	p {
+		margin: 0
 	}
 </style>
