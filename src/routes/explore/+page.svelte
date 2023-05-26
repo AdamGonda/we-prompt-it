@@ -4,7 +4,6 @@
 
 <script>
 	import { page } from '$app/stores';
-	import { results } from '$lib/stores/search-bar-store';
 	import Card from '$lib/components/card.svelte';
 	import { onMount } from 'svelte';
 	import Filters from '$lib/components/filters.svelte';
@@ -27,10 +26,8 @@
 
 <main>
 	<Filters />
-	<h1>Explore</h1>
 
-	<h3>All prompts</h3>
-	<div class="all">
+	<div class="card-list">
 		{#each resultsToShow as prompt (prompt.id)}
 			<Card {prompt} />
 		{/each}
@@ -38,14 +35,16 @@
 </main>
 
 <style>
-	.all {
+	.card-list {
 		display: grid;
 		grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-		gap: 16px;
+		gap: 24px;
+		width: 100%;
 	}
 
 	main {
 		display: flex;
-		flex-direction: column;
+		gap: 24px;
+		padding: 0 8px;
 	}
 </style>

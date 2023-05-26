@@ -12,75 +12,26 @@
 
 <a href={`${inApp ? '/app' : ''}/prompt/${prompt.slug}`}>
 	<div>
-		<span><b><u>{prompt.name}</u></b></span>
+		<p>{prompt.name}</p>
 		
-		<main>
+		<div class="excerpt">
 			<p>{prompt.content}</p>
-		</main>
+		</div>
 
-		<sub>
+		<div class="tags">
 			{#each prompt.tags as tag}
 				<span>{tag.name}</span>
 			{/each}
-		</sub>
+		</div>
 		
-		<footer class="footer">
-			<span>{prompt.aiModel.name}</span>
-			<span>❤️ {prompt.likes?.length}</span>
-			<span><img src="/fork-icon.png" alt="fork-icon" /> {prompt.forkedCount}</span>
-		</footer>
+		<div class="infos">
+			<span class="model">{prompt.aiModel.name}</span>
+			<span class="likes">❤️ {prompt.likes?.length}</span>
+			<span class="forked"><img src="/fork-icon.png" alt="fork-icon" /> {prompt.forkedCount}</span>
+		</div>
 	</div>
 </a>
 
 <style>
-	div {
-		border: 1px solid black;
-		border-radius: 7px;
-		padding: 16px;
-	}
-	p {
-		margin: 0;
-	}
-
-	span {
-		font-size: 16px;
-	}
-
-	a {
-		color: inherit;
-		text-decoration: none;
-	}
-
-	a:focus {
-		outline: none;
-	}
-
-	main {
-		margin-top: 6px;
-	}
-
-	main p {
-		line-height: 18px;
-		font-size: 16px;
-		font-weight: normal;
-	}
-
-	sub {
-		display: flex;
-		gap: 8px;
-		margin-top: 6px;
-	}
-
-	sub span {
-		border-radius: 10px;
-		padding: 6px;
-		border: 2px solid black;
-	}
-
-	footer {
-		display: flex;
-		align-items: center;
-		justify-content: space-between;
-		margin-top: 16px;
-	}
+	
 </style>
