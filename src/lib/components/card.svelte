@@ -67,6 +67,7 @@
 		flex-direction: column;
 		gap: 8px;
 		color: black;
+		max-height: 150px;
 	}
 
 	.highlight {

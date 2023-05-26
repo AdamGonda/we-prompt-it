@@ -38,7 +38,7 @@
 
 <style>
 	.filters {
-		width: 300px;
+		width: 200px;
 		padding: 24px;
 		font-size: 1.3rem;
 	}
