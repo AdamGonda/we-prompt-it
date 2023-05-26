@@ -32,129 +32,131 @@
 	}
 </script>
 
-<a href={`${inApp ? '/app' : ''}/prompt/${prompt.slug}`}>
+<a href={`${inApp ? '/app' : ''}/prompt/${prompt.slug}`} class="card">
 	<div class="row top">
-		<p class="name">{prompt.name}</p>
-		<img class="profile" src={prompt.author.picture} alt="author" />
+			<p class="name">{prompt.name}</p>
+			<img class="profile" src={prompt.author.picture} alt="author" />
 	</div>
 
 	<div class="row">
-		<p class="model">{prompt.aiModel.name}</p>
-		<div class="stats">
-			<span class="likes">❤️ {prompt.likes?.length}</span>
-			<span class="forked">
-				<img src="/fork-icon.png" alt="fork-icon" />
-				{prompt.forkedCount}
-			</span>
-		</div>
+			<p class="model">{prompt.aiModel.name}</p>
+			<div class="stats">
+					<span class="likes">❤️ {prompt.likes?.length}</span>
+					<span class="forked">
+							<img src="/fork-icon.png" alt="fork-icon" />
+							{prompt.forkedCount}
+					</span>
+			</div>
 	</div>
 
 	<div class="tags">
-		{#each smartTags as tag}
-			<span class:highlight={tag.isSelected}>{tag.name}</span>
-		{/each}
+			{#each smartTags as tag}
+					<span class:highlight={tag.isSelected}>{tag.name}</span>
+			{/each}
 	</div>
 
 	<div class="excerpt">
-		<p>{_.truncate(prompt.content, { length: 105 })}</p>
+			<p>{_.truncate(prompt.content, { length: 90 })}</p>
 	</div>
 </a>
 
 <style>
-	a {
-		text-decoration: none;
-		border: 2px solid #2f80ed;
-		border-radius: 12px;
-		padding: 16px;
-		display: flex;
-		flex-direction: column;
-		gap: 8px;
-		color: #333;
-		max-height: 200px;
-		background: #f7f9fc;
-		box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+	.card {
+			text-decoration: none;
+			border: 2px solid #ffffff;
+			border-radius: 12px;
+			padding: 16px;
+			display: flex;
+			flex-direction: column;
+			gap: 8px;
+			color: #ffffff;
+			max-height: 200px;
+			background: linear-gradient(to left, #24243e 0%, #302b63 50%, #0f0c29 100%);
+			box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
 	}
 
 	.highlight {
-		background-color: #2f80ed !important;
-		color: white;
+			background-color: #ffffff !important;
+			color: #24243e;
 	}
 
 	p {
-		margin: 0;
-		line-height: 1.5;
+			margin: 0;
+			line-height: 1.5;
 	}
 
 	.row {
-		display: flex;
-		justify-content: space-between;
-		align-items: center;
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
 	}
 
 	.model {
-		font-weight: 600;
-		padding: 4px 8px;
-		border-radius: 12px;
-		background-color: #6fcf97; /* Different color for AI Model */
-		color: #333;
-		font-size: 0.85rem;
+			font-weight: 600;
+			padding: 4px 8px;
+			border-radius: 12px;
+			background-color: #6fcf97;
+			color: #ffffff;
+			font-size: 0.85rem;
 	}
 
 	.tags {
-		display: flex;
-		gap: 8px;
-		flex-wrap: wrap;
+			display: flex;
+			gap: 8px;
+			flex-wrap: wrap;
 	}
 
 	.tags span {
-		background-color: #e0e0e0;
-		padding: 4px 8px;
-		border-radius: 12px;
-		font-size: 0.8rem;
-		font-weight: 500;
-		color: #333;
+			background-color: rgba(255, 255, 255, 0.2);
+			padding: 4px 8px;
+			border-radius: 12px;
+			font-size: 0.8rem;
+			font-weight: 500;
+			color: #ffffff;
 	}
 
 	.tags span.highlight {
-		background-color: #2f80ed;
-		color: white;
+			background-color: #ffffff;
+			color: #24243e;
 	}
 
 	.name {
-		font-size: 1.1rem;
-		font-weight: 600;
-		color: #2f80ed;
-		margin-bottom: 5px;
+			font-size: 1.1rem;
+			font-weight: 600;
+			color: #ffffff;
+			margin-bottom: 5px;
 	}
 
 	.likes,
 	.forked {
-		display: flex;
-		align-items: center;
-		font-size: 0.9rem;
-		color: #828282;
+			display: flex;
+			align-items: center;
+			font-size: 0.9rem;
+			color: #ffffff;
+			
 	}
 
 	.forked img {
-		width: 15px;
-		margin-right: 5px;
+			width: 15px;
+			margin-right: 5px;
+			filter: invert(1)
 	}
 
 	.stats {
-		display: flex;
-		gap: 16px;
+			display: flex;
+			gap: 16px;
 	}
 
 	.profile {
-		width: 30px;
-		height: 30px;
-		border-radius: 50%;
-		border: 2px solid #2f80ed;
-		object-fit: cover;
+			width: 30px;
+			height: 30px;
+			border-radius: 50%;
+			border: 2px solid #ffffff;
+			object-fit: cover;
 	}
 
 	.excerpt {
-		margin-top: 10px;
+			margin-top: 10px;
 	}
 
 	.top {
