@@ -23,13 +23,15 @@
 		</div>
 	</div>
 
+	<p class="name">{prompt.name}</p>
+	
 	<div class="tags">
 		{#each prompt.tags as tag}
 			<span>{tag.name}</span>
 		{/each}
 	</div>
 
-	<p class="name">{prompt.name}</p>
+	
 
 	<div class="excerpt">
 		<p>{_.truncate(prompt.content, { length: 50 })}</p>
