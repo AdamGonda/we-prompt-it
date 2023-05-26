@@ -74,6 +74,7 @@
 			gap: 8px;
 			color: #ffffff;
 			max-height: 200px;
+			max-width: 250px;
 			background: linear-gradient(to left, #24243e 0%, #302b63 50%, #0f0c29 100%);
 	}
 
