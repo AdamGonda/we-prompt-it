@@ -11,10 +11,6 @@
 		initVarsFromURL();
 	});
 
-	beforeNavigate(() => {
-		inputValue = '';
-	});
-
 	function initVarsFromURL() {
 		let searchParams = new URLSearchParams($page.url.search);
 		inputValue = searchParams.get('text');
@@ -102,7 +98,7 @@
 	}
 
 	input::placeholder {
-		color: #ffffff;
+		color: #ffffffab;
 		
 		font-size: 1rem;
 	}
