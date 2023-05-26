@@ -4,6 +4,10 @@
 	import { page } from '$app/stores';
 
 	const user = $page.data.session?.user;
+	$: links = {
+		create: user ? '/app/prompt/create' : '/login',
+		myCollection: user ? '/app/my-collection' : '/login'
+	};
 
 	function handleSignout() {
 		signOut();
@@ -15,37 +19,25 @@
 </script>
 
 <nav>
-	<a href={`/`} >
-		<img src="/weprompt-logo.svg" alt="logo" width="50px" />
+	<a href={`/`}>
+		<p class="logo">[we]prompt</p>
 	</a>
-	
+
 	<SearchBar />
 
-	{#if user}
-		<a href={`/app/my-collection`} >
-			<p>My collection</p>
-		</a>
-	{:else}
-		<a href={`/login`} >
-			<p>My collection</p>
-		</a>
-	{/if}
+	<a href={links.myCollection}>
+		<p>My collection</p>
+	</a>
+
+	<a href={links.create} class="create">
+		<p>Create prompt</p>
+	</a>
 
 	{#if user}
-		<a href={`/app/prompt/create`} >
-			<p>Create prompt</p>
-		</a>
+		<button style="cursor: pointer;" on:click={handleSignout}>signout</button>
 	{:else}
-		<a href={`/login`} >
-			<p>Create prompt</p>
-		</a>
-	{/if}
-
-	{#if user}
-		<button style="cursor: pointer;" on:click={handleSignout} >signout</button>
-	{:else}
-	<a href={`/login`} >
-		<p>Signup/Login</p>
+		<a href={`/login`}>
+			<p>Signup/Login</p>
 		</a>
 	{/if}
 </nav>
@@ -55,11 +47,27 @@
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
-		background: rgb(144, 144, 144);
-		padding: 10px 40px;
+		background: #048ba8;
+		padding: 20px 40px;
 	}
 
 	a {
 		text-decoration: none;
+		color: #fff;
+	}
+
+	.logo {
+		font-size: 1.2rem;
+		font-weight: bold;
+		color: #fff;
+	}
+
+	p {
+		margin: 0;
+	}
+
+	.create {
+		border: 2px solid white;
+		padding: 7px;
 	}
 </style>

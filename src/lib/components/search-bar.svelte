@@ -91,12 +91,11 @@
 
 	input {
 		padding: 0 16px;
-		border-top-left-radius: 3px;
-		border-bottom-left-radius: 3px;
 		border: none;
 		min-width: 300px;
-		height: 48px;
-		font-size: 20px;
+		height: 38px;
+		font-size: 16px;
+		font-weight: bold;
 	}
 
 	input:focus {
@@ -104,13 +103,11 @@
 	}
 
 	button {
-		padding: auto 10px;
 		border: none;
-		background: rgb(255, 255, 255);
+		background: #FF5E5B;
 		cursor: pointer;
-		border-top-right-radius: 3px;
-		border-bottom-right-radius: 3px;
-		height: 48px;
+		height: 38px;
+		width: 45px;
 	}
 
 	img {
