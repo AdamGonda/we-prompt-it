@@ -90,7 +90,7 @@
 	}
 
 	.outlined {
-		border: 1px solid #fff;
+		border: 1px solid rgb(255, 255, 255);
 	}
 
 	input {
@@ -106,7 +106,6 @@
 	}
 
 	input::placeholder {
-		/* color: #ffffffbb; */
 		color: white;
 		font-size: 1rem;
 	}
