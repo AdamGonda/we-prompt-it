@@ -6,6 +6,7 @@
 
 	let inputValue;
 	let placeholder = 'Find the prompt you need';
+	let inputInFocus = false;
 
 	afterNavigate(() => {
 		initVarsFromURL();
@@ -57,14 +58,16 @@
 
 	function handleFocus() {
 		searchFocused.update((value) => (value = true));
+		inputInFocus = true;
 	}
 
 	function handleBlur() {
 		searchFocused.update((value) => (value = false));
+		inputInFocus = false;
 	}
 </script>
 
-<form name="search" method="POST" on:submit|preventDefault={handleSubmit}>
+<form name="search" method="POST" class:outlined={inputInFocus} on:submit|preventDefault={handleSubmit}>
 	<input
 		autocomplete="off"
 		on:focus={handleFocus}
@@ -83,6 +86,11 @@
 	form {
 		display: flex;
 		align-items: center;
+		border: 1px solid rgba(0,0,0,0);
+	}
+
+	.outlined {
+		border: 1px solid #fff;
 	}
 
 	input {
@@ -98,13 +106,13 @@
 	}
 
 	input::placeholder {
-		color: #ffffffab;
-		
+		/* color: #ffffffbb; */
+		color: white;
 		font-size: 1rem;
 	}
 
 	input:focus {
-		outline: none
+		outline: none;
 	}
 
 	button {

@@ -19,35 +19,38 @@
 </script>
 
 <nav>
-	<a href={`/`}>
+	<a href={`/`} class="logo">
 		<img src="logo.svg" width="40px" alt="logo" />
 	</a>
 
-	<SearchBar />
+	<div class="all-but-logo">
+		<SearchBar />
 
-	<div>
-		<a href={links.myCollection}>
-			<p>My collection</p>
-		</a>
+		<div>
+			<div class="button-island">
+				<a href={links.myCollection}>
+					<p>My collection</p>
+				</a>
+				
+				<a href={links.create} class="create">
+					<p>Create prompt</p>
+				</a>
+			</div>
 
-		<a href={links.create} class="create">
-			<p>Create prompt</p>
-		</a>
+			{#if user}
+				<button style="cursor: pointer;" on:click={handleSignout}>signout</button>
+			{:else}
+				<a href={`/login`}>
+					<p>Signup/Login</p>
+				</a>
+			{/if}
+		</div>
 	</div>
-
-	{#if user}
-		<button style="cursor: pointer;" on:click={handleSignout}>signout</button>
-	{:else}
-		<a href={`/login`}>
-			<p>Signup/Login</p>
-		</a>
-	{/if}
 </nav>
 
 <style>
 	nav {
 		display: flex;
-		justify-content: space-between;
 		align-items: center;
 		background: #34cff2;
 		padding: 20px 40px;
@@ -60,6 +63,13 @@
 		gap: 34px;
 	}
 
+	.button-island {
+		display: flex;
+		align-items: center;
+		gap: 34px;
+		margin-right: 20px;
+	}
+
 	a {
 		text-decoration: none;
 		color: #ffffff;
@@ -69,8 +79,19 @@
 		margin: 0;
 	}
 
+	.logo {
+		margin-right: 64px;
+	}
+
+	.all-but-logo {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		width: 100%;
+	}
+
 	.create {
-		padding: 7px;
+		padding: 7px 12px;
 		border: 2px solid white;
 	}
 </style>
