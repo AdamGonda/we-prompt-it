@@ -63,16 +63,13 @@
 <style>
 	.card {
 			text-decoration: none;
-			border: 2px solid #ffffff;
-			border-radius: 12px;
-			padding: 16px;
+			padding: 20px;
 			display: flex;
 			flex-direction: column;
 			gap: 8px;
 			color: #ffffff;
 			max-height: 200px;
 			background: linear-gradient(to left, #24243e 0%, #302b63 50%, #0f0c29 100%);
-			box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
 	}
 
 	.highlight {
