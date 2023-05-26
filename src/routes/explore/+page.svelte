@@ -42,15 +42,16 @@
 		padding: 24px;
 		font-size: 1.3rem;
 	}
+
 	.card-list {
 		display: grid;
 		grid-template-columns: repeat(auto-fill, minmax(276px, 1fr));
+		grid-template-rows: repeat(auto-fill, minmax(230px, 1fr));
 		column-gap: 24px;
 		row-gap: 24px;
-
-
 		width: 100%;
 		margin-top: 24px;
+		align-items: start start;
 	}
 
 	main {

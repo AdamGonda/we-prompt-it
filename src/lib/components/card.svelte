@@ -57,7 +57,7 @@
 		{/each}
 	</div>
 
-	<div class="excerpt">
+	<div class="description">
 		<p>{_.truncate(prompt.content, { length: 90 })}</p>
 	</div>
 </a>
@@ -75,7 +75,7 @@
 		flex-direction: column;
 		gap: 8px;
 		color: #ffffff;
-		max-height: 200px;
+		/* max-height: 200px; */
 		background: linear-gradient(to left, #24243e 0%, #302b63 50%, #0f0c29 100%);
 	}
 
@@ -86,7 +86,7 @@
 
 	.model-highlight {
 		background: #6fcf97;
-		color: #24243e !important
+		color: #24243e !important;
 	}
 
 	p {
@@ -163,10 +163,7 @@
 		object-fit: cover;
 	}
 
-	.excerpt {
+	.description {
 		margin-top: 10px;
-	}
-
-	.top {
 	}
 </style>
