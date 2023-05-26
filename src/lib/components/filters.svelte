@@ -83,11 +83,32 @@
 
 		return searchParams.toString();
 	}
+
+	function resetSortBy() {
+		form.querySelectorAll('input[name="sort_by"]').forEach((input) => {
+			input.checked = false;
+		});
+		handleInput();
+	}
+
+	function resetTags() {
+		form.querySelectorAll('input[name="tag"]').forEach((input) => {
+			input.checked = false;
+		});
+		handleInput();
+	}
+
+	function resetAIModels() {
+		form.querySelectorAll('input[name="ai_model"]').forEach((input) => {
+			input.checked = false;
+		});
+		handleInput();
+	}
 </script>
 
 <form name="filter-explore" method="POST" bind:this={form} on:input={handleInput}>
 	<fieldset name="sort-by">
-		<legend>Sort by</legend>
+		<legend>Sort by <button type="button" on:click={resetSortBy}>Reset</button></legend>
 		<label>
 			<input
 				checked={isChecked.mostLiked}
@@ -109,7 +130,7 @@
 	</fieldset>
 
 	<fieldset class="tags">
-		<legend>Tags</legend>
+		<legend>Tags <button type="button" on:click={resetTags}>Reset</button></legend>
 		{#each $page.data.tags as tag (tag.id)}
 			<label>
 				<input checked={isChecked.tag(tag.name)} type="checkbox" name="tag" value={tag.name} />
@@ -119,7 +140,7 @@
 	</fieldset>
 
 	<fieldset>
-		<legend>AI models</legend>
+		<legend>AI models <button type="button" on:click={resetAIModels}>Reset</button></legend>
 		{#each $page.data.aiModels as model (model.id)}
 			<label>
 				<input
@@ -156,5 +177,12 @@
 		margin: 0;
 		display: flex;
 		flex-direction: column;
+	}
+
+	[type="button"] {
+		background: none;
+		border: none;
+		text-decoration: underline;
+		cursor: pointer;
 	}
 </style>
