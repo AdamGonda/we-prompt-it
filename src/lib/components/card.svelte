@@ -1,10 +1,17 @@
 <script>
 	import { browser } from '$app/environment';
+	import { afterNavigate } from '$app/navigation';
 	import { page } from '$app/stores';
 	import _ from 'lodash';
 
 	export let prompt;
 	let inApp = false;
+	let selectedTags;
+
+	afterNavigate(() => {
+		let searchParams = new URLSearchParams($page.url.search);
+		selectedTags = searchParams.getAll('tag');
+	});
 
 	if (browser && $page.data.session?.user) {
 		inApp = true;
@@ -24,14 +31,13 @@
 	</div>
 
 	<p class="name">{prompt.name}</p>
-	
+
 	<div class="tags">
 		{#each prompt.tags as tag}
 			<span>{tag.name}</span>
+			{console.log('render ')}
 		{/each}
 	</div>
-
-	
 
 	<div class="excerpt">
 		<p>{_.truncate(prompt.content, { length: 50 })}</p>
@@ -48,6 +54,11 @@
 		flex-direction: column;
 		gap: 8px;
 		color: black;
+	}
+
+	.highlight {
+		background-color: #9d9d9d !important;
+		color: white;
 	}
 
 	p {
