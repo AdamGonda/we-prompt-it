@@ -65,18 +65,34 @@
 		searchFocused.update((value) => (value = false));
 		inputInFocus = false;
 	}
+
+	function handleClear() {
+		inputValue = '';
+	}
 </script>
 
-<form name="search" method="POST" class:outlined={inputInFocus} on:submit|preventDefault={handleSubmit}>
-	<input
-		autocomplete="off"
-		on:focus={handleFocus}
-		on:blur={handleBlur}
-		bind:value={inputValue}
-		type="text"
-		name="text-search"
-		{placeholder}
-	/>
+<form
+	name="search"
+	method="POST"
+	class:outlined={inputInFocus}
+	on:submit|preventDefault={handleSubmit}
+>
+	<div class="search-input-container">
+		<input
+			autocomplete="off"
+			on:focus={handleFocus}
+			on:blur={handleBlur}
+			bind:value={inputValue}
+			type="text"
+			name="text-search"
+			{placeholder}
+		/>
+		{#if inputValue}
+			<button type="button" on:click={handleClear} class="clear-button">
+				<p>x</p>
+			</button>
+		{/if}
+	</div>
 	<button>
 		<p>go</p>
 	</button>
@@ -86,7 +102,7 @@
 	form {
 		display: flex;
 		align-items: center;
-		border: 1px solid rgba(0,0,0,0);
+		border: 1px solid rgba(0, 0, 0, 0);
 	}
 
 	.outlined {
@@ -99,8 +115,8 @@
 		min-width: 300px;
 		height: 38px;
 		font-size: 16px;
-		
-		background:rgba(0 ,0,0,0);
+
+		background: rgba(0, 0, 0, 0);
 		border: 2px solid #fff;
 		color: #fff;
 	}
@@ -127,6 +143,21 @@
 	}
 
 	p {
-		margin: 0
+		margin: 0;
+	}
+
+	.search-input-container {
+		position: relative;
+	}
+
+	.clear-button {
+		position: absolute;
+		top: 50%;
+		right: 1px;
+		transform: translateY(-50%);
+		background: none;
+		border: none;
+		cursor: pointer;
+		color: white;
 	}
 </style>
