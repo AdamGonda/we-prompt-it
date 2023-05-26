@@ -95,9 +95,6 @@
 			</button>
 		{/if}
 	</div>
-	<button>
-		<p>go</p>
-	</button>
 </form>
 
 <style>
@@ -121,6 +118,7 @@
 		background: rgba(0, 0, 0, 0);
 		border: 2px solid #fff;
 		color: #fff;
+		border-radius: 5px;
 	}
 
 	input::placeholder {

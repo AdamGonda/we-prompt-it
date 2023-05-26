@@ -61,8 +61,13 @@
 </a>
 
 <style>
+	:global(body) {
+		background: rgb(245, 245, 245);
+	}
+
 	.card {
 			text-decoration: none;
+			border-radius: 5px;
 			padding: 20px;
 			display: flex;
 			flex-direction: column;
@@ -136,7 +141,7 @@
 	.forked img {
 			width: 15px;
 			margin-right: 5px;
-			filter: invert(1)
+			filter: invert(1);
 	}
 
 	.stats {

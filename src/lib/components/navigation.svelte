@@ -61,6 +61,7 @@
 	a {
 		text-decoration: none;
 		color: #ffffff;
+		border-radius: 5px;
 	}
 
 	p {
