@@ -3,7 +3,7 @@
 	import { page } from '$app/stores';
 	import UserAvatar from './user-avatar.svelte';
 
-	const user = $page.data.session?.user;
+	const user = $page.data.dbUser
 	$: links = {
 		create: user ? '/app/prompt/create' : '/login',
 		myCollection: user ? '/app/my-collection' : '/login'
