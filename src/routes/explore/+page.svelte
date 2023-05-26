@@ -25,7 +25,9 @@
 </script>
 
 <main>
-	<Filters />
+	<div class="filters">
+		<Filters />
+	</div>
 
 	<div class="card-list">
 		{#each resultsToShow as prompt (prompt.id)}
@@ -35,16 +37,22 @@
 </main>
 
 <style>
+	.filters {
+		width: 300px;
+		padding: 24px;
+		font-size: 1.3rem;
+	}
 	.card-list {
 		display: grid;
 		grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
 		gap: 24px;
 		width: 100%;
+		margin-top: 24px;
 	}
 
 	main {
 		display: flex;
 		gap: 24px;
-		padding: 0 8px;
+		padding-right: 24px;
 	}
 </style>

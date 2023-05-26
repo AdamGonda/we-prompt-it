@@ -24,13 +24,12 @@
 	}
 
 	.content {
-		padding: 0 16px;
 		min-height: calc(100vh - 93px);
 	}
 
 	.overlay-ref {
 		position: relative;
-		padding-top: 24px;
+		/* padding-top: 24px; */
 	}
 
 	.overlay {

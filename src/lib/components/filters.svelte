@@ -135,8 +135,24 @@
 </form>
 
 <style>
+	form {
+		display: flex;
+		flex-direction: column;
+		gap: 16px;
+	}
+
 	.tags {
 		display: flex;
 		flex-direction: column;
+	}
+
+	legend {
+		font-weight: 600;
+	}
+
+	fieldset {
+		border: none;
+		padding: 0;
+		margin: 0;
 	}
 </style>
