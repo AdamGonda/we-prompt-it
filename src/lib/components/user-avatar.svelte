@@ -1,5 +1,6 @@
 <script>
 	import { page } from '$app/stores';
+	import routes from '$lib/routes';
 	import { signOut } from '@auth/sveltekit/client';
 
 	const user = $page.data.session?.user;
@@ -22,13 +23,13 @@
 		
 		{#if showDropdown}
 			<ul class="dropdown-menu">
-				<li><a href={`/profile/${user.username}`}>Profile</a></li>
+				<li><a href={routes.profile(user.username)}>Profile</a></li>
 				<li><button on:click={handleSignout}>Signout</button></li>
 			</ul>
 		{/if}
 	</div>
 {:else}
-	<a href="/login">
+	<a href={routes.login}>
 		<p><u>Login</u> - Signup</p>
 	</a>
 {/if}
