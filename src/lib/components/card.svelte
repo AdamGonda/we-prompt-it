@@ -15,7 +15,6 @@
 <a href={`${inApp ? '/app' : ''}/prompt/${prompt.slug}`} class="card">
 	<div class="row">
 		<p class="name">{prompt.name}</p>
-		<img class="profile" src={prompt.author.picture} alt="author" />
 	</div>
 
 	<div class="description">
@@ -23,8 +22,10 @@
 	</div>
 
 	<div class="row footer">
-		<p class="model">{prompt.aiModel.name}</p>
+		<img class="profile" src={prompt.author.picture} alt="author" />
+
 		<div class="stats">
+			<p class="model">{prompt.aiModel.name}</p>
 			<span class="likes">❤️ {prompt.likes?.length}</span>
 			<span class="forked">
 				<img src="/fork-icon.png" alt="fork-icon" />
@@ -64,6 +65,7 @@
 		border-radius: 12px;
 		background: #6fcf97;
 		color: black;
+		font-weight: bold;
 		font-size: 0.85rem;
 	}
 
@@ -90,7 +92,7 @@
 
 	.stats {
 		display: flex;
-		gap: 16px;
+		gap: 8px;
 	}
 
 	.profile {
