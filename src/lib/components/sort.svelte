@@ -7,7 +7,7 @@
 	let form;
 	let sortBys;
 	$: isChecked = {
-		all: $page.url.search == '?sort_by=',
+		// all: TODO fix this
 		mostLiked: $page.url.search.includes('most_liked'),
 		mostForked: $page.url.search.includes('most_forked')
 	};
