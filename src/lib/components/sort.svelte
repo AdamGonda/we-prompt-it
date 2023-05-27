@@ -46,9 +46,9 @@
 
 	function varsToQuerystring() {
 		let old = new URLSearchParams($page.url.search);
-		const text = old.get('text');
 		let searchParams = new URLSearchParams();
 
+		const text = old.get('text');
 		if(text) {
 			searchParams.append('text', text);
 		}
