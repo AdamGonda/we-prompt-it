@@ -1,15 +1,16 @@
 <svelte:head>
-    <title>Prompt details | We Prompt</title> 
+	<title>Prompt details | We Prompt</title>
 </svelte:head>
 
 <script>
 	import { page } from '$app/stores';
+	import routes from '$lib/routes';
 
 	const user = $page.data.session?.user;
 	const isOwner = user ? $page.data.prompt.author.email === user.email : false;
-	let likes = $page.data.prompt.likes.length
-	$: forkLink = user ? `/app/prompt/${$page.params.slug}/fork` : `/login`;
-	$: appreciationText = `Likes: ${likes}`
+	let likes = $page.data.prompt.likes.length;
+	$: forkLink = routes.fork(user, $page.params.slug);
+	$: appreciationText = `Likes: ${likes}`;
 
 	async function handleAddRemoveLike() {
 		const r = await fetch(`/api/add-remove-like?id=${$page.data.prompt.id}`, {
@@ -28,7 +29,7 @@
 
 <div>
 	<button>
-		<a href={forkLink} >Create new based on this</a>
+		<a href={forkLink}>Create new based on this</a>
 	</button>
 
 	{#if user}
@@ -37,13 +38,13 @@
 		</button>
 	{:else}
 		<button>
-			<a href={`/login`}>{appreciationText}</a>
+			<a href={routes.login}>{appreciationText}</a>
 		</button>
 	{/if}
 </div>
 
 <div class="location">
-	<a href={`/profile/${$page.data.prompt.author.username}`}>
+	<a href={routes.profile($page.data.prompt.author.username)}>
 		<span>{$page.data.prompt.author.firstName}</span>
 	</a>
 	/
@@ -53,12 +54,12 @@
 <ul>
 	{#if isOwner}
 		<li>
-			<a href={`/app/prompt/${$page.params.slug}`}>
+			<a href={routes.prompt(true, $page.params.slug)}>
 				<span>Content</span>
 			</a>
 		</li>
 		<li>
-			<a href={`/app/prompt/${$page.params.slug}/edit`}>
+			<a href={routes.edit($page.params.slug)}>
 				<span>Edit</span>
 			</a>
 		</li>
