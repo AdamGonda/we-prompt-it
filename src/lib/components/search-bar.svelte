@@ -1,5 +1,5 @@
 <script>
-	import { afterNavigate, beforeNavigate } from '$app/navigation';
+	import { afterNavigate, beforeNavigate, goto } from '$app/navigation';
 	import { page } from '$app/stores';
 	import { searchFocused } from '$lib/stores/search-bar-store';
 	import searchStore from '$lib/stores/search-store';
@@ -8,8 +8,14 @@
 	let placeholder = 'Find the prompt you need';
 	let inputInFocus = false;
 
-	afterNavigate(() => {
+	afterNavigate(async () => {
 		initVarsFromURL();
+
+		if ($page.route.id.includes('explore')) {
+			await searchStore.search({
+				endpoint: `/api/search?${varsToQuerystring()}`
+			});
+		}
 	});
 
 	function initVarsFromURL() {
@@ -18,10 +24,7 @@
 	}
 
 	async function handleSubmit() {
-		await searchStore.search({
-			endpoint: `/api/search?${varsToQuerystring()}`,
-			updateURL: `/explore?${varsToQuerystring()}`
-		});
+		goto(`/explore?${varsToQuerystring()}`);
 	}
 
 	function varsToQuerystring() {

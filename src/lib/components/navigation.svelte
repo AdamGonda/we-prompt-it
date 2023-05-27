@@ -3,7 +3,7 @@
 	import { page } from '$app/stores';
 	import UserAvatar from './user-avatar.svelte';
 
-	const user = $page.data.dbUser
+	const user = $page.data.session?.user;
 	$: links = {
 		create: user ? '/app/prompt/create' : '/login',
 		myCollection: user ? '/app/my-collection' : '/login'
@@ -13,7 +13,6 @@
 <nav>
 	<a href={`/`} class="logo">
 		<img src="logo.svg" width="40px" alt="logo" />
-		<!-- <span style="font-weight: bold; font-size: 1.2rem">[we]prompt</span> -->
 	</a>
 
 	<div class="all-but-logo">

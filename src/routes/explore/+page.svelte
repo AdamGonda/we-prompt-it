@@ -26,7 +26,7 @@
 
 <main>
 	<div class="sort">
-		<Sort />
+		<!-- <Sort /> -->
 	</div>
 
 	<div class="card-list">
