@@ -90,15 +90,15 @@
 	form {
 		display: flex;
 		flex-direction: column;
-		align-items: end;
+		align-items: center;
 	}
 
 	fieldset {
 		border: none;
-		padding: 7px 9px;
+		padding: 4px 5px;
 		margin: 0;
 		display: flex;
-		font-size: 1.5rem;
+		font-size: 1rem;
 		justify-content: center;
 		background: #665f7e80;
 		border-radius: 15px;

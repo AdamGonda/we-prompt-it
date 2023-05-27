@@ -24,10 +24,8 @@
 	});
 </script>
 
-<main>
-	<div class="sort">
-		<Sort />
-	</div>
+<main>	
+	<Sort />
 
 	<div class="card-list">
 		{#each resultsToShow as prompt (prompt.id)}
