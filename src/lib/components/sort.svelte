@@ -55,7 +55,15 @@
 
 <form name="filter-explore" method="POST" bind:this={form} on:input={triggerSearch}>
 	<fieldset name="sort-by">
-		<legend>Sort by</legend>
+		<label>
+			<input
+				checked
+				type="radio"
+				name="sort_by"
+				value=""
+			/>
+			All
+		</label>
 		<label>
 			<input
 				checked={isChecked.mostLiked}
