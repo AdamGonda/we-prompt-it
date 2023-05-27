@@ -1,7 +1,7 @@
 <script>
 	import { browser } from '$app/environment';
 	import { page } from '$app/stores';
-	import links from '$lib/links'
+	import routes from '$lib/routes'
 	import _ from 'lodash';
 
 	export let prompt;
@@ -12,7 +12,7 @@
 	}
 </script>
 
-<a href={links.prompt(inApp, prompt.slug)} class="card">
+<a href={routes.prompt(inApp, prompt.slug)} class="card">
 	<div class="row">
 		<p class="name">{prompt.name}</p>
 	</div>

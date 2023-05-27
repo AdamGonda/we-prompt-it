@@ -3,6 +3,7 @@
 	import { page } from '$app/stores';
 	import UserAvatar from './user-avatar.svelte';
 	import SearchManagger from './search-managger.svelte';
+	import routes from '$lib/routes'
 
 	const user = $page.data.session?.user;
 	$: links = {
@@ -13,8 +14,8 @@
 
 <nav>
 	<SearchManagger />
-	<a href={`/`} class="logo">
-		<img src="logo.svg" width="40px" alt="logo" />
+	<a href={routes.landing} class="logo">
+		<img src="/logo.svg" width="40px" alt="logo" />
 	</a>
 
 	<div class="all-but-logo">
