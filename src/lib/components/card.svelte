@@ -17,7 +17,7 @@
 	</div>
 
 	<div class="row footer">
-		<!-- <img class="profile" src={prompt.author.picture} alt="author" /> -->
+		<img class="profile" src={prompt.author.picture} alt="author" />
 
 		<div class="stats">
 			<p class="model">{prompt.aiModel.name}</p>

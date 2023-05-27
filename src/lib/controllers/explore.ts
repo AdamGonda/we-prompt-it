@@ -25,18 +25,8 @@ export async function search(event) {
 }
 // #endregion
 
-// #region LOADERS
-export async function loadExplore(event) {
-	return { 
-		prompts: await _search(event),
-		tags: await getAllTags(),
-		aiModels: await getAllAIModels()
-	};
-}
-// #endregion
-
 // #region PRIVATE
-async function _search(event) {
+export async function _search(event) {
 	const query = {
 		where: {
 			AND: [
@@ -61,7 +51,6 @@ async function _search(event) {
 
 	return await prisma.prompt.findMany(query);
 }
-
 
 function _handlePagination(query, event){
 	const page = event.url.searchParams.get('page');
