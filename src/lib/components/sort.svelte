@@ -28,7 +28,7 @@
 		sortBys = new FormData(form).getAll('sort_by');
 	}
 
-	async function handleInput() {
+	async function triggerSearch() {
 		mapFormDataToVars();
 
 		goto(`/explore?${varsToQuerystring()}`);
@@ -53,7 +53,7 @@
 	}
 </script>
 
-<form name="filter-explore" method="POST" bind:this={form} on:input={handleInput}>
+<form name="filter-explore" method="POST" bind:this={form} on:input={triggerSearch}>
 	<fieldset name="sort-by">
 		<legend>Sort by</legend>
 		<label>
