@@ -68,7 +68,7 @@
 	}
 
 	.name {
-		font-size: 1.1rem;
+		font-size: 1.3rem;
 		font-weight: 600;
 		color: #ffffff;
 		margin-bottom: 5px;
@@ -94,10 +94,10 @@
 	}
 
 	.profile {
-		width: 30px;
-		height: 30px;
+		width: 35px;
+		height: 35px;
 		border-radius: 50%;
-		border: 2px solid #ffffff;
+		border: 1px solid #ffffff;
 		object-fit: cover;
 	}
 
