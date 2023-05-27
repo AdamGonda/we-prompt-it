@@ -2,6 +2,7 @@
 
 # Tech
 TODO on first signup ask for username
+TODO remove search store, use search managger
 
 # Product (functional)
 TODO landing page
