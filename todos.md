@@ -1,13 +1,11 @@
 # Current value: HUF 550k+
 
 # Tech
-TODO initial sort when go to explore page
-so the correct radio is selected
+TODO initial sort when go to explore page so the correct radio is selected
 TODO revisit search, text and sort, remove the rest? full text or contains. which fields? tags?
 TODO on first signup ask for username
 TODO refactor loaders to one place
-TODO create a base query function
-TODO implement copy conter for prompts, so we can show "most used" sort, u seed for that
+TODO create a base query includes
 TODO add more users to seed
 
 # Product (functional)
