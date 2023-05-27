@@ -26,10 +26,6 @@
 		inputValue = searchParams.get('text');
 	}
 
-	async function handleSubmit() {
-		goto(`/explore?${varsToQuerystring()}`);
-	}
-
 	function varsToQuerystring() {
 		let old = new URLSearchParams($page.url.search);
 		let searchParams = new URLSearchParams();
@@ -61,7 +57,11 @@
 	function handleClear() {
 		inputValue = '';
 
-		handleSubmit();
+		triggerGoTo();
+	}
+
+	async function triggerGoTo() {
+		goto(`/explore?${varsToQuerystring()}`);
 	}
 </script>
 
@@ -69,7 +69,7 @@
 	name="search"
 	method="POST"
 	class:outlined={inputInFocus}
-	on:submit|preventDefault={handleSubmit}
+	on:submit|preventDefault={triggerGoTo}
 >
 	<div class="search-input-container">
 		<input
