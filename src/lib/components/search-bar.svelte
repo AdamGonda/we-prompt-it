@@ -32,20 +32,6 @@
 			searchParams.append('text', inputValue);
 		}
 
-		const tags = old.getAll('tag');
-		if (tags) {
-			tags.forEach((tag) => {
-				searchParams.append('tag', tag);
-			});
-		}
-
-		const aiModels = old.getAll('ai_model');
-		if (aiModels) {
-			aiModels.forEach((model) => {
-				searchParams.append('ai_model', model);
-			});
-		}
-
 		const sortBys = old.getAll('sort_by');
 		if (sortBys) {
 			sortBys.forEach((sort) => {
