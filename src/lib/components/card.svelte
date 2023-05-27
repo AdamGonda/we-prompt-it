@@ -62,8 +62,8 @@
 		font-weight: 600;
 		padding: 4px 8px;
 		border-radius: 12px;
-		border: 2px solid #6fcf97;
-		color: #fff;
+		background: #6fcf97;
+		color: black;
 		font-size: 0.85rem;
 	}
 
