@@ -1,5 +1,4 @@
 <script>
-	import { browser } from '$app/environment';
 	import { page } from '$app/stores';
 	import routes from '$lib/routes'
 	import _ from 'lodash';
