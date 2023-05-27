@@ -10,6 +10,8 @@ TODO add more users to seed
 
 # Product (functional)
 TODO landing page
+TODO profile page
+TODO repo page
 TODO signup/login page
 TODO profile page
 TODO loading, feedback indicators

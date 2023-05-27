@@ -127,7 +127,62 @@ const AI_MODELS = [
 	'T5',
 	'ALBERT'
 ];
+
 const PROMPTS = [
+	{
+		name: 'Art Exhibition Review',
+		description: 'Critique a famous art exhibition.',
+		content:
+			"Imagine you're reviewing a renowned art exhibition like 'Van Gogh: The Immersive Experience'. Discuss the showcased artworks, themes, the curation, and the overall experience. Remember to provide both appreciation and constructive criticism, concluding with a recommendation."
+	},
+	{
+		name: 'Restaurant Review',
+		description: "Analyze a well-known restaurant's offerings.",
+		content:
+			"Imagine you're critiquing a famous restaurant like 'Noma' in Copenhagen. Discuss the food quality, presentation, taste, service, ambiance, and value for money. Provide both praise and constructive feedback, ending with an overall rating or recommendation."
+	},
+	{
+		name: 'Travel Destination Critique',
+		description: 'Review a popular travel destination.',
+		content:
+			"Assume you're reviewing a popular travel destination like 'Paris'. Talk about its attractions, local cuisine, culture, people, and the overall experience. Try to maintain a balanced view with both pros and cons, concluding with a recommendation for potential travelers."
+	},
+	{
+		name: 'Play Review',
+		description: 'Critique a popular theatrical play.',
+		content:
+			"Imagine you're reviewing a popular play like 'Hamlet' performed by a renowned theater group. Discuss the storyline, acting, direction, set design, and the overall theatrical experience. Give both praise and constructive criticism, concluding with an overall recommendation."
+	},
+	{
+		name: 'Poetry Analysis',
+		description: 'Analyze a famous poem.',
+		content:
+			"Imagine you're analyzing a famous poem like 'The Road Not Taken' by Robert Frost. Discuss its themes, literary devices, language, and cultural or personal impact. Provide both praise and constructive criticism, concluding with an overall interpretation or recommendation."
+	},
+	{
+		name: 'Podcast Review',
+		description: 'Review a popular podcast.',
+		content:
+			"Assume you're reviewing a popular podcast like 'Serial'. Discuss its content, storytelling, audio quality, host's abilities, and overall impact. Remember to provide both appreciation and constructive feedback, concluding with a recommendation."
+	},
+	{
+		name: 'Game Reviewzza',
+		description: 'Analyze a popular video game.',
+		content:
+			"Imagine you're critiquing a popular video game like 'The Legend of Zelda: Breath of the Wild'. Discuss its gameplay, graphics, story, characters, and overall gaming experience. Offer both praise and constructive criticism, ending with an overall rating or recommendation."
+	},
+	{
+		name: 'Fashion Show Review',
+		description: 'Review a major fashion show.',
+		content:
+			"Assume you're reviewing a major fashion show like 'Paris Fashion Week'. Discuss the designs, themes, models, presentation, and overall impact. Remember to provide both positive feedback and constructive criticism, concluding with an overall opinion."
+	},
+	{
+		name: 'Tech Product Review',
+		description: 'Critique a new tech gadget.',
+		content:
+			"Imagine you're reviewing a new tech product like the 'Apple iPhone 13'. Discuss its features, performance, design, value for money, and overall user experience. Offer both appreciation and constructive feedback, ending with a recommendation."
+	},
 	{
 		name: 'Art Appreciation',
 		description: 'Analyze a famous painting and discuss its influence.',
@@ -272,6 +327,146 @@ const PROMPTS = [
 ];
 
 const USERS = [
+	{
+		firstName: 'Oliver',
+		lastName: 'Reid',
+		username: 'oliverReid',
+		email: 'oliverReid@gmail.com',
+		picture: 'https://randomuser.me/api/portraits/men/23.jpg'
+	},
+	{
+		firstName: 'Chloe',
+		lastName: 'Ball',
+		username: 'chloeBall',
+		email: 'chloeBall@gmail.com',
+		picture: 'https://randomuser.me/api/portraits/women/40.jpg'
+	},
+	{
+		firstName: 'Ethan',
+		lastName: 'Riley',
+		username: 'ethanRiley',
+		email: 'ethanRiley@gmail.com',
+		picture: 'https://randomuser.me/api/portraits/men/80.jpg'
+	},
+	{
+		firstName: 'Sophia',
+		lastName: 'Williamson',
+		username: 'sophiaWilliamson',
+		email: 'sophiaWilliamson@gmail.com',
+		picture: 'https://randomuser.me/api/portraits/women/95.jpg'
+	},
+	{
+		firstName: 'Jack',
+		lastName: 'Patterson',
+		username: 'jackPatterson',
+		email: 'jackPatterson@gmail.com',
+		picture: 'https://randomuser.me/api/portraits/men/46.jpg'
+	},
+	{
+		firstName: 'Isabelle',
+		lastName: 'Ellis',
+		username: 'isabelleEllis',
+		email: 'isabelleEllis@gmail.com',
+		picture: 'https://randomuser.me/api/portraits/women/36.jpg'
+	},
+	{
+		firstName: 'William',
+		lastName: 'Murphy',
+		username: 'williamMurphy',
+		email: 'williamMurphy@gmail.com',
+		picture: 'https://randomuser.me/api/portraits/men/37.jpg'
+	},
+	{
+		firstName: 'Emma',
+		lastName: 'Simpson',
+		username: 'emmaSimpson',
+		email: 'emmaSimpson@gmail.com',
+		picture: 'https://randomuser.me/api/portraits/women/77.jpg'
+	},
+	{
+		firstName: 'Noah',
+		lastName: 'Marshall',
+		username: 'noahMarshall',
+		email: 'noahMarshall@gmail.com',
+		picture: 'https://randomuser.me/api/portraits/men/58.jpg'
+	},
+	{
+		firstName: 'Ava',
+		lastName: 'Holmes',
+		username: 'avaHolmes',
+		email: 'avaHolmes@gmail.com',
+		picture: 'https://randomuser.me/api/portraits/women/8.jpg'
+	},
+	{
+		firstName: 'Liam',
+		lastName: 'Knight',
+		username: 'liamKnight',
+		email: 'liamKnight@gmail.com',
+		picture: 'https://randomuser.me/api/portraits/men/7.jpg'
+	},
+	{
+		firstName: 'Mia',
+		lastName: 'Gibson',
+		username: 'miaGibson',
+		email: 'miaGibson@gmail.com',
+		picture: 'https://randomuser.me/api/portraits/women/9.jpg'
+	},
+	{
+		firstName: 'James',
+		lastName: 'Freeman',
+		username: 'jamesFreeman',
+		email: 'jamesFreeman@gmail.com',
+		picture: 'https://randomuser.me/api/portraits/men/49.jpg'
+	},
+	{
+		firstName: 'Lily',
+		lastName: 'Duncan',
+		username: 'lilyDuncan',
+		email: 'lilyDuncan@gmail.com',
+		picture: 'https://randomuser.me/api/portraits/women/10.jpg'
+	},
+	{
+		firstName: 'Michael',
+		lastName: 'Rose',
+		username: 'michaelRose',
+		email: 'michaelRose@gmail.com',
+		picture: 'https://randomuser.me/api/portraits/men/11.jpg'
+	},
+	{
+		firstName: 'Madison',
+		lastName: 'Boyd',
+		username: 'madisonBoyd',
+		email: 'madisonBoyd@gmail.com',
+		picture: 'https://randomuser.me/api/portraits/women/12.jpg'
+	},
+	{
+		firstName: 'Daniel',
+		lastName: 'Morris',
+		username: 'danielMorris',
+		email: 'danielMorris@gmail.com',
+		picture: 'https://randomuser.me/api/portraits/men/13.jpg'
+	},
+	{
+		firstName: 'Sophie',
+		lastName: 'Grant',
+		username: 'sophieGrant',
+		email: 'sophieGrant@gmail.com',
+		picture: 'https://randomuser.me/api/portraits/women/14.jpg'
+	},
+	{
+		firstName: 'Aiden',
+		lastName: 'Mason',
+		username: 'aidenMason',
+		email: 'aidenMason@gmail.com',
+		picture: 'https://randomuser.me/api/portraits/men/15.jpg'
+	},
+	{
+		firstName: 'Ella',
+		lastName: 'Graham',
+		username: 'ellaGraham',
+		email: 'ellaGraham@gmail.com',
+		picture: 'https://randomuser.me/api/portraits/women/16.jpg'
+	},
 	{
 		firstName: 'Adam',
 		lastName: 'Gonda',
