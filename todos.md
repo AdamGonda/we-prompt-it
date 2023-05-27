@@ -6,6 +6,7 @@ TODO revisit search, text and sort, remove the rest? full text or contains. whic
 TODO on first signup ask for username
 TODO refactor loaders to one place
 TODO create a base query includes
+TODO make sure when no js folrms work correctly
 
 # Product (functional)
 TODO landing page
