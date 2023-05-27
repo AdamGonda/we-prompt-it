@@ -5,14 +5,9 @@
 	import _ from 'lodash';
 
 	export let prompt;
-	let inApp = false;
-
-	if (browser && $page.data.session?.user) {
-		inApp = true;
-	}
 </script>
 
-<a href={routes.prompt(inApp, prompt.slug)} class="card">
+<a href={routes.prompt($page.data.session?.user, prompt.slug)} class="card">
 	<div class="row">
 		<p class="name">{prompt.name}</p>
 	</div>

@@ -7,8 +7,8 @@
 
 	const user = $page.data.session?.user;
 	$: links = {
-		create: user ? '/app/prompt/create' : '/login',
-		myCollection: user ? '/app/my-collection' : '/login'
+		create: routes.create(user),
+		myCollection: routes.myCollection(user),
 	};
 </script>
 
