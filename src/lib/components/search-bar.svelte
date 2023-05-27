@@ -1,5 +1,5 @@
 <script>
-	import { afterNavigate, beforeNavigate, goto } from '$app/navigation';
+	import { afterNavigate, goto } from '$app/navigation';
 	import { page } from '$app/stores';
 	import { searchFocused } from '$lib/stores/search-bar-store';
 	import searchStore from '$lib/stores/search-store';
