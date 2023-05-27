@@ -5,6 +5,8 @@ TODO initial sort when go to explore page
 so the correct radio is selected
 TODO revisit search, text and sort, remove the rest? full text or contains. which fields? tags?
 TODO on first signup ask for username
+TODO refactor loaders to one place
+TODO create a base query function
 
 # Product (functional)
 TODO landing page
