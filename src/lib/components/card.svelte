@@ -19,7 +19,7 @@
 	</div>
 
 	<div class="description">
-		<p>{_.truncate(prompt.content, { length: 90 })}</p>
+		<p>{prompt.description}</p>
 	</div>
 
 	<div class="row">
@@ -49,7 +49,6 @@
 		flex-direction: column;
 		gap: 8px;
 		color: #ffffff;
-		/* max-height: 200px; */
 		background: linear-gradient(to left, #24243e 0%, #302b63 50%, #0f0c29 100%);
 	}
 

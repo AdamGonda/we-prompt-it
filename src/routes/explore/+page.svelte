@@ -40,7 +40,7 @@
 	.card-list {
 		display: grid;
 		grid-template-columns: repeat(auto-fill, minmax(276px, 1fr));
-		grid-template-rows: repeat(auto-fill, minmax(230px, 1fr));
+		grid-template-rows: repeat(auto-fill, minmax(200px, 1fr));
 		column-gap: 24px;
 		row-gap: 24px;
 		width: 100%;
