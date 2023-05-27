@@ -2,6 +2,7 @@
 	import SearchBar from './search-bar.svelte';
 	import { page } from '$app/stores';
 	import UserAvatar from './user-avatar.svelte';
+	import SearchManagger from './search-managger.svelte';
 
 	const user = $page.data.session?.user;
 	$: links = {
@@ -11,6 +12,7 @@
 </script>
 
 <nav>
+	<SearchManagger />
 	<a href={`/`} class="logo">
 		<img src="logo.svg" width="40px" alt="logo" />
 	</a>

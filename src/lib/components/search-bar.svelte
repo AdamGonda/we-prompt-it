@@ -2,23 +2,13 @@
 	import { afterNavigate, goto } from '$app/navigation';
 	import { page } from '$app/stores';
 	import { searchFocused } from '$lib/stores/search-bar-store';
-	import searchStore from '$lib/stores/search-store';
 
 	let inputValue;
 	let placeholder = 'Find the prompt you need';
 	let inputInFocus = false;
-	let firstLoad = true;
 
 	afterNavigate(async () => {
 		initVarsFromURL();
-
-		if (!firstLoad && $page.route.id.includes('explore')) {
-			await searchStore.search({
-				endpoint: `/api/search?${varsToQuerystring()}`
-			});
-		}
-
-		firstLoad = false;
 	});
 
 	function initVarsFromURL() {
