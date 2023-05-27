@@ -6,7 +6,7 @@
 	import { page } from '$app/stores';
 	import Card from '$lib/components/card.svelte';
 	import { onMount } from 'svelte';
-	import Filters from '$lib/components/filters.svelte';
+	import Sort from '$lib/components/sort.svelte';
 	import searchStore from '$lib/stores/search-store';
 
 	const { prompts } = $page.data;
@@ -25,8 +25,8 @@
 </script>
 
 <main>
-	<div class="filters">
-		<Filters />
+	<div class="sort">
+		<Sort />
 	</div>
 
 	<div class="card-list">
@@ -37,12 +37,6 @@
 </main>
 
 <style>
-	.filters {
-		width: 200px;
-		padding: 24px;
-		font-size: 1.3rem;
-	}
-
 	.card-list {
 		display: grid;
 		grid-template-columns: repeat(auto-fill, minmax(276px, 1fr));
@@ -56,7 +50,8 @@
 
 	main {
 		display: flex;
+		flex-direction: column;
 		gap: 24px;
-		padding-right: 24px;
+		padding: 24px;
 	}
 </style>
