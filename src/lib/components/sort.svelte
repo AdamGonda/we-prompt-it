@@ -69,7 +69,7 @@
 		<label>
 			<input
 				checked={isChecked.mostLiked}
-				type="checkbox"
+				type="radio"
 				name="sort_by"
 				value="most_liked"
 			/>
@@ -78,7 +78,7 @@
 		<label>
 			<input
 				checked={isChecked.mostForked}
-				type="checkbox"
+				type="radio"
 				name="sort_by"
 				value="most_forked"
 			/>
