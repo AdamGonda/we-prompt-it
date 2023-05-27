@@ -110,6 +110,7 @@
 		cursor: pointer;
 		user-select: none;
 		font-weight: 600;
+		transition: background-color 0.3s ease, color 0.7s ease;
 	}
 
 	.selected {
