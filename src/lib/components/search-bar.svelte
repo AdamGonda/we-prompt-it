@@ -47,10 +47,10 @@
 	function handleClear() {
 		inputValue = '';
 
-		triggerGoTo();
+		triggerSearch()
 	}
 
-	async function handleSubmit() {
+	async function triggerSearch() {
 		goto(`/explore?${varsToQuerystring()}`);
 	}
 </script>
@@ -59,7 +59,7 @@
 	name="search"
 	method="POST"
 	class:outlined={inputInFocus}
-	on:submit|preventDefault={handleSubmit}
+	on:submit|preventDefault={triggerSearch}
 >
 	<div class="search-input-container">
 		<input
