@@ -13,7 +13,7 @@
 </script>
 
 <a href={`${inApp ? '/app' : ''}/prompt/${prompt.slug}`} class="card">
-	<div class="row top">
+	<div class="row">
 		<p class="name">{prompt.name}</p>
 		<img class="profile" src={prompt.author.picture} alt="author" />
 	</div>
@@ -22,7 +22,7 @@
 		<p>{prompt.description}</p>
 	</div>
 
-	<div class="row">
+	<div class="row footer">
 		<p class="model">{prompt.aiModel.name}</p>
 		<div class="stats">
 			<span class="likes">❤️ {prompt.likes?.length}</span>
@@ -32,21 +32,16 @@
 			</span>
 		</div>
 	</div>
-
-
 </a>
 
 <style>
-	:global(body) {
-		background: rgb(245, 245, 245);
-	}
-
 	.card {
 		text-decoration: none;
 		border-radius: 5px;
 		padding: 20px;
 		display: flex;
 		flex-direction: column;
+		justify-content: space-between;
 		gap: 8px;
 		color: #ffffff;
 		background: linear-gradient(to left, #24243e 0%, #302b63 50%, #0f0c29 100%);
@@ -113,5 +108,9 @@
 
 	.description p {
 		line-height: 1.3;
+	}
+
+	.footer {
+		margin-top: 16px;
 	}
 </style>
