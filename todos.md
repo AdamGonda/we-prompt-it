@@ -1,6 +1,16 @@
 # Current value: HUF 550k+
 
 # Tech
+TODO fix refeching on expore when navigateing
+goto is not a good fit, use browser api to manipulate history and to update the url
+because goto althoug updates the url and it's not trigger a hard refresh
+but I can't listen for the appropriate event to trigger refetch 
+problems
+- maintin proper history
+- refetch on history change
+- update url on search
+- keep searchbar input in sync with url
+
 TODO on first signup ask for username
 
 # Product (functional)
