@@ -3,6 +3,7 @@
 # Tech
 TODO initial sort when go to explore page
 so the correct radio is selected
+TODO revisit search, text and sort, remove the rest? full text or contains. which fields? tags?
 TODO on first signup ask for username
 
 # Product (functional)
