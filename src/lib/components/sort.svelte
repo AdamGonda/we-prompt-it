@@ -8,7 +8,7 @@
 	let sortBys;
 	$: isChecked = {
 		mostLiked: $page.url.search.includes('most_liked'),
-		mostForked: $page.url.search.includes('most_forked'),
+		mostForked: $page.url.search.includes('most_forked')
 	};
 
 	onMount(async () => {
@@ -39,7 +39,7 @@
 		let searchParams = new URLSearchParams();
 
 		const text = old.get('text');
-		if(text) {
+		if (text) {
 			searchParams.append('text', text);
 		}
 
@@ -55,16 +55,7 @@
 
 <form name="filter-explore" method="POST" bind:this={form} on:input={triggerSearch}>
 	<fieldset name="sort-by">
-		<label>
-			<input
-				checked
-				type="radio"
-				name="sort_by"
-				value=""
-			/>
-			All
-		</label>
-		<label>
+		<label class:selected={isChecked.mostLiked}>
 			<input
 				checked={isChecked.mostLiked}
 				type="radio"
@@ -73,7 +64,7 @@
 			/>
 			Most liked
 		</label>
-		<label>
+		<label class:selected={isChecked.mostForked}>
 			<input
 				checked={isChecked.mostForked}
 				type="radio"
@@ -89,18 +80,35 @@
 	form {
 		display: flex;
 		flex-direction: column;
-		gap: 16px;
-	}
-
-	legend {
-		font-weight: 600;
+		align-items: center;
 	}
 
 	fieldset {
 		border: none;
-		padding: 0;
+		padding: 10px 11px;
 		margin: 0;
 		display: flex;
-		flex-direction: column;
+		font-size: 1.5rem;
+		justify-content: center;
+		background: #5a8af081;
+		border-radius: 15px;
+		gap: 8px;
+	}
+
+	label {
+		border-radius: 10px;
+		padding: 4px 16px;
+		cursor: pointer;
+		user-select: none;
+		font-weight: bold;
+	}
+
+	.selected {
+		background: #2e295c;
+		color: white;
+	}
+
+	input {
+		display: none;
 	}
 </style>
