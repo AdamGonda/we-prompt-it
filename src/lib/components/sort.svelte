@@ -7,6 +7,7 @@
 	let form;
 	let sortBys;
 	$: isChecked = {
+		all: $page.url.search == '?sort_by=',
 		mostLiked: $page.url.search.includes('most_liked'),
 		mostForked: $page.url.search.includes('most_forked')
 	};
@@ -55,6 +56,15 @@
 
 <form name="filter-explore" method="POST" bind:this={form} on:input={triggerSearch}>
 	<fieldset name="sort-by">
+		<label class:selected={isChecked.all}>
+			<input
+				checked={isChecked.mostLiked}
+				type="radio"
+				name="sort_by"
+				value=""
+			/>
+			All
+		</label>
 		<label class:selected={isChecked.mostLiked}>
 			<input
 				checked={isChecked.mostLiked}
@@ -80,19 +90,18 @@
 	form {
 		display: flex;
 		flex-direction: column;
-		align-items: center;
+		align-items: end;
 	}
 
 	fieldset {
 		border: none;
-		padding: 10px 11px;
+		padding: 7px 9px;
 		margin: 0;
 		display: flex;
 		font-size: 1.5rem;
 		justify-content: center;
-		background: #5a8af081;
+		background: #665f7e80;
 		border-radius: 15px;
-		gap: 8px;
 	}
 
 	label {
@@ -100,7 +109,7 @@
 		padding: 4px 16px;
 		cursor: pointer;
 		user-select: none;
-		font-weight: bold;
+		font-weight: 600;
 	}
 
 	.selected {
