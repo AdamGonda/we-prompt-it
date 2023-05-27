@@ -1,8 +1,7 @@
 <script>
-	import { beforeNavigate } from '$app/navigation';
+	import { beforeNavigate, goto } from '$app/navigation';
 	import { page } from '$app/stores';
 	import { navigationHappendBefore } from '$lib/stores/filters-store';
-	import searchStore from '$lib/stores/search-store';
 	import { onMount } from 'svelte';
 
 	let form;
@@ -14,12 +13,6 @@
 
 	onMount(async () => {
 		initVarsFromURL();
-
-		if ($navigationHappendBefore) {
-			await searchStore.search({
-				endpoint: `/api/search?${varsToQuerystring()}`
-			});
-		}
 	});
 
 	beforeNavigate(() => {
@@ -38,10 +31,7 @@
 	async function handleInput() {
 		mapFormDataToVars();
 
-		await searchStore.search({
-			endpoint: `/api/search?${varsToQuerystring()}`,
-			updateURL: `/explore?${varsToQuerystring()}`
-		});
+		goto(`/explore?${varsToQuerystring()}`);
 	}
 
 	function varsToQuerystring() {
