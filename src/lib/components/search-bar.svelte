@@ -50,7 +50,7 @@
 		triggerGoTo();
 	}
 
-	async function triggerGoTo() {
+	async function handleSubmit() {
 		goto(`/explore?${varsToQuerystring()}`);
 	}
 </script>
@@ -59,7 +59,7 @@
 	name="search"
 	method="POST"
 	class:outlined={inputInFocus}
-	on:submit|preventDefault={triggerGoTo}
+	on:submit|preventDefault={handleSubmit}
 >
 	<div class="search-input-container">
 		<input
