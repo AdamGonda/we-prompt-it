@@ -94,11 +94,6 @@
 		gap: 16px;
 	}
 
-	.tags {
-		display: flex;
-		flex-direction: column;
-	}
-
 	legend {
 		font-weight: 600;
 	}
@@ -109,12 +104,5 @@
 		margin: 0;
 		display: flex;
 		flex-direction: column;
-	}
-
-	[type="button"] {
-		background: none;
-		border: none;
-		text-decoration: underline;
-		cursor: pointer;
 	}
 </style>
