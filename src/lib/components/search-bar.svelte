@@ -7,15 +7,18 @@
 	let inputValue;
 	let placeholder = 'Find the prompt you need';
 	let inputInFocus = false;
+	let firstLoad = true;
 
 	afterNavigate(async () => {
 		initVarsFromURL();
 
-		if ($page.route.id.includes('explore')) {
+		if (!firstLoad && $page.route.id.includes('explore')) {
 			await searchStore.search({
 				endpoint: `/api/search?${varsToQuerystring()}`
 			});
 		}
+
+		firstLoad = false;
 	});
 
 	function initVarsFromURL() {
