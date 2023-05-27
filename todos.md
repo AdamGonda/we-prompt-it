@@ -7,7 +7,8 @@ TODO revisit search, text and sort, remove the rest? full text or contains. whic
 TODO on first signup ask for username
 TODO refactor loaders to one place
 TODO create a base query function
-TODO implement copy conter for prompts, so we can show "most used" sort
+TODO implement copy conter for prompts, so we can show "most used" sort, u seed for that
+TODO add more users to seed
 
 # Product (functional)
 TODO landing page
