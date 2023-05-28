@@ -20,7 +20,7 @@
 <style>
 	:global(body) {
 		margin: 0;
-		font-family: 'Source Sans Pro', sans-serif;
+		font-family: 'Inter';
 		box-sizing: border-box;
 		box-sizing: border-box;
 	}

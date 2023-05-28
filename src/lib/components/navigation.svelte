@@ -55,8 +55,6 @@
 	.button {
 		font-size: 1rem;
 		font-weight: 600;
-		font-family: 'Inter';
-
 	}
 
 	.my-collection {

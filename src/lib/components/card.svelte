@@ -34,10 +34,6 @@
 		background: #D9D9D9;
 		border-radius: 20px;
 		padding: 20px;
-		/* display: flex; */
-		/* flex-direction: column; */
-		/* justify-content: space-between; */
-		/* gap: 8px; */
 		color: black;
 	}
 
@@ -55,8 +51,14 @@
 	.name {
 		font-size: 1.3rem;
 		font-weight: 600;
-		/* color: #ffffff; */
-		margin-bottom: 5px;
+	}
+
+	.description {
+		font-size: 1.15rem;
+		font-weight: 400;
+		margin-top: 16px;
+		margin-bottom: 40px;
+		/* line-height: 1.3; */
 	}
 
 	.likes,
@@ -64,13 +66,11 @@
 		display: flex;
 		align-items: center;
 		font-size: 0.9rem;
-		/* color: #ffffff; */
 	}
 
 	.forked img {
 		width: 15px;
 		margin-right: 5px;
-		/* filter: invert(1); */
 	}
 
 	.stats {
@@ -78,16 +78,5 @@
 		gap: 8px;
 	}
 
-	.description {
-		margin-top: 10px;
-		font-size: 1.15rem;
-	}
 
-	.description p {
-		line-height: 1.3;
-	}
-
-	.footer {
-		margin-top: 16px;
-	}
 </style>
