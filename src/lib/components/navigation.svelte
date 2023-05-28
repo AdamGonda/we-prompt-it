@@ -17,14 +17,14 @@
 	<a href={routes.landing} class="logo">
 		<img src="/weprompt-logo.png" alt="logo" />
 	</a>
-	<a href={routes.landing} class="create">
-		<p>Home</p>
+	<SearchBar />
+
+	<a href={routes.landing} class="button">
+		<p class="my-collection">My collection</p>
 	</a>
-	<a href={links.create} class="create">
+	<a href={links.create} class="button">
 		<p>Create</p>
 	</a>
-	<SearchBar />
-	
 	<UserAvatar />
 </nav>
 
@@ -38,7 +38,8 @@
 	}
 
 	img {
-		width: 34px;
+		width: 38px;
+		margin-top: 3px;
 	}
 
 	a {
@@ -51,10 +52,14 @@
 		margin: 0;
 	}
 
-	.create {
+	.button {
 		font-size: 1rem;
 		font-weight: 600;
 		font-family: 'Inter';
 
+	}
+
+	.my-collection {
+		width: 104px;
 	}
 </style>
