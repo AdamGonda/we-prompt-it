@@ -16,10 +16,9 @@
 	</div>
 
 	<div class="row footer">
-		<img class="profile" src={prompt.author.picture} alt="author" />
 
 		<div class="stats">
-			<p class="model">{prompt.aiModel.name}</p>
+			<!-- <p class="model">{prompt.aiModel.name}</p> -->
 			<span class="likes">❤️ {prompt.likes?.length}</span>
 			<span class="forked">
 				<img src="/fork-icon.png" alt="fork-icon" />

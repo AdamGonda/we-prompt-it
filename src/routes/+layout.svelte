@@ -22,6 +22,11 @@
 		margin: 0;
 		font-family: 'Source Sans Pro', sans-serif;
 		box-sizing: border-box;
+		box-sizing: border-box;
+	}
+
+	:global(*) {
+		box-sizing: border-box;
 	}
 
 	.content {

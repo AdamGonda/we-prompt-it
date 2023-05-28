@@ -83,29 +83,19 @@
 	form {
 		display: flex;
 		align-items: center;
-		border: 1px solid rgba(0, 0, 0, 0);
-	}
-
-	.outlined {
-		border: 1px solid rgb(255, 255, 255);
+		width: 100%;
 	}
 
 	input {
 		padding: 0 16px;
 		border: none;
 		min-width: 300px;
-		height: 38px;
+		height: 48px;
 		font-size: 16px;
-
-		background: rgba(0, 0, 0, 0);
-		border: 2px solid #fff;
-		color: #fff;
-		border-radius: 5px;
-	}
-
-	input::placeholder {
-		color: white;
-		font-size: 1rem;
+		background:#E9E9E9;
+		color: #333333;
+		border-radius: 25px;
+		width: 100%;
 	}
 
 	input:focus {
@@ -130,6 +120,7 @@
 
 	.search-input-container {
 		position: relative;
+		width: 100%;
 	}
 
 	.clear-button {

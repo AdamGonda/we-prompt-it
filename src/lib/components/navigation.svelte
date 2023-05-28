@@ -3,66 +3,45 @@
 	import { page } from '$app/stores';
 	import UserAvatar from './user-avatar.svelte';
 	import SearchManagger from './search-managger.svelte';
-	import routes from '$lib/routes'
+	import routes from '$lib/routes';
 
 	const user = $page.data.session?.user;
 	$: links = {
 		create: routes.create(user),
-		myCollection: routes.myCollection(user),
+		myCollection: routes.myCollection(user)
 	};
 </script>
 
 <nav>
 	<SearchManagger />
 	<a href={routes.landing} class="logo">
-		<img src="/logo.svg" width="40px" alt="logo" />
+		<img src="/logo-2.png" alt="logo" />
 	</a>
-
-	<div class="all-but-logo">
-		<SearchBar />
-
-		<div>
-			<div class="button-island">
-				<a href={links.myCollection}>
-					<p>My collection</p>
-				</a>
-				
-				<a href={links.create} class="create">
-					<p>Create prompt</p>
-				</a>
-			</div>
-
-			<UserAvatar />
-		</div>
-	</div>
+	<SearchBar />
+	<a href={routes.landing} class="create">
+		<p>Home</p>
+	</a>
+	<a href={links.create} class="create">
+		<p>Create</p>
+	</a>
+	<UserAvatar />
 </nav>
 
 <style>
 	nav {
 		display: flex;
 		align-items: center;
-		background: #34cff2;
-		padding: 20px 40px;
-		padding: 20px 56px;
-		background-image: linear-gradient(to left, #24243e 0%, #302b63 50%, #0f0c29 100%);
+		padding: 16px;
+		gap: 30px;
 	}
 
-	div {
-		display: flex;
-		align-items: center;
-		gap: 34px;
-	}
-
-	.button-island {
-		display: flex;
-		align-items: center;
-		gap: 34px;
-		margin-right: 20px;
+	img {
+		width: 34px;
 	}
 
 	a {
 		text-decoration: none;
-		color: #ffffff;
+		color: #000000;
 		border-radius: 5px;
 	}
 
@@ -70,19 +49,8 @@
 		margin: 0;
 	}
 
-	.logo {
-		margin-right: 140px;
-	}
-
-	.all-but-logo {
-		display: flex;
-		align-items: center;
-		justify-content: space-between;
-		width: 100%;
-	}
-
 	.create {
-		padding: 7px 12px;
-		border: 2px solid white;
+		font-size: 1.2rem;
+		font-weight: 600;
 	}
 </style>
