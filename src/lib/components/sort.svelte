@@ -7,10 +7,11 @@
 	let form;
 	let sortBys;
 	$: isChecked = {
-		// all: TODO fix this
+		all: !(new URLSearchParams($page.url.search)).get('sort_by'),
 		mostLiked: $page.url.search.includes('most_liked'),
 		mostForked: $page.url.search.includes('most_forked')
 	};
+	$: console.log('log', isChecked.all)
 
 	onMount(async () => {
 		initVarsFromURL();
@@ -58,7 +59,7 @@
 	<fieldset name="sort-by">
 		<label class:selected={isChecked.all}>
 			<input
-				checked={isChecked.mostLiked}
+				checked={isChecked.all}
 				type="radio"
 				name="sort_by"
 				value=""

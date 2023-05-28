@@ -38,8 +38,8 @@
 		flex-direction: column;
 		justify-content: space-between;
 		gap: 8px;
-		color: #ffffff;
-		background: linear-gradient(to left, #24243e 0%, #302b63 50%, #0f0c29 100%);
+		color: black;
+		/* background: linear-gradient(to left, #24243e 0%, #302b63 50%, #0f0c29 100%); */
 	}
 
 	p {
@@ -66,7 +66,7 @@
 	.name {
 		font-size: 1.3rem;
 		font-weight: 600;
-		color: #ffffff;
+		/* color: #ffffff; */
 		margin-bottom: 5px;
 	}
 
@@ -75,13 +75,13 @@
 		display: flex;
 		align-items: center;
 		font-size: 0.9rem;
-		color: #ffffff;
+		/* color: #ffffff; */
 	}
 
 	.forked img {
 		width: 15px;
 		margin-right: 5px;
-		filter: invert(1);
+		/* filter: invert(1); */
 	}
 
 	.stats {
@@ -93,7 +93,7 @@
 		width: 35px;
 		height: 35px;
 		border-radius: 50%;
-		border: 1px solid #ffffff;
+		/* border: 1px solid #ffffff; */
 		object-fit: cover;
 	}
 
