@@ -19,7 +19,7 @@
 	</a>
 	<SearchBar />
 
-	<a href={routes.landing} class="button">
+	<a href={routes.myCollection(user)} class="button">
 		<p class="my-collection">My collection</p>
 	</a>
 	<a href={links.create} class="button">
