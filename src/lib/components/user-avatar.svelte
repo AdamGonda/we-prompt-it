@@ -42,8 +42,8 @@
 	}
 
 	img {
-		width: 3rem;
-		height: 3rem;
+		width: 1.8rem;
+		height: 1.8rem;
 		border-radius: 50%;
 	}
 
@@ -61,8 +61,8 @@
 
 	.dropdown-menu {
 		position: absolute;
-		top: 60px;
-		right: -20px;
+		top: 40px;
+		right: -25px;
 		background: white;
 		padding: 24px;
 		box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);

@@ -31,14 +31,14 @@
 <style>
 	.card {
 		text-decoration: none;
-		border-radius: 5px;
+		background: #D9D9D9;
+		border-radius: 20px;
 		padding: 20px;
-		display: flex;
-		flex-direction: column;
-		justify-content: space-between;
-		gap: 8px;
+		/* display: flex; */
+		/* flex-direction: column; */
+		/* justify-content: space-between; */
+		/* gap: 8px; */
 		color: black;
-		/* background: linear-gradient(to left, #24243e 0%, #302b63 50%, #0f0c29 100%); */
 	}
 
 	p {
@@ -50,16 +50,6 @@
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
-	}
-
-	.model {
-		font-weight: 600;
-		padding: 4px 8px;
-		border-radius: 12px;
-		background: #6fcf97;
-		color: black;
-		font-weight: bold;
-		font-size: 0.85rem;
 	}
 
 	.name {
@@ -86,14 +76,6 @@
 	.stats {
 		display: flex;
 		gap: 8px;
-	}
-
-	.profile {
-		width: 35px;
-		height: 35px;
-		border-radius: 50%;
-		/* border: 1px solid #ffffff; */
-		object-fit: cover;
 	}
 
 	.description {

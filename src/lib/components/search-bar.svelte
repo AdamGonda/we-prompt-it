@@ -90,7 +90,7 @@
 		padding: 0 16px;
 		border: none;
 		min-width: 300px;
-		height: 48px;
+		height: 46px;
 		font-size: 16px;
 		background:#E9E9E9;
 		color: #333333;

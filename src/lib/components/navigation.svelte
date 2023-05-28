@@ -15,15 +15,16 @@
 <nav>
 	<SearchManagger />
 	<a href={routes.landing} class="logo">
-		<img src="/logo-2.png" alt="logo" />
+		<img src="/weprompt-logo.png" alt="logo" />
 	</a>
-	<SearchBar />
 	<a href={routes.landing} class="create">
 		<p>Home</p>
 	</a>
 	<a href={links.create} class="create">
 		<p>Create</p>
 	</a>
+	<SearchBar />
+	
 	<UserAvatar />
 </nav>
 
@@ -31,8 +32,9 @@
 	nav {
 		display: flex;
 		align-items: center;
-		padding: 16px;
+		padding: 20px 24px;
 		gap: 30px;
+		height: 80px;
 	}
 
 	img {
@@ -50,7 +52,9 @@
 	}
 
 	.create {
-		font-size: 1.2rem;
+		font-size: 1rem;
 		font-weight: 600;
+		font-family: 'Inter';
+
 	}
 </style>
