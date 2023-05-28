@@ -4,9 +4,23 @@
 	import _ from 'lodash';
 
 	export let prompt;
+
+	// Add this function
+	function stringToColor(str) {
+		let hash = 0;
+		for (let i = 0; i < str.length; i++) {
+			hash = str.charCodeAt(i) + ((hash << 5) - hash);
+		}
+		let color = '#';
+		for (let i = 0; i < 3; i++) {
+			let value = (hash >> (i * 8)) & 0xFF;
+			color += ('00' + value.toString(16)).substr(-2);
+		}
+		return color;
+	}
 </script>
 
-<a href={routes.prompt($page.data.session?.user, prompt.slug)} class="card">
+<a href={routes.prompt($page.data.session?.user, prompt.slug)} class="card" style="box-shadow: 0 4px 12px {stringToColor(prompt.name + prompt.description)}">
 	<div>
 		<div class="row">
 			<p class="name">{prompt.name}</p>
@@ -77,6 +91,5 @@
 		display: flex;
 		gap: 8px;
 	}
-
 
 </style>
