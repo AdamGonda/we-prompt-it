@@ -58,7 +58,6 @@
 		font-weight: 400;
 		margin-top: 16px;
 		margin-bottom: 40px;
-		/* line-height: 1.3; */
 	}
 
 	.likes,
