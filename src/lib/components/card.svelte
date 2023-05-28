@@ -7,23 +7,22 @@
 </script>
 
 <a href={routes.prompt($page.data.session?.user, prompt.slug)} class="card">
-	<div class="row">
-		<p class="name">{prompt.name}</p>
-	</div>
-
-	<div class="description">
-		<p>{prompt.description}</p>
-	</div>
-
-	<div class="row footer">
-
-		<div class="stats">
-			<span class="likes">❤️ {prompt.likes?.length}</span>
-			<span class="forked">
-				<img src="/fork-icon.png" alt="fork-icon" />
-				{prompt.forkedCount}
-			</span>
+	<div>
+		<div class="row">
+			<p class="name">{prompt.name}</p>
 		</div>
+	
+		<div class="description">
+			<p>{prompt.description}</p>
+		</div>
+	</div>
+
+	<div class="stats">
+		<span class="likes">❤️ {prompt.likes?.length}</span>
+		<span class="forked">
+			<img src="/fork-icon.png" alt="fork-icon" />
+			{prompt.forkedCount}
+		</span>
 	</div>
 </a>
 
@@ -34,6 +33,9 @@
 		border-radius: 20px;
 		padding: 20px;
 		color: black;
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
 	}
 
 	p {
