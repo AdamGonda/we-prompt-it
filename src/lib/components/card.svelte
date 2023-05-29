@@ -111,6 +111,5 @@
 	.author {
 		border-radius: 50%;
 		width: 40px;
-		border: 1px solid rgb(39, 39, 39);
 	}
 </style>
