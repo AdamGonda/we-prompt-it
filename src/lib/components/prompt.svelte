@@ -5,9 +5,11 @@
 	const user = $page.data.session?.user;
 	const isOwner = user ? $page.data.prompt.author.email === user.email : false;
 	let likes = $page.data.prompt.likes.length;
+	let hartIcon = 'hart';
 	$: forkLink = routes.fork(user, $page.params.slug);
-	$: appreciationText = `❤️ ${likes}`;
-	console.log('log ', $page.data.prompt);
+	$: appreciationText = likes;
+
+	console.log('log $page.data.prompt.likes', $page.data.prompt.likes);
 
 	async function handleAddRemoveLike() {
 		const r = await fetch(`/api/add-remove-like?id=${$page.data.prompt.id}`, {
@@ -16,6 +18,12 @@
 		const json = await r.json();
 		if (json.status == 200) {
 			likes += json.diff;
+
+			if (hartIcon == 'hart') {
+				hartIcon = 'fullhart';
+			} else {
+				hartIcon = 'hart';
+			}
 		}
 	}
 
@@ -66,6 +74,7 @@
 				</a>
 
 				<button on:click={handleAddRemoveLike}>
+					<img style="width: 16px" src={`/${hartIcon}-icon.png`} alt="hart-icon" />
 					{appreciationText}
 				</button>
 			</div>
@@ -218,7 +227,8 @@
 		align-items: center;
 	}
 
-	button:hover, .forked:hover {
+	button:hover,
+	.forked:hover {
 		background-color: #cdcdcd;
 	}
 

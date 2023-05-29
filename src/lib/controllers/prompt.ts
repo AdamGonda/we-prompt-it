@@ -152,8 +152,8 @@ export async function deletePrompt(event: RequestEvent) {
 // #endregion
 
 // #region LOADERS
-export async function loadPrompt({ params }) {
-	const prompt = await getPromptBySlug(params.slug);
+export async function loadPrompt(event) {
+	const prompt = await getPromptBySlug(event.params.slug);
 	const aiModels = await getAllAIModels();
 	const tags = await getAllTags();
 
@@ -163,7 +163,7 @@ export async function loadPrompt({ params }) {
 		});
 	}
 
-	return { prompt, aiModels, tags };
+	return { prompt, aiModels, tags, user: await getDBUser(event) };
 }
 
 export async function loadEdit({ params }) {
