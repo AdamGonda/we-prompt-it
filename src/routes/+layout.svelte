@@ -20,12 +20,12 @@
 <style>
 	:global(body) {
 		margin: 0;
-		font-family: 'Inter';
 		box-sizing: border-box;
 		box-sizing: border-box;
 	}
-
+	
 	:global(*) {
+		font-family: 'Inter';
 		box-sizing: border-box;
 	}
 

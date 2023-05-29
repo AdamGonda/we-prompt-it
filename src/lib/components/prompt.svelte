@@ -34,7 +34,7 @@
 	function copyToClipboard() {
 		navigator.clipboard.writeText($page.data.prompt.content);
 		showCopyFeedback = true;
-		
+
 		setTimeout(() => {
 			showCopyFeedback = false;
 		}, 2000);
@@ -225,14 +225,12 @@
 	}
 
 	button {
-		display: inline-block;
 		padding: 10px 16px;
 		background: #e9e9e9;
 		color: black;
 		text-decoration: none;
-		font-size: 0.8rem;
-		font-weight: 600;
 		border-radius: 20px;
+		font-size: 16px;
 		border: none;
 		cursor: pointer;
 		transition: background-color 0.3s ease;
