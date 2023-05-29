@@ -93,7 +93,9 @@
 		</h1>
 
 		<div class="infos">
-			<p class="model">{$page.data.prompt.aiModel.name}</p>
+			<a class="model" target="_blank" href={$page.data.prompt.aiModel.link}>
+				<p>{$page.data.prompt.aiModel.name}</p>
+			</a>
 
 			<button on:click={copyToClipboard}>
 				{#if showCopyFeedback}
@@ -149,12 +151,16 @@
 
 	h2 {
 		margin: 0;
-		margin-top: 32px;
+		margin-top: 48px;
 		margin-bottom: 4px;
 	}
 
 	.description {
 		font-size: 1.1rem;
+	}
+
+	.model {
+		text-decoration: underline;
 	}
 
 	.body {
@@ -247,4 +253,6 @@
 	button:active {
 		background-color: #a0a0a0;
 	}
+
+	
 </style>
