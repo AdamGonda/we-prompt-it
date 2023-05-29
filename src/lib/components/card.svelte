@@ -4,6 +4,8 @@
 	import _ from 'lodash';
 
 	export let prompt;
+	const dynamicColor = stringToColor(prompt.name + prompt.description)
+
 
 	// Add this function
 	function stringToColor(str) {
@@ -23,7 +25,6 @@
 <a
 	href={routes.prompt($page.data.session?.user, prompt.slug)}
 	class="card"
-	style="box-shadow: 0 4px 12px {stringToColor(prompt.name + prompt.description)}"
 >
 	<div>
 		<div class="row">
@@ -36,11 +37,14 @@
 	</div>
 
 	<div class="stats">
-		<span class="likes">❤️ {prompt.likes?.length}</span>
-		<span class="forked">
-			<img src="/fork-icon.png" alt="fork-icon" />
-			{prompt.forkedCount}
-		</span>
+		<img class="author" src={prompt.author.picture} alt="" />
+		<div>
+			<span class="likes">❤️ {prompt.likes?.length}</span>
+			<span class="forked">
+				<img src="/fork-icon.png" alt="fork-icon" />
+				{prompt.forkedCount}
+			</span>
+		</div>
 	</div>
 </a>
 
@@ -70,6 +74,8 @@
 	.name {
 		font-size: 1.3rem;
 		font-weight: 600;
+		width: 100%;
+		border-bottom: 1px solid rgb(174, 174, 174);
 	}
 
 	.description {
@@ -93,6 +99,18 @@
 
 	.stats {
 		display: flex;
+		justify-content: space-between;
 		gap: 8px;
+	}
+
+	.stats div {
+		display: flex;
+		gap: 8px;
+	}
+
+	.author {
+		border-radius: 50%;
+		width: 40px;
+		border: 1px solid rgb(39, 39, 39);
 	}
 </style>
