@@ -5,7 +5,11 @@
 	const user = $page.data.session?.user;
 	const isOwner = user ? $page.data.prompt.author.email === user.email : false;
 	let likes = $page.data.prompt.likes.length;
-	let hartIconPrefix = $page.data.prompt.likes.map(like => like.userId).includes($page.data.user.id) ? 'fullhart' : 'hart';
+	let hartIconPrefix = $page.data.prompt.likes
+		.map((like) => like.userId)
+		.includes($page.data.user.id)
+		? 'fullhart'
+		: 'hart';
 	$: forkLink = routes.fork(user, $page.params.slug);
 	$: appreciationText = likes;
 
