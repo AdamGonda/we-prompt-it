@@ -144,7 +144,13 @@
 
 	.body {
 		margin-top: 24px;
-		max-width: 600px;
+		max-width: 800px;
+	}
+
+	.body p {
+		font-family: source-serif-pro, Georgia, Cambria, "Times New Roman", Times, serif;
+		font-size: 1.2rem;
+		line-height: 32px;
 	}
 
 	h1 {
