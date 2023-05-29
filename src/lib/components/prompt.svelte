@@ -1,6 +1,7 @@
 <script>
 	import { page } from '$app/stores';
 	import routes from '$lib/routes';
+	import { set } from 'lodash';
 
 	const user = $page.data.session?.user;
 	const isOwner = user ? $page.data.prompt.author.email === user.email : false;
@@ -12,6 +13,7 @@
 		: 'hart';
 	$: forkLink = routes.fork(user, $page.params.slug);
 	$: appreciationText = likes;
+	let showCopyFeedback = false;
 
 	async function handleAddRemoveLike() {
 		const r = await fetch(`/api/add-remove-like?id=${$page.data.prompt.id}`, {
@@ -31,6 +33,11 @@
 
 	function copyToClipboard() {
 		navigator.clipboard.writeText($page.data.prompt.content);
+		showCopyFeedback = true;
+		
+		setTimeout(() => {
+			showCopyFeedback = false;
+		}, 2000);
 	}
 </script>
 
@@ -89,22 +96,27 @@
 			<p class="model">{$page.data.prompt.aiModel.name}</p>
 
 			<button on:click={copyToClipboard}>
-				<svg
-					stroke="currentColor"
-					fill="none"
-					stroke-width="2"
-					viewBox="0 0 24 24"
-					stroke-linecap="round"
-					stroke-linejoin="round"
-					class="h-4 w-4"
-					height="1.2em"
-					width="1.2em"
-					xmlns="http://www.w3.org/2000/svg"
-					><path
-						d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"
-					/><rect x="8" y="2" width="8" height="4" rx="1" ry="1" /></svg
-				>
-				Copy prompt
+				{#if showCopyFeedback}
+					<img width="10px" src="/tick.png" alt="tick-icon" />
+					Copied!
+				{:else}
+					<svg
+						stroke="currentColor"
+						fill="none"
+						stroke-width="2"
+						viewBox="0 0 24 24"
+						stroke-linecap="round"
+						stroke-linejoin="round"
+						class="h-4 w-4"
+						height="1.2em"
+						width="1.2em"
+						xmlns="http://www.w3.org/2000/svg"
+						><path
+							d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"
+						/><rect x="8" y="2" width="8" height="4" rx="1" ry="1" /></svg
+					>
+					Copy prompt
+				{/if}
 			</button>
 		</div>
 	</div>
