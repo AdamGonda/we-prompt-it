@@ -5,11 +5,9 @@
 	const user = $page.data.session?.user;
 	const isOwner = user ? $page.data.prompt.author.email === user.email : false;
 	let likes = $page.data.prompt.likes.length;
-	let hartIcon = 'hart';
+	let hartIconPrefix = $page.data.prompt.likes.map(like => like.userId).includes($page.data.user.id) ? 'fullhart' : 'hart';
 	$: forkLink = routes.fork(user, $page.params.slug);
 	$: appreciationText = likes;
-
-	console.log('log $page.data.prompt.likes', $page.data.prompt.likes);
 
 	async function handleAddRemoveLike() {
 		const r = await fetch(`/api/add-remove-like?id=${$page.data.prompt.id}`, {
@@ -19,10 +17,10 @@
 		if (json.status == 200) {
 			likes += json.diff;
 
-			if (hartIcon == 'hart') {
-				hartIcon = 'fullhart';
+			if (hartIconPrefix == 'hart') {
+				hartIconPrefix = 'fullhart';
 			} else {
-				hartIcon = 'hart';
+				hartIconPrefix = 'hart';
 			}
 		}
 	}
@@ -74,7 +72,7 @@
 				</a>
 
 				<button on:click={handleAddRemoveLike}>
-					<img style="width: 16px" src={`/${hartIcon}-icon.png`} alt="hart-icon" />
+					<img style="width: 16px" src={`/${hartIconPrefix}-icon.png`} alt="hart-icon" />
 					{appreciationText}
 				</button>
 			</div>
