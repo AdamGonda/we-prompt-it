@@ -58,17 +58,19 @@
 			</a>
 
 			<div class="actions">
+				
+
+				<button on:click={handleAddRemoveLike}>
+					<img style="width: 16px" src={`/${hartIconPrefix}-icon.png`} alt="hart-icon" />
+					{appreciationText}
+				</button>
+
 				<a href={forkLink}>
 					<span class="forked">
 						<img src="/fork-icon.png" alt="fork-icon" />
 						{$page.data.prompt.forkedCount}
 					</span>
 				</a>
-
-				<button on:click={handleAddRemoveLike}>
-					<img style="width: 16px" src={`/${hartIconPrefix}-icon.png`} alt="hart-icon" />
-					{appreciationText}
-				</button>
 			</div>
 		</div>
 		<div class="name">
