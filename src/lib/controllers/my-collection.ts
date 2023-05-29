@@ -14,7 +14,8 @@ export async function loadMyCollection(event) {
 		include: {
 			likes: { where: { isDeleted: false } },
 			tags: true,
-			aiModel: true
+			aiModel: true,
+			author: true,
 		}
 	});
 
@@ -30,7 +31,8 @@ export async function loadMyCollection(event) {
 				include: {
 					likes: { where: { isDeleted: false } },
 					tags: true,
-					aiModel: true
+					aiModel: true,
+					author: true
 				}
 			}
 		}

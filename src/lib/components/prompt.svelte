@@ -147,9 +147,6 @@
 		align-items: center;
 	}
 
-	main {
-		padding: 0 64px;
-	}
 
 	h2 {
 		margin: 0;

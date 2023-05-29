@@ -1,5 +1,6 @@
 <script>
 	import { page } from '$app/stores';
+	import CardList from '$lib/components/card-list.svelte';
 	import Card from '$lib/components/card.svelte';
 
 	const myCollection = $page.data;
@@ -7,28 +8,15 @@
 </script>
 
 <main>
-	<h1>My collection</h1>
+	<h2>Created by me</h2>
+	<CardList prompts={myCollection.createdBy} />
+	
 
-	<h3>Created by me</h3>
-	<div class="all">
-		{#each myCollection.createdBy as prompt (prompt.id)}
-			<Card {prompt} />
-		{/each}
-	</div>
+	<h2>Forked</h2>
+	<CardList prompts={myCollection.forked} />
 
-	<h3>Forked</h3>
-	<div class="all">
-		{#each myCollection.forked as prompt (prompt.id)}
-			<Card {prompt} />
-		{/each}
-	</div>
-
-	<h3>Liked</h3>
-	<div class="all">
-		{#each myCollection.liked as prompt (prompt.id)}
-			<Card {prompt} />
-		{/each}
-	</div>
+	<h2>Liked</h2>
+	<CardList prompts={myCollection.liked} />
 </main>
 
 <style>

@@ -8,6 +8,7 @@
 	import { onMount } from 'svelte';
 	import Sort from '$lib/components/sort.svelte';
 	import searchStore from '$lib/stores/search-store';
+	import CardList from '$lib/components/card-list.svelte';
 
 	const { prompts } = $page.data;
 	let resultsToShow = prompts;
@@ -27,11 +28,7 @@
 <main>	
 	<!-- <Sort /> -->
 
-	<div class="card-list">
-		{#each resultsToShow as prompt (prompt.id)}
-			<Card {prompt} />
-		{/each}
-	</div>
+	<CardList {prompts} />
 </main>
 
 <style>

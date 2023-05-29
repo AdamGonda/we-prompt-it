@@ -31,6 +31,7 @@
 
 	.content {
 		min-height: calc(100vh - 93px);
+		padding: 0 100px;
 	}
 
 	.overlay-ref {
