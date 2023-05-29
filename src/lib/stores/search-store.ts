@@ -25,7 +25,3 @@ export default {
 	search,
 	reset
 };
-
-subscribe((value) => {
-	console.log(value);
-});
