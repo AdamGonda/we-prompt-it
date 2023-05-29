@@ -31,15 +31,6 @@
 </main>
 
 <style>
-	.card-list {
-		display: grid;
-		grid-template-columns: repeat(auto-fill, minmax(276px, 1fr));
-		padding: 0 104px;
-		gap: 34px;
-		width: 100%;
-		margin-top: 24px;
-	}
-
 	main {
 		display: flex;
 		flex-direction: column;
