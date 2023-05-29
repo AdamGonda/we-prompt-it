@@ -45,23 +45,6 @@
 	<title>Prompt details | We Prompt</title>
 </svelte:head>
 
-<!--
-<ul>
-	{#if isOwner}
-		<li>
-			<a href={routes.prompt(true, $page.params.slug)}>
-				<span>Content</span>
-			</a>
-		</li>
-		<li>
-			<a href={routes.edit($page.params.slug)}>
-				<span>Edit</span>
-			</a>
-		</li>
-	{/if}
-</ul>
--->
-
 <main>
 	<div class="header">
 		<div class="top-bar">
@@ -96,13 +79,14 @@
 				<a href={routes.edit($page.params.slug)}>Edit</a>
 			{/if}
 		</div>
+		
 
 		<div class="infos">
 			<a class="model" target="_blank" href={$page.data.prompt.aiModel.link}>
 				<p>{$page.data.prompt.aiModel.name}</p>
 			</a>
 
-			<button on:click={copyToClipboard}>
+			<button class="copy-btn" on:click={copyToClipboard}>
 				{#if showCopyFeedback}
 					<img width="10px" src="/tick.png" alt="tick-icon" />
 					Copied!
@@ -126,6 +110,15 @@
 				{/if}
 			</button>
 		</div>
+
+		<div class="tags">
+			{#each $page.data.prompt.tags as tag (tag.id)}
+			<a href={`/explore?tag=${tag.name}`}>
+				{tag.name}
+			</a>
+			{/each}
+		</div>
+		
 	</div>
 
 	<div style="display: flex; justify-content: center">
@@ -144,6 +137,8 @@
 </main>
 
 <style>
+
+
 	.actions {
 		display: flex;
 		gap: 16px;
@@ -169,7 +164,7 @@
 	}
 
 	.body {
-		margin-top: 24px;
+		
 		max-width: 800px;
 	}
 
@@ -177,6 +172,21 @@
 		font-family: source-serif-pro, Georgia, Cambria, 'Times New Roman', Times, serif;
 		font-size: 1.2rem;
 		line-height: 32px;
+	}
+
+	.tags {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 8px;
+		justify-content: center;
+	}
+
+	.tags a {
+		padding: 5px 8px;
+		border-radius: 7px;
+		border: 1px solid #313131;
+		font-size: 0.7rem;
+		
 	}
 
 	.name {
@@ -192,7 +202,7 @@
 		display: inline-block;
 	}
 
-	.name a{
+	.name a {
 		text-decoration: underline;
 		margin-bottom: -5px;
 		font-size: 0.8rem;
@@ -228,6 +238,8 @@
 		justify-content: center;
 		align-items: center;
 		gap: 32px;
+		margin-bottom: 24px;
+		
 	}
 
 	.forked img {
