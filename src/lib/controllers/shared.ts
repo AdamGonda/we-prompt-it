@@ -9,7 +9,8 @@ export async function getPromptBySlug(slug) {
 		include: {
 			author: true, // TODO is this ok?
 			likes:  { where: { isDeleted: false } },
-			tags: { where: { isDeleted: false } }
+			tags: { where: { isDeleted: false } },
+			aiModel: true
 		}
 	});
 
