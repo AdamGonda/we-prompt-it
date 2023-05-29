@@ -177,6 +177,7 @@
 	.tags {
 		display: flex;
 		flex-wrap: wrap;
+		padding: 0 300px;
 		gap: 8px;
 		justify-content: center;
 	}
