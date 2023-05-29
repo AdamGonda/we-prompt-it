@@ -1,6 +1,6 @@
 <script>
 	import { page } from '$app/stores';
-	import routes from '$lib/routes'
+	import routes from '$lib/routes';
 	import _ from 'lodash';
 
 	export let prompt;
@@ -13,19 +13,23 @@
 		}
 		let color = '#';
 		for (let i = 0; i < 3; i++) {
-			let value = (hash >> (i * 8)) & 0xFF;
+			let value = (hash >> (i * 8)) & 0xff;
 			color += ('00' + value.toString(16)).substr(-2);
 		}
 		return color;
 	}
 </script>
 
-<a href={routes.prompt($page.data.session?.user, prompt.slug)} class="card" style="box-shadow: 0 4px 12px {stringToColor(prompt.name + prompt.description)}">
+<a
+	href={routes.prompt($page.data.session?.user, prompt.slug)}
+	class="card"
+	style="box-shadow: 0 4px 12px {stringToColor(prompt.name + prompt.description)}"
+>
 	<div>
 		<div class="row">
 			<p class="name">{prompt.name}</p>
 		</div>
-	
+
 		<div class="description">
 			<p>{prompt.description}</p>
 		</div>
@@ -43,7 +47,7 @@
 <style>
 	.card {
 		text-decoration: none;
-		background: #D9D9D9;
+		background: #d9d9d9;
 		border-radius: 20px;
 		padding: 20px;
 		color: black;
@@ -91,5 +95,4 @@
 		display: flex;
 		gap: 8px;
 	}
-
 </style>
