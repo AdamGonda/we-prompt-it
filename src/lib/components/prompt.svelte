@@ -238,9 +238,8 @@
 		display: flex;
 		justify-content: center;
 		align-items: center;
-		gap: 32px;
-		margin-bottom: 24px;
-		
+		gap: 24px;
+		margin-bottom: 30px;
 	}
 
 	.forked img {
