@@ -28,7 +28,7 @@
 <main>	
 	<!-- <Sort /> -->
 
-	<CardList {prompts} />
+	<CardList prompts={resultsToShow} />
 </main>
 
 <style>
