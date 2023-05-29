@@ -1,5 +1,4 @@
-import { loadPrompt } from "$lib/controllers/prompt";
+import { loadPrompt } from '$lib/controllers/prompt.js';
 
-export async function load(event) {
-	return await loadPrompt(event);
-}
+export const load = loadPrompt
+
