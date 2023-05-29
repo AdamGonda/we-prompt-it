@@ -32,7 +32,7 @@
 		</div>
 
 		<div class="description">
-			<p>{prompt.description}</p>
+			<p>{_.truncate(prompt.description, { length: 100 })}</p>
 		</div>
 	</div>
 

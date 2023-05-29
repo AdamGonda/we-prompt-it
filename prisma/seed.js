@@ -154,10 +154,11 @@ const PROMPTS = [
 			"Imagine you're reviewing a popular play like 'Hamlet' performed by a renowned theater group. Discuss the storyline, acting, direction, set design, and the overall theatrical experience. Give both praise and constructive criticism, concluding with an overall recommendation."
 	},
 	{
-		name: 'Poetry Analysis',
-		description: 'Analyze a famous poem.',
+		name: 'Poem Analysis',
+		description:
+			"Your task is to conduct an in-depth analysis of a famous poem. This will involve unpacking its central themes, investigating the use of various literary devices, and scrutinizing the specific language choices made by the author. You will also be expected to delve into the cultural or personal impact of the poem, providing an appreciation of its influence. Your analysis should be balanced, including both praise for the poem's strengths and constructive.",
 		content:
-			"Imagine you're analyzing a famous poem like 'The Road Not Taken' by Robert Frost. Discuss its themes, literary devices, language, and cultural or personal impact. Provide both praise and constructive criticism, concluding with an overall interpretation or recommendation."
+			"You're studying 'The Road Not Taken' by Robert Frost. Discuss its key themes, like choice, regret and individualism. Examine its literary devices - such as metaphor, rhyme, and rhythm. Reflect on the language used, its cultural or personal significance. Offer praise for its vivid imagery and universal themes, and critique, perhaps, its potential for misinterpretation. Finally, give an overall interpretation or recommendation based on your analysis  criticism of any perceived weaknesses. Finally, your work should culminate in a coherent and considered overall interpretation or recommendation. This exercise will enhance your understanding of poetry and sharpen your analytical skills."
 	},
 	{
 		name: 'Podcast Review',

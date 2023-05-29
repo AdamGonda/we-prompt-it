@@ -29,21 +29,6 @@
 </svelte:head>
 
 <!--
-
-<div>
-
-
-	{#if user}
-		<button on:click={handleAddRemoveLike}>
-			{appreciationText}
-		</button>
-	{:else}
-		<button>
-			<a href={routes.login}>{appreciationText}</a>
-		</button>
-	{/if}
-</div>
-
 <ul>
 	{#if isOwner}
 		<li>
@@ -58,7 +43,6 @@
 		</li>
 	{/if}
 </ul>
-
 -->
 
 <main>
@@ -73,13 +57,17 @@
 				</p>
 			</a>
 
-			<div style="display: flex; gap: 16px;">
-				<span class="forked">
-					<img src="/fork-icon.png" alt="fork-icon" />
-					{$page.data.prompt.forkedCount}
-				</span>
+			<div class="actions">
+				<a href={forkLink}>
+					<span class="forked">
+						<img src="/fork-icon.png" alt="fork-icon" />
+						{$page.data.prompt.forkedCount}
+					</span>
+				</a>
 
-				<p>{appreciationText}</p>
+				<button on:click={handleAddRemoveLike}>
+					{appreciationText}
+				</button>
 			</div>
 		</div>
 		<h1>
@@ -87,9 +75,7 @@
 		</h1>
 
 		<div class="infos">
-			<div>
-				<p>{$page.data.prompt.aiModel.name}</p>
-			</div>
+			<p class="model">{$page.data.prompt.aiModel.name}</p>
 
 			<button on:click={copyToClipboard}>
 				<svg
@@ -128,6 +114,12 @@
 </main>
 
 <style>
+	.actions {
+		display: flex;
+		gap: 16px;
+		align-items: center;
+	}
+
 	main {
 		padding: 0 64px;
 	}
@@ -148,7 +140,7 @@
 	}
 
 	.body p {
-		font-family: source-serif-pro, Georgia, Cambria, "Times New Roman", Times, serif;
+		font-family: source-serif-pro, Georgia, Cambria, 'Times New Roman', Times, serif;
 		font-size: 1.2rem;
 		line-height: 32px;
 	}
@@ -196,6 +188,12 @@
 		margin-right: 5px;
 	}
 
+	.forked {
+		background: #e9e9e9;
+		padding: 10px 16px;
+		border-radius: 24px;
+	}
+
 	.top-bar {
 		display: flex;
 		gap: 8px;
@@ -205,8 +203,8 @@
 
 	button {
 		display: inline-block;
-		padding: 8px 16px;
-		background-color: #d9d9d9;
+		padding: 10px 16px;
+		background: #e9e9e9;
 		color: black;
 		text-decoration: none;
 		font-size: 0.8rem;
@@ -220,8 +218,8 @@
 		align-items: center;
 	}
 
-	button:hover {
-		background-color: #b8b8b8;
+	button:hover, .forked:hover {
+		background-color: #cdcdcd;
 	}
 
 	button:active {
