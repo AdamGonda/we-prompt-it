@@ -88,9 +88,14 @@
 				</button>
 			</div>
 		</div>
-		<h1>
-			{$page.data.prompt.name}
-		</h1>
+		<div class="name">
+			<h1>
+				{$page.data.prompt.name}
+			</h1>
+			{#if isOwner}
+				<a href={routes.edit($page.params.slug)}>Edit</a>
+			{/if}
+		</div>
 
 		<div class="infos">
 			<a class="model" target="_blank" href={$page.data.prompt.aiModel.link}>
@@ -174,10 +179,23 @@
 		line-height: 32px;
 	}
 
-	h1 {
-		text-align: center;
-		margin: 0;
+	.name {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		gap: 24px;
 		margin-bottom: 16px;
+	}
+
+	.name h1 {
+		margin: 0;
+		display: inline-block;
+	}
+
+	.name a{
+		text-decoration: underline;
+		margin-bottom: -5px;
+		font-size: 0.8rem;
 	}
 
 	p {
@@ -253,6 +271,4 @@
 	button:active {
 		background-color: #a0a0a0;
 	}
-
-	
 </style>
