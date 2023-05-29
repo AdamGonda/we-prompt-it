@@ -15,10 +15,10 @@
 	{#if !session}
 		<p>some informative stuff about the platform</p>
 	{/if}
-	<h2>Most liked</h2>
+	<h3>Most liked</h3>
 <CardList prompts={mostLiked} />
 
-<h2>Most forked</h2>
+<h3>Most forked</h3>
 <CardList prompts={mostForked} />
 </div>
 

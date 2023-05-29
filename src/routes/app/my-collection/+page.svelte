@@ -8,23 +8,18 @@
 </script>
 
 <main>
-	<h2>Created by me</h2>
+	<h3>Created by me</h3>
 	<CardList prompts={myCollection.createdBy} />
 	
 
-	<h2>Forked</h2>
+	<h3>Forked</h3>
 	<CardList prompts={myCollection.forked} />
 
-	<h2>Liked</h2>
+	<h3>Liked</h3>
 	<CardList prompts={myCollection.liked} />
 </main>
 
 <style>
-	.all {
-		display: grid;
-		grid-template-columns: repeat(5, 1fr);
-		gap: 16px;
-	}
 	main {
 		display: flex;
 		flex-direction: column;
