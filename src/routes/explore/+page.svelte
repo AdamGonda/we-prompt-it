@@ -4,7 +4,6 @@
 
 <script>
 	import { page } from '$app/stores';
-	import Card from '$lib/components/card.svelte';
 	import { onMount } from 'svelte';
 	import Sort from '$lib/components/sort.svelte';
 	import searchStore from '$lib/stores/search-store';
@@ -45,6 +44,6 @@
 		display: flex;
 		flex-direction: column;
 		gap: 24px;
-		padding: 24px;
+		padding-top: 24px;
 	}
 </style>
