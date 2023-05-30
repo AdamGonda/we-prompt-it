@@ -20,7 +20,7 @@
 		flex-direction: column;
 		align-items: center;
 		justify-content: center;
-		margin-bottom: var(--s-5);
+		margin-bottom: var(--s-7);
 	}
 
 	img {
