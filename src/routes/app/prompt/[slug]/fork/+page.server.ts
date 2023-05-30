@@ -1,7 +1,7 @@
 import { forkPrompt } from '$lib/controllers/actions';
-import { loadPrompt } from '$lib/controllers/loders';
+import { loadEditFork } from '$lib/controllers/loders';
 
-export const load = loadPrompt;
+export const load = loadEditFork;
 
 export const actions = {
 	fork: forkPrompt

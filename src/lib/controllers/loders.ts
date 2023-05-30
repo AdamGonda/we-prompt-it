@@ -76,7 +76,7 @@ export async function loadPrompt(event) {
 	return { prompt };
 }
 
-export async function loadEdit({ params }) {
+export async function loadEditFork({ params }) {
 	const prompt = await getPromptBySlug(params.slug);
 	const aiModels = await getAllAIModels();
 	const tags = await getAllTags();

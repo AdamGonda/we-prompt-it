@@ -1,7 +1,7 @@
 import { deletePrompt, editPrompt } from '$lib/controllers/actions';
-import { loadEdit } from '$lib/controllers/loders';
+import { loadEditFork } from '$lib/controllers/loders';
 
-export const load = loadEdit
+export const load = loadEditFork
 
 export const actions = {
 	edit: editPrompt,
