@@ -14,7 +14,7 @@
 <style>
 	.card-list {
 		display: grid;
-		grid-template-columns: repeat(auto-fill, minmax(286px, 1fr));		
+		grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));		
 		gap: 34px;
 		width: 100%;
 		margin-top: 24px;
