@@ -3,8 +3,6 @@
 	import CardList from '$lib/components/card-list.svelte';
 
 	const user = $page.data.user;
-
-	// console.log('log user', user)
 </script>
 
 <div class="profile">
