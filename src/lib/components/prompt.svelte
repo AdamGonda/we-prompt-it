@@ -13,7 +13,6 @@
 
 	function getHartIconPrefix() {
 		if (user) {
-			// @ts-ignore
 			const liked = $page.data.prompt.likes.find((like) => like.userId === user.id);
 			if (liked) {
 				return 'fullhart';

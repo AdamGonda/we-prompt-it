@@ -4,6 +4,16 @@
 	import _ from 'lodash';
 
 	export let prompt;
+
+	function getHartIconPrefix() {
+		if ($page.data.dbUser) {
+			const liked = prompt.likes.find((like) => like.userId === $page.data.dbUser.id);
+			if (liked) {
+				return 'fullhart';
+			}
+		}
+		return 'hart';
+	}
 </script>
 
 <a
@@ -23,7 +33,9 @@
 	<div class="stats">
 		<img class="author" src={prompt.author.picture} alt="" />
 		<div>
-			<span class="likes">❤️ {prompt.likes?.length}</span>
+			<span class="likes">
+				<img style="width: 16px" src={`/${getHartIconPrefix()}-icon.png`} alt="hart-icon" />
+				{prompt.likes?.length}</span>
 			<span class="forked">
 				<img src="/fork-icon.png" alt="fork-icon" />
 				{prompt.forkedCount}
