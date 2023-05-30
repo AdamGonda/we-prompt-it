@@ -1,3 +1,3 @@
-import { loadExplore } from "$lib/controllers/loders";
+import { loadIndex } from "$lib/controllers/loders";
 
-export const load = loadExplore
+export const load = loadIndex
