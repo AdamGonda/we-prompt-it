@@ -51,7 +51,7 @@
 	}
 
 	async function triggerSearch() {
-		goto(`/explore?${varsToQuerystring()}`);
+		goto(`?${varsToQuerystring()}`);
 	}
 </script>
 

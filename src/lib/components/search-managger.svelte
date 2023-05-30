@@ -6,7 +6,7 @@
 	let firstLoad = true;
 
 	afterNavigate(async () => {		
-		if (!firstLoad && $page.route.id.includes('explore')) {
+		if (!firstLoad) {
 			await searchStore.search({
 				endpoint: `/api/search${$page.url.search}`
 			});
