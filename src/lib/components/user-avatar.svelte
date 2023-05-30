@@ -8,11 +8,11 @@
 	let showDropdown = false;
 
 	onMount(() => {
-		window.addEventListener('click', e => {
+		window.addEventListener('click', (e) => {
 			if (e.target.closest('.dropdown')) return;
 			showDropdown = false;
-		})
-	})
+		});
+	});
 
 	function handleSignout() {
 		signOut();
@@ -28,9 +28,10 @@
 		<button class="dropdown-trigger" on:click={toggleShowDropdown}>
 			<img src={user.picture} alt="" />
 		</button>
-		
+
 		{#if showDropdown}
-			<ul class="dropdown-menu">
+			<!-- svelte-ignore a11y-click-events-have-key-events -->
+			<ul class="dropdown-menu" on:click={toggleShowDropdown}>
 				<li><a href={routes.profile(user.username)}>Profile</a></li>
 				<li><button on:click={handleSignout}>Signout</button></li>
 			</ul>
@@ -77,7 +78,8 @@
 		padding: 8px;
 	}
 
-	.dropdown-menu li, button {
+	.dropdown-menu li,
+	button {
 		font-family: 'Source Sans Pro', sans-serif !important;
 		font-weight: bold;
 	}
