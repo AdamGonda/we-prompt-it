@@ -60,35 +60,9 @@ export async function addRemoveLike(event) {
 	}
 }
 
-export async function checkPromptNameUniquenessForExisting(event) {
+export async function nameCheck(event) {
 	const proposedName = event.url.searchParams.get('proposedName');
 	const promptId = event.url.searchParams.get('promptId');
-	const user = await getDBUser(event);
-
-	if (!proposedName || !promptId || !Number(promptId)) {
-		throw error(400, {
-			message: `Missing parameters`
-		});
-	}
-
-	const existingPrompt = await prisma.prompt.findFirst({
-		where: {
-			slug: convertToSlug(user.username, proposedName),
-			authorId: user.id
-		}
-	});
-
-	console.log('log existingPrompt', Number(promptId))
-
-	if (existingPrompt && existingPrompt.id !== Number(promptId)) {
-		return json({ isUnique: false });
-	}
-
-	return json({ isUnique: true });
-}
-
-export async function checkPromptNameUniquenessForNew(event) {
-	const proposedName = event.url.searchParams.get('proposedName');
 	const user = await getDBUser(event);
 
 	if (!proposedName) {
@@ -104,11 +78,17 @@ export async function checkPromptNameUniquenessForNew(event) {
 		}
 	});
 
-	if (existingPrompt) {
-		return json({ isUnique: false });
-	}
+	// If promptId is null or undefined, this is a new prompt.
+	if (!promptId) {
+		return existingPrompt ? json({ ok: false }) : json({ ok: true });
+	} else {
+		// If promptId exists and the found prompt is not the same as the one being updated.
+		if (existingPrompt && existingPrompt.id !== Number(promptId)) {
+			return json({ ok: false });
+		}
 
-	return json({ isUnique: true });
+		return json({ ok: true });
+	}
 }
 
 export async function preSearchResultsNo(event) {
