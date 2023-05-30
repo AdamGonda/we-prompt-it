@@ -138,7 +138,7 @@
 				<a
 					class="bubble"
 					style={`background-color: ${stringToColor(tag.name)}`}
-					href={`/explore?tag=${tag.name}`}
+					href={`/?tag=${tag.name}`}
 				>
 					#{tag.name}
 				</a>

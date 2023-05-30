@@ -33,7 +33,7 @@
 	async function triggerSearch() {
 		mapFormDataToVars();
 
-		goto(`/explore?${varsToQuerystring()}`);
+		goto(`/?${varsToQuerystring()}`);
 	}
 
 	function varsToQuerystring() {
