@@ -10,6 +10,8 @@
 		create: routes.create(user),
 		myCollection: routes.myCollection(user)
 	};
+	$: onMycollection = $page.route.id.includes('my-collection')
+	$: onCreate = $page.route.id.includes('create') || $page.route.id.includes('fork')
 </script>
 
 <nav>
@@ -20,10 +22,10 @@
 	<SearchBar />
 
 	<a href={routes.myCollection(user)} class="button">
-		<p class="my-collection">My collection</p>
+		<p class="my-collection" class:underline={onMycollection} >My collection</p>
 	</a>
 	<a href={links.create} class="button">
-		<p>Create</p>
+		<p class:underline={onCreate}>Create</p>
 	</a>
 	<UserAvatar />
 </nav>
@@ -59,5 +61,9 @@
 
 	.my-collection {
 		width: 104px;
+	}
+
+	.underline {
+		text-decoration: underline;
 	}
 </style>
