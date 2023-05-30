@@ -1,7 +1,3 @@
-import type { PageServerLoad } from "./$types"
+import { loadIndex } from "$lib/controllers/loders"
 
-export const load: PageServerLoad = async (event) => {
-  return {
-    session: await event.locals.getSession(),
-  }
-}
+export const load = loadIndex

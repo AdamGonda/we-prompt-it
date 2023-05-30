@@ -1,14 +1,24 @@
 import { PrismaClient } from '@prisma/client';
-import { getAllAIModels, getAllTags, getDBUser, getPromptBySlug } from "./shared";
+import { getAllAIModels, getAllTags, getDBUser, getPromptBySlug } from './shared';
 import { error } from '@sveltejs/kit';
 import { _search } from './api';
 
 const prisma = new PrismaClient();
 
 export async function loadIndex(event) {
-	return { 
-		prompts: await _search(event),
+	return {
+		prompts: await _search(event)
 	};
+}
+
+export async function loadIndexLayout(event) {
+	const session = await event.locals.getSession();
+	
+	if(session) {
+		session.user = await getDBUser(event)
+	}
+
+	return { session };
 }
 
 export async function loadMyCollection(event) {
@@ -23,7 +33,7 @@ export async function loadMyCollection(event) {
 			likes: { where: { isDeleted: false } },
 			tags: true,
 			aiModel: true,
-			author: true,
+			author: true
 		}
 	});
 
@@ -55,8 +65,6 @@ export async function loadMyCollection(event) {
 
 export async function loadPrompt(event) {
 	const prompt = await getPromptBySlug(event.params.slug);
-	const aiModels = await getAllAIModels();
-	const tags = await getAllTags();
 
 	if (!prompt) {
 		throw error(404, {
@@ -64,7 +72,7 @@ export async function loadPrompt(event) {
 		});
 	}
 
-	return { prompt, aiModels, tags, user: await getDBUser(event) };
+	return { prompt };
 }
 
 export async function loadEdit({ params }) {

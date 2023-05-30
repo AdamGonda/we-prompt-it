@@ -1,19 +1,25 @@
 <script>
 	import { page } from '$app/stores';
 	import routes from '$lib/routes';
-	import { set } from 'lodash';
 
 	const user = $page.data.session?.user;
 	const isOwner = user ? $page.data.prompt.author.email === user.email : false;
 	let likes = $page.data.prompt.likes.length;
-	let hartIconPrefix = $page.data.prompt.likes
-		.map((like) => like.userId)
-		.includes($page.data.user.id)
-		? 'fullhart'
-		: 'hart';
+	let hartIconPrefix = getHartIconPrefix();
 	$: forkLink = routes.fork(user, $page.params.slug);
 	$: appreciationText = likes;
 	let showCopyFeedback = false;
+
+	function getHartIconPrefix() {
+		if (user) {
+			// @ts-ignore
+			const liked = $page.data.prompt.likes.find((like) => like.userId === user.id);
+			if (liked) {
+				return 'fullhart';
+			}
+		}
+		return 'hart';
+	}
 
 	function stringToColor(str) {
 		let hash = 0;
