@@ -81,7 +81,7 @@
 	.dropdown-menu li,
 	button {
 		font-family: 'Source Sans Pro', sans-serif !important;
-		font-weight: bold;
+		font-weight: 400;
 	}
 
 	button {
