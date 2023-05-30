@@ -38,8 +38,6 @@ export async function loadMyCollection(event) {
 		}
 	});
 
-	const forked = createdBy.filter((prompt) => prompt.parentId !== null);
-
 	const like = await prisma.like.findMany({
 		where: {
 			userId: dbUser.id,
@@ -58,7 +56,6 @@ export async function loadMyCollection(event) {
 	});
 
 	return {
-		forked,
 		createdBy,
 		liked: like?.map((like) => like.prompt)
 	};

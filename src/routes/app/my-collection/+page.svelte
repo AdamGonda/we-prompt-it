@@ -8,18 +8,18 @@
 </script>
 
 <main>
-	<h3>Created by me</h3>
+	<h3>Created</h3>
 	<CardList prompts={myCollection.createdBy} />
 	
-
-	<h3>Forked</h3>
-	<CardList prompts={myCollection.forked} />
-
 	<h3>Liked</h3>
 	<CardList prompts={myCollection.liked} />
 </main>
 
 <style>
+	h3 {
+		margin-top: 56px; 
+		margin-bottom: 0;
+	}
 	main {
 		display: flex;
 		flex-direction: column;
