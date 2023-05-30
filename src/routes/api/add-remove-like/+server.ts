@@ -1,3 +1,3 @@
-import { addRemoveLike } from '$lib/controllers/like-api';
+import { addRemoveLike } from "$lib/controllers/api";
 
 export const POST = addRemoveLike;

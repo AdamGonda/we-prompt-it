@@ -1,3 +1,3 @@
-import { checkPromptNameUniquenessForExisting } from "$lib/controllers/actions";
+import { checkPromptNameUniquenessForExisting } from "$lib/controllers/api";
 
 export const GET = checkPromptNameUniquenessForExisting

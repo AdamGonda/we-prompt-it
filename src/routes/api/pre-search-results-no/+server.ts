@@ -1,4 +1,4 @@
-import { preSearchResultsNo } from '$lib/controllers/search-api';
+import { preSearchResultsNo } from "$lib/controllers/api";
 
 export const GET = preSearchResultsNo
 

@@ -1,3 +1,3 @@
-import { checkPromptNameUniquenessForNew } from "$lib/controllers/actions";
+import { checkPromptNameUniquenessForNew } from "$lib/controllers/api";
 
 export const GET = checkPromptNameUniquenessForNew

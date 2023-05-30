@@ -4,6 +4,7 @@ import { error } from '@sveltejs/kit';
 const prisma = new PrismaClient();
 
 export async function getPromptBySlug(slug) {
+	console.log('log ', )
 	const prompt = await prisma.prompt.findFirst({
 		where: { slug, isDeleted: false },
 		include: {

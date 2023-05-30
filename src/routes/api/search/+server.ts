@@ -1,3 +1,3 @@
-import { search } from '$lib/controllers/search-api';
+import { search } from "$lib/controllers/api";
 
 export const GET = search

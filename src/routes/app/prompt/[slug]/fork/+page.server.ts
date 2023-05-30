@@ -1,4 +1,5 @@
-import { forkPrompt, loadPrompt } from '$lib/controllers/actions';
+import { forkPrompt } from '$lib/controllers/actions';
+import { loadPrompt } from '$lib/controllers/loders';
 
 export const load = loadPrompt;
 
