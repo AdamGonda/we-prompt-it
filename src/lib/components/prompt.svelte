@@ -191,10 +191,7 @@
 	.tags a {
 		padding: 5px 8px;
 		border-radius: 20px;
-		/* border: 2px solid #313131; */
 		padding: 10px 16px;
-
-		/* background: #313131; */
 		font-size: 0.8rem;
 		color: white;
 		font-weight: 500;
