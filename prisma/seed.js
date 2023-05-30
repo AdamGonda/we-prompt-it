@@ -595,7 +595,7 @@ async function main() {
 		// Randomly select an AI model, an author, and some tags
 		const aiModel = getRandomElement(aiModels);
 		const author = getRandomElement(users);
-		const selectedTags = getRandomSubset(tags, 1, 5);
+		const selectedTags = getRandomSubset(tags, 2, 5);
 
 		// Randomly select some users to like the prompt
 		const likers = getRandomSubset(users, 1, users.length);
