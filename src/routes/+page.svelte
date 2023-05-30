@@ -1,26 +1,32 @@
 <svelte:head>
-    <title>Home | We Prompt</title> 
+    <title>Explore | We Prompt</title> 
 </svelte:head>
 
 <script>
 	import { page } from '$app/stores';
+	import { onMount } from 'svelte';
+	import Sort from '$lib/components/sort.svelte';
+	import searchStore from '$lib/stores/search-store';
 	import CardList from '$lib/components/card-list.svelte';
-	import Card from '$lib/components/card.svelte';
 
-	const { session, mostLiked, mostForked } = $page.data;
-	// console.log('log $page.data;', $page.data) 
+	const { prompts } = $page.data;
+	let resultsToShow = prompts;
+	let frontendLoaded = false;
+
+	searchStore.subscribe((value) => {
+		if (frontendLoaded) {
+			resultsToShow = value;
+		}
+	});
+
+	onMount(() => {
+		frontendLoaded = true;
+	});
 </script>
 
-<div>
-	{#if !session}
-		<p>some informative stuff about the platform</p>
-	{/if}
-	<h3>Most liked</h3>
-<CardList prompts={mostLiked} />
+<main>	
+	<!-- <Sort /> -->
 
-<h3>Most forked</h3>
-<CardList prompts={mostForked} />
-</div>
+	<CardList prompts={resultsToShow} />
+</main>
 
-<style>
-</style>
