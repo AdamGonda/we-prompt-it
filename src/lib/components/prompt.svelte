@@ -1,4 +1,5 @@
 <script>
+	import { goto } from '$app/navigation';
 	import { page } from '$app/stores';
 	import routes from '$lib/routes';
 
@@ -35,6 +36,10 @@
 	}
 
 	async function handleAddRemoveLike() {
+		if(!user) {
+			goto('/login')
+		}
+
 		const r = await fetch(`/api/add-remove-like?id=${$page.data.prompt.id}`, {
 			method: 'POST'
 		});
