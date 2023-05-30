@@ -108,7 +108,7 @@
 				<p>{$page.data.prompt.aiModel.name}</p>
 			</a>
 
-			<button class="copy-btn" on:click={copyToClipboard}>
+			<button class="copy-btn bubble" on:click={copyToClipboard}>
 				{#if showCopyFeedback}
 					<img width="10px" src="/tick.png" alt="tick-icon" />
 					Copied!
