@@ -81,13 +81,13 @@
 			</a>
 
 			<div class="actions">
-				<button on:click={handleAddRemoveLike}>
+				<button class="bubble" on:click={handleAddRemoveLike}>
 					<img style="width: 16px" src={`/${hartIconPrefix}-icon.png`} alt="hart-icon" />
 					{appreciationText}
 				</button>
 
 				<a href={forkLink}>
-					<span class="forked">
+					<span class="forked bubble">
 						<img src="/fork-icon.png" alt="fork-icon" />
 						{$page.data.prompt.forkedCount}
 					</span>
@@ -136,6 +136,7 @@
 		<div class="tags">
 			{#each $page.data.prompt.tags as tag (tag.id)}
 				<a
+					class="bubble"
 					style={`background-color: ${stringToColor(tag.name)}`}
 					href={`/explore?tag=${tag.name}`}
 				>
@@ -163,19 +164,19 @@
 <style>
 	.actions {
 		display: flex;
-		gap: 16px;
+		gap: var(--s-4);
 		align-items: center;
 	}
 
 	h1 {
-		font-size: 2.6rem;
+		font-size: var(--fs-5);
 	}
 
 	h2 {
 		margin: 0;
-		margin-top: 48px;
-		margin-bottom: 4px;
-		font-size: 1.6rem;
+		margin-top: var(--s-8);
+		margin-bottom: var(--s-1);
+		font-size: var(--fs-4);
 	}
 
 	.model {
@@ -183,27 +184,29 @@
 	}
 
 	.body {
-		max-width: 800px;
+		max-width: 800px; /* TODO */
 	}
 
 	.body p {
 		font-family: source-serif-pro, Georgia, Cambria, 'Times New Roman', Times, serif;
-		font-size: 1.3rem;
-		line-height: 32px;
+		font-size: var(--fs-3);
+		line-height: var(--s-6);
 	}
 
 	.tags {
 		display: flex;
 		flex-wrap: wrap;
-		gap: 8px;
+		gap: var(--fs-2);
 		justify-content: center;
 	}
 
+	.bubble {
+		border-radius: var(--br-1);
+		padding: var(--s-3) var(--s-4);
+	}
+
 	.tags a {
-		padding: 5px 8px;
-		border-radius: 20px;
-		padding: 10px 16px;
-		font-size: 0.8rem;
+		font-size: var(--fs-1);
 		color: white;
 		font-weight: 500;
 	}
@@ -212,8 +215,8 @@
 		display: flex;
 		align-items: center;
 		justify-content: center;
-		gap: 24px;
-		margin-bottom: 16px;
+		gap: var(--s-5);
+		margin-bottom: var(--s-4);
 	}
 
 	.name h1 {
@@ -224,7 +227,7 @@
 	.name a {
 		text-decoration: underline;
 		margin-bottom: -5px;
-		font-size: 0.8rem;
+		font-size: var(--fs-1);
 	}
 
 	p {
@@ -244,7 +247,7 @@
 	.author {
 		display: flex;
 		align-items: center;
-		gap: 8px;
+		gap: var(--s-2);
 	}
 
 	.author span {
@@ -256,8 +259,8 @@
 		display: flex;
 		justify-content: center;
 		align-items: center;
-		gap: 24px;
-		margin-bottom: 24px;
+		gap: var(--s-5);
+		margin-bottom: var(--s-5);
 	}
 
 	.forked img {
@@ -267,29 +270,25 @@
 
 	.forked {
 		background: #e9e9e9;
-		padding: 10px 16px;
-		border-radius: 24px;
 	}
 
 	.top-bar {
 		display: flex;
-		gap: 8px;
+		gap: var(--s-2);
 		justify-content: space-between;
-		margin-top: 34px;
+		margin-top: var(--s-6);
 	}
 
 	button {
-		padding: 10px 16px;
 		background: #e9e9e9;
 		color: black;
 		text-decoration: none;
-		border-radius: 20px;
 		font-size: 16px;
 		border: none;
 		cursor: pointer;
 		transition: background-color 0.3s ease;
 		display: flex;
-		gap: 8px;
+		gap: var(--s-2);
 		align-items: center;
 	}
 

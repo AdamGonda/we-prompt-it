@@ -27,6 +27,24 @@
 	:global(*) {
 		font-family: 'Inter';
 		box-sizing: border-box;
+
+		--s-1: 4px;
+		--s-2: 8px;
+		--s-3: 12px;
+		--s-4: 16px;
+		--s-5: 24px;
+		--s-6: 34px;
+		--s-8: 48px;
+		--s-9: 54px;
+		--s-10: 64px;
+
+		--fs-1: 0.8rem;
+		--fs-2: 1rem;
+		--fs-3: 1.3rem;
+		--fs-4: 1.6rem;
+		--fs-5: 2.6rem;
+
+		--br-1: 20px;
 	}
 
 	.content {
