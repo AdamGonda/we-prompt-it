@@ -1,4 +1,4 @@
-import { loadPrompt } from '$lib/controllers/prompt.js';
+import { loadPrompt } from '$lib/controllers/actions.js';
 
 export const load = loadPrompt
 

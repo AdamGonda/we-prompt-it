@@ -1,4 +1,4 @@
-import { deletePrompt, editPrompt, loadEdit } from '$lib/controllers/prompt';
+import { deletePrompt, editPrompt, loadEdit } from '$lib/controllers/actions';
 
 export const load = loadEdit
 

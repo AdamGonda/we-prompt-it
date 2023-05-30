@@ -1,14 +1,13 @@
 import { getOrCreateAiModel, getDBUser, getTagIds } from '$lib/controllers/shared';
-import { getAllAIModels, getAllTags, getPromptBySlug } from '$lib/controllers/shared';
+import { getPromptBySlug } from '$lib/controllers/shared';
 import type { RequestEvent } from '@sveltejs/kit';
 
-import { error, json } from '@sveltejs/kit';
+import { error } from '@sveltejs/kit';
 import { PrismaClient } from '@prisma/client';
 import { convertToSlug, validateForm } from '$lib/utils';
 
 const prisma = new PrismaClient();
 
-// #region ACTIONS
 export async function createPrompt(event: RequestEvent) {
 	const user = await getDBUser(event);
 	const data = await validateForm(event);
@@ -149,94 +148,3 @@ export async function deletePrompt(event: RequestEvent) {
 		data: { isDeleted: true }
 	});
 }
-// #endregion
-
-// #region LOADERS
-export async function loadPrompt(event) {
-	const prompt = await getPromptBySlug(event.params.slug);
-	const aiModels = await getAllAIModels();
-	const tags = await getAllTags();
-
-	if (!prompt) {
-		throw error(404, {
-			message: 'Not found'
-		});
-	}
-
-	return { prompt, aiModels, tags, user: await getDBUser(event) };
-}
-
-export async function loadEdit({ params }) {
-	const prompt = await getPromptBySlug(params.slug);
-	const aiModels = await getAllAIModels();
-	const tags = await getAllTags();
-
-	if (!prompt) {
-		throw error(404, {
-			message: 'Not found'
-		});
-	}
-
-	return { prompt, aiModels, tags };
-}
-
-export async function loadCreatePrompt() {
-	const allModels = await getAllAIModels();
-	const tags = await getAllTags();
-
-	return { allModels, tags };
-}
-// #endregion
-
-// #region API
-export async function checkPromptNameUniquenessForExisting(event) {
-	const proposedName = event.url.searchParams.get('proposedName');
-	const promptId = event.url.searchParams.get('promptId');
-	const user = await getDBUser(event);
-
-	if (!proposedName || !promptId || !Number(promptId)) {
-		throw error(400, {
-			message: `Missing parameters`
-		});
-	}
-
-	const existingPrompt = await prisma.prompt.findFirst({
-		where: {
-			slug: convertToSlug(user.username, proposedName),
-			authorId: user.id
-		}
-	});
-
-	console.log('log existingPrompt', Number(promptId))
-
-	if (existingPrompt && existingPrompt.id !== Number(promptId)) {
-		return json({ isUnique: false });
-	}
-
-	return json({ isUnique: true });
-}
-
-export async function checkPromptNameUniquenessForNew(event) {
-	const proposedName = event.url.searchParams.get('proposedName');
-	const user = await getDBUser(event);
-
-	if (!proposedName) {
-		throw error(400, {
-			message: `Missing parameters`
-		});
-	}
-
-	const existingPrompt = await prisma.prompt.findFirst({
-		where: {
-			slug: convertToSlug(user.username, proposedName),
-			authorId: user.id
-		}
-	});
-
-	if (existingPrompt) {
-		return json({ isUnique: false });
-	}
-
-	return json({ isUnique: true });
-}
-// #endregion

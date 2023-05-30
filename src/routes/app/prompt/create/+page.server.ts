@@ -1,4 +1,4 @@
-import { createPrompt, loadCreatePrompt } from '$lib/controllers/prompt';
+import { createPrompt, loadCreatePrompt } from '$lib/controllers/actions';
 
 export const load = loadCreatePrompt
 
