@@ -1,11 +1,10 @@
 <svelte:head>
-    <title>Explore | We Prompt</title> 
+    <title>Home | We Prompt</title> 
 </svelte:head>
 
 <script>
 	import { page } from '$app/stores';
 	import { onMount } from 'svelte';
-	import Sort from '$lib/components/sort.svelte';
 	import searchStore from '$lib/stores/search-store';
 	import CardList from '$lib/components/card-list.svelte';
 
@@ -25,8 +24,6 @@
 </script>
 
 <main>	
-	<!-- <Sort /> -->
-
 	<CardList prompts={resultsToShow} />
 </main>
 
