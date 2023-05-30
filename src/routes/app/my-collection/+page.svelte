@@ -15,9 +15,9 @@
 
 <style>
 	h3 {
-		margin-top: 56px; 
-		margin-bottom: 0;
+		margin: 0;
 	}
+	
 	main {
 		display: flex;
 		flex-direction: column;

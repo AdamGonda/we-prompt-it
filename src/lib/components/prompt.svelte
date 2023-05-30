@@ -174,7 +174,7 @@
 
 	h2 {
 		margin: 0;
-		margin-top: var(--s-8);
+		margin-top: var(--s-7);
 		margin-bottom: var(--s-1);
 		font-size: var(--fs-4);
 	}
@@ -276,7 +276,6 @@
 		display: flex;
 		gap: var(--s-2);
 		justify-content: space-between;
-		margin-top: var(--s-6);
 	}
 
 	button {

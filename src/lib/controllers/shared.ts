@@ -1,3 +1,4 @@
+import globalIncludes from '$lib/global-includes';
 import { PrismaClient } from '@prisma/client';
 import { error } from '@sveltejs/kit';
 
@@ -6,12 +7,7 @@ const prisma = new PrismaClient();
 export async function getPromptBySlug(slug) {
 	const prompt = await prisma.prompt.findFirst({
 		where: { slug, isDeleted: false },
-		include: {
-			author: true, // TODO is this ok?
-			likes:  { where: { isDeleted: false } },
-			tags: { where: { isDeleted: false } },
-			aiModel: true
-		}
+		...globalIncludes
 	});
 
 	if (!prompt) {

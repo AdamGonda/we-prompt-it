@@ -17,6 +17,5 @@
 		grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));		
 		gap: 34px;
 		width: 100%;
-		margin-top: 24px;
 	}
 </style>

@@ -2,6 +2,7 @@ import { PrismaClient } from '@prisma/client';
 import { getAllAIModels, getAllTags, getDBUser, getPromptBySlug } from './shared';
 import { error } from '@sveltejs/kit';
 import { _search } from './api';
+import globalIncludes from '$lib/global-includes';
 
 const prisma = new PrismaClient();
 
@@ -92,4 +93,25 @@ export async function loadCreatePrompt() {
 	const tags = await getAllTags();
 
 	return { allModels, tags };
+}
+
+export async function loadProfile(event) {
+	// if id is not present trhow 404
+	if(!event.params.username) {
+		throw error(404, {
+			message: 'Not found'
+		});
+	}
+
+	// get user by id, prisma
+	const user = await prisma.user.findFirst({
+		where: { username: event.params.username },
+		include: {
+			prompts: {
+				...globalIncludes
+			}
+		}
+	});
+
+	return { user }
 }

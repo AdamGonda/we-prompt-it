@@ -34,9 +34,7 @@
 		--s-4: 16px;
 		--s-5: 24px;
 		--s-6: 34px;
-		--s-8: 48px;
-		--s-9: 54px;
-		--s-10: 64px;
+		--s-7: 48px;
 
 		--fs-1: 0.8rem;
 		--fs-2: 1rem;
@@ -49,7 +47,7 @@
 
 	.content {
 		min-height: calc(100vh - 93px);
-		padding: 0 100px;
+		padding: var(--s-5) 100px;
 	}
 
 	.overlay-ref {
