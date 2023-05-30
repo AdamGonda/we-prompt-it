@@ -200,11 +200,6 @@
 		justify-content: center;
 	}
 
-	.bubble {
-		border-radius: var(--br-1);
-		padding: var(--s-3) var(--s-4);
-	}
-
 	.tags a {
 		font-size: var(--fs-1);
 		color: white;

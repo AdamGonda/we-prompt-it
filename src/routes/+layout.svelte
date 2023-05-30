@@ -43,6 +43,12 @@
 		--fs-5: 2.6rem;
 
 		--br-1: 20px;
+		--br-2: 30px;
+	}
+
+	:global(.bubble) {
+		border-radius: var(--br-1);
+		padding: var(--s-3) var(--s-4);
 	}
 
 	.content {
