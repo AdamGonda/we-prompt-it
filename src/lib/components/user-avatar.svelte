@@ -3,7 +3,7 @@
 	import routes from '$lib/routes';
 	import { signOut } from '@auth/sveltekit/client';
 
-	const user = $page.data.session?.user;
+	const user = $page.data.dbUser;
 	let showDropdown = false;
 
 	function handleSignout() {
@@ -18,7 +18,7 @@
 {#if user}
 	<div class="dropdown">
 		<button class="dropdown-trigger" on:click={toggleWhoDropdown}>
-			<img src={user.image} alt="" />
+			<img src={user.picture} alt="" />
 		</button>
 		
 		{#if showDropdown}
@@ -28,10 +28,6 @@
 			</ul>
 		{/if}
 	</div>
-{:else}
-	<a href={routes.login}>
-		<p><u>Login</u> - Signup</p>
-	</a>
 {/if}
 
 <style>

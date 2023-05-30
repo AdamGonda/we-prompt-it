@@ -2,7 +2,7 @@
 	import { page } from '$app/stores';
 	import routes from '$lib/routes';
 
-	const user = $page.data.session?.user;
+	const user = $page.data.dbUser;
 	const isOwner = user ? $page.data.prompt.author.email === user.email : false;
 	let likes = $page.data.prompt.likes.length;
 	let hartIconPrefix = getHartIconPrefix();

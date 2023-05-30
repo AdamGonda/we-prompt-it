@@ -13,12 +13,13 @@ export async function loadIndex(event) {
 
 export async function loadIndexLayout(event) {
 	const session = await event.locals.getSession();
+	let dbUser = null;
 	
 	if(session) {
-		session.user = await getDBUser(event)
+		dbUser = await getDBUser(event)
 	}
 
-	return { session };
+	return { session, dbUser };
 }
 
 export async function loadMyCollection(event) {

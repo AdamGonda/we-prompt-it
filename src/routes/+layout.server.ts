@@ -1,3 +1,3 @@
-import { loadIndex } from "$lib/controllers/loders"
+import { loadIndexLayout } from "$lib/controllers/loders"
 
-export const load = loadIndex
+export const load = loadIndexLayout
