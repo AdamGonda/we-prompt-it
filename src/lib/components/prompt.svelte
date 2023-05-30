@@ -22,7 +22,7 @@
 		}
 		let color = '#';
 		for (let i = 0; i < 3; i++) {
-			let value = (hash >> (i * 8)) & 0xff;
+			let value = (hash >> (i * 8)) & 0xaf; // change 0x7f to 0xaf
 			color += ('00' + value.toString(16)).substr(-2);
 		}
 		return color;
@@ -126,9 +126,10 @@
 		<div class="tags">
 			{#each $page.data.prompt.tags as tag (tag.id)}
 				<a
-				style={`background-color: ${stringToColor(tag.name)}`} 
-				href={`/explore?tag=${tag.name}`}>
-					{tag.name}
+					style={`background-color: ${stringToColor(tag.name)}`}
+					href={`/explore?tag=${tag.name}`}
+				>
+					#{tag.name}
 				</a>
 			{/each}
 		</div>

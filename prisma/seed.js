@@ -2,7 +2,7 @@ import { PrismaClient } from '@prisma/client';
 const prisma = new PrismaClient();
 
 const TAGS = [
-	'life_hacks',
+	'life-hacks',
 	'motivation',
 	'productivity',
 	'entertainment',
@@ -17,26 +17,26 @@ const TAGS = [
 	'gardening',
 	'cooking',
 	'relationships',
-	'personal_finance',
-	'career_advice',
+	'personal-finance',
+	'career-advice',
 	'entrepreneurship',
 	'technology',
 	'gaming',
-	'ai_for_beginners',
-	'science_facts',
+	'ai-for-beginners',
+	'science-facts',
 	'history',
-	'language_learning',
+	'language-learning',
 	'poetry',
-	'book_recommendations',
-	'movie_reviews',
+	'book-recommendations',
+	'movie-reviews',
 	'fashion',
 	'art',
 	'sports',
 	'sustainability',
 	'philosophy',
 	'parenting',
-	'pet_care',
-	'mental_health',
+	'pet-care',
+	'mental-health',
 	'meditation',
 	'yoga',
 	'astronomy',
@@ -46,67 +46,67 @@ const TAGS = [
 	'photography',
 	'coding',
 	'dance',
-	'virtual_reality',
-	'augmented_reality',
+	'virtual-reality',
+	'augmented-reality',
 	'startups',
 	'baking',
-	'gourmet_food',
-	'craft_beer',
-	'wine_tasting',
-	'home_decor',
-	'outdoor_activities',
+	'gourmet-food',
+	'craft-beer',
+	'wine-tasting',
+	'home-decor',
+	'outdoor-activities',
 	'camping',
 	'hiking',
 	'running',
 	'cycling',
 	'surfing',
-	'rock_climbing',
+	'rock-climbing',
 	'skiing',
 	'golfing',
-	'board_games',
-	'card_games',
-	'stand_up_comedy',
-	'magic_tricks',
-	'drone_flying',
-	'bird_watching',
-	'classic_literature',
-	'graphic_novels',
-	'indie_films',
-	'retro_gaming',
+	'board-games',
+	'card-games',
+	'stand-up-comedy',
+	'magic-tricks',
+	'drone-flying',
+	'bird-watching',
+	'classic-literature',
+	'graphic-novels',
+	'indie-films',
+	'retro-gaming',
 	'collecting',
-	'conspiracy_theories',
-	'true_crime',
+	'conspiracy-theories',
+	'true-crime',
 	'mythology',
-	'urban_legends',
+	'urban-legends',
 	'astrology',
 	'numerology',
-	'vintage_fashion',
-	'street_art',
+	'vintage-fashion',
+	'street-art',
 	'museums',
-	'world_cultures',
-	'language_exchanges',
-	'digital_nomad_life',
-	'tiny_houses',
-	'zero_waste_lifestyle',
+	'world-cultures',
+	'language-exchanges',
+	'digital-nomad-life',
+	'tiny-houses',
+	'zero-waste-lifestyle',
 	'veganism',
-	'plant_based_diets',
-	'animal_rescue',
-	'foster_parenting',
+	'plant-based-diets',
+	'animal-rescue',
+	'foster-parenting',
 	'homeschooling',
-	'online_learning',
-	'remote_work',
+	'online-learning',
+	'remote-work',
 	'freelancing',
 	'investing',
 	'cryptocurrency',
-	'sustainable_fashion',
-	'green_energy',
+	'sustainable-fashion',
+	'green-energy',
 	'mindfulness',
 	'gratitude',
-	'self_care',
-	'positive_psychology',
-	'emotional_intelligence',
+	'self-care',
+	'positive-psychology',
+	'emotional-intelligence',
 	'resilience',
-	'stress_management'
+	'stress-management'
 ];
 
 const AI_MODELS = [
@@ -131,199 +131,78 @@ const AI_MODELS = [
 const PROMPTS = [
 	{
 		name: 'Art Exhibition Review',
-		description: 'Critique a famous art exhibition.',
+		description:
+			'Critique a famous art exhibition. Analyze the presentation, curatorial decisions, artworks, and overall experience in depth.',
 		content:
-			"Imagine you're reviewing a renowned art exhibition like 'Van Gogh: The Immersive Experience'. Discuss the showcased artworks, themes, the curation, and the overall experience. Remember to provide both appreciation and constructive criticism, concluding with a recommendation."
+			"Imagine you're reviewing a renowned art exhibition like 'Van Gogh: The Immersive Experience'. Discuss the showcased artworks, delve into the themes portrayed, analyze the curation's effectiveness, and describe the overall visitor experience. Reflect on the exhibition's impact and significance. Provide both praise and constructive criticism, concluding with a recommendation for or against visiting."
 	},
 	{
 		name: 'Restaurant Review',
-		description: "Analyze a well-known restaurant's offerings.",
+		description:
+			"Provide an in-depth analysis of a well-known restaurant's offerings. Evaluate its cuisine, service, ambiance, and overall dining experience.",
 		content:
-			"Imagine you're critiquing a famous restaurant like 'Noma' in Copenhagen. Discuss the food quality, presentation, taste, service, ambiance, and value for money. Provide both praise and constructive feedback, ending with an overall rating or recommendation."
+			"Imagine you're critiquing a famous restaurant like 'Noma' in Copenhagen. Discuss the quality, taste, and presentation of the food. Analyze the level of service, the ambiance, the restaurant's decor, and its suitability for various dining occasions. Reflect on the price and whether it provides value for money. Provide both praise and constructive feedback, concluding with an overall rating or recommendation."
 	},
 	{
 		name: 'Travel Destination Critique',
-		description: 'Review a popular travel destination.',
+		description:
+			'Review a popular travel destination in depth. Discuss its attractions, local cuisine, culture, people, infrastructure, and overall experience.',
 		content:
-			"Assume you're reviewing a popular travel destination like 'Paris'. Talk about its attractions, local cuisine, culture, people, and the overall experience. Try to maintain a balanced view with both pros and cons, concluding with a recommendation for potential travelers."
+			"Assume you're reviewing a popular travel destination like 'Paris'. Talk about its famous attractions, local and unique cuisine, rich culture, and the experience of interacting with the locals. Explore the city's infrastructure, ease of travel, safety, and accommodations. Maintain a balanced view, providing both pros and cons. Conclude with a recommendation for potential travelers."
 	},
 	{
 		name: 'Play Review',
-		description: 'Critique a popular theatrical play.',
+		description:
+			'Critique a popular theatrical play. Evaluate the storyline, acting, direction, set design, music, costumes, and overall theatrical experience.',
 		content:
-			"Imagine you're reviewing a popular play like 'Hamlet' performed by a renowned theater group. Discuss the storyline, acting, direction, set design, and the overall theatrical experience. Give both praise and constructive criticism, concluding with an overall recommendation."
+			"Imagine you're reviewing a popular play like 'Hamlet' performed by a renowned theater group. Discuss the storyline's coherence, the performances of the actors, the director's vision, the effectiveness of the set design, the music, and the costumes. Reflect on the overall theatrical experience, the play's emotional impact, and its relevance in today's context. Provide both praise and constructive criticism, concluding with an overall recommendation."
 	},
 	{
 		name: 'Poem Analysis',
 		description:
-			"Your task is to conduct an in-depth analysis of a famous poem. This will involve unpacking its central themes, investigating the use of various literary devices, and scrutinizing the specific language choices made by the author. You will also be expected to delve into the cultural or personal impact of the poem, providing an appreciation of its influence. Your analysis should be balanced, including both praise for the poem's strengths and constructive.",
+			'Conduct a deep analysis of a famous poem. Unpack its themes, investigate literary devices, scrutinize the language, and evaluate its cultural impact.',
 		content:
-			"You're studying 'The Road Not Taken' by Robert Frost. Discuss its key themes, like choice, regret and individualism. Examine its literary devices - such as metaphor, rhyme, and rhythm. Reflect on the language used, its cultural or personal significance. Offer praise for its vivid imagery and universal themes, and critique, perhaps, its potential for misinterpretation. Finally, give an overall interpretation or recommendation based on your analysis  criticism of any perceived weaknesses. Finally, your work should culminate in a coherent and considered overall interpretation or recommendation. This exercise will enhance your understanding of poetry and sharpen your analytical skills."
+			"You're studying 'The Road Not Taken' by Robert Frost. Analyze its key themes such as choice, regret and individualism. Examine its use of literary devices like metaphor, rhyme, and rhythm. Reflect on the specific language and its cultural or personal significance. Offer praise for its vivid imagery and universal themes, and critique its potential for misinterpretation. Provide a comprehensive interpretation based on your analysis. Conclude with an overall appraisal and personal view of the poem."
 	},
 	{
 		name: 'Podcast Review',
-		description: 'Review a popular podcast.',
+		description:
+			'Provide a thorough review of a popular podcast. Discuss its content, storytelling technique, audio quality, host dynamics, and overall impact.',
 		content:
-			"Assume you're reviewing a popular podcast like 'Serial'. Discuss its content, storytelling, audio quality, host's abilities, and overall impact. Remember to provide both appreciation and constructive feedback, concluding with a recommendation."
-	},
-	{
-		name: 'Game Reviewzza',
-		description: 'Analyze a popular video game.',
-		content:
-			"Imagine you're critiquing a popular video game like 'The Legend of Zelda: Breath of the Wild'. Discuss its gameplay, graphics, story, characters, and overall gaming experience. Offer both praise and constructive criticism, ending with an overall rating or recommendation."
-	},
-	{
-		name: 'Fashion Show Review',
-		description: 'Review a major fashion show.',
-		content:
-			"Assume you're reviewing a major fashion show like 'Paris Fashion Week'. Discuss the designs, themes, models, presentation, and overall impact. Remember to provide both positive feedback and constructive criticism, concluding with an overall opinion."
-	},
-	{
-		name: 'Tech Product Review',
-		description: 'Critique a new tech gadget.',
-		content:
-			"Imagine you're reviewing a new tech product like the 'Apple iPhone 13'. Discuss its features, performance, design, value for money, and overall user experience. Offer both appreciation and constructive feedback, ending with a recommendation."
-	},
-	{
-		name: 'Art Appreciation',
-		description: 'Analyze a famous painting and discuss its influence.',
-		content: `Take a well-known painting — for instance, Vincent Van Gogh's "Starry Night" — and provide a thorough analysis of its composition, color, texture, and symbolism. Discuss its historical context and how its major themes and techniques influenced subsequent artists and movements.`
-	},
-	{
-		name: 'Coding Challenge',
-		description: 'Solve a coding problem using JavaScript.',
-		content: `Consider a coding problem such as reversing a string in JavaScript. Provide a step-by-step solution, explaining your thought process, code implementation, and any potential edge cases or optimizations that can be considered.`
-	},
-	{
-		name: 'Fitness Routine',
-		description: 'Propose a weekly fitness routine for beginners.',
-		content: `Create a weekly fitness routine suitable for beginners. This could include a mix of cardio, strength training, flexibility exercises, and rest days. Ensure to give instructions for each exercise and advice on how to stay safe and avoid injury.`
-	},
-	{
-		name: 'Space Exploration',
-		description: 'Discuss the future of space exploration.',
-		content: `Share your insights on the future of space exploration. This could include advancements in rocket technology, the prospect of colonizing Mars, the search for extraterrestrial life, the potential for mining asteroids, or any other fascinating predictions or theories.`
-	},
-	{
-		name: 'Film Critique',
-		description: 'Provide a critique of a classic movie.',
-		content: `Imagine you're reviewing a classic movie, such as "The Godfather". Discuss its plot, characters, acting, directing, cinematography, theme, and cultural impact. Try to balance praise with constructive criticism, and give an overall score or recommendation at the end.`
-	},
-	{
-		name: 'Sustainable Living',
-		description: 'Offer tips on how to lead a more sustainable lifestyle.',
-		content: `Provide a list of practical tips and habits for leading a more sustainable lifestyle. This could include recommendations for reducing waste, conserving energy, using eco-friendly products, sustainable eating, and other environmentally conscious practices.`
-	},
-	{
-		name: 'Creative Writing',
-		description: 'Provide a guide on how to improve creative writing skills.',
-		content: `Give a comprehensive guide on how to enhance creative writing skills. This could include advice on developing characters, setting, plot, dialogue, and themes, as well as tips on grammar, punctuation, and style. Include exercises or prompts that can help hone these skills.`
-	},
-	{
-		name: 'Career Advice',
-		description: 'Share career advice for software engineers.',
-		content: `Provide career advice specifically tailored to software engineers. This could include tips on improving coding skills, staying updated with new technologies, working on personal projects, networking, preparing for interviews, and progressing in their career path.`
-	},
-	{
-		name: 'Personal Finance',
-		description: 'Provide a guide on personal finance management.',
-		content: `Create a comprehensive guide on managing personal finances effectively. This could include tips on budgeting, saving, investing, managing debt, planning for retirement, and understanding taxes. Provide resources for further reading and learning.`
-	},
-	{
-		name: 'Photography Basics',
-		description: 'Discuss the basics of good photography.',
-		content: `Explain the basic principles of good photography. This could include the rule of thirds, framing, use of light, color, texture, perspective, and composition. Discuss different types of photography and provide tips suitable for beginners.`
-	},
-	{
-		name: 'Healthy Recipes',
-		description: 'Provide a list of healthy recipes for breakfast, lunch, and dinner.',
-		content: `Create a comprehensive list of healthy recipes that span all major meals of the day: breakfast, lunch, and dinner. Ensure the recipes cater to a variety of dietary preferences and restrictions, such as vegetarian, vegan, gluten-free, and dairy-free options.`
-	},
-	{
-		name: 'Self-Care Tips',
-		description: 'Offer self-care tips to help people relax and destress.',
-		content: `Share a list of self-care tips that can help individuals relax and manage stress in their day-to-day life. This could include recommendations for relaxation techniques, mental health practices, physical activities, and any other advice that can contribute to a healthier, more balanced lifestyle.`
-	},
-	{
-		name: 'Poetry Appreciation',
-		description: 'Analyze a famous poem and discuss its major themes.',
-		content: `Take a well-known poem — for instance, Robert Frost's "The Road Not Taken" — and provide a thorough analysis of its themes, imagery, and structure. Discuss its historical context and how its major themes resonate with readers today.`
-	},
-	{
-		name: 'Math Problem',
-		description: 'Explain how to solve a complex math problem.',
-		content: `Consider a complex mathematical problem such as solving a system of linear equations. Explain the steps to solve this problem in a clear and concise manner that can be easily understood by a high school student. Include an example problem and walk through its solution step by step.`
-	},
-	{
-		name: 'Scientific Facts',
-		description: 'Share some interesting scientific facts about the universe.',
-		content: `Provide a list of intriguing scientific facts about the universe. This could include information about the cosmos, black holes, galaxies, stars, planets, astrophysics, or any other relevant topic that could capture the interest of science enthusiasts.`
-	},
-	{
-		name: 'Photography Techniques',
-		description: 'Discuss some advanced techniques for photography.',
-		content: `Describe some advanced photography techniques that can help photographers improve their skills and capture better photos. This could include advice on composition, lighting, focus, depth of field, post-processing, and any other pertinent topics.`
-	},
-	{
-		name: 'Meditation Guide',
-		description: 'Provide a guide on how to meditate for beginners.',
-		content: `Create a beginner-friendly guide on how to meditate. This should include instructions on proper posture, focus, breathing techniques, duration, and frequency of meditation sessions. Also provide tips on overcoming common challenges faced by beginners when they start meditating.`
-	},
-	{
-		name: 'Plant Care',
-		description: 'Share tips on how to take care of indoor plants.',
-		content: `Give a detailed guide on how to care for indoor plants. Discuss different types of indoor plants, their light and water requirements, common issues such as pests or yellowing leaves, and tips for promoting growth and maintaining plant health.`
-	},
-	{
-		name: 'Learning a New Language',
-		description: 'Offer tips and resources for learning a new language.',
-		content: `Provide a comprehensive guide to learning a new language, including effective study methods, resources like books and apps, tips for practicing speaking and listening skills, and advice on how to stay motivated throughout the learning process.`
+			"Assume you're reviewing a popular podcast like 'Serial'. Analyze its content, the effectiveness of its storytelling, the audio quality, and the host's presentation skills. Reflect on the podcast's structure, pacing, and overall impact on the listener. Remember to provide both appreciation for the podcast's strengths and constructive feedback on areas for improvement, concluding with a recommendation for potential listeners."
 	},
 	{
 		name: 'Game Review',
-		description: 'Write a review for a popular video game.',
-		content: `Imagine you're reviewing a popular video game, such as The Legend of Zelda: Breath of the Wild. Discuss its gameplay, graphics, storyline, characters, difficulty, replayability, and overall enjoyment. Try to balance praise with constructive criticism, and give an overall score or recommendation at the end.`
-	},
-	{
-		name: 'Conversation with Shakespeare',
 		description:
-			'Imagine having a conversation with William Shakespeare. What would it be like?',
-		content: `If you, an artificial intelligence, found yourself in a hypothetical conversation with the great playwright William Shakespeare, how would you approach his famous existential query, 'To be or not to be, that is the question'? Consider Shakespeare's thematic exploration of human nature, existentialism, and the concept of mortality as you formulate your response.`
+			'Provide a detailed critique of a popular video game. Evaluate its gameplay, graphics, storyline, characters, soundtrack, and overall gaming experience.',
+		content:
+			"Imagine you're critiquing a popular video game like 'The Legend of Zelda: Breath of the Wild'. Discuss its gameplay mechanics, graphics quality, the depth of its story, character development, and the immersive qualities of its soundtrack. Reflect on the overall gaming experience, the game's replayability, and its innovation within the gaming industry. Offer both praise and constructive criticism, ending with an overall rating or recommendation."
 	},
 	{
-		name: 'Cooking Tips',
-		description: 'Share your favorite cooking tips and tricks.',
-		content: `In the realm of culinary arts, the homemade pizza has always been a popular pursuit. Given your vast database of cooking knowledge, could you provide a comprehensive guide to making a homemade pizza for a novice? This should include dough preparation, sauce selection, topping choices, oven temperature tips, and any additional pointers that might contribute to the overall quality of the final product.`
+		name: 'Fashion Show Review',
+		description:
+			'Provide a thorough review of a major fashion show. Discuss the designs, themes, models, presentation, music, audience reaction, and overall impact.',
+		content:
+			"Assume you're reviewing a major fashion show like 'Paris Fashion Week'. Discuss the uniqueness and innovation of the designs, the thematic coherence, the models' presentation, the effectiveness of the staging, the soundtrack's suitability, and the overall impact on the audience. Provide both positive feedback and constructive criticism, concluding with an overall opinion on the show's success and influence in the fashion world."
 	},
 	{
-		name: 'Fitness Challenge',
-		description: 'Create a 30-day fitness challenge for beginners.',
-		content: `Craft an introductory fitness regimen aimed at individuals who are new to regular exercise. The program should span 30 days and gradually increase in intensity as the participant grows more comfortable with the exercises. The aim is to promote overall health, so the regimen should be well-rounded, targeting strength, endurance, flexibility, and balance. Remember to consider the fact that these individuals may not have access to gym equipment.`
+		name: 'Tech Product Review',
+		description:
+			'Provide an in-depth critique of a new tech gadget. Discuss its features, performance, design, value for money, and the overall user experience.',
+		content:
+			"Imagine you're reviewing a new tech product like the 'Apple iPhone 13'. Discuss its innovative features, performance in real-world use, the aesthetic and ergonomic aspects of its design, its price point, and whether it offers value for money. Reflect on the overall user experience, including the device's software, durability, and customer support. Offer both appreciation for its strengths and constructive feedback for improvement, ending with a recommendation."
 	},
 	{
-		name: 'Travel Recommendations',
-		description: 'Give travel recommendations for a weekend trip to Paris.',
-		content: `The city of Paris is renowned for its rich history, exquisite cuisine, and stunning architecture. If someone is planning a brief weekend trip, help them make the most of their time by suggesting an itinerary. This should cover historical sites, museums, restaurants, cafes, and local markets that truly capture the essence of the city. Consider factors like location proximity and opening hours while crafting the schedule.`
+		name: 'Art Appreciation',
+		description:
+			'Analyze a famous painting in depth. Discuss its composition, symbolism, historical context, influence, and its place in art history.',
+		content: `Consider a well-known painting — for instance, Vincent Van Gogh's "Starry Night". Provide a thorough analysis of its composition, color palette, texture, and symbolism. Discuss its historical context, the artist's intentions, and how its major themes and techniques influenced subsequent artists and art movements. Reflect on its impact on you personally and its enduring popularity in modern culture.`
 	},
 	{
-		name: 'Learning to Code',
-		description: 'Advice on learning how to code for beginners.',
-		content: `As an advanced artificial intelligence with a wealth of knowledge on computer programming, provide a comprehensive guide to coding for beginners. This should cover the selection of a suitable first programming language, valuable learning resources (like books, online tutorials, and coding platforms), practical projects to apply newly acquired skills, and strategies for overcoming common obstacles faced by novice programmers.`
-	},
-	{
-		name: 'Discussing Philosophy',
-		description: 'Engage in a philosophical discussion about the meaning of life.',
-		content: `If you, as an AI, were asked to contribute to a philosophical discussion on the meaning of life, how would you approach this question? Consider various philosophical theories and perspectives on the meaning of life in your response.`
-	},
-	{
-		name: 'Financial Advice',
-		description: 'Give advice on how to manage finances effectively.',
-		content: `As an AI, you've processed tons of financial advice. If a young adult is looking to manage their finances effectively, what are some key steps they should take? This advice could include budgeting, saving, investing, and managing debt.`
-	},
-	{
-		name: 'Book Recommendations',
-		description: 'Recommend a list of must-read books for fiction lovers.',
-		content: `Based on your extensive knowledge of literature, could you recommend a list of must-read fiction books? Try to include a mix of classic and contemporary works, spanning various genres and styles.`
+		name: 'Coding Challenge',
+		description:
+			'Solve a coding problem using JavaScript. Explain your thought process, code implementation, considerations for edge cases, and potential optimizations.',
+		content: `Consider a coding problem such as reversing a string in JavaScript. Provide a step-by-step solution, explaining your thought process as you break down the problem, your approach to coding the solution, and any considerations for edge cases or errors. Reflect on the efficiency of the solution and discuss potential optimizations or alternative solutions.`
 	}
 ];
 
@@ -716,7 +595,7 @@ async function main() {
 		// Randomly select an AI model, an author, and some tags
 		const aiModel = getRandomElement(aiModels);
 		const author = getRandomElement(users);
-		const selectedTags = getRandomSubset(tags, 0, 3);
+		const selectedTags = getRandomSubset(tags, 1, 5);
 
 		// Randomly select some users to like the prompt
 		const likers = getRandomSubset(users, 1, users.length);
