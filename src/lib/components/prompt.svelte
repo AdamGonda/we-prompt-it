@@ -15,6 +15,19 @@
 	$: appreciationText = likes;
 	let showCopyFeedback = false;
 
+	function stringToColor(str) {
+		let hash = 0;
+		for (let i = 0; i < str.length; i++) {
+			hash = str.charCodeAt(i) + ((hash << 5) - hash);
+		}
+		let color = '#';
+		for (let i = 0; i < 3; i++) {
+			let value = (hash >> (i * 8)) & 0xff;
+			color += ('00' + value.toString(16)).substr(-2);
+		}
+		return color;
+	}
+
 	async function handleAddRemoveLike() {
 		const r = await fetch(`/api/add-remove-like?id=${$page.data.prompt.id}`, {
 			method: 'POST'
@@ -58,8 +71,6 @@
 			</a>
 
 			<div class="actions">
-				
-
 				<button on:click={handleAddRemoveLike}>
 					<img style="width: 16px" src={`/${hartIconPrefix}-icon.png`} alt="hart-icon" />
 					{appreciationText}
@@ -81,7 +92,6 @@
 				<a href={routes.edit($page.params.slug)}>Edit</a>
 			{/if}
 		</div>
-		
 
 		<div class="infos">
 			<a class="model" target="_blank" href={$page.data.prompt.aiModel.link}>
@@ -115,12 +125,13 @@
 
 		<div class="tags">
 			{#each $page.data.prompt.tags as tag (tag.id)}
-			<a href={`/explore?tag=${tag.name}`}>
-				{tag.name}
-			</a>
+				<a
+				style={`background-color: ${stringToColor(tag.name)}`} 
+				href={`/explore?tag=${tag.name}`}>
+					{tag.name}
+				</a>
 			{/each}
 		</div>
-		
 	</div>
 
 	<div style="display: flex; justify-content: center">
@@ -139,14 +150,11 @@
 </main>
 
 <style>
-
-
 	.actions {
 		display: flex;
 		gap: 16px;
 		align-items: center;
 	}
-
 
 	h2 {
 		margin: 0;
@@ -163,7 +171,6 @@
 	}
 
 	.body {
-		
 		max-width: 800px;
 	}
 
@@ -184,12 +191,12 @@
 	.tags a {
 		padding: 5px 8px;
 		border-radius: 20px;
-		border: 2px solid #313131;
+		/* border: 2px solid #313131; */
 		padding: 10px 16px;
 
 		/* background: #313131; */
 		font-size: 1rem;
-		color: #313131;
+		color: white;
 		font-weight: 500;
 	}
 
