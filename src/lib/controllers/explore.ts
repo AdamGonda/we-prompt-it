@@ -1,6 +1,6 @@
 import { PrismaClient } from '@prisma/client';
 import { json } from '@sveltejs/kit';
-import { getAllAIModels, getAllTags } from './shared';
+import globalIncludes from '$lib/global-includes';
 
 const prisma = new PrismaClient();
 
@@ -35,12 +35,7 @@ export async function _search(event) {
 				}
 			]
 		},
-		include: {
-			tags: { where: { isDeleted: false } },
-			likes: { where: { isDeleted: false } },
-			aiModel: true,
-			author: true
-		},
+		...globalIncludes
 	};
 
 	_handleSearchBar(query, event);
