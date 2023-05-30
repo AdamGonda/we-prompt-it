@@ -195,7 +195,7 @@
 		padding: 10px 16px;
 
 		/* background: #313131; */
-		font-size: 1rem;
+		font-size: 0.8rem;
 		color: white;
 		font-weight: 500;
 	}
@@ -249,7 +249,7 @@
 		justify-content: center;
 		align-items: center;
 		gap: 24px;
-		margin-bottom: 30px;
+		margin-bottom: 24px;
 	}
 
 	.forked img {
