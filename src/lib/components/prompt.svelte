@@ -167,14 +167,15 @@
 		align-items: center;
 	}
 
+	h1 {
+		font-size: 2.6rem;
+	}
+
 	h2 {
 		margin: 0;
 		margin-top: 48px;
 		margin-bottom: 4px;
-	}
-
-	.description {
-		font-size: 1.1rem;
+		font-size: 1.6rem;
 	}
 
 	.model {
@@ -187,7 +188,7 @@
 
 	.body p {
 		font-family: source-serif-pro, Georgia, Cambria, 'Times New Roman', Times, serif;
-		font-size: 1.2rem;
+		font-size: 1.3rem;
 		line-height: 32px;
 	}
 

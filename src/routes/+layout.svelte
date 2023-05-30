@@ -36,7 +36,6 @@
 
 	.overlay-ref {
 		position: relative;
-		/* padding-top: 24px; */
 	}
 
 	.overlay {
