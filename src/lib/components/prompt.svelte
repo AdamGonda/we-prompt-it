@@ -183,10 +183,14 @@
 
 	.tags a {
 		padding: 5px 8px;
-		border-radius: 7px;
-		border: 1px solid #313131;
-		font-size: 0.7rem;
-		
+		border-radius: 20px;
+		border: 2px solid #313131;
+		padding: 10px 16px;
+
+		/* background: #313131; */
+		font-size: 1rem;
+		color: #313131;
+		font-weight: 500;
 	}
 
 	.name {
