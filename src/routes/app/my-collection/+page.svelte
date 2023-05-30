@@ -1,10 +1,8 @@
 <script>
 	import { page } from '$app/stores';
 	import CardList from '$lib/components/card-list.svelte';
-	import Card from '$lib/components/card.svelte';
 
 	const myCollection = $page.data;
-	// console.log('log myCollection', myCollection)
 </script>
 
 <main>

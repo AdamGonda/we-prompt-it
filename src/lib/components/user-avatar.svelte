@@ -2,22 +2,30 @@
 	import { page } from '$app/stores';
 	import routes from '$lib/routes';
 	import { signOut } from '@auth/sveltekit/client';
+	import { onMount } from 'svelte';
 
 	const user = $page.data.dbUser;
 	let showDropdown = false;
+
+	onMount(() => {
+		window.addEventListener('click', e => {
+			if (e.target.closest('.dropdown')) return;
+			showDropdown = false;
+		})
+	})
 
 	function handleSignout() {
 		signOut();
 	}
 
-	function toggleWhoDropdown() {
+	function toggleShowDropdown() {
 		showDropdown = !showDropdown;
 	}
 </script>
 
 {#if user}
 	<div class="dropdown">
-		<button class="dropdown-trigger" on:click={toggleWhoDropdown}>
+		<button class="dropdown-trigger" on:click={toggleShowDropdown}>
 			<img src={user.picture} alt="" />
 		</button>
 		
