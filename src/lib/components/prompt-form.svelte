@@ -110,6 +110,12 @@
 			showAddNewModel = false;
 		}
 	}
+
+	function handleHeight(event) {
+    const input = event.target;
+    input.style.height = 'auto';
+    input.style.height = `${input.scrollHeight}px`;
+  }
 </script>
 
 <form
@@ -140,11 +146,11 @@
 	<div class="description field-wrap">
 		<textarea
 			name="description"
-			rows="4"
-			cols="50"
+			rows="1"
 			placeholder={data.placeholder?.description}
 			on:blur={handleFieldChange}
 			on:input={handleFieldChange}
+			on:input={handleHeight}
 			value={_.get(data, 'prefill.description', '')}
 		/>
 		<span class="error">{isTouched.description && errors.description ? errors.description : ''}</span>
@@ -221,7 +227,7 @@
 
 <style>
 	form {
-		margin-top: 40px;
+		margin-top: 42px;
 		display: flex;
 		flex-direction: column;
 		align-items: center;
@@ -243,13 +249,18 @@
 		border-bottom: 2px solid rgb(174, 174, 174);
 	}
 
-	.name input:focus {
+	input:focus, textarea:focus {
 		outline: none;
 	}
 
 	.description textarea {
+		font-family: source-serif-pro, Georgia, Cambria, 'Times New Roman', Times, serif;
 		border: none;
 		border-bottom: 2px solid rgb(174, 174, 174);
+		font-size: var(--fs-3);
+		line-height: var(--s-6);
+		min-width: 505px;
+		text-align: center;
 		resize: none;
 	}
 
