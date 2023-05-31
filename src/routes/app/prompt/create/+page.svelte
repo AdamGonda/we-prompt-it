@@ -8,7 +8,6 @@
 	}
 </script>
 
-Create
 <PromptForm
 	{onSuccess}
 	action="?/create"

@@ -35,8 +35,8 @@
 	}
 
 	async function handleAddRemoveLike() {
-		if(!user) {
-			goto('/login')
+		if (!user) {
+			goto('/login');
 		}
 
 		const r = await fetch(`/api/add-remove-like?id=${$page.data.prompt.id}`, {
@@ -82,24 +82,23 @@
 
 			<div class="actions">
 				<button class="bubble" on:click={handleAddRemoveLike}>
-					<img style="width: 16px" src={`/${hartIconPrefix}-icon.png`} alt="hart-icon" />
+					<img class="icon" src={`/${hartIconPrefix}-icon.png`} alt="hart-icon" />
 					{appreciationText}
 				</button>
 
 				<a href={forkLink}>
 					<span class="forked bubble">
-						<img src="/fork-icon.png" alt="fork-icon" />
+						<img class="icon" src="/fork-icon.png" alt="fork-icon" />
 						{$page.data.prompt.forkedCount}
 					</span>
 				</a>
 			</div>
 		</div>
+
 		<div class="name">
-			<h1>
-				{$page.data.prompt.name}
-			</h1>
+			<h1>{$page.data.prompt.name}</h1>
 			{#if isOwner}
-				<a href={routes.edit($page.params.slug)}>Edit</a>
+				<a class="edit-link" href={routes.edit($page.params.slug)}>Edit</a>
 			{/if}
 		</div>
 
@@ -110,24 +109,15 @@
 
 			<button class="copy-btn bubble" on:click={copyToClipboard}>
 				{#if showCopyFeedback}
-					<img width="10px" src="/tick.png" alt="tick-icon" />
+					<img class="tick-icon" src="/tick.png" alt="tick-icon" />
 					Copied!
 				{:else}
-					<svg
-						stroke="currentColor"
-						fill="none"
-						stroke-width="2"
-						viewBox="0 0 24 24"
-						stroke-linecap="round"
-						stroke-linejoin="round"
-						class="h-4 w-4"
-						height="1.2em"
-						width="1.2em"
-						xmlns="http://www.w3.org/2000/svg"
-						><path
+					<svg class="copy-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+						<path
 							d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"
-						/><rect x="8" y="2" width="8" height="4" rx="1" ry="1" /></svg
-					>
+						/>
+						<rect x="8" y="2" width="8" height="4" rx="1" ry="1" />
+					</svg>
 					Copy prompt
 				{/if}
 			</button>
@@ -146,18 +136,12 @@
 		</div>
 	</div>
 
-	<div style="display: flex; justify-content: center">
-		<div class="body">
-			<h2>Description</h2>
-			<p class="description">
-				{$page.data.prompt.description}
-			</p>
+	<div class="body">
+		<h2>Description</h2>
+		<p class="description">{$page.data.prompt.description}</p>
 
-			<h2>Prompt</h2>
-			<p class="prompt">
-				{$page.data.prompt.content}
-			</p>
-		</div>
+		<h2>Prompt</h2>
+		<p class="prompt">{$page.data.prompt.content}</p>
 	</div>
 </main>
 
@@ -184,10 +168,13 @@
 	}
 
 	.body {
-		max-width: 800px; /* TODO */
+		max-width: 800px;
+		margin: 0 auto;
+		padding: var(--s-4);
 	}
 
-	.body p {
+	.description,
+	.prompt {
 		font-family: source-serif-pro, Georgia, Cambria, 'Times New Roman', Times, serif;
 		font-size: var(--fs-3);
 		line-height: var(--s-6);
@@ -293,5 +280,29 @@
 
 	button:active {
 		background-color: #a0a0a0;
+	}
+
+	.icon {
+		width: 16px;
+	}
+
+	.copy-icon {
+		stroke: currentColor;
+		fill: none;
+		stroke-width: 2;
+		stroke-linecap: round;
+		stroke-linejoin: round;
+		width: 1.2em;
+		height: 1.2em;
+	}
+
+	.tick-icon {
+		width: 10px;
+	}
+
+	.copy-btn {
+		display: flex;
+		align-items: center;
+		gap: var(--s-2);
 	}
 </style>
