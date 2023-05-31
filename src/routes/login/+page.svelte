@@ -20,7 +20,7 @@
 <div class="wrap">
 	
 		<h1>Welcome back, Idea Weaver!</h1>
-		<h3>Time to explore, craft, and share AI prompts!</h3>
+		<h3>Time to explore, craft, and share those prompts!</h3>
 		<button class="bubble" on:click={() => signIn('google')}
 			>
 			<img src="/google-logo.png" alt="Google Logo" />
@@ -43,6 +43,7 @@
 	}
 
 	h3 {
+		font-size: var(--fs-2);
 		margin-bottom: var(--s-6);
 	}
 
@@ -50,6 +51,8 @@
 		display: flex;
 		align-items: center;
 		flex-direction: column;
+		height: 100vh;
+		padding-top: var(--s-7);
 	}
 
 	button {
