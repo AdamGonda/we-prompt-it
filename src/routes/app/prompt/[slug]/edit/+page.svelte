@@ -141,7 +141,7 @@
 	.danger-zone p {
 		margin: 0;
 		margin-top: var(--s-7);
-		margin-bottom: var(--s-3);
+		margin-bottom: var(--s-4);
 		font-size: var(--fs-4);
 		font-weight: 500;
 	}
