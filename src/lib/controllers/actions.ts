@@ -1,4 +1,4 @@
-import { getOrCreateAiModel, getDBUser, getTagIds } from '$lib/controllers/shared';
+import { getOrCreateAiModel, getDBUser, getOrCreateTags } from '$lib/controllers/shared';
 import { getPromptBySlug } from '$lib/controllers/shared';
 import type { RequestEvent } from '@sveltejs/kit';
 
@@ -12,14 +12,14 @@ export async function createPrompt(event: RequestEvent) {
 	const user = await getDBUser(event);
 	const data = await validateForm(event);
 	const aiModelId = await getOrCreateAiModel(data);
-	const incomingTagIds = await getTagIds(data);
+	const tagIds = await getOrCreateTags(data);
 
 	return await prisma.prompt.create({
 		data: {
 			description: data.description,
 			tags: {
-				connect: incomingTagIds
-					? incomingTagIds.map((tagId) => ({ id: tagId }))
+				connect: tagIds
+					? tagIds.map((tagId) => ({ id: tagId }))
 					: undefined
 			},
 			name: data.name,
@@ -44,7 +44,7 @@ export async function editPrompt(event: RequestEvent) {
 	const user = await getDBUser(event);
 	const data = await validateForm(event);
 	const aiModelId = await getOrCreateAiModel(data);
-	const incomingTagIds = await getTagIds(data);
+	const tagIds = await getOrCreateTags(data);
 
 	const promptToEdit = await prisma.prompt.findFirst({
 		where: { slug, isDeleted: false },
@@ -64,7 +64,7 @@ export async function editPrompt(event: RequestEvent) {
 	const updateSlug = promptToEdit.name !== data.name;
 	const tagIdsToRemove = promptToEdit.tags
 		.map((tag) => tag.id)
-		.filter((tagId) => !incomingTagIds?.includes(tagId));
+		.filter((tagId) => !tagIds?.includes(tagId));
 
 	return await prisma.prompt.update({
 		where: { slug },
@@ -73,8 +73,8 @@ export async function editPrompt(event: RequestEvent) {
 			slug: updateSlug ? convertToSlug(user.username, data.name) : promptToEdit.slug,
 			description: data.description,
 			tags: {
-				connect: incomingTagIds
-					? incomingTagIds.map((tagId) => ({ id: tagId }))
+				connect: tagIds
+					? tagIds.map((tagId) => ({ id: tagId }))
 					: undefined,
 				disconnect: tagIdsToRemove
 					? tagIdsToRemove.map((tagId) => ({ id: tagId }))
@@ -91,7 +91,7 @@ export async function forkPrompt(event: RequestEvent) {
 	const slug = event.params.slug;
 	const data = await validateForm(event);
 	const aiModelId = await getOrCreateAiModel(data);
-	const incomingTagIds = await getTagIds(data);
+	const tagIds = await getOrCreateTags(data);
 
 	await prisma.prompt.update({
 		where: {
@@ -126,8 +126,8 @@ export async function forkPrompt(event: RequestEvent) {
 				}
 			},
 			tags: {
-				connect: incomingTagIds
-					? incomingTagIds.map((tagId) => ({ id: tagId }))
+				connect: tagIds
+					? tagIds.map((tagId) => ({ id: tagId }))
 					: undefined
 			}
 		}

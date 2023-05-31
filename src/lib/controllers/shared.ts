@@ -86,7 +86,7 @@ export async function getOrCreateAiModel(data) {
 	return newModel.id;
 }
 
-export async function getTagIds(data) {
+export async function getOrCreateTags(data) {
 	if (data.tags == '') {
 		return;
 	}
