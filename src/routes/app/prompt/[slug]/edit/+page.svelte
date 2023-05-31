@@ -21,6 +21,12 @@
 	function onEditSuccess(data) {
 		goto(`/app/prompt/${data.slug}`);
 	}
+
+	function handleBackdropClose(event) {
+		if (event.target.close) {
+			event.target.close();
+		}
+	}
 </script>
 
 <PromptForm
@@ -47,11 +53,19 @@
 	}}
 >
 	<div class="slot">
-		<button style="font-size: var(--fs-1); text-decoration: underline" type="button" on:click={() => confirmDiscardDialog.showModal()}>
+		<button
+			style="font-size: var(--fs-1); text-decoration: underline"
+			type="button"
+			on:click={() => confirmDiscardDialog.showModal()}
+		>
 			discard changes
 		</button>
-		<button style="background: lightgreen;" class="bubble" type="button" {disabled} on:click={() => confirmEditDialog.showModal()}
-			>Apply changes</button
+		<button
+			style="background: lightgreen;"
+			class="bubble"
+			type="button"
+			{disabled}
+			on:click={() => confirmEditDialog.showModal()}>Apply changes</button
 		>
 	</div>
 </PromptForm>
@@ -66,7 +80,8 @@
 	>
 </div>
 
-<dialog bind:this={confirmEditDialog}>
+<!-- svelte-ignore a11y-click-events-have-key-events -->
+<dialog bind:this={confirmEditDialog} on:click={handleBackdropClose}>
 	<form method="POST" action="?/delete" use:enhance={onDelete}>
 		<p>Are you sure you want to proceed?</p>
 		<div>
@@ -82,7 +97,8 @@
 	</form>
 </dialog>
 
-<dialog bind:this={confirmDiscardDialog}>
+<!-- svelte-ignore a11y-click-events-have-key-events -->
+<dialog bind:this={confirmDiscardDialog} on:click={handleBackdropClose}>
 	<form method="POST" action="?/delete" use:enhance={onDelete}>
 		<p>Are you sure you want to proceed?</p>
 		<div>
@@ -98,7 +114,8 @@
 	</form>
 </dialog>
 
-<dialog bind:this={confirmDeleteDialog}>
+<!-- svelte-ignore a11y-click-events-have-key-events -->
+<dialog bind:this={confirmDeleteDialog} on:click={handleBackdropClose}>
 	<form method="POST" action="?/delete" use:enhance={onDelete}>
 		<p>Are you sure you want to proceed?</p>
 		<div>
@@ -121,19 +138,19 @@
 		background: red;
 		border: none;
 	}
-	.danger-zone p{
+	.danger-zone p {
 		margin: 0;
 		margin-top: var(--s-7);
 		margin-bottom: var(--s-3);
 		font-size: var(--fs-4);
 		font-weight: 500;
-	 }
+	}
 
 	dialog {
 		background: white;
 		border: none;
 		border-radius: var(--br-1);
-		padding: var(--s-6);
+		padding: 0;
 	}
 
 	dialog::backdrop {
@@ -146,6 +163,7 @@
 		flex-direction: column;
 		gap: var(--s-4);
 		align-items: end;
+		padding: var(--s-5);
 	}
 
 	dialog p {
