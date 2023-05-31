@@ -37,8 +37,8 @@
 		},
 		placeholder: {
 			name: 'Give it a name',
-			description: 'Description',
-			content: 'Content'
+			description: 'Describe your prompt in a few sentences',
+			content: 'Here comes your magic prompt'
 		},
 		selectedModelId: $page.data.prompt.aiModelId,
 		allModels: $page.data.aiModels
