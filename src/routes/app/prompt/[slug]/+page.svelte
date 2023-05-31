@@ -1,25 +1,6 @@
 <script>
-	import { page } from '$app/stores';
+	import Prompt from "$lib/components/prompt.svelte";
 
-	const data = {
-		name: $page.data.prompt.name,
-		description: $page.data.prompt.description,
-		content: $page.data.prompt.content,
-	}
 </script>
 
-<main>
-	<div>
-		<h2>{data.content}</h2>
-	</div>
-	<div>
-		<h2>About</h2>
-		<p>{data.description}</p>
-	</div>
-</main>
-
-<style>
-main {
-	display: flex;
-}
-</style>
+<Prompt />

@@ -1,86 +1,111 @@
 <script>
-	import { browser } from '$app/environment';
 	import { page } from '$app/stores';
+	import routes from '$lib/routes';
+	import _ from 'lodash';
 
 	export let prompt;
-	let inApp = false;
 
-	if (browser && $page.data.session?.user) {
-		inApp = true;
+	function getHartIconPrefix() {
+		if ($page.data.dbUser) {
+			const liked = prompt.likes.find((like) => like.userId === $page.data.dbUser.id);
+			if (liked) {
+				return 'fullhart';
+			}
+		}
+		return 'hart';
 	}
 </script>
 
-<a href={`${inApp ? '/app' : ''}/prompt/${prompt.slug}`}>
+<a
+	href={routes.prompt($page.data.session?.user, prompt.slug)}
+	class="card"
+>
 	<div>
-		<span><b><u>{prompt.name}</u></b></span>
-		
-		<main>
-			<p>{prompt.content}</p>
-		</main>
+		<div class="row">
+			<p class="name">{prompt.name}</p>
+		</div>
 
-		<sub>
-			{#each prompt.tags as tag}
-				<span>{tag.name}</span>
-			{/each}
-		</sub>
-		
-		<footer class="footer">
-			<span>{prompt.aiModel.name}</span>
-			<span>❤️ {prompt.likes?.length}</span>
-			<span><img src="/fork-icon.png" alt="fork-icon" /> {prompt.forkedCount}</span>
-		</footer>
+		<div class="description">
+			<p>{_.truncate(prompt.description, { length: 100 })}</p>
+		</div>
+	</div>
+
+	<div class="stats">
+		<img class="author" src={prompt.author.picture} alt="" />
+		<div>
+			<span class="likes">
+				<img style="width: 16px" src={`/${getHartIconPrefix()}-icon.png`} alt="hart-icon" />
+				{prompt.likes?.length}</span>
+			<span class="forked">
+				<img src="/fork-icon.png" alt="fork-icon" />
+				{prompt.forkedCount}
+			</span>
+		</div>
 	</div>
 </a>
 
 <style>
-	div {
-		border: 1px solid black;
-		border-radius: 7px;
-		padding: 16px;
+	.card {
+		text-decoration: none;
+		background: #e9e9e9;
+		border-radius: 20px;
+		padding: 20px;
+		color: black;
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
 	}
+
 	p {
 		margin: 0;
+		line-height: 1.5;
 	}
 
-	span {
-		font-size: 16px;
-	}
-
-	a {
-		color: inherit;
-		text-decoration: none;
-	}
-
-	a:focus {
-		outline: none;
-	}
-
-	main {
-		margin-top: 6px;
-	}
-
-	main p {
-		line-height: 18px;
-		font-size: 16px;
-		font-weight: normal;
-	}
-
-	sub {
+	.row {
 		display: flex;
-		gap: 8px;
-		margin-top: 6px;
+		justify-content: space-between;
+		align-items: center;
 	}
 
-	sub span {
-		border-radius: 10px;
-		padding: 6px;
-		border: 2px solid black;
+	.name {
+		font-size: 1.3rem;
+		font-weight: 600;
+		width: 100%;
+		border-bottom: 1px solid rgb(174, 174, 174);
 	}
 
-	footer {
+	.description {
+		font-size: 1.15rem;
+		font-weight: 400;
+		margin-top: 16px;
+		margin-bottom: 40px;
+	}
+
+	.likes,
+	.forked {
 		display: flex;
 		align-items: center;
+		font-size: 0.9rem;
+	}
+
+	.forked img {
+		width: 15px;
+		margin-right: 5px;
+	}
+
+	.stats {
+		display: flex;
 		justify-content: space-between;
-		margin-top: 16px;
+		gap: 8px;
+	}
+
+	.stats div {
+		display: flex;
+		gap: 8px;
+	}
+
+	.author {
+		border-radius: 50%;
+		width: 40px;
 	}
 </style>

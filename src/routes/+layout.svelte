@@ -20,17 +20,44 @@
 <style>
 	:global(body) {
 		margin: 0;
-		font-family: 'Source Sans Pro', sans-serif;
+		box-sizing: border-box;
+		box-sizing: border-box;
+	}
+	
+	:global(*) {
+		font-family: 'Inter';
+		box-sizing: border-box;
+
+		--s-1: 4px;
+		--s-2: 8px;
+		--s-3: 12px;
+		--s-4: 16px;
+		--s-5: 24px;
+		--s-6: 34px;
+		--s-7: 48px;
+
+		--fs-1: 0.8rem;
+		--fs-2: 1rem;
+		--fs-3: 1.3rem;
+		--fs-4: 1.6rem;
+		--fs-5: 2.6rem;
+
+		--br-1: 20px;
+		--br-2: 30px;
+	}
+
+	:global(.bubble) {
+		border-radius: var(--br-1);
+		padding: var(--s-3) var(--s-4);
 	}
 
 	.content {
-		padding: 0 16px;
 		min-height: calc(100vh - 93px);
+		padding: var(--s-5) 100px;
 	}
 
 	.overlay-ref {
 		position: relative;
-		padding-top: 24px;
 	}
 
 	.overlay {

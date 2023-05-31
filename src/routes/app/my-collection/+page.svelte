@@ -1,42 +1,28 @@
 <script>
 	import { page } from '$app/stores';
-	import Card from '$lib/components/card.svelte';
+	import CardList from '$lib/components/card-list.svelte';
 
 	const myCollection = $page.data;
-	// console.log('log myCollection', myCollection)
 </script>
 
 <main>
-	<h1>My collection</h1>
-
-	<h3>Created by me</h3>
-	<div class="all">
-		{#each myCollection.createdBy as prompt (prompt.id)}
-			<Card {prompt} />
-		{/each}
-	</div>
-
-	<h3>Forked</h3>
-	<div class="all">
-		{#each myCollection.forked as prompt (prompt.id)}
-			<Card {prompt} />
-		{/each}
-	</div>
-
-	<h3>Liked</h3>
-	<div class="all">
-		{#each myCollection.liked as prompt (prompt.id)}
-			<Card {prompt} />
-		{/each}
-	</div>
+	<h3>Created</h3>
+	<CardList prompts={myCollection.createdBy} />
+	
+	<h3 class="liked">Liked</h3>
+	<CardList prompts={myCollection.liked} />
 </main>
 
 <style>
-	.all {
-		display: grid;
-		grid-template-columns: repeat(5, 1fr);
-		gap: 16px;
+	h3 {
+		margin: 0;
+		margin-bottom: var(--s-4);
 	}
+
+	.liked {
+		margin-top: var(--s-6);
+	}
+	
 	main {
 		display: flex;
 		flex-direction: column;

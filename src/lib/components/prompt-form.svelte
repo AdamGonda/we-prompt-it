@@ -50,21 +50,20 @@
 			});
 		}
 
-		checkPromptNameUniqueness(formData);
+		nameCheck(formData);
 	}
 
-	async function checkPromptNameUniqueness(formData) {
+	async function nameCheck(formData) {
 		if (formData.name) {
 			const isExisting = type === 'edit'
-			const middle = isExisting ? '-for-existing' : '-for-new';
-			const end = isExisting ? `&promptId=${data.id}` : '';
+			const promptId = isExisting ? `&promptId=${data.id}` : '';
 
-			let url = `/api/check-prompt-name-uniqueness${middle}?proposedName=${formData.name}${end}`;
+			let url = `/api/name-check?proposedName=${formData.name}${promptId}`;
 
 			const r = await fetch(url);
 			const json = await r.json();
 
-			if (!json.isUnique) {
+			if (!json.ok) {
 				errors.name = 'Name is not unique';
 			}
 		}

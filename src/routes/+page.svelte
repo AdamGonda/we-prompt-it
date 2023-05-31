@@ -4,26 +4,26 @@
 
 <script>
 	import { page } from '$app/stores';
-	import Card from '$lib/components/card.svelte';
+	import { onMount } from 'svelte';
+	import searchStore from '$lib/stores/search-store';
+	import CardList from '$lib/components/card-list.svelte';
 
-	const { session, mostLiked, mostForked } = $page.data;
-	// console.log('log $page.data;', $page.data) 
+	const { prompts } = $page.data;
+	let resultsToShow = prompts;
+	let frontendLoaded = false;
+
+	searchStore.subscribe((value) => {
+		if (frontendLoaded) {
+			resultsToShow = value;
+		}
+	});
+
+	onMount(() => {
+		frontendLoaded = true;
+	});
 </script>
 
-<div>
-	{#if !session}
-		<p>some informative stuff about the platform</p>
-	{/if}
-	<h2>Most liked</h2>
-	{#each mostLiked as prompt (prompt.id)}
-		<Card {prompt} />
-	{/each}
+<main>	
+	<CardList prompts={resultsToShow} />
+</main>
 
-	<h2>Most forked</h2>
-	{#each mostForked as prompt (prompt.id)}
-		<Card {prompt} />
-	{/each}
-</div>
-
-<style>
-</style>

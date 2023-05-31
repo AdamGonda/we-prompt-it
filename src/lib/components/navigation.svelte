@@ -1,99 +1,69 @@
 <script lang="ts">
-	import { signIn, signOut } from '@auth/sveltekit/client';
 	import SearchBar from './search-bar.svelte';
 	import { page } from '$app/stores';
+	import UserAvatar from './user-avatar.svelte';
+	import SearchManagger from './search-managger.svelte';
+	import routes from '$lib/routes';
 
 	const user = $page.data.session?.user;
 	$: links = {
-		create: user ? '/app/prompt/create' : '/login',
-		myCollection: user ? '/app/my-collection' : '/login'
+		create: routes.create(user),
+		myCollection: routes.myCollection(user)
 	};
-
-	function handleSignout() {
-		signOut();
-	}
-
-	function handleSignin() {
-		signIn('google');
-	}
+	$: onMycollection = $page.route.id.includes('my-collection')
+	$: onCreate = $page.route.id.includes('create') || $page.route.id.includes('fork')
 </script>
 
 <nav>
-	<a href={`/`} class="logo">
-		<img src="logo.svg" width="40px" alt="logo" />
-		<!-- <span style="font-weight: bold; font-size: 1.2rem">[we]prompt</span> -->
+	<SearchManagger />
+	<a href={routes.landing} class="logo">
+		<img src="/weprompt-logo.png" alt="logo" />
 	</a>
+	<SearchBar />
 
-	<div class="all-but-logo">
-		<SearchBar />
-
-		<div>
-			<div class="button-island">
-				<a href={links.myCollection}>
-					<p>My collection</p>
-				</a>
-				
-				<a href={links.create} class="create">
-					<p>Create prompt</p>
-				</a>
-			</div>
-
-			{#if user}
-				<button style="cursor: pointer;" on:click={handleSignout}>signout</button>
-			{:else}
-				<a href={`/login`}>
-					<p>Signup/Login</p>
-				</a>
-			{/if}
-		</div>
-	</div>
+	<a href={routes.myCollection(user)} class="button">
+		<p class="my-collection" class:underline={onMycollection} >My collection</p>
+	</a>
+	<a href={links.create} class="button">
+		<p class:underline={onCreate}>Create</p>
+	</a>
+	<UserAvatar />
 </nav>
 
 <style>
 	nav {
 		display: flex;
 		align-items: center;
-		background: #34cff2;
-		padding: 20px 40px;
-		padding: 20px 56px;
-		background-image: linear-gradient(to left, #24243e 0%, #302b63 50%, #0f0c29 100%);
+		padding: 20px 24px;
+		gap: 30px;
+		height: 80px;
 	}
 
-	div {
-		display: flex;
-		align-items: center;
-		gap: 34px;
-	}
-
-	.button-island {
-		display: flex;
-		align-items: center;
-		gap: 34px;
-		margin-right: 20px;
+	img {
+		width: 38px;
+		margin-top: 3px;
 	}
 
 	a {
 		text-decoration: none;
-		color: #ffffff;
+		color: #000000;
+		border-radius: 5px;
 	}
 
 	p {
 		margin: 0;
 	}
 
-	.logo {
-		margin-right: 140px;
+	.button {
+		font-size: 1rem;
+		font-weight: 600;
 	}
 
-	.all-but-logo {
-		display: flex;
-		align-items: center;
-		justify-content: space-between;
-		width: 100%;
+	.my-collection {
+		width: 104px;
 	}
 
-	.create {
-		padding: 7px 12px;
-		border: 2px solid white;
+	.underline {
+		text-decoration: underline;
 	}
 </style>

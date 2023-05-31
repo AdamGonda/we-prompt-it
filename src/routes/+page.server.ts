@@ -1,3 +1,3 @@
-import { loadLanding } from "$lib/controllers/landing"
+import { loadIndex } from "$lib/controllers/loders";
 
-export const load = loadLanding
+export const load = loadIndex

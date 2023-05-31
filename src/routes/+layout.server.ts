@@ -1,7 +1,3 @@
-import type { PageServerLoad } from "./explore/$types"
+import { loadIndexLayout } from "$lib/controllers/loders"
 
-export const load: PageServerLoad = async (event) => {
-  return {
-    session: await event.locals.getSession()
-  }
-}
+export const load = loadIndexLayout

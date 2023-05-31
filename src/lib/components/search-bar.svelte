@@ -1,14 +1,13 @@
 <script>
-	import { afterNavigate, beforeNavigate } from '$app/navigation';
+	import { afterNavigate, goto } from '$app/navigation';
 	import { page } from '$app/stores';
 	import { searchFocused } from '$lib/stores/search-bar-store';
-	import searchStore from '$lib/stores/search-store';
 
 	let inputValue;
 	let placeholder = 'Find the prompt you need';
 	let inputInFocus = false;
 
-	afterNavigate(() => {
+	afterNavigate(async () => {
 		initVarsFromURL();
 	});
 
@@ -17,33 +16,12 @@
 		inputValue = searchParams.get('text');
 	}
 
-	async function handleSubmit() {
-		await searchStore.search({
-			endpoint: `/api/search?${varsToQuerystring()}`,
-			updateURL: `/explore?${varsToQuerystring()}`
-		});
-	}
-
 	function varsToQuerystring() {
 		let old = new URLSearchParams($page.url.search);
 		let searchParams = new URLSearchParams();
 
 		if (inputValue) {
 			searchParams.append('text', inputValue);
-		}
-
-		const tags = old.getAll('tag');
-		if (tags) {
-			tags.forEach((tag) => {
-				searchParams.append('tag', tag);
-			});
-		}
-
-		const aiModels = old.getAll('ai_model');
-		if (aiModels) {
-			aiModels.forEach((model) => {
-				searchParams.append('ai_model', model);
-			});
 		}
 
 		const sortBys = old.getAll('sort_by');
@@ -65,49 +43,59 @@
 		searchFocused.update((value) => (value = false));
 		inputInFocus = false;
 	}
+
+	function handleClear() {
+		inputValue = '';
+
+		triggerSearch()
+	}
+
+	async function triggerSearch() {
+		goto(`/?${varsToQuerystring()}`);
+	}
 </script>
 
-<form name="search" method="POST" class:outlined={inputInFocus} on:submit|preventDefault={handleSubmit}>
-	<input
-		autocomplete="off"
-		on:focus={handleFocus}
-		on:blur={handleBlur}
-		bind:value={inputValue}
-		type="text"
-		name="text-search"
-		{placeholder}
-	/>
-	<button>
-		<p>go</p>
-	</button>
+<form
+	name="search"
+	method="POST"
+	class:outlined={inputInFocus}
+	on:submit|preventDefault={triggerSearch}
+>
+	<div class="search-input-container">
+		<input
+			autocomplete="off"
+			on:focus={handleFocus}
+			on:blur={handleBlur}
+			bind:value={inputValue}
+			type="text"
+			name="text-search"
+			{placeholder}
+		/>
+		{#if inputValue}
+			<button type="button" on:click={handleClear} class="clear-button">
+				<p>x</p>
+			</button>
+		{/if}
+	</div>
 </form>
 
 <style>
 	form {
 		display: flex;
 		align-items: center;
-		border: 1px solid rgba(0,0,0,0);
-	}
-
-	.outlined {
-		border: 1px solid rgb(255, 255, 255);
+		width: 100%;
 	}
 
 	input {
 		padding: 0 16px;
 		border: none;
 		min-width: 300px;
-		height: 38px;
+		height: 46px;
 		font-size: 16px;
-		
-		background:rgba(0 ,0,0,0);
-		border: 2px solid #fff;
-		color: #fff;
-	}
-
-	input::placeholder {
-		color: white;
-		font-size: 1rem;
+		background:#E9E9E9;
+		color: #333333;
+		border-radius: 25px;
+		width: 100%;
 	}
 
 	input:focus {
@@ -127,6 +115,22 @@
 	}
 
 	p {
-		margin: 0
+		margin: 0;
+	}
+
+	.search-input-container {
+		position: relative;
+		width: 100%;
+	}
+
+	.clear-button {
+		position: absolute;
+		top: 50%;
+		right: 1px;
+		transform: translateY(-50%);
+		background: none;
+		border: none;
+		cursor: pointer;
+		color: white;
 	}
 </style>

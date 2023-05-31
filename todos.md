@@ -1,11 +1,15 @@
 # Current value: HUF 550k+
 
 # Tech
+TODO initial sort when go to explore page so the correct radio is selected
+TODO revisit search, text and sort, remove the rest? full text or contains. which fields? tags?
 TODO on first signup ask for username
 TODO remove search store, use search managger
 
 # Product (functional)
 TODO landing page
+TODO profile page
+TODO repo page
 TODO signup/login page
 TODO profile page
 TODO loading, feedback indicators
