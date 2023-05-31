@@ -234,6 +234,7 @@
 		flex-direction: column;
 		align-items: center;
 		margin-bottom: var(--s-4);
+		width: 100%;
 	}
 
 	.name {
@@ -256,6 +257,10 @@
 		margin-top: var(--s-7);
 	}
 
+	.content {
+		margin-top: var(--s-7);
+	}
+
 	input:focus, textarea:focus {
 		outline: none;
 	}
@@ -266,8 +271,7 @@
 		border-bottom: 2px solid rgb(120, 120, 120);
 		font-size: var(--fs-3);
 		line-height: var(--s-6);
-		min-width: 505px;
-		text-align: center;
+		width: 100%;
 		resize: none;
 	}
 
