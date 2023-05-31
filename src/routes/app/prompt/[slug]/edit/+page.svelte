@@ -35,6 +35,11 @@
 			description: $page.data.prompt.description,
 			content: $page.data.prompt.content
 		},
+		placeholder: {
+			name: 'Give it a name',
+			description: 'Description',
+			content: 'Content'
+		},
 		selectedModelId: $page.data.prompt.aiModelId,
 		allModels: $page.data.aiModels
 	}}
