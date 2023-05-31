@@ -46,17 +46,20 @@
 		allModels: $page.data.aiModels
 	}}
 >
-	<button type="button" on:click={() => confirmDiscardDialog.showModal()}>
-		discard changes
-	</button>
-	<button type="button" {disabled} on:click={() => confirmEditDialog.showModal()}
-		>Submit</button
-	>
+	<div class="slot">
+		<button style="font-size: var(--fs-1); text-decoration: underline" type="button" on:click={() => confirmDiscardDialog.showModal()}>
+			discard changes
+		</button>
+		<button style="background: lightgreen;" class="bubble" type="button" {disabled} on:click={() => confirmEditDialog.showModal()}
+			>Apply changes</button
+		>
+	</div>
 </PromptForm>
 
 <div class="danger-zone">
 	<p>Danger zone</p>
 	<button
+		class="bubble"
 		on:click={() => {
 			confirmDeleteDialog.showModal();
 		}}>Delete</button
@@ -113,11 +116,18 @@
 		margin-top: var(--s-5);
 	}
 
-	.danger-zone p {
-		border: 4px dashed red;
-		padding: var(--s-2) var(--s-4);
-		font-weight: 500;
+	.danger-zone button {
+		color: white;
+		background: red;
+		border: none;
 	}
+	.danger-zone p{
+		margin: 0;
+		margin-top: var(--s-7);
+		margin-bottom: var(--s-3);
+		font-size: var(--fs-4);
+		font-weight: 500;
+	 }
 
 	dialog {
 		background: white;
@@ -159,5 +169,19 @@
 
 	dialog input:hover {
 		background: rgb(211, 31, 31);
+	}
+
+	.slot {
+		display: flex;
+		justify-content: space-between;
+		gap: var(--s-4);
+		margin-top: var(--s-5);
+	}
+
+	.slot button {
+		background: none;
+		border: none;
+		cursor: pointer;
+		font-size: var(--fs-2);
 	}
 </style>
