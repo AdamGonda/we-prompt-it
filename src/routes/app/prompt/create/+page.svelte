@@ -14,9 +14,9 @@
 	formName="create-prompt-form"
 	data={{
 		placeholder: {
-			name: 'name placeholder todocopy',
-			description: 'description placeholder todocopy',
-			content: 'content placeholder todocopy'
+			name: 'Give it a name',
+			description: 'Describe your prompt in a few sentences',
+			content: 'Here comes your magic prompt'
 		},
 		allModels: $page.data.allModels
 	}}
