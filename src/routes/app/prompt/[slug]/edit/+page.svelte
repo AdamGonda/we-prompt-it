@@ -14,8 +14,8 @@
 
 	onMount(() => {
 		// confirmEditDialog.showModal();
-		// confirmDiscardDialog.showModal();
-		confirmDeleteDialog.showModal();
+		confirmDiscardDialog.showModal();
+		// confirmDeleteDialog.showModal();
 	});
 
 	function onDelete() {
@@ -75,13 +75,23 @@
 	<button on:click={form.requestSubmit()}>Submit</button>
 </dialog>
 
-<dialog class="confirm-discard" bind:this={confirmDiscardDialog}>
-	<button on:click={() => confirmDiscardDialog.close()}>Close</button>
-	<h2>Are you sure you want to discard?</h2>
-	<button on:click={() => goto(routes.prompt(true, $page.params.slug))}>Submit</button>
+<dialog bind:this={confirmDiscardDialog}>
+	<form method="POST" action="?/delete" use:enhance={onDelete}>
+		<p>Are you sure you want to proceed?</p>
+		<div>
+			<button type="button" on:click={() => confirmDiscardDialog.close()}>Cancel</button>
+			<input
+				class="bubble"
+				type="button"
+				value="Discard change"
+				style="background: orange; color: black"
+				on:click={() => goto(routes.prompt(true, $page.params.slug))}
+			/>
+		</div>
+	</form>
 </dialog>
 
-<dialog class="confirm-delete" bind:this={confirmDeleteDialog}>
+<dialog bind:this={confirmDeleteDialog}>
 	<form method="POST" action="?/delete" use:enhance={onDelete}>
 		<p>Are you sure you want to proceed?</p>
 		<div>
@@ -116,19 +126,19 @@
 		background-color: rgba(0, 0, 0, 0.5);
 	}
 
-	.confirm-delete form {
+	dialog form {
 		font-size: var(--fs-4);
 		display: flex;
 		flex-direction: column;
 		gap: var(--s-4);
-		align-items: center;
+		align-items: end;
 	}
 
-	.confirm-delete p {
+	dialog p {
 		margin-top: 0;
 	}
 
-	.confirm-delete button,
+	dialog button,
 	input {
 		font-size: var(--fs-2);
 		background: none;
@@ -136,14 +146,14 @@
 		cursor: pointer;
 	}
 
-	.confirm-delete input {
+	dialog input {
 		background: rgb(255, 38, 38);
 		color: white;
-		font-weight: bold;
+		font-weight: 400;
 		margin-left: var(--s-4);
 	}
 
-	.confirm-delete input:hover {
+	dialog input:hover {
 		background: rgb(211, 31, 31);
 	}
 </style>
