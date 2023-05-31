@@ -53,6 +53,12 @@
 	>
 </PromptForm>
 
+<button
+	on:click={() => {
+		confirmDeleteDialog.showModal();
+	}}>Delete prompt</button
+>
+
 <dialog bind:this={confirmEditDialog}>
 	<button on:click={() => confirmEditDialog.close()}>Close</button>
 	<h2>Are you sure you want to edit?</h2>
@@ -65,11 +71,6 @@
 	<button on:click={() => goto(routes.prompt(true, $page.params.slug))}>Submit</button>
 </dialog>
 
-<button
-	on:click={() => {
-		confirmDeleteDialog.showModal();
-	}}>Delete</button
->
 <dialog bind:this={confirmDeleteDialog}>
 	<button on:click={() => confirmDeleteDialog.close()}>Close</button>
 	<form method="POST" action="?/delete" use:enhance={onDelete}>
