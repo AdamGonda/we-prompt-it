@@ -143,33 +143,6 @@
 		<span class="error">{isTouched.name && errors.name ? errors.name : ''}</span>
 	</div>
 
-	<div class="description field-wrap">
-		<textarea
-			name="description"
-			rows="1"
-			placeholder={data.placeholder?.description}
-			on:blur={handleFieldChange}
-			on:input={handleFieldChange}
-			on:input={handleHeight}
-			value={_.get(data, 'prefill.description', '')}
-		/>
-		<span class="error">{isTouched.description && errors.description ? errors.description : ''}</span>
-	</div>
-
-	<label for="content">
-		Prompt {type == 'create' ? '*' : ''}
-		<textarea
-			name="content"
-			rows="4"
-			cols="50"
-			placeholder={data.placeholder?.content}
-			on:blur={handleFieldChange}
-			on:input={handleFieldChange}
-			value={_.get(data, 'prefill.content', '')}
-		/>
-		<span class="error">{isTouched.content && errors.content ? errors.content : ''}</span>
-	</label>
-
 	<label for="model">
 		Model
 		<select name="model" on:change={handleAddNewModel} on:focus={handleAddNewModel}>
@@ -220,6 +193,32 @@
 		<Tags />
 	</label>
 
+	<div class="description field-wrap">
+		<textarea
+			name="description"
+			rows="1"
+			placeholder={data.placeholder?.description}
+			on:blur={handleFieldChange}
+			on:input={handleFieldChange}
+			on:input={handleHeight}
+			value={_.get(data, 'prefill.description', '')}
+		/>
+		<span class="error">{isTouched.description && errors.description ? errors.description : ''}</span>
+	</div>
+
+	<div class="field-wrap content">
+		<textarea
+			name="content"
+			rows="1"
+			placeholder={data.placeholder?.content}
+			on:blur={handleFieldChange}
+			on:input={handleFieldChange}
+			on:input={handleHeight}
+			value={_.get(data, 'prefill.content', '')}
+		/>
+		<span class="error">{isTouched.content && errors.content ? errors.content : ''}</span>
+	</div>
+
 	<slot {disabled}>
 		<input type="submit" {disabled} />
 	</slot>
@@ -246,17 +245,17 @@
 		font-weight: bold;
 		text-align: center;
 		border: none;
-		border-bottom: 2px solid rgb(174, 174, 174);
+		border-bottom: 2px solid rgb(120, 120, 120);
 	}
 
 	input:focus, textarea:focus {
 		outline: none;
 	}
 
-	.description textarea {
+	textarea {
 		font-family: source-serif-pro, Georgia, Cambria, 'Times New Roman', Times, serif;
 		border: none;
-		border-bottom: 2px solid rgb(174, 174, 174);
+		border-bottom: 2px solid rgb(120, 120, 120);
 		font-size: var(--fs-3);
 		line-height: var(--s-6);
 		min-width: 505px;
