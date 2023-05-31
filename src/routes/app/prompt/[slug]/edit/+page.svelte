@@ -12,12 +12,6 @@
 	let confirmDeleteDialog;
 	let form;
 
-	onMount(() => {
-		// confirmEditDialog.showModal();
-		confirmDiscardDialog.showModal();
-		// confirmDeleteDialog.showModal();
-	});
-
 	function onDelete() {
 		return async () => {
 			goto(`/app/my-collection`);
@@ -69,10 +63,20 @@
 	>
 </div>
 
-<dialog class="confirm-edit" bind:this={confirmEditDialog}>
-	<button on:click={() => confirmEditDialog.close()}>Close</button>
-	<h2>Are you sure you want to edit?</h2>
-	<button on:click={form.requestSubmit()}>Submit</button>
+<dialog bind:this={confirmEditDialog}>
+	<form method="POST" action="?/delete" use:enhance={onDelete}>
+		<p>Are you sure you want to proceed?</p>
+		<div>
+			<button type="button" on:click={() => confirmEditDialog.close()}>Cancel</button>
+			<input
+				class="bubble"
+				type="button"
+				value="Apply changes"
+				style="background: lightgreen; color: black"
+				on:click={() => form.requestSubmit()}
+			/>
+		</div>
+	</form>
 </dialog>
 
 <dialog bind:this={confirmDiscardDialog}>
@@ -83,7 +87,7 @@
 			<input
 				class="bubble"
 				type="button"
-				value="Discard change"
+				value="Discard changes"
 				style="background: orange; color: black"
 				on:click={() => goto(routes.prompt(true, $page.params.slug))}
 			/>
