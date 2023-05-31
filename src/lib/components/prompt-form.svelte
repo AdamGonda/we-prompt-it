@@ -120,7 +120,7 @@
 	on:input={validateForm}
 	bind:this={_form}
 >
-	<div class="name">
+	<div class="name field-wrap">
 		<input
 			name="name"
 			type="text"
@@ -134,11 +134,10 @@
 				}
 			}}
 		/>
-		<span>{isTouched.name && errors.name ? errors.name : ''}</span>
+		<span class="error">{isTouched.name && errors.name ? errors.name : ''}</span>
 	</div>
 
-	<label for="description">
-		Description {type == 'create' ? '*' : ''}
+	<div class="description field-wrap">
 		<textarea
 			name="description"
 			rows="4"
@@ -148,8 +147,8 @@
 			on:input={handleFieldChange}
 			value={_.get(data, 'prefill.description', '')}
 		/>
-		<span>{isTouched.description && errors.description ? errors.description : ''}</span>
-	</label>
+		<span class="error">{isTouched.description && errors.description ? errors.description : ''}</span>
+	</div>
 
 	<label for="content">
 		Prompt {type == 'create' ? '*' : ''}
@@ -162,7 +161,7 @@
 			on:input={handleFieldChange}
 			value={_.get(data, 'prefill.content', '')}
 		/>
-		<span>{isTouched.content && errors.content ? errors.content : ''}</span>
+		<span class="error">{isTouched.content && errors.content ? errors.content : ''}</span>
 	</label>
 
 	<label for="model">
@@ -229,7 +228,7 @@
 		gap: 8px;
 	}
 
-	.name {
+	.field-wrap {
 		display: flex;
 		flex-direction: column;
 		align-items: center;
@@ -248,8 +247,13 @@
 		outline: none;
 	}
 
-	span {
-		font-size: 1rem;
+	.description textarea {
+		border: none;
+		border-bottom: 2px solid rgb(174, 174, 174);
+		resize: none;
+	}
+
+	.error {
 		color: red;
 	}
 </style>
