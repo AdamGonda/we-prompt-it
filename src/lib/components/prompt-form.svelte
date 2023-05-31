@@ -291,6 +291,7 @@
 		line-height: var(--s-6);
 		width: 100%;
 		resize: none;
+		overflow-y: hidden;
 	}
 
 	.error {

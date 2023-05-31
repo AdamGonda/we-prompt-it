@@ -7,6 +7,7 @@
 	import _ from 'lodash';
 
 	let confirmEditDialog;
+	let confirmDiscardDialog;
 	let confirmDeleteDialog;
 	let form;
 
@@ -44,9 +45,9 @@
 		allModels: $page.data.aiModels
 	}}
 >
-	<a href={routes.prompt(true, $page.params.slug)}>
-		<span>Content</span>
-	</a>
+	<button type="button" on:click={() => confirmDiscardDialog.showModal()}>
+		discard changes
+	</button>
 	<button type="button" {disabled} on:click={() => confirmEditDialog.showModal()}
 		>Submit</button
 	>
@@ -56,6 +57,12 @@
 	<button on:click={() => confirmEditDialog.close()}>Close</button>
 	<h2>Are you sure you want to edit?</h2>
 	<button on:click={form.requestSubmit()}>Submit</button>
+</dialog>
+
+<dialog bind:this={confirmDiscardDialog}>
+	<button on:click={() => confirmDiscardDialog.close()}>Close</button>
+	<h2>Are you sure you want to discard?</h2>
+	<button on:click={() => goto(routes.prompt(true, $page.params.slug))}>Submit</button>
 </dialog>
 
 <button
