@@ -8,17 +8,25 @@
 	}
 </script>
 
-Create
-<PromptForm
-	{onSuccess}
-	action="?/create"
-	formName="create-prompt-form"
-	data={{
-		placeholder: {
-			name: 'name placeholder todocopy',
-			description: 'description placeholder todocopy',
-			content: 'content placeholder todocopy'
-		},
-		allModels: $page.data.allModels
-	}}
-/>
+<div class="wrap">
+	<PromptForm
+		{onSuccess}
+		action="?/create"
+		formName="create-prompt-form"
+		data={{
+			placeholder: {
+				name: 'name placeholder todocopy',
+				description: 'description placeholder todocopy',
+				content: 'content placeholder todocopy'
+			},
+			allModels: $page.data.allModels
+		}}
+	/>
+</div>
+
+<style>
+	.wrap {
+		background: #E9E9E9;
+		height: 100vh;
+	}
+</style>

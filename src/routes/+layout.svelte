@@ -52,8 +52,7 @@
 	}
 
 	.content {
-		min-height: calc(100vh - 93px);
-		padding: var(--s-5) 100px;
+		
 	}
 
 	.overlay-ref {
