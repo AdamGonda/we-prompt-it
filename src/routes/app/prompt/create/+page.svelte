@@ -27,7 +27,7 @@
 <style>
 	.wrap {
 		display: grid;
-		place-items: center center;
+		place-items: center;
 		background: #E9E9E9;
 		height: calc(100vh - 80px);
 	}

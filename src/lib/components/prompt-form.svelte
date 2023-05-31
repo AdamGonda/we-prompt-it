@@ -55,7 +55,7 @@
 
 	async function nameCheck(formData) {
 		if (formData.name) {
-			const isExisting = type === 'edit'
+			const isExisting = type === 'edit';
 			const promptId = isExisting ? `&promptId=${data.id}` : '';
 
 			let url = `/api/name-check?proposedName=${formData.name}${promptId}`;
@@ -120,61 +120,69 @@
 	on:input={validateForm}
 	bind:this={_form}
 >
-	<label for="name">
-		Name {['create', 'fork'].includes(type) ? '*' : ''}
-		<input
-			name="name"
-			type="text"
-			placeholder={data.placeholder?.name}
-			on:blur={handleFieldChange}
-			on:input={handleFieldChange}
-			value={_.get(data, 'prefill.name', '')}
-			on:keypress={(e) => {
-				if ($$slots.default && e.key === 'Enter') {
-					e.preventDefault();
-				}
-			}}
-		/>
-		<span>{isTouched.name && errors.name ? errors.name : ''}</span>
-	</label>
+	<div>
+		<label for="name">
+			Name {['create', 'fork'].includes(type) ? '*' : ''}
+			<input
+				name="name"
+				type="text"
+				placeholder={data.placeholder?.name}
+				on:blur={handleFieldChange}
+				on:input={handleFieldChange}
+				value={_.get(data, 'prefill.name', '')}
+				on:keypress={(e) => {
+					if ($$slots.default && e.key === 'Enter') {
+						e.preventDefault();
+					}
+				}}
+			/>
+			<span>{isTouched.name && errors.name ? errors.name : ''}</span>
+		</label>
+	</div>
 
-	<label for="description">
-		Description {type == 'create' ? '*' : ''}
-		<textarea
-			name="description"
-			rows="4"
-			cols="50"
-			placeholder={data.placeholder?.description}
-			on:blur={handleFieldChange}
-			on:input={handleFieldChange}
-			value={_.get(data, 'prefill.description', '')}
-		/>
-		<span>{isTouched.description && errors.description ? errors.description : ''}</span>
-	</label>
+	<div>
+		<label for="description">
+			Description {type == 'create' ? '*' : ''}
+			<textarea
+				name="description"
+				rows="4"
+				cols="50"
+				placeholder={data.placeholder?.description}
+				on:blur={handleFieldChange}
+				on:input={handleFieldChange}
+				value={_.get(data, 'prefill.description', '')}
+			/>
+			<span>{isTouched.description && errors.description ? errors.description : ''}</span>
+		</label>
+	</div>
 
-	<label for="content">
-		Prompt {type == 'create' ? '*' : ''}
-		<textarea
-			name="content"
-			rows="4"
-			cols="50"
-			placeholder={data.placeholder?.content}
-			on:blur={handleFieldChange}
-			on:input={handleFieldChange}
-			value={_.get(data, 'prefill.content', '')}
-		/>
-		<span>{isTouched.content && errors.content ? errors.content : ''}</span>
-	</label>
+	<div>
+		<label for="content">
+			Prompt {type == 'create' ? '*' : ''}
+			<textarea
+				name="content"
+				rows="4"
+				cols="50"
+				placeholder={data.placeholder?.content}
+				on:blur={handleFieldChange}
+				on:input={handleFieldChange}
+				value={_.get(data, 'prefill.content', '')}
+			/>
+			<span>{isTouched.content && errors.content ? errors.content : ''}</span>
+		</label>
+	</div>
 
-	<label for="model">
-		Model
-		<select name="model" on:change={handleAddNewModel} on:focus={handleAddNewModel}>
-			{#each data.allModels as model}
-				<option selected={isSelected(model)} value={model.id}>{model.name}</option>
-			{/each}
-			<option value="-1">Add new model</option>
-		</select>
-	</label>
+	<div>
+		<label for="model">
+			Model
+			<select name="model" on:change={handleAddNewModel} on:focus={handleAddNewModel}>
+				{#each data.allModels as model}
+					<option selected={isSelected(model)} value={model.id}>{model.name}</option>
+				{/each}
+				<option value="-1">Add new model</option>
+			</select>
+		</label>
+	</div>
 
 	{#if showAddNewModel}
 		<div>
@@ -225,8 +233,15 @@
 	form {
 		display: flex;
 		flex-direction: column;
-		align-items: start;
-		gap: 8px;
+		align-items: center;
+		gap: var(--s-5);
+		background: white;
+		border-radius: var(--br-2);
+		padding: var(--s-7);
+	}
+
+	div {
+		width: 100%;
 	}
 
 	label {
