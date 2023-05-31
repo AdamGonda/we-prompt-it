@@ -143,15 +143,14 @@
 		<span class="error">{isTouched.name && errors.name ? errors.name : ''}</span>
 	</div>
 
-	<label for="model">
-		Model
+	<div class="model">
 		<select name="model" on:change={handleAddNewModel} on:focus={handleAddNewModel}>
 			{#each data.allModels as model}
 				<option selected={isSelected(model)} value={model.id}>{model.name}</option>
 			{/each}
 			<option value="-1">Add new model</option>
 		</select>
-	</label>
+	</div>
 
 	{#if showAddNewModel}
 		<div>
@@ -188,10 +187,7 @@
 		</div>
 	{/if}
 
-	<label for="tags">
-		Tags
-		<Tags />
-	</label>
+	<Tags />
 
 	<div class="description field-wrap">
 		<textarea
@@ -240,12 +236,24 @@
 		margin-bottom: var(--s-4);
 	}
 
+	.name {
+		margin-bottom: var(--s-4);
+	}
+
 	.name input {
 		font-size: var(--fs-5);
 		font-weight: bold;
 		text-align: center;
 		border: none;
 		border-bottom: 2px solid rgb(120, 120, 120);
+	}
+
+	.model {
+		margin-bottom: var(--s-5);
+	}
+
+	.description {
+		margin-top: var(--s-7);
 	}
 
 	input:focus, textarea:focus {
