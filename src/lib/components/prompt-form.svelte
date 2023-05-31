@@ -121,67 +121,52 @@
 	bind:this={_form}
 >
 	<div>
-		<label for="name">
-			Name {['create', 'fork'].includes(type) ? '*' : ''}
-			<input
-				name="name"
-				type="text"
-				placeholder={data.placeholder?.name}
-				on:blur={handleFieldChange}
-				on:input={handleFieldChange}
-				value={_.get(data, 'prefill.name', '')}
-				on:keypress={(e) => {
-					if ($$slots.default && e.key === 'Enter') {
-						e.preventDefault();
-					}
-				}}
-			/>
-			<span>{isTouched.name && errors.name ? errors.name : ''}</span>
-		</label>
+		<input
+			name="name"
+			type="text"
+			placeholder={data.placeholder?.name}
+			on:blur={handleFieldChange}
+			on:input={handleFieldChange}
+			value={_.get(data, 'prefill.name', '')}
+			on:keypress={(e) => {
+				if ($$slots.default && e.key === 'Enter') {
+					e.preventDefault();
+				}
+			}}
+		/>
+		<span class="error">{isTouched.name && errors.name ? errors.name : ''}</span>
 	</div>
 
 	<div>
-		<label for="description">
-			Description {type == 'create' ? '*' : ''}
-			<textarea
-				name="description"
-				rows="4"
-				cols="50"
-				placeholder={data.placeholder?.description}
-				on:blur={handleFieldChange}
-				on:input={handleFieldChange}
-				value={_.get(data, 'prefill.description', '')}
-			/>
-			<span>{isTouched.description && errors.description ? errors.description : ''}</span>
-		</label>
+		<textarea
+			name="description"
+			rows="1"
+			placeholder={data.placeholder?.description}
+			on:blur={handleFieldChange}
+			on:input={handleFieldChange}
+			value={_.get(data, 'prefill.description', '')}
+		/>
+		<span class="error">{isTouched.description && errors.description ? errors.description : ''}</span>
 	</div>
 
 	<div>
-		<label for="content">
-			Prompt {type == 'create' ? '*' : ''}
-			<textarea
-				name="content"
-				rows="4"
-				cols="50"
-				placeholder={data.placeholder?.content}
-				on:blur={handleFieldChange}
-				on:input={handleFieldChange}
-				value={_.get(data, 'prefill.content', '')}
-			/>
-			<span>{isTouched.content && errors.content ? errors.content : ''}</span>
-		</label>
+		<textarea
+			name="content"
+			placeholder={data.placeholder?.content}
+			on:blur={handleFieldChange}
+			on:input={handleFieldChange}
+			value={_.get(data, 'prefill.content', '')}
+		/>
+		<span class="error">{isTouched.content && errors.content ? errors.content : ''}</span>
 	</div>
 
 	<div>
-		<label for="model">
-			Model
-			<select name="model" on:change={handleAddNewModel} on:focus={handleAddNewModel}>
-				{#each data.allModels as model}
-					<option selected={isSelected(model)} value={model.id}>{model.name}</option>
-				{/each}
-				<option value="-1">Add new model</option>
-			</select>
-		</label>
+		<select name="model" on:change={handleAddNewModel} on:focus={handleAddNewModel}>
+			{#each data.allModels as model}
+				<option selected={isSelected(model)} value={model.id}>{model.name}</option>
+			{/each}
+			<option value="-1">Add new model</option>
+		</select>
 	</div>
 
 	{#if showAddNewModel}
@@ -238,17 +223,30 @@
 		background: white;
 		border-radius: var(--br-2);
 		padding: var(--s-7);
+		min-width: 500px;
+		margin-top: -160px; /* TODO is it okay like this? */
 	}
 
 	div {
 		width: 100%;
 	}
 
-	label {
-		display: flex;
-		flex-direction: column;
-		gap: 4px;
+	input,
+	textarea,
+	select {
+		border: none;
+		border-bottom: 2px solid rgb(154, 154, 154);
+		width: 100%;
+		font-size: var(--fs-3);
 	}
+
+	input:focus,
+	textarea:focus,
+	select:focus {
+		outline: none;
+		
+	}
+
 	span {
 		font-size: 1rem;
 		color: red;
