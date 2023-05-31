@@ -55,7 +55,7 @@
 
 	async function nameCheck(formData) {
 		if (formData.name) {
-			const isExisting = type === 'edit'
+			const isExisting = type === 'edit';
 			const promptId = isExisting ? `&promptId=${data.id}` : '';
 
 			let url = `/api/name-check?proposedName=${formData.name}${promptId}`;
@@ -120,8 +120,7 @@
 	on:input={validateForm}
 	bind:this={_form}
 >
-	<label for="name">
-		Name {['create', 'fork'].includes(type) ? '*' : ''}
+	<div class="name">
 		<input
 			name="name"
 			type="text"
@@ -136,7 +135,7 @@
 			}}
 		/>
 		<span>{isTouched.name && errors.name ? errors.name : ''}</span>
-	</label>
+	</div>
 
 	<label for="description">
 		Description {type == 'create' ? '*' : ''}
@@ -223,17 +222,32 @@
 
 <style>
 	form {
+		margin-top: 40px;
 		display: flex;
 		flex-direction: column;
-		align-items: start;
+		align-items: center;
 		gap: 8px;
 	}
 
-	label {
+	.name {
 		display: flex;
 		flex-direction: column;
-		gap: 4px;
+		align-items: center;
+		margin-bottom: var(--s-4);
 	}
+
+	.name input {
+		font-size: var(--fs-5);
+		font-weight: bold;
+		text-align: center;
+		border: none;
+		border-bottom: 2px solid rgb(174, 174, 174);
+	}
+
+	.name input:focus {
+		outline: none;
+	}
+
 	span {
 		font-size: 1rem;
 		color: red;
