@@ -74,7 +74,8 @@ export async function nameCheck(event) {
 	const existingPrompt = await prisma.prompt.findFirst({
 		where: {
 			slug: convertToSlug(user.username, proposedName),
-			authorId: user.id
+			authorId: user.id,
+			isDeleted: false
 		}
 	});
 
