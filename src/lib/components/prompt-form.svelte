@@ -32,6 +32,14 @@
 		if (type === 'fork') {
 			validateForm();
 		}
+
+		Array.from(_form.elements).forEach((el) => {
+			if(el.tagName === 'TEXTAREA') {
+				el.style.height = 'auto';
+				el.style.height = `${el.scrollHeight}px`;
+			}
+		}
+		);
 	});
 
 	function isSelected(model) {
@@ -190,6 +198,7 @@
 	<Tags />
 
 	<div class="description field-wrap">
+		<h2>Description</h2>
 		<textarea
 			name="description"
 			rows="1"
@@ -203,6 +212,7 @@
 	</div>
 
 	<div class="field-wrap content">
+		<h2>Prompt</h2>
 		<textarea
 			name="content"
 			rows="1"
@@ -235,6 +245,7 @@
 		align-items: center;
 		margin-bottom: var(--s-4);
 		width: 100%;
+		max-width: 750px;
 	}
 
 	.name {
@@ -251,6 +262,13 @@
 
 	.model {
 		margin-bottom: var(--s-5);
+	}
+
+	h2 {
+		font-size: var(--fs-4);
+		text-align: start;
+		margin-bottom: var(--s-1);
+		width: 100%;
 	}
 
 	.description {
