@@ -130,7 +130,7 @@ const AI_MODELS = [
 	'ALBERT'
 ];
 
-const PROMPTS = [
+export const RAW_PROMPTS = [
 	{
 		name: 'Art Exhibition Review',
 		description:
