@@ -1,136 +1,8 @@
 import { PrismaClient } from '@prisma/client';
 const prisma = new PrismaClient();
 
-// not used
-const TAGS = [
-	'life-hacks',
-	'motivation',
-	'productivity',
-	'entertainment',
-	'humor',
-	'education',
-	'music',
-	'travel',
-	'health',
-	'fitness',
-	'nutrition',
-	'diy',
-	'gardening',
-	'cooking',
-	'relationships',
-	'personal-finance',
-	'career-advice',
-	'entrepreneurship',
-	'technology',
-	'gaming',
-	'ai-for-beginners',
-	'science-facts',
-	'history',
-	'language-learning',
-	'poetry',
-	'book-recommendations',
-	'movie-reviews',
-	'fashion',
-	'art',
-	'sports',
-	'sustainability',
-	'philosophy',
-	'parenting',
-	'pet-care',
-	'mental-health',
-	'meditation',
-	'yoga',
-	'astronomy',
-	'psychology',
-	'politics',
-	'geography',
-	'photography',
-	'coding',
-	'dance',
-	'virtual-reality',
-	'augmented-reality',
-	'startups',
-	'baking',
-	'gourmet-food',
-	'craft-beer',
-	'wine-tasting',
-	'home-decor',
-	'outdoor-activities',
-	'camping',
-	'hiking',
-	'running',
-	'cycling',
-	'surfing',
-	'rock-climbing',
-	'skiing',
-	'golfing',
-	'board-games',
-	'card-games',
-	'stand-up-comedy',
-	'magic-tricks',
-	'drone-flying',
-	'bird-watching',
-	'classic-literature',
-	'graphic-novels',
-	'indie-films',
-	'retro-gaming',
-	'collecting',
-	'conspiracy-theories',
-	'true-crime',
-	'mythology',
-	'urban-legends',
-	'astrology',
-	'numerology',
-	'vintage-fashion',
-	'street-art',
-	'museums',
-	'world-cultures',
-	'language-exchanges',
-	'digital-nomad-life',
-	'tiny-houses',
-	'zero-waste-lifestyle',
-	'veganism',
-	'plant-based-diets',
-	'animal-rescue',
-	'foster-parenting',
-	'homeschooling',
-	'online-learning',
-	'remote-work',
-	'freelancing',
-	'investing',
-	'cryptocurrency',
-	'sustainable-fashion',
-	'green-energy',
-	'mindfulness',
-	'gratitude',
-	'self-care',
-	'positive-psychology',
-	'emotional-intelligence',
-	'resilience',
-	'stress-management'
-];
-
-// not used
-const AI_MODELS = [
-	'DistilBERT',
-	'XLNet',
-	'MobileBERT',
-	'BERT',
-	'Longformer',
-	'CTRL',
-	'MPNet',
-	'OpenGPT',
-	'ChatGPT',
-	'GPT',
-	'RoBERTa',
-	'Transformer',
-	'TinyBERT',
-	'XLM',
-	'T5',
-	'ALBERT'
-];
-
-export const RAW_PROMPTS = [
+const RAW_PROMPTS = [
+  // 0
 	{
 		name: 'Art Exhibition Review',
 		description:
@@ -140,6 +12,7 @@ export const RAW_PROMPTS = [
 		tags: ['art', 'museums', 'culture', 'education', 'entertainment'],
 		aiModel: 'RoBERTa'
 	},
+  // 1
 	{
 		name: 'Restaurant Review',
 		description:
@@ -149,6 +22,7 @@ export const RAW_PROMPTS = [
 		tags: ['gourmet-food', 'travel', 'lifestyle', 'entertainment', 'culture'],
 		aiModel: 'BERT'
 	},
+  // 2
 	{
 		name: 'Travel Destination Critique',
 		description:
@@ -158,6 +32,7 @@ export const RAW_PROMPTS = [
 		tags: ['travel', 'culture', 'outdoor-activities', 'education', 'entertainment'],
 		aiModel: 'DistilBERT'
 	},
+  // 3
 	{
 		name: 'Play Review',
 		description:
@@ -167,6 +42,7 @@ export const RAW_PROMPTS = [
 		tags: ['entertainment', 'education', 'music', 'culture', 'art'],
 		aiModel: 'ALBERT'
 	},
+  // 4
 	{
 		name: 'Poem Analysis',
 		description:
@@ -176,6 +52,7 @@ export const RAW_PROMPTS = [
 		tags: ['education', 'poetry', 'literature', 'culture', 'language-learning'],
 		aiModel: 'XLNet'
 	},
+  // 5
 	{
 		name: 'Podcast Review',
 		description:
@@ -185,6 +62,7 @@ export const RAW_PROMPTS = [
 		tags: ['entertainment', 'education', 'technology', 'music', 'storytelling'],
 		aiModel: 'Transformer'
 	},
+  // 6
 	{
 		name: 'Game Review',
 		description:
@@ -194,6 +72,7 @@ export const RAW_PROMPTS = [
 		tags: ['gaming', 'technology', 'entertainment', 'storytelling', 'education'],
 		aiModel: 'OpenGPT'
 	},
+  // 7
 	{
 		name: 'Fashion Show Review',
 		description:
@@ -203,6 +82,7 @@ export const RAW_PROMPTS = [
 		tags: ['fashion', 'entertainment', 'culture', 'music', 'art'],
 		aiModel: 'CTRL'
 	},
+  // 8
 	{
 		name: 'Tech Product Review',
 		description:
@@ -212,6 +92,7 @@ export const RAW_PROMPTS = [
 		tags: ['technology', 'education', 'lifestyle', 'productivity', 'entertainment'],
 		aiModel: 'Longformer'
 	},
+  // 9
 	{
 		name: 'Art Appreciation',
 		description:
@@ -221,6 +102,7 @@ export const RAW_PROMPTS = [
 		tags: ['art', 'history', 'culture', 'education', 'psychology'],
 		aiModel: 'BERT'
 	},
+  // 10
 	{
 		name: 'Coding Challenge',
 		description:
@@ -261,301 +143,6 @@ const USERS = [
 		email: 'sophiaWilliamson@gmail.com',
 		picture: 'https://randomuser.me/api/portraits/women/95.jpg'
 	},
-	{
-		firstName: 'Jack',
-		lastName: 'Patterson',
-		username: 'jackPatterson',
-		email: 'jackPatterson@gmail.com',
-		picture: 'https://randomuser.me/api/portraits/men/46.jpg'
-	},
-	{
-		firstName: 'Isabelle',
-		lastName: 'Ellis',
-		username: 'isabelleEllis',
-		email: 'isabelleEllis@gmail.com',
-		picture: 'https://randomuser.me/api/portraits/women/36.jpg'
-	},
-	{
-		firstName: 'William',
-		lastName: 'Murphy',
-		username: 'williamMurphy',
-		email: 'williamMurphy@gmail.com',
-		picture: 'https://randomuser.me/api/portraits/men/37.jpg'
-	},
-	{
-		firstName: 'Emma',
-		lastName: 'Simpson',
-		username: 'emmaSimpson',
-		email: 'emmaSimpson@gmail.com',
-		picture: 'https://randomuser.me/api/portraits/women/77.jpg'
-	},
-	{
-		firstName: 'Noah',
-		lastName: 'Marshall',
-		username: 'noahMarshall',
-		email: 'noahMarshall@gmail.com',
-		picture: 'https://randomuser.me/api/portraits/men/58.jpg'
-	},
-	{
-		firstName: 'Ava',
-		lastName: 'Holmes',
-		username: 'avaHolmes',
-		email: 'avaHolmes@gmail.com',
-		picture: 'https://randomuser.me/api/portraits/women/8.jpg'
-	},
-	{
-		firstName: 'Liam',
-		lastName: 'Knight',
-		username: 'liamKnight',
-		email: 'liamKnight@gmail.com',
-		picture: 'https://randomuser.me/api/portraits/men/7.jpg'
-	},
-	{
-		firstName: 'Mia',
-		lastName: 'Gibson',
-		username: 'miaGibson',
-		email: 'miaGibson@gmail.com',
-		picture: 'https://randomuser.me/api/portraits/women/9.jpg'
-	},
-	{
-		firstName: 'James',
-		lastName: 'Freeman',
-		username: 'jamesFreeman',
-		email: 'jamesFreeman@gmail.com',
-		picture: 'https://randomuser.me/api/portraits/men/49.jpg'
-	},
-	{
-		firstName: 'Lily',
-		lastName: 'Duncan',
-		username: 'lilyDuncan',
-		email: 'lilyDuncan@gmail.com',
-		picture: 'https://randomuser.me/api/portraits/women/10.jpg'
-	},
-	{
-		firstName: 'Michael',
-		lastName: 'Rose',
-		username: 'michaelRose',
-		email: 'michaelRose@gmail.com',
-		picture: 'https://randomuser.me/api/portraits/men/11.jpg'
-	},
-	{
-		firstName: 'Madison',
-		lastName: 'Boyd',
-		username: 'madisonBoyd',
-		email: 'madisonBoyd@gmail.com',
-		picture: 'https://randomuser.me/api/portraits/women/12.jpg'
-	},
-	{
-		firstName: 'Daniel',
-		lastName: 'Morris',
-		username: 'danielMorris',
-		email: 'danielMorris@gmail.com',
-		picture: 'https://randomuser.me/api/portraits/men/13.jpg'
-	},
-	{
-		firstName: 'Sophie',
-		lastName: 'Grant',
-		username: 'sophieGrant',
-		email: 'sophieGrant@gmail.com',
-		picture: 'https://randomuser.me/api/portraits/women/14.jpg'
-	},
-	{
-		firstName: 'Aiden',
-		lastName: 'Mason',
-		username: 'aidenMason',
-		email: 'aidenMason@gmail.com',
-		picture: 'https://randomuser.me/api/portraits/men/15.jpg'
-	},
-	{
-		firstName: 'Ella',
-		lastName: 'Graham',
-		username: 'ellaGraham',
-		email: 'ellaGraham@gmail.com',
-		picture: 'https://randomuser.me/api/portraits/women/16.jpg'
-	},
-	{
-		firstName: 'Adam',
-		lastName: 'Gonda',
-		username: 'adamgonda',
-		email: 'adamgondagyula@gmail.com',
-		picture:
-			'https://media.licdn.com/dms/image/D4D03AQGP2Uqp_BckfA/profile-displayphoto-shrink_800_800/0/1671748473242?e=2147483647&v=beta&t=FisqNTE1LPZ6lCsaITUOg7jg5DdhE5v9eAJJKnBl930'
-	},
-	{
-		firstName: 'Lillian',
-		lastName: 'Newton',
-		username: 'mormota',
-		email: 'testshareloop1@gmail.com',
-		picture: 'https://randomuser.me/api/portraits/men/6.jpg'
-	},
-	{
-		firstName: 'Cynthia',
-		lastName: 'Fisher',
-		username: 'fabriko',
-		email: 'testshareloop2@gmail.com',
-		picture: 'https://randomuser.me/api/portraits/men/5.jpg'
-	},
-	{
-		firstName: 'John',
-		lastName: 'Doe',
-		username: 'johndoe',
-		email: 'johndoe@gmail.com',
-		picture: 'https://randomuser.me/api/portraits/men/45.jpg'
-	},
-	{
-		firstName: 'Jane',
-		lastName: 'Doe',
-		username: 'janedoe',
-		email: 'janedoe@gmail.com',
-		picture: 'https://randomuser.me/api/portraits/women/78.jpg'
-	},
-	{
-		firstName: 'Emma',
-		lastName: 'Brown',
-		username: 'emmabrown',
-		email: 'emmabrown@gmail.com',
-		picture: 'https://randomuser.me/api/portraits/women/56.jpg'
-	},
-	{
-		firstName: 'James',
-		lastName: 'Smith',
-		username: 'jamessmith',
-		email: 'jamessmith@gmail.com',
-		picture: 'https://randomuser.me/api/portraits/men/98.jpg'
-	},
-	{
-		firstName: 'Alice',
-		lastName: 'Johnson',
-		username: 'alicejohnson',
-		email: 'alicejohnson@gmail.com',
-		picture: 'https://randomuser.me/api/portraits/women/12.jpg'
-	},
-	{
-		firstName: 'Bob',
-		lastName: 'Thompson',
-		username: 'bobthompson',
-		email: 'bobthompson@gmail.com',
-		picture: 'https://randomuser.me/api/portraits/men/34.jpg'
-	},
-	{
-		firstName: 'Charlotte',
-		lastName: 'Robinson',
-		username: 'charlotterobinson',
-		email: 'charlotterobinson@gmail.com',
-		picture: 'https://randomuser.me/api/portraits/women/56.jpg'
-	},
-	{
-		firstName: 'David',
-		lastName: 'Clark',
-		username: 'davidclark',
-		email: 'davidclark@gmail.com',
-		picture: 'https://randomuser.me/api/portraits/men/78.jpg'
-	},
-	{
-		firstName: 'Emily',
-		lastName: 'Mitchell',
-		username: 'emilymitchell',
-		email: 'emilymitchell@gmail.com',
-		picture: 'https://randomuser.me/api/portraits/women/90.jpg'
-	},
-	{
-		firstName: 'Frank',
-		lastName: 'Anderson',
-		username: 'frankanderson',
-		email: 'frankanderson@gmail.com',
-		picture: 'https://randomuser.me/api/portraits/men/21.jpg'
-	},
-	{
-		firstName: 'Grace',
-		lastName: 'Taylor',
-		username: 'gracetaylor',
-		email: 'gracetaylor@gmail.com',
-		picture: 'https://randomuser.me/api/portraits/women/43.jpg'
-	},
-	{
-		firstName: 'Henry',
-		lastName: 'White',
-		username: 'henrywhite',
-		email: 'henrywhite@gmail.com',
-		picture: 'https://randomuser.me/api/portraits/men/65.jpg'
-	},
-	{
-		firstName: 'Isabella',
-		lastName: 'Harris',
-		username: 'isabellaharris',
-		email: 'isabellaharris@gmail.com',
-		picture: 'https://randomuser.me/api/portraits/women/87.jpg'
-	},
-	{
-		firstName: 'Jacob',
-		lastName: 'Davis',
-		username: 'jacobdavis',
-		email: 'jacobdavis@gmail.com',
-		picture: 'https://randomuser.me/api/portraits/men/9.jpg'
-	},
-	{
-		firstName: 'Carl',
-		lastName: 'Wagner',
-		username: 'turboSpeed',
-		email: 'carlWagner@gmail.com',
-		picture: 'https://randomuser.me/api/portraits/men/31.jpg'
-	},
-	{
-		firstName: 'Emma',
-		lastName: 'Dobson',
-		username: 'emmaDob',
-		email: 'emmaDobson@gmail.com',
-		picture: 'https://randomuser.me/api/portraits/women/22.jpg'
-	},
-	{
-		firstName: 'Oscar',
-		lastName: 'Howard',
-		username: 'oscarTheGrouch',
-		email: 'oscarHoward@gmail.com',
-		picture: 'https://randomuser.me/api/portraits/men/18.jpg'
-	},
-	{
-		firstName: 'Laura',
-		lastName: 'Harper',
-		username: 'lauraHarp',
-		email: 'lauraHarper@gmail.com',
-		picture: 'https://randomuser.me/api/portraits/women/89.jpg'
-	},
-	{
-		firstName: 'Paul',
-		lastName: 'Martin',
-		username: 'paulMartini',
-		email: 'paulMartin@gmail.com',
-		picture: 'https://randomuser.me/api/portraits/men/44.jpg'
-	},
-	{
-		firstName: 'Emily',
-		lastName: 'Cook',
-		username: 'cookieMonster',
-		email: 'emilyCook@gmail.com',
-		picture: 'https://randomuser.me/api/portraits/women/35.jpg'
-	},
-	{
-		firstName: 'George',
-		lastName: 'Crawford',
-		username: 'georgeCraw',
-		email: 'georgeCrawford@gmail.com',
-		picture: 'https://randomuser.me/api/portraits/men/68.jpg'
-	},
-	{
-		firstName: 'Amelia',
-		lastName: 'Morrison',
-		username: 'ameliMorr',
-		email: 'ameliaMorrison@gmail.com',
-		picture: 'https://randomuser.me/api/portraits/women/17.jpg'
-	},
-	{
-		firstName: 'John',
-		lastName: 'Atkinson',
-		username: 'johnA',
-		email: 'johnAtkinson@gmail.com',
-		picture: 'https://randomuser.me/api/portraits/men/99.jpg'
-	}
 ];
 
 // get users
@@ -575,88 +162,78 @@ async function getUsers() {
 	return await Promise.all(users);
 }
 
-async function getAiModels() {
-	const models = AI_MODELS.map(async (model) => {
-		return await prisma.aiModel.create({
-			data: {
-				name: model,
-				link: 'https://chat.openai.com/'
-			}
-		});
-	});
-	return await Promise.all(models);
-}
-
-async function getTags() {
-	const tags = TAGS.map(async (tag) => {
-		return await prisma.tag.create({
-			data: {
-				name: tag
-			}
-		});
-	});
-	return await Promise.all(tags);
-}
-
 async function main() {
-	// Get the arrays of users, AI models, and tags
+	// Get the array of users
 	const users = await getUsers();
-	const aiModels = await getAiModels();
-	const tags = await getTags();
 
 	// Function to get a random element from an array
 	const getRandomElement = (array) => array[Math.floor(Math.random() * array.length)];
 
 	// Function to get a random subset of an array
 	const getRandomSubset = (array, minLen, maxLen) => {
-		const shuffled = array.sort(() => 0.5 - Math.random());
-		return shuffled.slice(0, Math.floor(Math.random() * (maxLen - minLen + 1)) + minLen);
+			const shuffled = array.sort(() => 0.5 - Math.random());
+			return shuffled.slice(0, Math.floor(Math.random() * (maxLen - minLen + 1)) + minLen);
 	};
 
 	// Function to get a random number between two values
 	const getRandomNumber = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min;
 
-	// Iterate over each item in the PROMPTS array
-	for (const prompt of PROMPTS) {
-		// Randomly select an AI model, an author, and some tags
-		const aiModel = getRandomElement(aiModels);
-		const author = getRandomElement(users);
-		const selectedTags = getRandomSubset(tags, 2, 5);
+	// Iterate over each item in the RAW_PROMPTS array
+	for (const prompt of RAW_PROMPTS) {
+			// Randomly select an author
+			const author = getRandomElement(users);
 
-		// Randomly select some users to like the prompt
-		const likers = getRandomSubset(users, 1, users.length);
+			// Randomly select some users to like the prompt
+			const likers = getRandomSubset(users, 1, users.length);
 
-		// Randomly select forkedCount
-		const forkedCount = getRandomNumber(1, 1000);
+			// Randomly select forkedCount
+			const forkedCount = getRandomNumber(1, 1000);
 
-		// Create the prompt
-		await prisma.prompt.create({
-			data: {
-				name: prompt.name,
-				description: prompt.description,
-				content: prompt.content,
-				slug: prompt.name.toLowerCase().replace(/\s/g, '-'),
-				author: {
-					connect: {
-						id: author.id
-					}
-				},
-				aiModel: {
-					connect: {
-						id: aiModel.id
-					}
-				},
-				tags: {
-					connect: selectedTags.map((tag) => ({ id: tag.id }))
-				},
-				likes: {
-					create: likers.map((user) => ({ userId: user.id }))
-				},
-				forkedCount: forkedCount
+			// Check if the AI Model exists, create if it doesn't
+			let aiModel = await prisma.aiModel.findUnique({ where: { name: prompt.aiModel } });
+			if (!aiModel) {
+					aiModel = await prisma.aiModel.create({ data: { name: prompt.aiModel, link: 'https://chat.openai.com/' } });
 			}
-		});
+
+			// Check if the tags exist, create them if they don't
+			const createdTags = [];
+			for (const tagName of prompt.tags) {
+					let tag = await prisma.tag.findUnique({ where: { name: tagName } });
+					if (!tag) {
+							tag = await prisma.tag.create({ data: { name: tagName } });
+					}
+					createdTags.push(tag);
+			}
+
+			// Create the prompt
+			await prisma.prompt.create({
+					data: {
+							name: prompt.name,
+							description: prompt.description,
+							content: prompt.content,
+							slug: prompt.name.toLowerCase().replace(/\s/g, '-'),
+							author: {
+									connect: {
+											id: author.id
+									}
+							},
+							aiModel: {
+									connect: {
+											id: aiModel.id
+									}
+							},
+							tags: {
+									connect: createdTags.map((tag) => ({ id: tag.id }))
+							},
+							likes: {
+									create: likers.map((user) => ({ userId: user.id }))
+							},
+							forkedCount: forkedCount
+					}
+			});
 	}
 }
+
 
 main()
 	.then(async () => {
