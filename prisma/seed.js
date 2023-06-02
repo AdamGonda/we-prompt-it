@@ -203,7 +203,7 @@ async function main() {
 		for (const tagName of prompt.tags) {
 			let tag = await prisma.tag.findUnique({ where: { name: tagName } });
 			if (!tag) {
-				tag = await prisma.tag.create({ data: { name: tagName } });
+				tag = await prisma.tag.create({ data: { name: tagName, color: stringToColor(tagName) } });
 			}
 			createdTags.push(tag);
 		}
@@ -399,6 +399,19 @@ export function promptToString(prompt) {
 		prompt.content
 	} ${prompt.tags.join(' ')} ${prompt.aiModel.name}`;
 	return getCleanText(rawString);
+}
+
+function stringToColor(str) {
+	let hash = 0;
+	for (let i = 0; i < str.length; i++) {
+		hash = str.charCodeAt(i) + ((hash << 5) - hash);
+	}
+	let color = '#';
+	for (let i = 0; i < 3; i++) {
+		let value = (hash >> (i * 8)) & 0xaf; // change 0x7f to 0xaf
+		color += ('00' + value.toString(16)).substr(-2);
+	}
+	return color;
 }
 
 main()

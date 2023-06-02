@@ -3,6 +3,7 @@ import { error, json } from '@sveltejs/kit';
 import { PrismaClient } from '@prisma/client';
 import globalIncludes from '$lib/global-includes';
 import natural from 'natural';
+import { convertToSlug } from '$lib/utils';
 
 const prisma = new PrismaClient();
 
