@@ -32,7 +32,7 @@
 			<img class="author" src={prompt.author.picture} alt="" />
 			<p class="model">{prompt.aiModel.name}</p>
 		</div>
-		
+
 		<div>
 			<span class="likes">
 				<img
@@ -83,14 +83,20 @@
 	.model {
 		margin-top: var(--s-2);
 		margin-left: var(--s-2);
-		text-decoration: underline;
+		position: relative;
+	}
+
+	.model::before {
+		position: absolute;
+		content: 'Model';
+		font-size: 10px;
+		top: -10px;
 	}
 
 	.description {
 		font-size: 1.15rem;
 		font-weight: 400;
 		margin-top: var(--s-4);
-		/* margin-bottom: var(--s-6); */
 		margin-bottom: 40px;
 	}
 
