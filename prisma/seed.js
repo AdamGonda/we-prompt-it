@@ -208,7 +208,7 @@ async function main() {
 			createdTags.push(tag);
 		}
 
-		const fulltext = getCleanText(promptToString(prompt))
+		const fulltext = promptToString(prompt)
 
 		// Create the prompt
 		await prisma.prompt.create({
