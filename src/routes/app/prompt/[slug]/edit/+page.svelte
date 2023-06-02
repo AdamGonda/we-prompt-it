@@ -53,32 +53,33 @@
 	}}
 >
 	<div class="slot">
-		<button
-			style="font-size: var(--fs-1); text-decoration: underline"
+		<div>
+			<button
+			class="bubble delete"
 			type="button"
-			on:click={() => confirmDiscardDialog.showModal()}
+			on:click={() => {
+				confirmDeleteDialog.showModal();
+			}}>Delete</button
 		>
-			discard changes
-		</button>
-		<button
-			style="background: lightgreen;"
-			class="bubble"
-			type="button"
-			{disabled}
-			on:click={() => confirmEditDialog.showModal()}>Apply changes</button
-		>
+		</div>
+
+		<dir class="discard-apply">
+			<button
+				class="discard"
+				type="button"
+				on:click={() => confirmDiscardDialog.showModal()}
+			>
+				discard changes
+			</button>
+			<button
+				class="bubble apply"
+				type="button"
+				{disabled}
+				on:click={() => confirmEditDialog.showModal()}>Apply changes</button
+			>
+		</dir>
 	</div>
 </PromptForm>
-
-<div class="danger-zone">
-	<p>Danger zone</p>
-	<button
-		class="bubble"
-		on:click={() => {
-			confirmDeleteDialog.showModal();
-		}}>Delete</button
-	>
-</div>
 
 <!-- svelte-ignore a11y-click-events-have-key-events -->
 <dialog bind:this={confirmEditDialog} on:click={handleBackdropClose}>
@@ -126,26 +127,6 @@
 </dialog>
 
 <style>
-	.danger-zone {
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		margin-top: var(--s-5);
-	}
-
-	.danger-zone button {
-		color: white;
-		background: red;
-		border: none;
-	}
-	.danger-zone p {
-		margin: 0;
-		margin-top: var(--s-7);
-		margin-bottom: var(--s-4);
-		font-size: var(--fs-4);
-		font-weight: 500;
-	}
-
 	dialog {
 		background: white;
 		border: none;
@@ -192,8 +173,10 @@
 	.slot {
 		display: flex;
 		justify-content: space-between;
-		gap: var(--s-4);
+		align-items: center;
 		margin-top: var(--s-5);
+		width: 100%;
+		max-width: 750px;
 	}
 
 	.slot button {
@@ -201,5 +184,27 @@
 		border: none;
 		cursor: pointer;
 		font-size: var(--fs-2);
+	}
+
+	.discard-apply{
+		display: flex;
+		gap: var(--s-4);
+	}
+
+	.apply {
+		background: lightgreen !important;
+		color: black;
+	}
+
+	.discard {
+		font-size: var(--fs-1) !important;
+		text-decoration: underline
+	}
+
+	.delete {
+		background: rgb(255, 38, 38) !important;
+		color: white;
+		border-radius: var(--br-1);
+    padding: var(--s-3) var(--s-4);
 	}
 </style>
