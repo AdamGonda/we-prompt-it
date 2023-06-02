@@ -7,6 +7,10 @@ import globalIncludes from '$lib/global-includes';
 const prisma = new PrismaClient();
 
 export async function loadIndex(event) {
+	if (event.url.searchParams.has('skip_loader')) {
+		return {};
+	}
+
 	return {
 		prompts: await _search(event)
 	};
@@ -15,9 +19,9 @@ export async function loadIndex(event) {
 export async function loadIndexLayout(event) {
 	const session = await event.locals.getSession();
 	let dbUser = null;
-	
-	if(session) {
-		dbUser = await getDBUser(event)
+
+	if (session) {
+		dbUser = await getDBUser(event);
 	}
 
 	return { session, dbUser };
@@ -97,7 +101,7 @@ export async function loadCreatePrompt() {
 
 export async function loadProfile(event) {
 	// if id is not present trhow 404
-	if(!event.params.username) {
+	if (!event.params.username) {
 		throw error(404, {
 			message: 'Not found'
 		});
@@ -113,5 +117,5 @@ export async function loadProfile(event) {
 		}
 	});
 
-	return { user }
+	return { user };
 }
