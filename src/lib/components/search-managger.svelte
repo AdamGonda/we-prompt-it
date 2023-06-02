@@ -6,7 +6,7 @@
 	let firstLoad = true;
 
 	afterNavigate(async () => {		
-		if (!firstLoad) {
+		if (!firstLoad && $page.route.id == '/') {
 			await searchStore.search({
 				endpoint: `/api/search${$page.url.search}`
 			});
