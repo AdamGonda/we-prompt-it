@@ -144,7 +144,7 @@ function _handlePagination(query, event) {
 }
 
 function _handleSearchBar(query, event) {
-	const WORDS_LIMIT = 5;
+	const WORDS_LIMIT = 8;
 	const text = event.url.searchParams.get('text');
 
 	if (text === null) {
@@ -156,19 +156,41 @@ function _handleSearchBar(query, event) {
 	}
 
 	let search = getCleanText(text);
-
 	if (search.includes(' ')) {
 		search = search.split(' ').join(' | ');
 	}
-
 	const fulltextSearch = {
 		fulltext: {
 			search
 		}
 	};
 
+	const tagContains = text.split(' ').map((word) => {
+		return {
+			tags: {
+				some: {
+					name: {
+						contains: word,
+						mode: 'insensitive'
+					}
+				}
+			}
+		};
+	});
+
+	const aiModelContain = text.split(' ').map((word) => {
+		return {
+			aiModel: {
+				name: {
+					contains: word,
+					mode: 'insensitive'
+				}
+			}
+		};
+	});
+
 	if (text) {
-		query.where.OR = [fulltextSearch];
+		query.where.OR = [fulltextSearch, ...tagContains, ...aiModelContain];
 	}
 }
 
