@@ -80,7 +80,7 @@
 		/>
 		{#if inputValue}
 			<button type="button" on:click={handleClear} class="clear-button">
-				<p>x</p>
+				<img src="/x-icon.png" alt="clear" />
 			</button>
 		{/if}
 	</div>
@@ -138,6 +138,18 @@
 		background: none;
 		border: none;
 		cursor: pointer;
-		color: white;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		border-radius: 50%;
+	}
+
+	.clear-button:hover {
+		background: #cdcdcd;
+	}
+
+	.clear-button img{
+		width: 14px;
+		height: 14px;
 	}
 </style>
