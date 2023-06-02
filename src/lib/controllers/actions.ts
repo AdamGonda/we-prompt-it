@@ -5,6 +5,7 @@ import type { RequestEvent } from '@sveltejs/kit';
 import { error } from '@sveltejs/kit';
 import { PrismaClient } from '@prisma/client';
 import { convertToSlug, validateForm } from '$lib/utils';
+import { promptToString } from './api';
 
 const prisma = new PrismaClient();
 
@@ -18,9 +19,7 @@ export async function createPrompt(event: RequestEvent) {
 		data: {
 			description: data.description,
 			tags: {
-				connect: tagIds
-					? tagIds.map((tagId) => ({ id: tagId }))
-					: undefined
+				connect: tagIds ? tagIds.map((tagId) => ({ id: tagId })) : undefined
 			},
 			name: data.name,
 			author: {
@@ -34,7 +33,12 @@ export async function createPrompt(event: RequestEvent) {
 				connect: {
 					id: aiModelId
 				}
-			}
+			},
+			fulltext: promptToString({
+				name: data.name,
+				description: data.description,
+				content: data.content
+			})
 		}
 	});
 }
@@ -73,15 +77,18 @@ export async function editPrompt(event: RequestEvent) {
 			slug: updateSlug ? convertToSlug(user.username, data.name) : promptToEdit.slug,
 			description: data.description,
 			tags: {
-				connect: tagIds
-					? tagIds.map((tagId) => ({ id: tagId }))
-					: undefined,
+				connect: tagIds ? tagIds.map((tagId) => ({ id: tagId })) : undefined,
 				disconnect: tagIdsToRemove
 					? tagIdsToRemove.map((tagId) => ({ id: tagId }))
 					: undefined
 			},
 			content: data.content,
-			aiModelId
+			aiModelId,
+			fulltext: promptToString({
+				name: data.name,
+				description: data.description,
+				content: data.content
+			})
 		}
 	});
 }
@@ -126,10 +133,13 @@ export async function forkPrompt(event: RequestEvent) {
 				}
 			},
 			tags: {
-				connect: tagIds
-					? tagIds.map((tagId) => ({ id: tagId }))
-					: undefined
-			}
+				connect: tagIds ? tagIds.map((tagId) => ({ id: tagId })) : undefined
+			},
+			fulltext: promptToString({
+				name: data.name,
+				description: data.description,
+				content: data.content
+			})
 		}
 	});
 }

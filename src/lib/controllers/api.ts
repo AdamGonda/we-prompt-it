@@ -151,7 +151,7 @@ function _handleSearchBar(query, event) {
 		return;
 	}
 
-	if(text.includes(' ') && text.split(' ').length > WORDS_LIMIT) {
+	if (text.includes(' ') && text.split(' ').length > WORDS_LIMIT) {
 		throw new Error(`You can search for a maximum of ${WORDS_LIMIT} words`);
 	}
 
@@ -223,6 +223,8 @@ function _handleSortBy(query, event) {
 		});
 	}
 }
+
+// UTILS
 
 export function getCleanText(text) {
 	const tokenizer = new natural.WordPunctTokenizer();
@@ -379,8 +381,6 @@ export function getCleanText(text) {
 }
 
 export function promptToString(prompt) {
-	const rawString = `${prompt.name} ${prompt.description} ${
-		prompt.content
-	} ${prompt.tags.join(' ')} ${prompt.aiModel.name}`;
+	const rawString = `${prompt.name} ${prompt.description} ${prompt.content}`;
 	return getCleanText(rawString);
 }

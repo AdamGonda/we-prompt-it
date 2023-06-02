@@ -203,12 +203,14 @@ async function main() {
 		for (const tagName of prompt.tags) {
 			let tag = await prisma.tag.findUnique({ where: { name: tagName } });
 			if (!tag) {
-				tag = await prisma.tag.create({ data: { name: tagName, color: stringToColor(tagName) } });
+				tag = await prisma.tag.create({
+					data: { name: tagName, color: stringToColor(tagName) }
+				});
 			}
 			createdTags.push(tag);
 		}
 
-		const fulltext = promptToString(prompt)
+		const fulltext = promptToString(prompt);
 
 		// Create the prompt
 		await prisma.prompt.create({
@@ -395,9 +397,7 @@ export function getCleanText(text) {
 }
 
 export function promptToString(prompt) {
-	const rawString = `${prompt.name} ${prompt.description} ${
-		prompt.content
-	} ${prompt.tags.join(' ')} ${prompt.aiModel.name}`;
+	const rawString = `${prompt.name} ${prompt.description} ${prompt.content}`;
 	return getCleanText(rawString);
 }
 
