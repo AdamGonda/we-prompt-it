@@ -4,9 +4,18 @@
 	import { searchFocused } from '$lib/stores/search-bar-store';
 	import searchStore from '$lib/stores/search-store';
 
+	let input;
 	let inputValue;
 	let placeholder = 'Find the prompt you need';
 	let inputInFocus = false;
+
+	function onKeyDown(e) {
+		if (e.key == 'Escape' && inputInFocus) {
+			searchFocused.update((value) => (value = false));
+			inputInFocus = false;
+			input.blur();
+		}
+	}
 
 	afterNavigate(async () => {
 		initVarsFromURL();
@@ -62,6 +71,8 @@
 	}
 </script>
 
+<svelte:window on:keydown|preventDefault={onKeyDown} />
+
 <form
 	name="search"
 	method="POST"
@@ -71,6 +82,7 @@
 	<div class="search-input-container">
 		<input
 			autocomplete="off"
+			bind:this={input}
 			on:focus={handleFocus}
 			on:blur={handleBlur}
 			bind:value={inputValue}
@@ -148,7 +160,7 @@
 		background: #cdcdcd;
 	}
 
-	.clear-button img{
+	.clear-button img {
 		width: 14px;
 		height: 14px;
 	}
