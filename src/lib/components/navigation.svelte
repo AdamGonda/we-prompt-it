@@ -4,6 +4,7 @@
 	import UserAvatar from './user-avatar.svelte';
 	import SearchManagger from './search-managger.svelte';
 	import routes from '$lib/routes';
+	import { goto } from '$app/navigation';
 
 	const user = $page.data.session?.user;
 	$: links = {
@@ -12,13 +13,21 @@
 	};
 	$: onMycollection = $page.route.id.includes('my-collection')
 	$: onCreate = $page.route.id.includes('create') || $page.route.id.includes('fork')
+
+	function goHome() {
+		goto(`/?skip_loader`).then(() => {
+			const url = `/`;
+			history.pushState({message: "New State"}, "", url);
+		});
+	}
 </script>
 
 <nav>
 	<SearchManagger />
-	<a href={routes.landing} class="logo">
-		<img src="/weprompt-logo.png" alt="logo" />
-	</a>
+
+	<!-- svelte-ignore a11y-click-events-have-key-events -->
+	<img on:click={goHome} src="/weprompt-logo.png" alt="logo" />
+
 	<SearchBar />
 
 	<a href={routes.myCollection(user)} class="button">
@@ -42,6 +51,7 @@
 	img {
 		width: 38px;
 		margin-top: 3px;
+		cursor: pointer;
 	}
 
 	a {

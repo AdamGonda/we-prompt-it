@@ -51,7 +51,7 @@
 	}
 
 	async function triggerSearch() {
-		goto(`/?${varsToQuerystring()}&skip_loader=true`).then(() => {
+		goto(`/?${varsToQuerystring()}&skip_loader`).then(() => {
 			const url = `/?${varsToQuerystring()}`;
 			history.pushState({message: "New State"}, "", url);
 		});
