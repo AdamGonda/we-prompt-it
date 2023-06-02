@@ -9,14 +9,6 @@
 	let placeholder = 'Find the prompt you need';
 	let inputInFocus = false;
 
-	function onKeyDown(e) {
-		if (e.key == 'Escape' && inputInFocus) {
-			searchFocused.update((value) => (value = false));
-			inputInFocus = false;
-			input.blur();
-		}
-	}
-
 	afterNavigate(async () => {
 		initVarsFromURL();
 
@@ -69,9 +61,17 @@
 	async function triggerSearch() {
 		goto(`/search?${varsToQuerystring()}`);
 	}
+
+	function blurInput(e) {
+		if (e.key == 'Escape' && inputInFocus) {
+			searchFocused.update((value) => (value = false));
+			inputInFocus = false;
+			input.blur();
+		}
+	}
 </script>
 
-<svelte:window on:keydown|preventDefault={onKeyDown} />
+<svelte:window on:keydown|preventDefault={blurInput} />
 
 <form
 	name="search"
