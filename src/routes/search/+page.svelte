@@ -1,9 +1,10 @@
 <script>
-	import { page } from '$app/stores';
-	import searchStore from '$lib/stores/search-store';
+	import searchStore, {isLoading} from '$lib/stores/search-store';
 	import CardList from '$lib/components/card-list.svelte';
+	import LoadingIndicator from '$lib/components/loading-indicator.svelte';
 
 	let resultsToShow = [];
+	console.log('log isLoading', $isLoading)
 
 	searchStore.subscribe((value) => {
 		resultsToShow = value;
@@ -15,5 +16,9 @@
 </svelte:head>
 
 <main>
-	<CardList prompts={resultsToShow} />
+	{#if $isLoading}
+		<LoadingIndicator />
+	{:else}
+		<CardList prompts={resultsToShow} />
+	{/if}
 </main>

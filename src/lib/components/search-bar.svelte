@@ -71,7 +71,7 @@
 	}
 </script>
 
-<svelte:window on:keydown|preventDefault={blurInput} />
+<svelte:window on:keydown={blurInput} />
 
 <form
 	name="search"
