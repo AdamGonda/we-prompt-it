@@ -1,9 +1,10 @@
-import { PrismaClient } from '@prisma/client';
+import '@tensorflow/tfjs-backend-cpu';
+import { TensorFlowEmbeddings } from 'langchain/embeddings/tensorflow';
+import fs from 'fs';
 import natural from 'natural';
-const prisma = new PrismaClient();
 
 const RAW_PROMPTS = [
-	// 0
+  // 0
 	{
 		name: 'Art Exhibition Review',
 		description:
@@ -13,7 +14,7 @@ const RAW_PROMPTS = [
 		tags: ['art', 'museums', 'culture', 'education', 'entertainment'],
 		aiModel: 'RoBERTa'
 	},
-	// 1
+  // 1
 	{
 		name: 'Restaurant Review',
 		description:
@@ -23,7 +24,7 @@ const RAW_PROMPTS = [
 		tags: ['gourmet-food', 'travel', 'lifestyle', 'entertainment', 'culture'],
 		aiModel: 'BERT'
 	},
-	// 2
+  // 2
 	{
 		name: 'Travel Destination Critique',
 		description:
@@ -33,7 +34,7 @@ const RAW_PROMPTS = [
 		tags: ['travel', 'culture', 'outdoor-activities', 'education', 'entertainment'],
 		aiModel: 'DistilBERT'
 	},
-	// 3
+  // 3
 	{
 		name: 'Play Review',
 		description:
@@ -43,7 +44,7 @@ const RAW_PROMPTS = [
 		tags: ['entertainment', 'education', 'music', 'culture', 'art'],
 		aiModel: 'ALBERT'
 	},
-	// 4
+  // 4
 	{
 		name: 'Poem Analysis',
 		description:
@@ -53,7 +54,7 @@ const RAW_PROMPTS = [
 		tags: ['education', 'poetry', 'literature', 'culture', 'language-learning'],
 		aiModel: 'XLNet'
 	},
-	// 5
+  // 5
 	{
 		name: 'Podcast Review',
 		description:
@@ -63,7 +64,7 @@ const RAW_PROMPTS = [
 		tags: ['entertainment', 'education', 'technology', 'music', 'storytelling'],
 		aiModel: 'Transformer'
 	},
-	// 6
+  // 6
 	{
 		name: 'Game Review',
 		description:
@@ -73,7 +74,7 @@ const RAW_PROMPTS = [
 		tags: ['gaming', 'technology', 'entertainment', 'storytelling', 'education'],
 		aiModel: 'OpenGPT'
 	},
-	// 7
+  // 7
 	{
 		name: 'Fashion Show Review',
 		description:
@@ -83,7 +84,7 @@ const RAW_PROMPTS = [
 		tags: ['fashion', 'entertainment', 'culture', 'music', 'art'],
 		aiModel: 'CTRL'
 	},
-	// 8
+  // 8
 	{
 		name: 'Tech Product Review',
 		description:
@@ -93,7 +94,7 @@ const RAW_PROMPTS = [
 		tags: ['technology', 'education', 'lifestyle', 'productivity', 'entertainment'],
 		aiModel: 'Longformer'
 	},
-	// 9
+  // 9
 	{
 		name: 'Art Appreciation',
 		description:
@@ -103,7 +104,7 @@ const RAW_PROMPTS = [
 		tags: ['art', 'history', 'culture', 'education', 'psychology'],
 		aiModel: 'BERT'
 	},
-	// 10
+  // 10
 	{
 		name: 'Coding Challenge',
 		description:
@@ -115,132 +116,35 @@ const RAW_PROMPTS = [
 	}
 ];
 
-const USERS = [
-	{
-		firstName: 'Adam',
-		lastName: 'Gonda',
-		username: 'adamgonda',
-		email: 'adamgondagyula@gmail.com',
-		picture: 'https://randomuser.me/api/portraits/men/23.jpg'
-	},
-	{
-		firstName: 'Chloe',
-		lastName: 'Ball',
-		username: 'chloeBall',
-		email: 'chloeBall@gmail.com',
-		picture: 'https://randomuser.me/api/portraits/women/40.jpg'
-	},
-	{
-		firstName: 'Ethan',
-		lastName: 'Riley',
-		username: 'ethanRiley',
-		email: 'ethanRiley@gmail.com',
-		picture: 'https://randomuser.me/api/portraits/men/80.jpg'
-	},
-	{
-		firstName: 'Sophia',
-		lastName: 'Williamson',
-		username: 'sophiaWilliamson',
-		email: 'sophiaWilliamson@gmail.com',
-		picture: 'https://randomuser.me/api/portraits/women/95.jpg'
-	}
-];
-
-// get users
-async function getUsers() {
-	const users = USERS.map(async (user) => {
-		return await prisma.user.create({
-			data: {
-				firstName: user.firstName,
-				lastName: user.lastName,
-				username: user.username,
-				email: user.email,
-				picture: user.picture
-			}
-		});
-	});
-
-	return await Promise.all(users);
-}
-
 async function main() {
-	// Get the array of users
-	const users = await getUsers();
+	const embeddings = new TensorFlowEmbeddings();
 
-	// Function to get a random element from an array
-	const getRandomElement = (array) => array[Math.floor(Math.random() * array.length)];
+	const strings = promptsToStrings(RAW_PROMPTS)
+	const result = await embeddings.embedDocuments(strings);
 
-	// Function to get a random subset of an array
-	const getRandomSubset = (array, minLen, maxLen) => {
-		const shuffled = array.sort(() => 0.5 - Math.random());
-		return shuffled.slice(0, Math.floor(Math.random() * (maxLen - minLen + 1)) + minLen);
+	const perExample = {
+		rows: result.map((row, i) => {
+			return {
+				vector: row,
+				ref: i
+			};
+		})
 	};
 
-	// Function to get a random number between two values
-	const getRandomNumber = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min;
-
-	// Iterate over each item in the RAW_PROMPTS array
-	for (const prompt of RAW_PROMPTS) {
-		// Randomly select an author
-		const author = getRandomElement(users);
-
-		// Randomly select some users to like the prompt
-		const likers = getRandomSubset(users, 1, users.length);
-
-		// Randomly select forkedCount
-		const forkedCount = getRandomNumber(1, 1000);
-
-		// Check if the AI Model exists, create if it doesn't
-		let aiModel = await prisma.aiModel.findUnique({ where: { name: prompt.aiModel } });
-		if (!aiModel) {
-			aiModel = await prisma.aiModel.create({
-				data: { name: prompt.aiModel, link: 'https://chat.openai.com/' }
-			});
-		}
-
-		// Check if the tags exist, create them if they don't
-		const createdTags = [];
-		for (const tagName of prompt.tags) {
-			let tag = await prisma.tag.findUnique({ where: { name: tagName } });
-			if (!tag) {
-				tag = await prisma.tag.create({ data: { name: tagName } });
-			}
-			createdTags.push(tag);
-		}
-
-		const fulltext = getCleanText(promptToString(prompt))
-
-		// Create the prompt
-		await prisma.prompt.create({
-			data: {
-				name: prompt.name,
-				description: prompt.description,
-				content: prompt.content,
-				slug: prompt.name.toLowerCase().replace(/\s/g, '-'),
-				author: {
-					connect: {
-						id: author.id
-					}
-				},
-				aiModel: {
-					connect: {
-						id: aiModel.id
-					}
-				},
-				tags: {
-					connect: createdTags.map((tag) => ({ id: tag.id }))
-				},
-				likes: {
-					create: likers.map((user) => ({ userId: user.id }))
-				},
-				forkedCount: forkedCount,
-				fulltext
-			}
-		});
-	}
+	fs.writeFile('my-data.json', JSON.stringify(perExample, null, 2), (err) => {
+		if (err) throw err;
+		console.log('Data written to file');
+	});
 }
 
-export function getCleanText(text) {
+function promptsToStrings(rawPrompts){
+  return rawPrompts.map((prompt) => {
+    const rawString = `${prompt.name} ${prompt.description} ${prompt.content} ${prompt.tags.join(' ')}`;
+    return getCleanText(rawString);
+  });
+}
+
+function getCleanText(text) {
 	const tokenizer = new natural.WordPunctTokenizer();
 
 	const stopWords = [
@@ -394,19 +298,19 @@ export function getCleanText(text) {
 	return tokens.join(' ');
 }
 
-export function promptToString(prompt) {
-	const rawString = `${prompt.name} ${prompt.description} ${
-		prompt.content
-	} ${prompt.tags.join(' ')} ${prompt.aiModel.name}`;
-	return getCleanText(rawString);
+async function query(q) {
+	const embeddings = new TensorFlowEmbeddings();
+	const result = await embeddings.embedQuery(getCleanText(q));
+
+	fs.writeFile('query.json', JSON.stringify(result, null, 4), (err) => {
+		if (err) throw err;
+		console.log('Data written to file');
+	});
+
+	// console.log('log result', result);
 }
 
-main()
-	.then(async () => {
-		await prisma.$disconnect();
-	})
-	.catch(async (e) => {
-		console.error(e);
-		await prisma.$disconnect();
-		process.exit(1);
-	});
+
+// main();
+// query('Art Exhibition Review')  // 0, 9, 7, 3, 6
+// query('give me some art stuff') // 0, 9, 3, 4, 6
