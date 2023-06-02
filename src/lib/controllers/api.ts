@@ -112,7 +112,6 @@ export async function search(event) {
 }
 
 export async function _search(event) {
-	console.log('log _search', )
 	const query = {
 		where: {
 			AND: [
