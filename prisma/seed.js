@@ -1,8 +1,9 @@
 import { PrismaClient } from '@prisma/client';
+import natural from 'natural';
 const prisma = new PrismaClient();
 
 const RAW_PROMPTS = [
-  // 0
+	// 0
 	{
 		name: 'Art Exhibition Review',
 		description:
@@ -12,7 +13,7 @@ const RAW_PROMPTS = [
 		tags: ['art', 'museums', 'culture', 'education', 'entertainment'],
 		aiModel: 'RoBERTa'
 	},
-  // 1
+	// 1
 	{
 		name: 'Restaurant Review',
 		description:
@@ -22,7 +23,7 @@ const RAW_PROMPTS = [
 		tags: ['gourmet-food', 'travel', 'lifestyle', 'entertainment', 'culture'],
 		aiModel: 'BERT'
 	},
-  // 2
+	// 2
 	{
 		name: 'Travel Destination Critique',
 		description:
@@ -32,7 +33,7 @@ const RAW_PROMPTS = [
 		tags: ['travel', 'culture', 'outdoor-activities', 'education', 'entertainment'],
 		aiModel: 'DistilBERT'
 	},
-  // 3
+	// 3
 	{
 		name: 'Play Review',
 		description:
@@ -42,7 +43,7 @@ const RAW_PROMPTS = [
 		tags: ['entertainment', 'education', 'music', 'culture', 'art'],
 		aiModel: 'ALBERT'
 	},
-  // 4
+	// 4
 	{
 		name: 'Poem Analysis',
 		description:
@@ -52,7 +53,7 @@ const RAW_PROMPTS = [
 		tags: ['education', 'poetry', 'literature', 'culture', 'language-learning'],
 		aiModel: 'XLNet'
 	},
-  // 5
+	// 5
 	{
 		name: 'Podcast Review',
 		description:
@@ -62,7 +63,7 @@ const RAW_PROMPTS = [
 		tags: ['entertainment', 'education', 'technology', 'music', 'storytelling'],
 		aiModel: 'Transformer'
 	},
-  // 6
+	// 6
 	{
 		name: 'Game Review',
 		description:
@@ -72,7 +73,7 @@ const RAW_PROMPTS = [
 		tags: ['gaming', 'technology', 'entertainment', 'storytelling', 'education'],
 		aiModel: 'OpenGPT'
 	},
-  // 7
+	// 7
 	{
 		name: 'Fashion Show Review',
 		description:
@@ -82,7 +83,7 @@ const RAW_PROMPTS = [
 		tags: ['fashion', 'entertainment', 'culture', 'music', 'art'],
 		aiModel: 'CTRL'
 	},
-  // 8
+	// 8
 	{
 		name: 'Tech Product Review',
 		description:
@@ -92,7 +93,7 @@ const RAW_PROMPTS = [
 		tags: ['technology', 'education', 'lifestyle', 'productivity', 'entertainment'],
 		aiModel: 'Longformer'
 	},
-  // 9
+	// 9
 	{
 		name: 'Art Appreciation',
 		description:
@@ -102,7 +103,7 @@ const RAW_PROMPTS = [
 		tags: ['art', 'history', 'culture', 'education', 'psychology'],
 		aiModel: 'BERT'
 	},
-  // 10
+	// 10
 	{
 		name: 'Coding Challenge',
 		description:
@@ -116,10 +117,10 @@ const RAW_PROMPTS = [
 
 const USERS = [
 	{
-		firstName: 'Oliver',
-		lastName: 'Reid',
-		username: 'oliverReid',
-		email: 'oliverReid@gmail.com',
+		firstName: 'Adam',
+		lastName: 'Gonda',
+		username: 'adamgonda',
+		email: 'adamgondagyula@gmail.com',
 		picture: 'https://randomuser.me/api/portraits/men/23.jpg'
 	},
 	{
@@ -142,7 +143,7 @@ const USERS = [
 		username: 'sophiaWilliamson',
 		email: 'sophiaWilliamson@gmail.com',
 		picture: 'https://randomuser.me/api/portraits/women/95.jpg'
-	},
+	}
 ];
 
 // get users
@@ -171,8 +172,8 @@ async function main() {
 
 	// Function to get a random subset of an array
 	const getRandomSubset = (array, minLen, maxLen) => {
-			const shuffled = array.sort(() => 0.5 - Math.random());
-			return shuffled.slice(0, Math.floor(Math.random() * (maxLen - minLen + 1)) + minLen);
+		const shuffled = array.sort(() => 0.5 - Math.random());
+		return shuffled.slice(0, Math.floor(Math.random() * (maxLen - minLen + 1)) + minLen);
 	};
 
 	// Function to get a random number between two values
@@ -180,60 +181,225 @@ async function main() {
 
 	// Iterate over each item in the RAW_PROMPTS array
 	for (const prompt of RAW_PROMPTS) {
-			// Randomly select an author
-			const author = getRandomElement(users);
+		// Randomly select an author
+		const author = getRandomElement(users);
 
-			// Randomly select some users to like the prompt
-			const likers = getRandomSubset(users, 1, users.length);
+		// Randomly select some users to like the prompt
+		const likers = getRandomSubset(users, 1, users.length);
 
-			// Randomly select forkedCount
-			const forkedCount = getRandomNumber(1, 1000);
+		// Randomly select forkedCount
+		const forkedCount = getRandomNumber(1, 1000);
 
-			// Check if the AI Model exists, create if it doesn't
-			let aiModel = await prisma.aiModel.findUnique({ where: { name: prompt.aiModel } });
-			if (!aiModel) {
-					aiModel = await prisma.aiModel.create({ data: { name: prompt.aiModel, link: 'https://chat.openai.com/' } });
-			}
-
-			// Check if the tags exist, create them if they don't
-			const createdTags = [];
-			for (const tagName of prompt.tags) {
-					let tag = await prisma.tag.findUnique({ where: { name: tagName } });
-					if (!tag) {
-							tag = await prisma.tag.create({ data: { name: tagName } });
-					}
-					createdTags.push(tag);
-			}
-
-			// Create the prompt
-			await prisma.prompt.create({
-					data: {
-							name: prompt.name,
-							description: prompt.description,
-							content: prompt.content,
-							slug: prompt.name.toLowerCase().replace(/\s/g, '-'),
-							author: {
-									connect: {
-											id: author.id
-									}
-							},
-							aiModel: {
-									connect: {
-											id: aiModel.id
-									}
-							},
-							tags: {
-									connect: createdTags.map((tag) => ({ id: tag.id }))
-							},
-							likes: {
-									create: likers.map((user) => ({ userId: user.id }))
-							},
-							forkedCount: forkedCount
-					}
+		// Check if the AI Model exists, create if it doesn't
+		let aiModel = await prisma.aiModel.findUnique({ where: { name: prompt.aiModel } });
+		if (!aiModel) {
+			aiModel = await prisma.aiModel.create({
+				data: { name: prompt.aiModel, link: 'https://chat.openai.com/' }
 			});
+		}
+
+		// Check if the tags exist, create them if they don't
+		const createdTags = [];
+		for (const tagName of prompt.tags) {
+			let tag = await prisma.tag.findUnique({ where: { name: tagName } });
+			if (!tag) {
+				tag = await prisma.tag.create({ data: { name: tagName } });
+			}
+			createdTags.push(tag);
+		}
+
+		const fulltext = getCleanText(promptToString(prompt))
+
+		// Create the prompt
+		await prisma.prompt.create({
+			data: {
+				name: prompt.name,
+				description: prompt.description,
+				content: prompt.content,
+				slug: prompt.name.toLowerCase().replace(/\s/g, '-'),
+				author: {
+					connect: {
+						id: author.id
+					}
+				},
+				aiModel: {
+					connect: {
+						id: aiModel.id
+					}
+				},
+				tags: {
+					connect: createdTags.map((tag) => ({ id: tag.id }))
+				},
+				likes: {
+					create: likers.map((user) => ({ userId: user.id }))
+				},
+				forkedCount: forkedCount,
+				fulltext
+			}
+		});
 	}
 }
 
+export function getCleanText(text) {
+	const tokenizer = new natural.WordPunctTokenizer();
+
+	const stopWords = [
+		'a',
+		'about',
+		'above',
+		'after',
+		'again',
+		'against',
+		'all',
+		'am',
+		'an',
+		'and',
+		'any',
+		'are',
+		'as',
+		'at',
+		'be',
+		'because',
+		'been',
+		'before',
+		'being',
+		'below',
+		'between',
+		'both',
+		'but',
+		'by',
+		'can',
+		'could',
+		'did',
+		'do',
+		'does',
+		'doing',
+		'down',
+		'during',
+		'each',
+		'few',
+		'for',
+		'from',
+		'further',
+		'had',
+		'has',
+		'have',
+		'having',
+		'he',
+		'her',
+		'here',
+		'hers',
+		'herself',
+		'him',
+		'himself',
+		'his',
+		'how',
+		'i',
+		'if',
+		'in',
+		'into',
+		'is',
+		'it',
+		'its',
+		'itself',
+		'me',
+		'more',
+		'most',
+		'my',
+		'myself',
+		'no',
+		'nor',
+		'not',
+		'of',
+		'off',
+		'on',
+		'once',
+		'only',
+		'or',
+		'other',
+		'ought',
+		'our',
+		'ours',
+		'ourselves',
+		'out',
+		'over',
+		'own',
+		'same',
+		'she',
+		'should',
+		'so',
+		'some',
+		'such',
+		'than',
+		'that',
+		'the',
+		'their',
+		'theirs',
+		'them',
+		'themselves',
+		'then',
+		'there',
+		'these',
+		'they',
+		'this',
+		'those',
+		'through',
+		'to',
+		'too',
+		'under',
+		'until',
+		'up',
+		'very',
+		'was',
+		'we',
+		'were',
+		'what',
+		'when',
+		'where',
+		'which',
+		'while',
+		'who',
+		'whom',
+		'why',
+		'will',
+		'with',
+		'you',
+		'your',
+		'yours',
+		'yourself',
+		'yourselves'
+	];
+
+	// Lowercase the text
+	text = text.toLowerCase();
+
+	// Remove punctuation
+	text = text.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g, '');
+
+	// Remove extra whitespace and trim leading and trailing whitespaces
+	text = text.replace(/\s{2,}/g, ' ').trim();
+
+	// Tokenization
+	let tokens = tokenizer.tokenize(text);
+
+	// Remove stop words
+	tokens = tokens.filter((token) => !stopWords.includes(token));
+
+	// Remove numbers - this will remove all tokens that are entirely numeric
+	tokens = tokens.filter((token) => !token.match(/^[0-9]+$/));
+
+	// Stemming - using Porter's stemming algorithm
+	tokens = tokens.map((token) => natural.PorterStemmer.stem(token));
+
+	return tokens.join(' ');
+}
+
+export function promptToString(prompt) {
+	const rawString = `${prompt.name} ${prompt.description} ${
+		prompt.content
+	} ${prompt.tags.join(' ')} ${prompt.aiModel.name}`;
+	return getCleanText(rawString);
+}
 
 main()
 	.then(async () => {

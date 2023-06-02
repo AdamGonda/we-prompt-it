@@ -1,7 +1,7 @@
 import { getDBUser } from '$lib/controllers/shared';
 import { error, json } from '@sveltejs/kit';
 import { PrismaClient } from '@prisma/client';
-import { convertToSlug } from '$lib/utils';
+import { convertToSlug, getCleanText } from '$lib/utils';
 import globalIncludes from '$lib/global-includes';
 
 const prisma = new PrismaClient();
@@ -132,7 +132,7 @@ export async function _search(event) {
 	return await prisma.prompt.findMany(query);
 }
 
-function _handlePagination(query, event){
+function _handlePagination(query, event) {
 	const page = event.url.searchParams.get('page');
 	const limit = event.url.searchParams.get('limit');
 
@@ -154,34 +154,27 @@ function _handleSearchBar(query, event) {
 		throw new Error(`You can search for a maximum of ${WORDS_LIMIT} words`);
 	}
 
-	const searchInName = {
-		name: {
-			contains: text,
-			mode: 'insensitive'
-		}
-	};
+	let search = getCleanText(text);
 
-	const searchInDescription = {
-		description: {
-			contains: text,
-			mode: 'insensitive'
-		}
-	};
+	if (search.includes(' ')) {
+		search = search.split(' ').join(' | ');
+	}
 
-	const searchInPromptsContent = {
-		content: {
-			contains: text,
-			mode: 'insensitive'
+	console.log('log search', search);
+
+	const fulltextSearch = {
+		fulltext: {
+			search
 		}
 	};
 
 	if (text) {
-		query.where.OR = [searchInName, searchInDescription, searchInPromptsContent];
+		query.where.OR = [fulltextSearch];
 	}
 }
 
 function _handleTags(query, event) {
-	const tags = event.url.searchParams.getAll('tag')
+	const tags = event.url.searchParams.getAll('tag');
 
 	if (tags?.length > 0) {
 		query.where.AND.push({
