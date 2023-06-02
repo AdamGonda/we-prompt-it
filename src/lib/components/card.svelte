@@ -81,8 +81,8 @@
 	}
 
 	.model {
-		margin-top: var(--s-2);
-		margin-left: var(--s-2);
+		margin-top: var(--s-3);
+		margin-left: var(--s-4);
 		position: relative;
 	}
 
