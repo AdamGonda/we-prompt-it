@@ -2,7 +2,6 @@
 	import SearchBar from './search-bar.svelte';
 	import { page } from '$app/stores';
 	import UserAvatar from './user-avatar.svelte';
-	import SearchManagger from './search-managger.svelte';
 	import routes from '$lib/routes';
 
 	const user = $page.data.session?.user;
@@ -15,7 +14,6 @@
 </script>
 
 <nav>
-	<SearchManagger />
 	<a href={routes.landing} class="logo">
 		<img src="/weprompt-logo.png" alt="logo" />
 	</a>

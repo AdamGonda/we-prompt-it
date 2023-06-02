@@ -2,6 +2,7 @@
 	import { afterNavigate, goto } from '$app/navigation';
 	import { page } from '$app/stores';
 	import { searchFocused } from '$lib/stores/search-bar-store';
+	import searchStore from '$lib/stores/search-store';
 
 	let inputValue;
 	let placeholder = 'Find the prompt you need';
@@ -9,6 +10,12 @@
 
 	afterNavigate(async () => {
 		initVarsFromURL();
+
+		if ($page.route.id.includes('search')) {
+			await searchStore.search({
+				endpoint: `/api/search${$page.url.search}`
+			});
+		}
 	});
 
 	function initVarsFromURL() {
@@ -47,11 +54,11 @@
 	function handleClear() {
 		inputValue = '';
 
-		triggerSearch()
+		triggerSearch();
 	}
 
 	async function triggerSearch() {
-		goto(`/?${varsToQuerystring()}`);
+		goto(`/search?${varsToQuerystring()}`);
 	}
 </script>
 
@@ -92,7 +99,7 @@
 		min-width: 300px;
 		height: 46px;
 		font-size: 16px;
-		background:#E9E9E9;
+		background: #e9e9e9;
 		color: #333333;
 		border-radius: 25px;
 		width: 100%;
