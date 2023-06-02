@@ -161,8 +161,6 @@ function _handleSearchBar(query, event) {
 		search = search.split(' ').join(' | ');
 	}
 
-	console.log('log search', search);
-
 	const fulltextSearch = {
 		fulltext: {
 			search
