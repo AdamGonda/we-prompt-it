@@ -93,6 +93,29 @@ export async function nameCheck(event) {
 	}
 }
 
+export async function usernameCheck(event) {
+	const proposedName = event.url.searchParams.get('proposedName');
+
+	if (!proposedName) {
+		throw error(400, {
+			message: `Missing parameters`
+		});
+	}
+
+	const existingUser = await prisma.user.findFirst({
+		where: {
+			username: proposedName,
+			isDeleted: false
+		}
+	});
+
+	if (existingUser) {
+		return json({ ok: false });
+	}
+
+	return json({ ok: true });
+}
+
 export async function preSearchResultsNo(event) {
 	const query = event.url.searchParams.get('q');
 	const rawResults = await _search(query);
