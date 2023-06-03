@@ -66,8 +66,8 @@
 
 <div class="wrap">
 	{#if onboard}
-		<h1>It seams this is you first time here</h1>
-		<h3>Choose a username</h3>
+		<h1>It seams this is your first time here.</h1>
+		<h3>Please choose a user name so everybody knows who made those great prompts.</h3>
 		<form method="POST" bind:this={form} on:input={validateForm}>
 			<input
 				on:blur={handleFieldChange}
@@ -79,7 +79,7 @@
 			<p>{isTouched.name && errors.name ? errors.name : ''}</p>
 		</form>
 	{:else}
-		<h1>Welcome back, Idea Weaver!</h1>
+		<h1>Welcome Idea Weaver!</h1>
 		<h3>Time to explore, craft, and share AI prompts!</h3>
 		<button class="bubble" on:click={() => signIn('google')}>
 			<img src="/google-logo.png" alt="Google Logo" />
