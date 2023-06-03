@@ -23,6 +23,7 @@ export async function loadIndexLayout(event) {
 	}
 
 	if (session) {
+		// TODO revise if this needed or not
 		if (event.route.id !== '/login' && (!dbUser || !dbUser.isOnboarded)) {
 			throw redirect(308, '/login');
 		}
