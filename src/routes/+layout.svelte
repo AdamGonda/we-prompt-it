@@ -44,6 +44,12 @@
 
 		--br-1: 20px;
 		--br-2: 30px;
+
+		--sucess: #59a14f;
+		--alert: #edc948;
+		--danger: #e15759;
+		--black: #333333;
+		--white: whitesmoke;
 	}
 
 	:global(.bubble) {
