@@ -304,6 +304,8 @@
 		display: flex;
 		justify-content: end;
 		width: 100%;
+		max-width: 750px;
+		margin-top: var(--s-7);
 	}
 
 	.submit-wrap input {
