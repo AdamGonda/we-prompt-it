@@ -14,12 +14,8 @@
 		name: false
 	};
 
-	if (browser && user) {
-		if (user.isOnboarded) {
-			goto('/');
-		} else if (!user.isOnboarded) {
-			onboard = true;
-		}
+	if(user.username === null) {
+		onboard = true;
 	}
 
 	async function validateForm() {

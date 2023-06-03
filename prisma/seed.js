@@ -116,13 +116,13 @@ const RAW_PROMPTS = [
 ];
 
 const USERS = [
-	{
-		firstName: 'Adam',
-		lastName: 'Gonda',
-		username: 'adamgonda',
-		email: 'adamgondagyula@gmail.com',
-		picture: 'https://randomuser.me/api/portraits/men/23.jpg'
-	},
+	// {
+	// 	firstName: 'Adam',
+	// 	lastName: 'Gonda',
+	// 	username: 'adamgonda',
+	// 	email: 'adamgondagyula@gmail.com',
+	// 	picture: 'https://randomuser.me/api/portraits/men/23.jpg'
+	// },
 	{
 		firstName: 'Chloe',
 		lastName: 'Ball',

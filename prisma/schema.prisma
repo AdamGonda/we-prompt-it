@@ -13,7 +13,7 @@ model User {
   email        String     @unique
   firstName    String
   lastName     String
-  username     String     @unique
+  username     String?    @unique
   picture      String     @default("")
   createdAt    DateTime   @default(now())
   updatedAt    DateTime   @updatedAt
@@ -24,7 +24,6 @@ model User {
   followings   Follower[] @relation("Followings")
   comments     Comment[]
   isDeleted    Boolean    @default(false)
-  isOnboarded  Boolean    @default(false)
 }
 
 model Prompt {

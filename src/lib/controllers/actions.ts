@@ -37,7 +37,6 @@ export async function createUser(event: RequestEvent) {
 			firstName: session.user.name.split(' ')[0],
 			lastName: session.user.name.split(' ')[1],
 			email: session.user.email,
-			isOnboarded: true
 		}
 	});
 }

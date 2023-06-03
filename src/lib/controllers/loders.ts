@@ -22,12 +22,12 @@ export async function loadIndexLayout(event) {
 		dbUser = await getDBUser(event);
 	}
 
-	if (session) {
-		// TODO revise if this needed or not
-		if (event.route.id !== '/login' && (!dbUser || !dbUser.isOnboarded)) {
-			throw redirect(308, '/login');
-		}
-	}
+	// if (session) {
+	// TODO revise if this needed or not
+	// 	if (event.route.id !== '/login' && (!dbUser || !dbUser.isOnboarded)) {
+	// 		throw redirect(308, '/login');
+	// 	}
+	// }
 
 	return { session, dbUser };
 }
@@ -123,4 +123,10 @@ export async function loadProfile(event) {
 	});
 
 	return { user };
+}
+
+export async function loadLogin(event) {
+	const dbUser = await getDBUser(event);
+
+	return { dbUser }
 }

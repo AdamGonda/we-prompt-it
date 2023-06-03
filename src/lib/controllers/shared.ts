@@ -21,41 +21,33 @@ export async function getPromptBySlug(slug) {
 
 export async function getAllPrompts() {
 	return await prisma.prompt.findMany({
-		where: { isDeleted: false },
+		where: { isDeleted: false }
 	});
 }
 
 export async function getAllAIModels() {
 	return await prisma.aiModel.findMany({
 		where: { isDeleted: false },
-		orderBy: { prompts: { _count: 'desc' } },
+		orderBy: { prompts: { _count: 'desc' } }
 	});
 }
 
 export async function getAllTags() {
 	return await prisma.tag.findMany({
 		where: { isDeleted: false },
-		orderBy: { prompts: { _count: 'desc' } },
+		orderBy: { prompts: { _count: 'desc' } }
 	});
 }
 
 export async function getDBUser(event) {
-	const session = await event.locals.getSession();
-
-	if (!session || !session.user) {
-		throw error(400, {
-			message: 'Not logged in'
-		});
-	}
+	const session = await event.session;
 
 	const dbUser = await prisma.user.findUnique({
 		where: { email: session.user.email }
 	});
 
-	if (!dbUser) {
-		throw error(404, {
-			message: 'User not found'
-		});
+	if (dbUser?.isDeleted) {
+		return null;
 	}
 
 	return dbUser;
