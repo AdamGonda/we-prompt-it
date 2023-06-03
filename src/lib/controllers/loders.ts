@@ -13,10 +13,12 @@ export async function loadIndex(event) {
 }
 
 export async function loadIndexLayout(event) {
+	console.log('log loadIndex', )
 	const session = await event.locals.getSession();
 	let dbUser = null;
 
 	if (session) {
+		// TODO performace issue? to hit the db every time we visit a page?
 		dbUser = await getDBUser(event);
 	}
 
