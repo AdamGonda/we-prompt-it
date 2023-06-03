@@ -1,10 +1,11 @@
-import { getOrCreateAiModel, getDBUser, getTagIds } from '$lib/controllers/shared';
+import { getOrCreateAiModel, getDBUser, getOrCreateTags } from '$lib/controllers/shared';
 import { getPromptBySlug } from '$lib/controllers/shared';
 import type { RequestEvent } from '@sveltejs/kit';
 
 import { error } from '@sveltejs/kit';
 import { PrismaClient } from '@prisma/client';
 import { convertToSlug, validateForm } from '$lib/utils';
+import { promptToString } from './api';
 
 const prisma = new PrismaClient();
 
@@ -12,15 +13,13 @@ export async function createPrompt(event: RequestEvent) {
 	const user = await getDBUser(event);
 	const data = await validateForm(event);
 	const aiModelId = await getOrCreateAiModel(data);
-	const incomingTagIds = await getTagIds(data);
+	const tagIds = await getOrCreateTags(data);
 
 	return await prisma.prompt.create({
 		data: {
 			description: data.description,
 			tags: {
-				connect: incomingTagIds
-					? incomingTagIds.map((tagId) => ({ id: tagId }))
-					: undefined
+				connect: tagIds ? tagIds.map((tagId) => ({ id: tagId })) : undefined
 			},
 			name: data.name,
 			author: {
@@ -34,7 +33,12 @@ export async function createPrompt(event: RequestEvent) {
 				connect: {
 					id: aiModelId
 				}
-			}
+			},
+			fulltext: promptToString({
+				name: data.name,
+				description: data.description,
+				content: data.content
+			})
 		}
 	});
 }
@@ -44,7 +48,7 @@ export async function editPrompt(event: RequestEvent) {
 	const user = await getDBUser(event);
 	const data = await validateForm(event);
 	const aiModelId = await getOrCreateAiModel(data);
-	const incomingTagIds = await getTagIds(data);
+	const tagIds = await getOrCreateTags(data);
 
 	const promptToEdit = await prisma.prompt.findFirst({
 		where: { slug, isDeleted: false },
@@ -64,7 +68,7 @@ export async function editPrompt(event: RequestEvent) {
 	const updateSlug = promptToEdit.name !== data.name;
 	const tagIdsToRemove = promptToEdit.tags
 		.map((tag) => tag.id)
-		.filter((tagId) => !incomingTagIds?.includes(tagId));
+		.filter((tagId) => !tagIds?.includes(tagId));
 
 	return await prisma.prompt.update({
 		where: { slug },
@@ -73,15 +77,18 @@ export async function editPrompt(event: RequestEvent) {
 			slug: updateSlug ? convertToSlug(user.username, data.name) : promptToEdit.slug,
 			description: data.description,
 			tags: {
-				connect: incomingTagIds
-					? incomingTagIds.map((tagId) => ({ id: tagId }))
-					: undefined,
+				connect: tagIds ? tagIds.map((tagId) => ({ id: tagId })) : undefined,
 				disconnect: tagIdsToRemove
 					? tagIdsToRemove.map((tagId) => ({ id: tagId }))
 					: undefined
 			},
 			content: data.content,
-			aiModelId
+			aiModelId,
+			fulltext: promptToString({
+				name: data.name,
+				description: data.description,
+				content: data.content
+			})
 		}
 	});
 }
@@ -91,7 +98,7 @@ export async function forkPrompt(event: RequestEvent) {
 	const slug = event.params.slug;
 	const data = await validateForm(event);
 	const aiModelId = await getOrCreateAiModel(data);
-	const incomingTagIds = await getTagIds(data);
+	const tagIds = await getOrCreateTags(data);
 
 	await prisma.prompt.update({
 		where: {
@@ -126,10 +133,13 @@ export async function forkPrompt(event: RequestEvent) {
 				}
 			},
 			tags: {
-				connect: incomingTagIds
-					? incomingTagIds.map((tagId) => ({ id: tagId }))
-					: undefined
-			}
+				connect: tagIds ? tagIds.map((tagId) => ({ id: tagId })) : undefined
+			},
+			fulltext: promptToString({
+				name: data.name,
+				description: data.description,
+				content: data.content
+			})
 		}
 	});
 }

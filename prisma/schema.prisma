@@ -33,6 +33,7 @@ model Prompt {
   description String @default("")
   forkedCount Int    @default(0)
   content     String
+  fulltext    String
 
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt
@@ -74,6 +75,7 @@ model Tag {
   id        Int      @id @default(autoincrement())
   name      String   @unique
   prompts   Prompt[]
+  color     String   @default("")
   isDeleted Boolean  @default(false)
 }
 

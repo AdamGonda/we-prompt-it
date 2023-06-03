@@ -16,10 +16,7 @@
 	}
 </script>
 
-<a
-	href={routes.prompt($page.data.session?.user, prompt.slug)}
-	class="card"
->
+<a href={routes.prompt($page.data.session?.user, prompt.slug)} class="card">
 	<div>
 		<div class="row">
 			<p class="name">{prompt.name}</p>
@@ -31,11 +28,20 @@
 	</div>
 
 	<div class="stats">
-		<img class="author" src={prompt.author.picture} alt="" />
+		<div>
+			<img class="author" src={prompt.author.picture} alt="" />
+			<p class="model">{prompt.aiModel.name}</p>
+		</div>
+
 		<div>
 			<span class="likes">
-				<img style="width: 16px" src={`/${getHartIconPrefix()}-icon.png`} alt="hart-icon" />
-				{prompt.likes?.length}</span>
+				<img
+					style="width: 16px"
+					src={`/${getHartIconPrefix()}-icon.png`}
+					alt="hart-icon"
+				/>
+				{prompt.likes?.length}</span
+			>
 			<span class="forked">
 				<img src="/fork-icon.png" alt="fork-icon" />
 				{prompt.forkedCount}
@@ -74,10 +80,23 @@
 		border-bottom: 1px solid rgb(174, 174, 174);
 	}
 
+	.model {
+		margin-top: var(--s-3);
+		margin-left: var(--s-4);
+		position: relative;
+	}
+
+	.model::before {
+		position: absolute;
+		content: 'Model';
+		font-size: 10px;
+		top: -10px;
+	}
+
 	.description {
 		font-size: 1.15rem;
 		font-weight: 400;
-		margin-top: 16px;
+		margin-top: var(--s-4);
 		margin-bottom: 40px;
 	}
 

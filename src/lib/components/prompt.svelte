@@ -21,19 +21,6 @@
 		return 'hart';
 	}
 
-	function stringToColor(str) {
-		let hash = 0;
-		for (let i = 0; i < str.length; i++) {
-			hash = str.charCodeAt(i) + ((hash << 5) - hash);
-		}
-		let color = '#';
-		for (let i = 0; i < 3; i++) {
-			let value = (hash >> (i * 8)) & 0xaf; // change 0x7f to 0xaf
-			color += ('00' + value.toString(16)).substr(-2);
-		}
-		return color;
-	}
-
 	async function handleAddRemoveLike() {
 		if (!user) {
 			goto('/login');
@@ -127,7 +114,7 @@
 			{#each $page.data.prompt.tags as tag (tag.id)}
 				<a
 					class="bubble"
-					style={`background-color: ${stringToColor(tag.name)}`}
+					style={`background-color: ${tag.color}`}
 					href={`/?tag=${tag.name}`}
 				>
 					#{tag.name}

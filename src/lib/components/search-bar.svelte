@@ -2,13 +2,21 @@
 	import { afterNavigate, goto } from '$app/navigation';
 	import { page } from '$app/stores';
 	import { searchFocused } from '$lib/stores/search-bar-store';
+	import searchStore from '$lib/stores/search-store';
 
+	let input;
 	let inputValue;
 	let placeholder = 'Find the prompt you need';
 	let inputInFocus = false;
 
 	afterNavigate(async () => {
 		initVarsFromURL();
+
+		if ($page.route.id.includes('search')) {
+			await searchStore.search({
+				endpoint: `/api/search${$page.url.search}`
+			});
+		}
 	});
 
 	function initVarsFromURL() {
@@ -47,13 +55,23 @@
 	function handleClear() {
 		inputValue = '';
 
-		triggerSearch()
+		triggerSearch();
 	}
 
 	async function triggerSearch() {
-		goto(`/?${varsToQuerystring()}`);
+		goto(`/search?${varsToQuerystring()}`);
+	}
+
+	function blurInput(e) {
+		if (e.key == 'Escape' && inputInFocus) {
+			searchFocused.update((value) => (value = false));
+			inputInFocus = false;
+			input.blur();
+		}
 	}
 </script>
+
+<svelte:window on:keydown={blurInput} />
 
 <form
 	name="search"
@@ -64,6 +82,7 @@
 	<div class="search-input-container">
 		<input
 			autocomplete="off"
+			bind:this={input}
 			on:focus={handleFocus}
 			on:blur={handleBlur}
 			bind:value={inputValue}
@@ -73,7 +92,7 @@
 		/>
 		{#if inputValue}
 			<button type="button" on:click={handleClear} class="clear-button">
-				<p>x</p>
+				<img src="/x-icon.png" alt="clear" />
 			</button>
 		{/if}
 	</div>
@@ -92,7 +111,7 @@
 		min-width: 300px;
 		height: 46px;
 		font-size: 16px;
-		background:#E9E9E9;
+		background: #e9e9e9;
 		color: #333333;
 		border-radius: 25px;
 		width: 100%;
@@ -131,6 +150,18 @@
 		background: none;
 		border: none;
 		cursor: pointer;
-		color: white;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		border-radius: 50%;
+	}
+
+	.clear-button:hover {
+		background: #cdcdcd;
+	}
+
+	.clear-button img {
+		width: 14px;
+		height: 14px;
 	}
 </style>

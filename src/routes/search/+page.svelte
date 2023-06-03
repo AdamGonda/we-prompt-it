@@ -1,0 +1,31 @@
+<script>
+	import searchStore, { isLoading } from '$lib/stores/search-store';
+	import CardList from '$lib/components/card-list.svelte';
+	import LoadingIndicator from '$lib/components/loading-indicator.svelte';
+
+	let resultsToShow = [];
+	let minTimeElapsed = false;
+
+	$: if ($isLoading) {
+		minTimeElapsed = false;
+		setTimeout(() => {
+			minTimeElapsed = true;
+		}, 1000);
+	}
+
+	searchStore.subscribe((value) => {
+		resultsToShow = value;
+	});
+</script>
+
+<svelte:head>
+	<title>Search | We Prompt</title>
+</svelte:head>
+
+<main>
+	{#if $isLoading || !minTimeElapsed}
+		<LoadingIndicator />
+	{:else}
+		<CardList prompts={resultsToShow} />
+	{/if}
+</main>
