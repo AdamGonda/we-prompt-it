@@ -226,7 +226,9 @@
 	</div>
 
 	<slot {disabled}>
-		<input type="submit" {disabled} />
+		<div class="submit-wrap">
+			<input class="bubble" type="submit" {disabled} />
+		</div>
 	</slot>
 </form>
 
@@ -296,5 +298,17 @@
 
 	.error {
 		color: red;
+	}
+
+	.submit-wrap {
+		display: flex;
+		justify-content: end;
+		width: 100%;
+	}
+
+	.submit-wrap input {
+		background: #59a14f;
+		color: whitesmoke;
+		border: none;
 	}
 </style>
