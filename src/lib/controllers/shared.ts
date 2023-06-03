@@ -42,6 +42,8 @@ export async function getAllTags() {
 export async function getDBUser(event) {
 	const session = await event.locals.getSession();
 
+	console.log('log session2', session)
+
 	if (!session || !session.user) {
 		throw error(400, {
 			message: 'Not logged in'
@@ -51,12 +53,6 @@ export async function getDBUser(event) {
 	const dbUser = await prisma.user.findUnique({
 		where: { email: session.user.email }
 	});
-
-	if (!dbUser) {
-		throw error(404, {
-			message: 'User not found'
-		});
-	}
 
 	return dbUser;
 }

@@ -13,23 +13,19 @@ export async function loadIndex(event) {
 }
 
 export async function loadIndexLayout(event) {
-	console.log('log loadIndex', )
+	console.log('log loadIndex');
 	const session = await event.locals.getSession();
-	let dbUser = null;
 
-	if (session) {
-		// TODO performace issue? to hit the db every time we visit a page?
-		dbUser = await getDBUser(event);
-	}
+	// if (session) {
+	// 	const dbUser = await getDBUser(event);
 
-	if (session) {
-		// TODO revise if this needed or not
-		if (event.route.id !== '/login' && (!dbUser || !dbUser.isOnboarded)) {
-			throw redirect(308, '/login');
-		}
-	}
+	// 	// TODO revise if this needed or not
+	// 	if (event.route.id !== '/login' && (!dbUser || !dbUser.isOnboarded)) {
+	// 		throw redirect(308, '/login');
+	// 	}
+	// }
 
-	return { session, dbUser };
+	return { session };
 }
 
 export async function loadMyCollection(event) {
@@ -123,4 +119,16 @@ export async function loadProfile(event) {
 	});
 
 	return { user };
+}
+
+export async function loadLogin(event) {
+	const session = await event.locals.getSession();
+
+	let dbUser = null;
+
+	if (session) {
+		dbUser = await getDBUser(event);
+	}
+
+	return { dbUser };
 }

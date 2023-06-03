@@ -14,10 +14,10 @@
 		name: false
 	};
 
-	if (browser && user) {
-		if (user.isOnboarded) {
+	if (browser && $page.data.session) {
+		if (user?.isOnboarded) {
 			goto('/');
-		} else if (!user.isOnboarded) {
+		} else {
 			onboard = true;
 		}
 	}
@@ -77,6 +77,8 @@
 				placeholder="Username"
 			/>
 			<p>{isTouched.name && errors.name ? errors.name : ''}</p>
+
+			<input type="submit" value="Submit" />
 		</form>
 	{:else}
 		<h1>Welcome Idea Weaver!</h1>
