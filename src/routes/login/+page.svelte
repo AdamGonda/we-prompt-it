@@ -3,7 +3,7 @@
 	import { goto } from '$app/navigation';
 	import { page } from '$app/stores';
 	import { formDataToObject } from '$lib/utils';
-	import { onboardSchema } from '$lib/yup-schemas';
+	import { createUserSchema } from '$lib/yup-schemas';
 	import { signIn } from '@auth/sveltekit/client';
 
 	let form;
@@ -27,7 +27,7 @@
 		const formData = formDataToObject(new FormData(form));
 
 		try {
-			onboardSchema.validateSync(formData, { abortEarly: false });
+			createUserSchema.validateSync(formData, { abortEarly: false });
 		} catch (error) {
 			error.inner.forEach((err) => {
 				errors[err.path] = err.errors[0];

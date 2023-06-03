@@ -35,11 +35,11 @@ export const promptSchema = object().shape({
 
 export type PromptSchema = InferType<typeof promptSchema>;
 
-export const onboardSchema = object().shape({
+export const createUserSchema = object().shape({
 	name: string()
 	.required('Name is required')
 	.trim()
 	.min(5, 'Must be 5 or more characters long')
 });
 
-export type OnboardingSchema = InferType<typeof onboardSchema>;
+export type OnboardingSchema = InferType<typeof createUserSchema>;
