@@ -42,4 +42,4 @@ export const createUserSchema = object().shape({
 	.min(5, 'Must be 5 or more characters long')
 });
 
-export type OnboardingSchema = InferType<typeof createUserSchema>;
+export type CreateUserSchema = InferType<typeof createUserSchema>;

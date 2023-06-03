@@ -71,6 +71,7 @@
 		<form method="POST" bind:this={form} on:input={validateForm}>
 			<input
 				on:blur={handleFieldChange}
+				on:input={handleFieldChange}
 				type="text"
 				name="name"
 				placeholder="Username"

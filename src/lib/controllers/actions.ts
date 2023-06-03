@@ -6,12 +6,45 @@ import { error } from '@sveltejs/kit';
 import { PrismaClient } from '@prisma/client';
 import { convertToSlug, validateForm } from '$lib/utils';
 import { promptToString } from './api';
+import { createUserSchema, promptSchema } from '$lib/yup-schemas';
 
 const prisma = new PrismaClient();
 
+export async function createUser(event: RequestEvent) {
+	const data = await validateForm(event, createUserSchema);
+	const session = await event.locals.getSession()
+
+	// if no session user, throw error
+	if (!session.user) {
+		throw error(401, JSON.stringify({ name: 'Unauthorized' }));
+	}
+
+	// check if user with the same username is not already in the database
+	const existingUser = await prisma.user.findUnique({
+		where: {
+			username: data.name,
+		}
+	});
+
+	if (existingUser && existingUser.isDeleted === false) {
+		throw error(400, JSON.stringify({ name: 'Name is not unique' }));
+	}
+
+	// create new user with username, use session user to get firstName latName and email
+	await prisma.user.create({
+		data: {
+			username: data.name,
+			firstName: session.user.name.split(' ')[0],
+			lastName: session.user.name.split(' ')[1],
+			email: session.user.email,
+			isOnboarded: true
+		}
+	});
+}
+
 export async function createPrompt(event: RequestEvent) {
 	const user = await getDBUser(event);
-	const data = await validateForm(event);
+	const data = await validateForm(event, promptSchema);
 	const aiModelId = await getOrCreateAiModel(data);
 	const tagIds = await getOrCreateTags(data);
 
@@ -46,7 +79,7 @@ export async function createPrompt(event: RequestEvent) {
 export async function editPrompt(event: RequestEvent) {
 	const slug = event.params.slug;
 	const user = await getDBUser(event);
-	const data = await validateForm(event);
+	const data = await validateForm(event, promptSchema);
 	const aiModelId = await getOrCreateAiModel(data);
 	const tagIds = await getOrCreateTags(data);
 
@@ -96,7 +129,7 @@ export async function editPrompt(event: RequestEvent) {
 export async function forkPrompt(event: RequestEvent) {
 	const dbUser = await getDBUser(event);
 	const slug = event.params.slug;
-	const data = await validateForm(event);
+	const data = await validateForm(event, promptSchema);
 	const aiModelId = await getOrCreateAiModel(data);
 	const tagIds = await getOrCreateTags(data);
 

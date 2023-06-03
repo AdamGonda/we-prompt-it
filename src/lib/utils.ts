@@ -1,5 +1,5 @@
 import { error } from '@sveltejs/kit';
-import { promptSchema, type PromptSchema } from './yup-schemas';
+import type { PromptSchema, CreateUserSchema } from './yup-schemas';
 
 
 export function formDataToObject(formData) {
@@ -16,12 +16,12 @@ export function formDataToObject(formData) {
 	return formValues;
 }
 
-export async function validateForm(event): Promise<PromptSchema> {
+export async function validateForm(event, schema): Promise<PromptSchema | CreateUserSchema> {
 	const formData = formDataToObject(await event.request.formData());
 	const errors = {};
 
 	try {
-		promptSchema.validateSync(formData, { abortEarly: false });
+		schema.validateSync(formData, { abortEarly: false });
 	} catch (error) {
 		error.inner.forEach((err) => {
 			errors[err.path] = err.errors[0];
