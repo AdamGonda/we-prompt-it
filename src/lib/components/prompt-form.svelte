@@ -312,5 +312,6 @@
 		background: #59a14f;
 		color: whitesmoke;
 		border: none;
+		font-size: var(--fs-2);
 	}
 </style>
