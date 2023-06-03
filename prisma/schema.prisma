@@ -24,6 +24,7 @@ model User {
   followings   Follower[] @relation("Followings")
   comments     Comment[]
   isDeleted    Boolean    @default(false)
+  isOnboarded  Boolean    @default(false)
 }
 
 model Prompt {

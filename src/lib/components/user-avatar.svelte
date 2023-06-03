@@ -37,6 +37,8 @@
 			</ul>
 		{/if}
 	</div>
+	{:else}
+	<!-- <a class="login" href={routes.login}>Login</a> -->
 {/if}
 
 <style>
@@ -104,5 +106,12 @@
 	.dropdown-menu a:hover,
 	.dropdown-menu button:hover {
 		background-color: rgba(0, 0, 0, 0.1);
+	}
+
+	.login {
+		color: black;
+		text-decoration: none;
+		font-size: 0.9rem;
+		display: inline-block;
 	}
 </style>

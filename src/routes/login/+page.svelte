@@ -4,10 +4,15 @@
 	import { page } from '$app/stores';
 	import { signIn, signOut } from '@auth/sveltekit/client';
 
-	const user = $page.data.session?.user;
+	const user = $page.data.dbUser;
+	let onboard = false;
 
 	if (browser && user) {
-		goto('/');
+		if (user.isOnboarded) {
+			goto('/');
+		} else if (!user.isOnboarded) {
+			onboard = true;
+		}
 	}
 </script>
 
@@ -18,15 +23,12 @@
 <!-- open ai style -->
 
 <div class="wrap">
-	
-		<h1>Welcome back, Idea Weaver!</h1>
-		<h3>Time to explore, craft, and share AI prompts!</h3>
-		<button class="bubble" on:click={() => signIn('google')}
-			>
-			<img src="/google-logo.png" alt="Google Logo" />
-			Continue with Google</button
-		>
-	
+	<h1>Welcome back, Idea Weaver!</h1>
+	<h3>Time to explore, craft, and share AI prompts!</h3>
+	<button class="bubble" on:click={() => signIn('google')}>
+		<img src="/google-logo.png" alt="Google Logo" />
+		Continue with Google</button
+	>
 </div>
 
 <style>
@@ -53,7 +55,7 @@
 	}
 
 	button {
-		background: #E9E9E9;
+		background: #e9e9e9;
 		border-radius: var(--br-2);
 		display: flex;
 		align-items: center;
@@ -65,6 +67,6 @@
 	}
 
 	button img {
-		width: 30px
+		width: 30px;
 	}
 </style>
