@@ -28,7 +28,7 @@
 		height: 15px;
     border-radius: 8px;
 		background: #333;
-		animation: loader 0.4s infinite alternate cubic-bezier(0.2, 1, 0.8, 1);
+		animation: loader 0.5s infinite alternate cubic-bezier(0.2, 1, 0.8, 1);
 	}
 
 	.loader div:nth-child(2) {
