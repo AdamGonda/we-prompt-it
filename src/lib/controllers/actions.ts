@@ -12,17 +12,17 @@ const prisma = new PrismaClient();
 
 export async function createUser(event: RequestEvent) {
 	const data = await validateForm(event, createUserSchema);
-	const session = await event.locals.getSession()
+	const session = await event.locals.getSession();
 
 	// if no session user, throw error
-	if (!session.user) {
+	if (!session?.user) {
 		throw error(401, JSON.stringify({ name: 'Unauthorized' }));
 	}
 
-	// check if user with the same username is not already in the database
+	// check if user with the same username in the database
 	const existingUser = await prisma.user.findUnique({
 		where: {
-			username: data.name,
+			username: data.name
 		}
 	});
 
@@ -30,15 +30,27 @@ export async function createUser(event: RequestEvent) {
 		throw error(400, JSON.stringify({ name: 'Name is not unique' }));
 	}
 
-	// create new user with username, use session user to get firstName latName and email
-	await prisma.user.create({
-		data: {
-			username: data.name,
-			firstName: session.user.name.split(' ')[0],
-			lastName: session.user.name.split(' ')[1],
-			email: session.user.email,
-		}
-	});
+	// if user with the same username exists, but deleted - restore it
+	if (existingUser && existingUser.isDeleted === true) {
+		await prisma.user.update({
+			where: {
+				id: existingUser.id
+			},
+			data: {
+				isDeleted: false
+			}
+		});
+	} else {
+		// create new user with username, use session user to get firstName latName and email
+		await prisma.user.create({
+			data: {
+				username: data.name,
+				email: session.user.email
+			}
+		});
+	}
+
+	event.cookies.set('isOnboarded=true; Max-Age=86400; Path=/; HttpOnly');
 }
 
 export async function createPrompt(event: RequestEvent) {

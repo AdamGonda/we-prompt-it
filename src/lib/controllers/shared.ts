@@ -39,8 +39,7 @@ export async function getAllTags() {
 	});
 }
 
-export async function getDBUser(event) {
-	const session = await event.session;
+export async function getDBUser(session) {
 
 	const dbUser = await prisma.user.findUnique({
 		where: { email: session.user.email }

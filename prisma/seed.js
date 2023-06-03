@@ -117,32 +117,20 @@ const RAW_PROMPTS = [
 
 const USERS = [
 	// {
-	// 	firstName: 'Adam',
-	// 	lastName: 'Gonda',
 	// 	username: 'adamgonda',
 	// 	email: 'adamgondagyula@gmail.com',
-	// 	picture: 'https://randomuser.me/api/portraits/men/23.jpg'
 	// },
 	{
-		firstName: 'Chloe',
-		lastName: 'Ball',
 		username: 'chloeBall',
 		email: 'chloeBall@gmail.com',
-		picture: 'https://randomuser.me/api/portraits/women/40.jpg'
 	},
 	{
-		firstName: 'Ethan',
-		lastName: 'Riley',
 		username: 'ethanRiley',
 		email: 'ethanRiley@gmail.com',
-		picture: 'https://randomuser.me/api/portraits/men/80.jpg'
 	},
 	{
-		firstName: 'Sophia',
-		lastName: 'Williamson',
 		username: 'sophiaWilliamson',
 		email: 'sophiaWilliamson@gmail.com',
-		picture: 'https://randomuser.me/api/portraits/women/95.jpg'
 	}
 ];
 
@@ -151,11 +139,8 @@ async function getUsers() {
 	const users = USERS.map(async (user) => {
 		return await prisma.user.create({
 			data: {
-				firstName: user.firstName,
-				lastName: user.lastName,
 				username: user.username,
 				email: user.email,
-				picture: user.picture
 			}
 		});
 	});
