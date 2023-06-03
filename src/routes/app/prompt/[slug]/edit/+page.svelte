@@ -91,7 +91,7 @@
 				class="bubble"
 				type="button"
 				value="Apply changes"
-				style="background: lightgreen; color: black"
+				style="background: #59a14f; color: whitesmoke"
 				on:click={() => form.requestSubmit()}
 			/>
 		</div>
@@ -108,7 +108,7 @@
 				class="bubble"
 				type="button"
 				value="Discard changes"
-				style="background: orange; color: black"
+				style="background: #edc948; color: #333333"
 				on:click={() => goto(routes.prompt(true, $page.params.slug))}
 			/>
 		</div>
@@ -160,7 +160,7 @@
 	}
 
 	dialog input {
-		background: rgb(255, 38, 38);
+		background: #e15759;
 		color: white;
 		font-weight: 400;
 		margin-left: var(--s-4);
@@ -192,8 +192,8 @@
 	}
 
 	.apply {
-		background: lightgreen !important;
-		color: black;
+		background: #59a14f !important;
+		color: whitesmoke;
 	}
 
 	.discard {
@@ -202,7 +202,7 @@
 	}
 
 	.delete {
-		background: rgb(255, 38, 38) !important;
+		background: #e15759 !important;
 		color: white;
 		border-radius: var(--br-1);
     padding: var(--s-3) var(--s-4);
