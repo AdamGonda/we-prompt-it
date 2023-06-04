@@ -13,6 +13,30 @@ export async function loadIndex(event) {
 }
 
 export async function loadIndexLayout(event) {
+	if (!event.route.id.includes('api')) {
+		const session = await event.locals.getSession();
+
+		if (session) {
+			if (!event.cookies.get('isOnboarded')) {
+				// at this point
+				// 1. user is in session
+				// 2. user has no cookie
+
+				// now we need to check if user is in db
+				const user = await getDBUser(session);
+
+				if (user && !event.cookies.get('isOnboarded')) {
+					console.log('set cookie');
+					// if user is in db, cookie probably has been deleted, so we set it again
+					event.cookies.set('isOnboarded=true; Max-Age=86400; Path=/; HttpOnly');
+				} else if (!user && event.route.id !== '/app/onboarding') {
+					console.log('redirect');
+					throw redirect(308, '/app/onboarding');
+				}
+			}
+		}
+	}
+
 	const session = await event.locals.getSession();
 	let dbUser = null;
 
@@ -128,7 +152,7 @@ export async function loadOnboarding(event) {
 	const session = await event.locals.getSession();
 	const user = await getDBUser(session);
 
-	if(user){
+	if (user) {
 		throw redirect(308, '/');
 	}
 }
