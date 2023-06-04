@@ -35,9 +35,9 @@ async function forceOnboarding({ event, resolve }) {
 					console.log('set cookie');
 					// if user is in db, cookie probably has been deleted, so we set it again
 					event.cookies.set('isOnboarded=true; Max-Age=86400; Path=/; HttpOnly');
-				} else if (!user && event.route.id !== '/onboarding') {
+				} else if (!user && event.route.id !== '/app/onboarding') {
 					console.log('redirect');
-					throw redirect(308, '/onboarding');
+					throw redirect(308, '/app/onboarding');
 				}
 			}
 		}
