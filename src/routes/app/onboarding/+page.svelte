@@ -1,4 +1,7 @@
 <script>
+	import { browser } from '$app/environment';
+	import { goto } from '$app/navigation';
+	import { page } from '$app/stores';
 	import { formDataToObject } from '$lib/utils';
 	import { createUserSchema } from '$lib/yup-schemas';
 
@@ -7,6 +10,10 @@
 	let isTouched = {
 		name: false
 	};
+
+	if(browser && $page.data.dbUser) {
+		goto('/')
+	}
 
 	async function validateForm() {
 		errors = {};

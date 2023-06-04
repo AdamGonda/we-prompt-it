@@ -6,7 +6,6 @@
 
 	const user = $page.data.dbUser;
 	let showDropdown = false;
-	console.log('log user', user)
 
 	onMount(() => {
 		window.addEventListener('click', (e) => {

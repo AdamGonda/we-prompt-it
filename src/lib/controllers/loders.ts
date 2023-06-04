@@ -152,9 +152,7 @@ export async function loadProfile(event) {
 
 export async function loadOnboarding(event) {
 	const session = await event.locals.getSession();
-	const user = await getDBUser(session);
+	const dbUser = await getDBUser(session);
 
-	if (user) {
-		throw redirect(308, '/');
-	}
+	return { dbUser };
 }
