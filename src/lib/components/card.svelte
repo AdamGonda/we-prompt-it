@@ -29,7 +29,7 @@
 
 	<div class="stats">
 		<div>
-			<img class="author" src={prompt.author.picture} alt="" />
+			<img class="author" src={prompt.author.image} alt="" />
 			<p class="model">{prompt.aiModel.name}</p>
 		</div>
 
