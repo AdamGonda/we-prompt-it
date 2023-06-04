@@ -11,7 +11,8 @@ import { createUserSchema, promptSchema } from '$lib/yup-schemas';
 const prisma = new PrismaClient();
 
 export async function createPrompt(event: RequestEvent) {
-	const user = await getDBUser(event);
+	const session = await event.locals.getSession();
+	const user = await getDBUser(session);
 	const data = await validateForm(event, promptSchema);
 	const aiModelId = await getOrCreateAiModel(data);
 	const tagIds = await getOrCreateTags(data);
@@ -46,7 +47,8 @@ export async function createPrompt(event: RequestEvent) {
 
 export async function editPrompt(event: RequestEvent) {
 	const slug = event.params.slug;
-	const user = await getDBUser(event);
+	const session = await event.locals.getSession();
+	const user = await getDBUser(session);
 	const data = await validateForm(event, promptSchema);
 	const aiModelId = await getOrCreateAiModel(data);
 	const tagIds = await getOrCreateTags(data);
@@ -95,7 +97,8 @@ export async function editPrompt(event: RequestEvent) {
 }
 
 export async function forkPrompt(event: RequestEvent) {
-	const dbUser = await getDBUser(event);
+	const session = await event.locals.getSession();
+	const dbUser = await getDBUser(session);
 	const slug = event.params.slug;
 	const data = await validateForm(event, promptSchema);
 	const aiModelId = await getOrCreateAiModel(data);

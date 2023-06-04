@@ -56,7 +56,9 @@ export async function loadIndexLayout(event) {
 }
 
 export async function loadMyCollection(event) {
-	const dbUser = await getDBUser(event);
+	const session = await event.locals.getSession();
+
+	const dbUser = await getDBUser(session);
 
 	const createdBy = await prisma.prompt.findMany({
 		where: {

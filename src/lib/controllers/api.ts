@@ -66,7 +66,7 @@ export async function createUser(event) {
 export async function addRemoveLike(event) {
 	const id = event.url.searchParams.get('id');
 	const session = await event.locals.getSession();
-	const user = await getDBUser(event);
+	const user = await getDBUser(session);
 	const userId = user.id;
 	const promptId = Number(id);
 
@@ -120,7 +120,8 @@ export async function addRemoveLike(event) {
 export async function nameCheck(event) {
 	const proposedName = event.url.searchParams.get('proposedName');
 	const promptId = event.url.searchParams.get('promptId');
-	const user = await getDBUser(event);
+	const session = await event.locals.getSession();
+	const user = await getDBUser(session);
 
 	if (!proposedName) {
 		throw error(400, {
