@@ -31,13 +31,13 @@ async function forceOnboarding({ event, resolve }) {
 				// now we need to check if user is in db
 				const user = await getDBUser(session);
 
-				if (!user && event.route.id !== '/onboarding') {
-					console.log('redirect');
-					throw redirect(308, '/onboarding');
-				} else if (user && !event.cookies.get('isOnboarded')) {
+				if (user && !event.cookies.get('isOnboarded')) {
 					console.log('set cookie');
 					// if user is in db, cookie probably has been deleted, so we set it again
 					event.cookies.set('isOnboarded=true; Max-Age=86400; Path=/; HttpOnly');
+				} else if (!user && event.route.id !== '/onboarding') {
+					console.log('redirect');
+					throw redirect(308, '/onboarding');
 				}
 			}
 		}
@@ -53,7 +53,7 @@ export const handle: Handle = sequence(
 	SvelteKitAuth({
 		providers: [
 			Google({ clientId: GOOGLE_CLIENT_ID, clientSecret: GOOGLE_CLIENT_SECRET })
-		]
+		],
 	}),
 	authorization,
 	forceOnboarding

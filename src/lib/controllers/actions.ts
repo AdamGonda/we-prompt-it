@@ -16,25 +16,36 @@ export async function createUser(event: RequestEvent) {
 
 	// if no session user, throw error
 	if (!session?.user) {
-		throw error(401, JSON.stringify({ name: 'Unauthorized' }));
+		throw error(401, { message: 'Unauthorized' });
+	}
+
+	// check if user is already in the database
+	const user = await prisma.user.findUnique({
+		where: {
+			email: session.user.email
+		}
+	});
+
+	if(user && user.isDeleted === false) {
+		throw error(400, { message: 'User already exists for this session' });
 	}
 
 	// check if user with the same username in the database
-	const existingUser = await prisma.user.findUnique({
+	const userWithsameUsername = await prisma.user.findUnique({
 		where: {
 			username: data.name
 		}
 	});
 
-	if (existingUser && existingUser.isDeleted === false) {
-		throw error(400, JSON.stringify({ name: 'Name is not unique' }));
+	if (userWithsameUsername && userWithsameUsername.isDeleted === false) {
+		throw error(400, { message: 'Name is not unique' });
 	}
 
 	// if user with the same username exists, but deleted - restore it
-	if (existingUser && existingUser.isDeleted === true) {
+	if (userWithsameUsername && userWithsameUsername.isDeleted === true) {
 		await prisma.user.update({
 			where: {
-				id: existingUser.id
+				id: userWithsameUsername.id
 			},
 			data: {
 				isDeleted: false
@@ -49,8 +60,6 @@ export async function createUser(event: RequestEvent) {
 			}
 		});
 	}
-
-	event.cookies.set('isOnboarded=true; Max-Age=86400; Path=/; HttpOnly');
 }
 
 export async function createPrompt(event: RequestEvent) {
