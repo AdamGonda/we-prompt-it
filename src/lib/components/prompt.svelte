@@ -59,7 +59,7 @@
 	<div class="header">
 		<div class="top-bar">
 			<a class="author" href={routes.profile($page.data.prompt.author.username)}>
-				<img src={$page.data.prompt.author.picture} alt="" />
+				<img src={$page.data.prompt.author.image} alt="" />
 				<p>
 					<span>created by</span>
 					<br />
