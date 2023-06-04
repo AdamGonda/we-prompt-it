@@ -6,6 +6,7 @@
 
 	const user = $page.data.dbUser;
 	let showDropdown = false;
+	console.log('log user', user)
 
 	onMount(() => {
 		window.addEventListener('click', (e) => {
@@ -26,7 +27,7 @@
 {#if user}
 	<div class="dropdown">
 		<button class="dropdown-trigger" on:click={toggleShowDropdown}>
-			<img src={user.picture} alt="" />
+			<img src={user.image} alt="" />
 		</button>
 
 		{#if showDropdown}

@@ -17,7 +17,7 @@ export async function createUser(event) {
 		throw error(401, { message: 'Unauthorized' });
 	}
 
-	// check if user is already in the database
+	// check if user with the same email in the database
 	const user = await prisma.user.findUnique({
 		where: {
 			email: session.user.email
@@ -54,7 +54,8 @@ export async function createUser(event) {
 		await prisma.user.create({
 			data: {
 				username,
-				email: session.user.email
+				email: session.user.email,
+				image: session.user.image,
 			}
 		});
 	}

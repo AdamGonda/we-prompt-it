@@ -46,7 +46,7 @@
 	}
 
 	function handleSubmit() {
-		fetch(`/api/create-user?username=${form.name.value}}`, {
+		fetch(`/api/create-user?username=${form.name.value}`, {
 			method: 'POST'
 		})
 			.then((r) => r.json())
