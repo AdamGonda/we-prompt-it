@@ -1,5 +1,3 @@
-import { createUser } from '$lib/controllers/actions';
+import { loadOnboarding } from '$lib/controllers/loders';
 
-export const actions = {
-	default: createUser,
-};
+export const load = loadOnboarding

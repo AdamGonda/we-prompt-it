@@ -44,12 +44,29 @@
 		isTouched[event.target.name] = true;
 		validateForm();
 	}
+
+	function handleSubmit() {
+		fetch(`/api/create-user?username=${form.name.value}}`, {
+			method: 'POST'
+		})
+			.then((r) => r.json())
+			.then((json) => {
+				if (json.status === 200) {
+					window.location.href = '/';
+				}
+			});
+	}
 </script>
 
 <div class="wrap">
 	<h1>It seams this is your first time here.</h1>
 	<h3>Please choose a user name so everybody knows who made those great prompts.</h3>
-	<form method="POST" bind:this={form} on:input={validateForm}>
+	<form
+		method="POST"
+		bind:this={form}
+		on:input={validateForm}
+		on:submit|preventDefault={handleSubmit}
+	>
 		<input
 			on:blur={handleFieldChange}
 			on:input={handleFieldChange}

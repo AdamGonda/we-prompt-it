@@ -10,58 +10,6 @@ import { createUserSchema, promptSchema } from '$lib/yup-schemas';
 
 const prisma = new PrismaClient();
 
-export async function createUser(event: RequestEvent) {
-	const data = await validateForm(event, createUserSchema);
-	const session = await event.locals.getSession();
-
-	// if no session user, throw error
-	if (!session?.user) {
-		throw error(401, { message: 'Unauthorized' });
-	}
-
-	// check if user is already in the database
-	const user = await prisma.user.findUnique({
-		where: {
-			email: session.user.email
-		}
-	});
-
-	if(user && user.isDeleted === false) {
-		throw error(400, { message: 'User already exists for this session' });
-	}
-
-	// check if user with the same username in the database
-	const userWithsameUsername = await prisma.user.findUnique({
-		where: {
-			username: data.name
-		}
-	});
-
-	if (userWithsameUsername && userWithsameUsername.isDeleted === false) {
-		throw error(400, { message: 'Name is not unique' });
-	}
-
-	// if user with the same username exists, but deleted - restore it
-	if (userWithsameUsername && userWithsameUsername.isDeleted === true) {
-		await prisma.user.update({
-			where: {
-				id: userWithsameUsername.id
-			},
-			data: {
-				isDeleted: false
-			}
-		});
-	} else {
-		// create new user with username, use session user to get firstName latName and email
-		await prisma.user.create({
-			data: {
-				username: data.name,
-				email: session.user.email
-			}
-		});
-	}
-}
-
 export async function createPrompt(event: RequestEvent) {
 	const user = await getDBUser(event);
 	const data = await validateForm(event, promptSchema);

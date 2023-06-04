@@ -123,3 +123,12 @@ export async function loadProfile(event) {
 
 	return { user };
 }
+
+export async function loadOnboarding(event) {
+	const session = await event.locals.getSession();
+	const user = await getDBUser(session);
+
+	if(user){
+		throw redirect(308, '/');
+	}
+}
