@@ -19,38 +19,31 @@ async function authorization({ event, resolve }) {
 }
 
 async function forceOnboarding({ event, resolve }) {
-	// Determine if user onboarding is complete
-	const session = await event.locals.getSession();
+	if (!event.route.id.includes('api')) {
+		const session = await event.locals.getSession();
 
-	// not bother with anonymous users
-	if (!session) {
-		return resolve(event);
+		if (session) {
+			if (!event.cookies.get('isOnboarded')) {
+				// at this point
+				// 1. user is in session
+				// 2. user has no cookie
+
+				// now we need to check if user is in db
+				const user = await getDBUser(session);
+
+				if (!user && event.route.id !== '/onboarding') {
+					console.log('redirect');
+					throw redirect(308, '/onboarding');
+				} else if (user && !event.cookies.get('isOnboarded')) {
+					console.log('set cookie');
+					// if user is in db, cookie probably has been deleted, so we set it again
+					event.cookies.set('isOnboarded=true; Max-Age=86400; Path=/; HttpOnly');
+				}
+			}
+		}
 	}
 
-	// if cokkie is set, user is onboarded
-	if (event.cookies.get('isOnboarded')) {
-		return resolve(event);
-	}
-  
-	// at this point
-	// 1. user is in session
-	// 2. user has no cookie
-
-	// now we need to check if user is in db
-	const user = await getDBUser(session);
-
-	// if user is not in db yet but in session, redirect to onboarding to finish creating a user
-	if (!user && event.route.id !== '/onboarding') {
-    console.log('log redirect')
-		throw redirect(308, '/onboarding');
-	}
-
-	// if user is in db, cookie probably has been deleted, so we set it again
-	if (user) {
-		event.cookies.set('isOnboarded=true; Max-Age=86400; Path=/; HttpOnly');
-	}
-  
-  return resolve(event);
+	return resolve(event);
 }
 
 // First handle authentication, then authorization
