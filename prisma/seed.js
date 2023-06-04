@@ -123,14 +123,17 @@ const USERS = [
 	{
 		username: 'chloeBall',
 		email: 'chloeBall@gmail.com',
+		image: 'https://randomuser.me/api/portraits/women/40.jpg'
 	},
 	{
 		username: 'ethanRiley',
 		email: 'ethanRiley@gmail.com',
+		image: 'https://randomuser.me/api/portraits/men/80.jpg'
 	},
 	{
 		username: 'sophiaWilliamson',
 		email: 'sophiaWilliamson@gmail.com',
+		image: 'https://randomuser.me/api/portraits/women/95.jpg'
 	}
 ];
 
@@ -141,6 +144,7 @@ async function getUsers() {
 			data: {
 				username: user.username,
 				email: user.email,
+				image: user.image
 			}
 		});
 	});
