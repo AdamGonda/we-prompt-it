@@ -1,5 +1,5 @@
 import { PrismaClient } from '@prisma/client';
-import { getAllAIModels, getAllTags, getDBUser, getPromptBySlug } from './shared';
+import { createUser, getAllAIModels, getAllTags, getDBUser, getPromptBySlug } from './shared';
 import { error, redirect } from '@sveltejs/kit';
 import { _search } from './api';
 import globalIncludes from '$lib/global-includes';
@@ -161,58 +161,4 @@ async function createUserOnFirstLogin(event) {
 			}
 		}
 	}
-}
-
-async function createUser(session) {
-	const username = session.user.name.split(' ').join('-').toLowerCase();
-
-	// if no session user, throw error
-	if (!session?.user) {
-		throw error(401, { message: 'Unauthorized' });
-	}
-
-	// check if user with the same email in the database
-	const user = await prisma.user.findUnique({
-		where: {
-			email: session.user.email
-		}
-	});
-
-	if(user && user.isDeleted === false) {
-		throw error(400, { message: 'User already exists for this session' });
-	}
-
-	// check if user with the same username in the database
-	const userWithsameUsername = await prisma.user.findUnique({
-		where: {
-			username
-		}
-	});
-
-	if (userWithsameUsername && userWithsameUsername.isDeleted === false) {
-		throw error(400, { message: 'Name is not unique' });
-	}
-
-	// if user with the same username exists, but deleted - restore it
-	if (userWithsameUsername && userWithsameUsername.isDeleted === true) {
-		await prisma.user.update({
-			where: {
-				id: userWithsameUsername.id
-			},
-			data: {
-				isDeleted: false
-			}
-		});
-	} else {
-		// create new user with username, use session user to get firstName latName and email
-		await prisma.user.create({
-			data: {
-				username,
-				email: session.user.email,
-				image: session.user.image,
-			}
-		});
-	}
-
-	return new Response(JSON.stringify({ status: 200 }));
 }

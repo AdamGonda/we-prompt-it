@@ -49,3 +49,7 @@ export function hash(str) {
 
 	return hash;
 }
+
+export function nameToUsername(name) {
+	return name.split(' ').join('-').toLowerCase()
+}
