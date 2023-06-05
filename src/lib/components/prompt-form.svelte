@@ -144,6 +144,7 @@
 			name="name"
 			type="text"
 			placeholder={data.placeholder?.name}
+			class:invalid={isTouched.name && errors.name}
 			on:blur={handleFieldChange}
 			on:input={handleFieldChange}
 			value={_.get(data, 'prefill.name', '')}
@@ -153,7 +154,9 @@
 				}
 			}}
 		/>
-		<span style="align-self: center;" class="error">{isTouched.name && errors.name ? errors.name : ''}</span>
+		<span style="align-self: center;" class="error"
+			>{isTouched.name && errors.name ? errors.name : ''}</span
+		>
 	</div>
 
 	<div class="model">
@@ -172,6 +175,7 @@
 			name="description"
 			rows="1"
 			placeholder={data.placeholder?.description}
+			class:invalid={isTouched.description && errors.description}
 			on:blur={handleFieldChange}
 			on:input={handleFieldChange}
 			on:input={handleHeight}
@@ -188,6 +192,7 @@
 			name="content"
 			rows="1"
 			placeholder={data.placeholder?.content}
+			class:invalid={isTouched.content && errors.content}
 			on:blur={handleFieldChange}
 			on:input={handleFieldChange}
 			on:input={handleHeight}
@@ -307,5 +312,14 @@
 	.submit-wrap input:disabled {
 		background: #b3b3b3;
 		cursor: not-allowed;
+	}
+
+	.invalid {
+		border-bottom: 4px solid var(--danger) !important;
+		color: var(--danger);
+	}
+
+	input.invalid::placeholder, textarea.invalid::placeholder {
+		color: var(--danger);
 	}
 </style>
