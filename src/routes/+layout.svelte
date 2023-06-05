@@ -108,6 +108,7 @@
 		left: 0;
 		right: 0;
 		display: none;
+		z-index: 10;
 	}
 
 	.show {
