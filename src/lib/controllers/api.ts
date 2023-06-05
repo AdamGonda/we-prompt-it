@@ -3,19 +3,21 @@ import { error, json } from '@sveltejs/kit';
 import { PrismaClient } from '@prisma/client';
 import globalIncludes from '$lib/global-includes';
 import natural from 'natural';
-import { convertToSlug } from '$lib/utils';
+import { convertToSlug, forceAuth } from '$lib/utils';
 
 const prisma = new PrismaClient();
 
 export async function addRemoveLike(event) {
+	const session = forceAuth(event);
 	const id = event.url.searchParams.get('id');
-	const session = await event.locals.getSession();
 	const user = await getDBUser(session);
 	const userId = user.id;
 	const promptId = Number(id);
 
-	if (!id || !session.user) {
-		return new Response(JSON.stringify({ status: 400 }));
+	if (!id || !Number(id) || Number(id) < 0) {
+		throw error(400, {
+			message: `Something wrong with the id`
+		});
 	}
 
 	// check if user already liked the prompt before
@@ -62,9 +64,9 @@ export async function addRemoveLike(event) {
 }
 
 export async function nameCheck(event) {
+	const session = forceAuth(event);
 	const proposedName = event.url.searchParams.get('proposedName');
 	const promptId = event.url.searchParams.get('promptId');
-	const session = await event.locals.getSession();
 	const user = await getDBUser(session);
 
 	if (!proposedName) {
@@ -85,6 +87,12 @@ export async function nameCheck(event) {
 	if (!promptId) {
 		return existingPrompt ? json({ ok: false }) : json({ ok: true });
 	} else {
+		if (!Number(promptId)) {
+			throw error(400, {
+				message: `Prompt id is not a number`
+			});
+		}
+
 		// If promptId exists and the found prompt is not the same as the one being updated.
 		if (existingPrompt && existingPrompt.id !== Number(promptId)) {
 			return json({ ok: false });
@@ -95,6 +103,7 @@ export async function nameCheck(event) {
 }
 
 export async function usernameCheck(event) {
+	forceAuth(event);
 	const proposedName = event.url.searchParams.get('proposedName');
 
 	if (!proposedName) {
@@ -115,21 +124,6 @@ export async function usernameCheck(event) {
 	}
 
 	return json({ ok: true });
-}
-
-export async function preSearchResultsNo(event) {
-	const query = event.url.searchParams.get('q');
-	const rawResults = await _search(query);
-
-	if (query) {
-		if (rawResults.length === 0) {
-			json(0);
-		}
-
-		return json(rawResults.length);
-	}
-
-	return json([]);
 }
 
 export async function search(event) {
