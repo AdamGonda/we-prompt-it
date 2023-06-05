@@ -114,9 +114,10 @@ export async function loadProfile(event) {
 		where: { username: event.params.username },
 		include: {
 			prompts: {
+				where: { isDeleted: false },
 				...globalIncludes
-			}
-		}
+			},
+		},
 	});
 
 	return { user };
