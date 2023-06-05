@@ -48,6 +48,7 @@
 		"@trpc/server": "^10.19.1",
 		"@types/lodash": "^4.14.194",
 		"@zerodevx/svelte-toast": "^0.9.3",
+		"bad-words-next": "^2.1.0",
 		"langchain": "^0.0.87",
 		"lodash": "^4.17.21",
 		"nanoid": "^4.0.2",

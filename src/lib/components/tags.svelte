@@ -1,7 +1,10 @@
 <script>
-	import { toast } from '@zerodevx/svelte-toast'
+	import { toast } from '@zerodevx/svelte-toast';
 	import { page } from '$app/stores';
 	import { stringToColor } from '$lib/utils';
+	import BadWordsNext from 'bad-words-next';
+	import en from 'bad-words-next/data/en.json';
+	const badwords = new BadWordsNext({ data: en });
 
 	const allTags = getAllTags();
 	let _tags = getExistingPromptTags();
@@ -37,13 +40,15 @@
 
 	function validateNewTag(tag) {
 		const minLength = 3;
-    const maxLength = 20;
-    const maxTags = 5;
+		const maxLength = 20;
+		const maxTags = 5;
 
 		const isTooShort = tag.length < minLength;
 		const isTooLong = tag.length > maxLength;
 		const tooManyTags = _tags.length >= maxTags;
 		const isAlreadyAdded = _tags.includes(tag);
+		const isProfane = badwords.check(tag);
+		
 
 		if (isTooShort) {
 			input = '';
@@ -64,9 +69,19 @@
 			return;
 		}
 
-		if(tooManyTags) {
+		if (tooManyTags) {
 			input = '';
-			toast.push(`You can add a maximum of ${maxTags} tags. Please remove a tag before adding another.`);
+			toast.push(
+				`You can add a maximum of ${maxTags} tags. Please remove a tag before adding another.`
+			);
+			return;
+		}
+
+		if (isProfane) {
+			input = '';
+			toast.push(
+				`Tag contains profanity. Try a different tag or contact us if you think this is a mistake.`
+			);
 			return;
 		}
 
@@ -79,6 +94,7 @@
 			.toString()
 			.trim()
 			.replace(' ', '-')
+			.replace('_', '');
 	}
 
 	function addTag(tag) {
@@ -190,7 +206,7 @@
 		position: relative;
 	}
 
-	input[type="text"] {
+	input[type='text'] {
 		width: 150px;
 		font-size: var(--fs-2);
 		font-weight: bold;
@@ -207,7 +223,7 @@
 		display: flex;
 		flex-wrap: wrap;
 		align-items: center;
-    gap: var(--fs-2);
+		gap: var(--fs-2);
 	}
 
 	.tag {

@@ -1,7 +1,6 @@
 import { error } from '@sveltejs/kit';
 import { promptSchema, type PromptSchema } from './yup-schemas';
 
-
 export function formDataToObject(formData) {
 	const formValues = {};
 	for (const [key, value] of formData.entries()) {
