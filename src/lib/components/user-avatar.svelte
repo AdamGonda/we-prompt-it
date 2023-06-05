@@ -1,10 +1,12 @@
 <script>
+	import { browser } from '$app/environment';
 	import { page } from '$app/stores';
 	import routes from '$lib/routes';
+	import { nameToUsername } from '$lib/utils';
 	import { signOut } from '@auth/sveltekit/client';
 	import { onMount } from 'svelte';
 
-	const user = $page.data.dbUser;
+	$: user = browser ? $page.data.session?.user: null
 	let showDropdown = false;
 
 	onMount(() => {
@@ -26,16 +28,20 @@
 {#if user}
 	<div class="dropdown">
 		<button class="dropdown-trigger" on:click={toggleShowDropdown}>
-			<img src={user.picture} alt="" />
+			<img src={user.image} alt="" />
 		</button>
 
 		{#if showDropdown}
 			<!-- svelte-ignore a11y-click-events-have-key-events -->
 			<ul class="dropdown-menu" on:click={toggleShowDropdown}>
-				<li><a href={routes.profile(user.username)}>Profile</a></li>
+				<li><a href={routes.profile(nameToUsername(user.name))}>Profile</a></li>
 				<li><button on:click={handleSignout}>Signout</button></li>
 			</ul>
 		{/if}
+	</div>
+	{:else}
+	<div class="login bubble">
+		<a href={routes.login}>Login</a>
 	</div>
 {/if}
 
@@ -104,5 +110,20 @@
 	.dropdown-menu a:hover,
 	.dropdown-menu button:hover {
 		background-color: rgba(0, 0, 0, 0.1);
+	}
+
+	.login {
+		display: flex;
+		align-items: center;
+		gap: 8px;
+		background: #E9E9E9;
+		height: 46px;
+	}
+
+	.login a{
+		color: black;
+		text-decoration: none;
+		font-size: 0.9rem;
+		font-weight: 500;
 	}
 </style>

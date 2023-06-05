@@ -11,10 +11,8 @@ datasource db {
 model User {
   id           Int        @id @default(autoincrement())
   email        String     @unique
-  firstName    String
-  lastName     String
-  username     String     @unique
-  picture      String     @default("")
+  username     String?    @unique
+  image        String     @default("")
   createdAt    DateTime   @default(now())
   updatedAt    DateTime   @updatedAt
   prompts      Prompt[]

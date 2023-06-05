@@ -1,5 +1,5 @@
 import { error } from '@sveltejs/kit';
-import { promptSchema, type PromptSchema } from './yup-schemas';
+import type { PromptSchema, CreateUserSchema } from './yup-schemas';
 
 export function formDataToObject(formData) {
 	const formValues = {};
@@ -15,12 +15,15 @@ export function formDataToObject(formData) {
 	return formValues;
 }
 
-export async function validateForm(event): Promise<PromptSchema> {
+export async function validateForm(
+	event,
+	schema
+): Promise<PromptSchema | CreateUserSchema> {
 	const formData = formDataToObject(await event.request.formData());
 	const errors = {};
 
 	try {
-		promptSchema.validateSync(formData, { abortEarly: false });
+		schema.validateSync(formData, { abortEarly: false });
 	} catch (error) {
 		error.inner.forEach((err) => {
 			errors[err.path] = err.errors[0];
@@ -49,4 +52,19 @@ export function stringToColor(str) {
 		color += ('00' + value.toString(16)).substr(-2);
 	}
 	return color;
+}
+
+export function hash(str) {
+	let hash = 0;
+	for (let i = 0; i < str.length; i++) {
+		const char = str.charCodeAt(i);
+		hash = (hash << 5) - hash + char;
+		hash = hash & hash; // Convert to 32bit integer
+	}
+
+	return hash;
+}
+
+export function nameToUsername(name) {
+	return name.trim().split(' ').join('-').toLowerCase();
 }

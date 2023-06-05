@@ -6,7 +6,7 @@
 </script>
 
 <div class="profile">
-	<img src={user.picture} alt="user" />
+	<img src={user.image} alt="user" />
 	<p>{user.username}</p>
 </div>
 

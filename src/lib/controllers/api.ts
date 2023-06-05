@@ -10,7 +10,7 @@ const prisma = new PrismaClient();
 export async function addRemoveLike(event) {
 	const id = event.url.searchParams.get('id');
 	const session = await event.locals.getSession();
-	const user = await getDBUser(event);
+	const user = await getDBUser(session);
 	const userId = user.id;
 	const promptId = Number(id);
 
@@ -64,7 +64,8 @@ export async function addRemoveLike(event) {
 export async function nameCheck(event) {
 	const proposedName = event.url.searchParams.get('proposedName');
 	const promptId = event.url.searchParams.get('promptId');
-	const user = await getDBUser(event);
+	const session = await event.locals.getSession();
+	const user = await getDBUser(session);
 
 	if (!proposedName) {
 		throw error(400, {
@@ -91,6 +92,29 @@ export async function nameCheck(event) {
 
 		return json({ ok: true });
 	}
+}
+
+export async function usernameCheck(event) {
+	const proposedName = event.url.searchParams.get('proposedName');
+
+	if (!proposedName) {
+		throw error(400, {
+			message: `Missing parameters`
+		});
+	}
+
+	const existingUser = await prisma.user.findFirst({
+		where: {
+			username: proposedName,
+			isDeleted: false
+		}
+	});
+
+	if (existingUser) {
+		return json({ ok: false });
+	}
+
+	return json({ ok: true });
 }
 
 export async function preSearchResultsNo(event) {

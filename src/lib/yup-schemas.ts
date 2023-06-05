@@ -16,7 +16,7 @@ export const promptSchema = object().shape({
 		.min(10, 'Must be 10 or more characters long'),
 	model: number().required('Model is required'),
 	tags: string().strict().optional(),
-	newModelName: string().when('model', {
+	newModelName: string().trim().when('model', {
 		is: (value) => value === -1,
 		then: (schema) =>
 			schema
@@ -36,3 +36,12 @@ export const promptSchema = object().shape({
 });
 
 export type PromptSchema = InferType<typeof promptSchema>;
+
+export const createUserSchema = object().shape({
+	name: string()
+	.required('Name is required')
+	.trim()
+	.min(5, 'Must be 5 or more characters long')
+});
+
+export type CreateUserSchema = InferType<typeof createUserSchema>;

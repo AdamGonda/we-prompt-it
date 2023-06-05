@@ -1,8 +1,9 @@
 import { PrismaClient } from '@prisma/client';
-import { getAllAIModels, getAllTags, getDBUser, getPromptBySlug } from './shared';
-import { error } from '@sveltejs/kit';
+import { createUser, getAllAIModels, getAllTags, getDBUser, getPromptBySlug } from './shared';
+import { error, redirect } from '@sveltejs/kit';
 import { _search } from './api';
 import globalIncludes from '$lib/global-includes';
+import { hash } from '$lib/utils';
 
 const prisma = new PrismaClient();
 
@@ -13,18 +14,30 @@ export async function loadIndex(event) {
 }
 
 export async function loadIndexLayout(event) {
+	createUserOnFirstLogin(event);
+
 	const session = await event.locals.getSession();
 	let dbUser = null;
-	
-	if(session) {
-		dbUser = await getDBUser(event)
+
+	if (session) {
+		// TODO performace issue? to hit the db every time we visit a page?
+		dbUser = await getDBUser(session);
 	}
+
+	// if (session) {
+	// TODO revise if this needed or not
+	// 	if (event.route.id !== '/login' && (!dbUser || !dbUser.isOnboarded)) {
+	// 		throw redirect(308, '/login');
+	// 	}
+	// }
 
 	return { session, dbUser };
 }
 
 export async function loadMyCollection(event) {
-	const dbUser = await getDBUser(event);
+	const session = await event.locals.getSession();
+
+	const dbUser = await getDBUser(session);
 
 	const createdBy = await prisma.prompt.findMany({
 		where: {
@@ -97,7 +110,7 @@ export async function loadCreatePrompt() {
 
 export async function loadProfile(event) {
 	// if id is not present trhow 404
-	if(!event.params.username) {
+	if (!event.params.username) {
 		throw error(404, {
 			message: 'Not found'
 		});
@@ -113,5 +126,39 @@ export async function loadProfile(event) {
 		}
 	});
 
-	return { user }
+	return { user };
+}
+
+export async function loadOnboarding(event) {
+	const session = await event.locals.getSession();
+	const dbUser = await getDBUser(session);
+
+	return { dbUser };
+}
+
+async function createUserOnFirstLogin(event) {
+	const session = await event.locals.getSession()
+
+	if (session) {
+		if (event.cookies.get('isOnboarded') !== hash(session.user.email)) {
+			// at this point
+			// 1. user is in session
+			// 2. user has no cookie
+
+			// now we need to check if user is in db
+			const user = await getDBUser(session);
+
+			if (user) {
+				// if user is in db, cookie probably has been deleted, so we set it again
+				console.log('set cookie');
+				event.cookies.set(
+					`isOnboarded=${hash(user.email)}; Max-Age=86400; Path=/; HttpOnly`
+				);
+			} else {
+				// create new user in db
+				console.log('create new user');
+				createUser(session)
+			}
+		}
+	}
 }

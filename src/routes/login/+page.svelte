@@ -2,11 +2,9 @@
 	import { browser } from '$app/environment';
 	import { goto } from '$app/navigation';
 	import { page } from '$app/stores';
-	import { signIn, signOut } from '@auth/sveltekit/client';
+	import { signIn } from '@auth/sveltekit/client';
 
-	const user = $page.data.session?.user;
-
-	if (browser && user) {
+	if(browser && $page.data.session) {
 		goto('/');
 	}
 </script>
@@ -15,18 +13,15 @@
 	<title>Login | We Prompt</title>
 </svelte:head>
 
-<!-- open ai style -->
-
 <div class="wrap">
-	
-		<h1>Welcome back, Idea Weaver!</h1>
-		<h3>Time to explore, craft, and share AI prompts!</h3>
-		<button class="bubble" on:click={() => signIn('google')}
-			>
-			<img src="/google-logo.png" alt="Google Logo" />
-			Continue with Google</button
-		>
-	
+	<h1>Welcome Idea Weaver!</h1>
+	<h3>Time to explore, craft, and share those prompts!</h3>
+	<button class="bubble" on:click={() => signIn('google')}>
+		<img src="/google-logo.png" alt="Google Logo" />
+		Continue with Google</button
+	>
+
+	<p style="margin-top: 450px">terms of service</p>
 </div>
 
 <style>
@@ -53,7 +48,7 @@
 	}
 
 	button {
-		background: #E9E9E9;
+		background: #e9e9e9;
 		border-radius: var(--br-2);
 		display: flex;
 		align-items: center;
@@ -65,6 +60,6 @@
 	}
 
 	button img {
-		width: 30px
+		width: 30px;
 	}
 </style>
