@@ -156,14 +156,11 @@
 			{#each data.allModels as model}
 				<option selected={isSelected(model)} value={model.id}>{model.name}</option>
 			{/each}
-			<option value="-1">Add new model</option>
+			<option selected value="-1">Add new model</option>
 		</select>
-	</div>
-
-	{#if showAddNewModel}
-		<div>
-			<label for="newModelName">
-				Model name
+		{#if showAddNewModel}
+		<div class="new-model">
+			<div>
 				<input
 					type="text"
 					name="newModelName"
@@ -176,9 +173,8 @@
 						? errors.newModelName
 						: ''}</span
 				>
-			</label>
-			<label for="newModelLink">
-				Model link
+			</div>
+			<div>
 				<input
 					type="text"
 					name="newModelLink"
@@ -191,9 +187,10 @@
 						? errors.newModelLink
 						: ''}</span
 				>
-			</label>
+			</div>
 		</div>
 	{/if}
+	</div>
 
 	<Tags />
 
@@ -263,7 +260,41 @@
 	}
 
 	.model {
-		margin-bottom: var(--s-5);
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		margin-bottom: var(--s-6);
+	}
+
+	select[name="model"] {
+		padding: var(--s-2);
+		font-size: var(--fs-2);
+		font-weight: bold;
+		text-align: center;
+		border: none;
+		border-bottom: 2px solid rgb(120, 120, 120);
+	}
+
+	.new-model {
+		display: flex;
+		margin-top: var(--s-5);
+		/* gap: var(--s-4); */
+		margin-bottom: var(--s-7);
+	}
+
+	.new-model div {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+	}
+
+	.new-model input {
+		padding: var(--s-2);
+		font-size: var(--fs-2);
+		font-weight: bold;
+		text-align: center;
+		border: none;
+		border-bottom: 2px solid rgb(120, 120, 120);
 	}
 
 	h2 {
@@ -281,7 +312,7 @@
 		margin-top: var(--s-7);
 	}
 
-	input:focus, textarea:focus {
+	input:focus, textarea:focus, select:focus {
 		outline: none;
 	}
 

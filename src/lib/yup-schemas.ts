@@ -8,9 +8,11 @@ export const promptSchema = object().shape({
 		.max(20, 'Must be less than 20 characters long'),
 	description: string()
 		.required('Description is required')
+		.trim()
 		.min(10, 'Must be 10 or more characters long'),
 	content: string()
 		.required('Content is required')
+		.trim()
 		.min(10, 'Must be 10 or more characters long'),
 	model: number().required('Model is required'),
 	tags: string().strict().optional(),
@@ -19,7 +21,9 @@ export const promptSchema = object().shape({
 		then: (schema) =>
 			schema
 				.required('New model name is required')
-				.min(5, 'Must be 5 or more characters long)'),
+				.trim()
+				.min(5, 'Must be 5 or more characters long')
+				.max(15, 'Must be less then 15 characters long'),
 		otherwise: (schema) => schema.optional()
 	}),
 	newModelLink: string()
