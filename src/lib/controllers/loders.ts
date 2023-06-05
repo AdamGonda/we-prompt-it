@@ -14,31 +14,7 @@ export async function loadIndex(event) {
 }
 
 export async function loadIndexLayout(event) {
-	if (!event.route.id.includes('api')) {
-		const session = await event.locals.getSession();
-
-		if (session) {
-			if (event.cookies.get('isOnboarded') !== hash(session.user.email)) {
-				// at this point
-				// 1. user is in session
-				// 2. user has no cookie
-
-				// now we need to check if user is in db
-				const user = await getDBUser(session);
-
-				if (user && !event.cookies.get('isOnboarded')) {
-					console.log('set cookie');
-					// if user is in db, cookie probably has been deleted, so we set it again
-					event.cookies.set(
-						`isOnboarded=${hash(user.email)}; Max-Age=86400; Path=/; HttpOnly`
-					);
-				} else if (!user && event.route.id !== '/app/onboarding') {
-					console.log('redirect');
-					throw redirect(308, '/app/onboarding');
-				}
-			}
-		}
-	}
+	createUserOnFirstLogin(event);
 
 	const session = await event.locals.getSession();
 	let dbUser = null;
@@ -158,4 +134,85 @@ export async function loadOnboarding(event) {
 	const dbUser = await getDBUser(session);
 
 	return { dbUser };
+}
+
+async function createUserOnFirstLogin(event) {
+	const session = await event.locals.getSession()
+
+	if (session) {
+		if (event.cookies.get('isOnboarded') !== hash(session.user.email)) {
+			// at this point
+			// 1. user is in session
+			// 2. user has no cookie
+
+			// now we need to check if user is in db
+			const user = await getDBUser(session);
+
+			if (user) {
+				// if user is in db, cookie probably has been deleted, so we set it again
+				console.log('set cookie');
+				event.cookies.set(
+					`isOnboarded=${hash(user.email)}; Max-Age=86400; Path=/; HttpOnly`
+				);
+			} else {
+				// create new user in db
+				console.log('create new user');
+				createUser(session)
+			}
+		}
+	}
+}
+
+async function createUser(session) {
+	const username = session.user.name.split(' ').join('-').toLowerCase();
+
+	// if no session user, throw error
+	if (!session?.user) {
+		throw error(401, { message: 'Unauthorized' });
+	}
+
+	// check if user with the same email in the database
+	const user = await prisma.user.findUnique({
+		where: {
+			email: session.user.email
+		}
+	});
+
+	if(user && user.isDeleted === false) {
+		throw error(400, { message: 'User already exists for this session' });
+	}
+
+	// check if user with the same username in the database
+	const userWithsameUsername = await prisma.user.findUnique({
+		where: {
+			username
+		}
+	});
+
+	if (userWithsameUsername && userWithsameUsername.isDeleted === false) {
+		throw error(400, { message: 'Name is not unique' });
+	}
+
+	// if user with the same username exists, but deleted - restore it
+	if (userWithsameUsername && userWithsameUsername.isDeleted === true) {
+		await prisma.user.update({
+			where: {
+				id: userWithsameUsername.id
+			},
+			data: {
+				isDeleted: false
+			}
+		});
+	} else {
+		// create new user with username, use session user to get firstName latName and email
+		await prisma.user.create({
+			data: {
+				username,
+				email: session.user.email,
+				image: session.user.image,
+			}
+		});
+	}
+
+	return new Response(JSON.stringify({ status: 200 }));
 }
