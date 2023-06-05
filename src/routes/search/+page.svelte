@@ -4,14 +4,6 @@
 	import LoadingIndicator from '$lib/components/loading-indicator.svelte';
 
 	let resultsToShow = [];
-	let minTimeElapsed = false;
-
-	$: if ($isLoading) {
-		minTimeElapsed = false;
-		setTimeout(() => {
-			minTimeElapsed = true;
-		}, 1000);
-	}
 
 	searchStore.subscribe((value) => {
 		resultsToShow = value;
@@ -23,7 +15,7 @@
 </svelte:head>
 
 <main>
-	{#if $isLoading || !minTimeElapsed}
+	{#if $isLoading}
 		<LoadingIndicator />
 	{:else}
 		<CardList prompts={resultsToShow} />
