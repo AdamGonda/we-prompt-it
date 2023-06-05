@@ -153,7 +153,7 @@
 				}
 			}}
 		/>
-		<span class="error">{isTouched.name && errors.name ? errors.name : ''}</span>
+		<span style="align-self: center;" class="error">{isTouched.name && errors.name ? errors.name : ''}</span>
 	</div>
 
 	<div class="model">
@@ -283,7 +283,9 @@
 	}
 
 	.error {
-		color: red;
+		margin-top: var(--s-1);
+		color: var(--danger);
+		align-self: start;
 	}
 
 	.submit-wrap {
