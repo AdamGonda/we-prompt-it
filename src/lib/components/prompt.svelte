@@ -27,6 +27,7 @@
 	async function handleAddRemoveLike() {
 		if (!user) {
 			goto('/login');
+			return;
 		}
 
 		try {

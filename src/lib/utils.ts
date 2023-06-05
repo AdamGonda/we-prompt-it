@@ -26,7 +26,7 @@ export async function validateForm(
 export async function forceAuth(event) {
 	const session = await event.locals.getSession();
 
-	if (!session.user) {
+	if (!session) {
 		throw error(401, 'Unauthorized');
 	}
 

@@ -8,7 +8,7 @@ import { convertToSlug, forceAuth } from '$lib/utils';
 const prisma = new PrismaClient();
 
 export async function addRemoveLike(event) {
-	const session = forceAuth(event);
+	const session = await await forceAuth(event);
 	const id = event.url.searchParams.get('id');
 	const user = await getDBUser(session);
 	const userId = user.id;
@@ -64,7 +64,7 @@ export async function addRemoveLike(event) {
 }
 
 export async function nameCheck(event) {
-	const session = forceAuth(event);
+	const session = await forceAuth(event);
 	const proposedName = event.url.searchParams.get('proposedName');
 	const promptId = event.url.searchParams.get('promptId');
 	const user = await getDBUser(session);
@@ -103,7 +103,7 @@ export async function nameCheck(event) {
 }
 
 export async function usernameCheck(event) {
-	forceAuth(event);
+	await forceAuth(event);
 	const proposedName = event.url.searchParams.get('proposedName');
 
 	if (!proposedName) {
