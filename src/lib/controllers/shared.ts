@@ -114,7 +114,6 @@ export async function getOrCreateTags(data) {
 		const newTag = await prisma.tag.create({
 			data: {
 				name: tag,
-				color: stringToColor(tag)
 			}
 		});
 
@@ -122,17 +121,4 @@ export async function getOrCreateTags(data) {
 	});
 
 	return await Promise.all(tagIdPromises);
-}
-
-function stringToColor(str) {
-	let hash = 0;
-	for (let i = 0; i < str.length; i++) {
-		hash = str.charCodeAt(i) + ((hash << 5) - hash);
-	}
-	let color = '#';
-	for (let i = 0; i < 3; i++) {
-		const value = (hash >> (i * 8)) & 0xaf; // change 0x7f to 0xaf
-		color += ('00' + value.toString(16)).substr(-2);
-	}
-	return color;
 }

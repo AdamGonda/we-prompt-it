@@ -204,7 +204,7 @@ async function main() {
 			let tag = await prisma.tag.findUnique({ where: { name: tagName } });
 			if (!tag) {
 				tag = await prisma.tag.create({
-					data: { name: tagName, color: stringToColor(tagName) }
+					data: { name: tagName }
 				});
 			}
 			createdTags.push(tag);

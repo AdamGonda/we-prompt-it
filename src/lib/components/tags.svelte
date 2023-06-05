@@ -1,5 +1,6 @@
 <script>
 	import { page } from "$app/stores";
+	import { stringToColor } from "$lib/utils";
 
 	const allTags = getAllTags();
 	let _tags = getExistingPromptTags();
@@ -141,8 +142,8 @@
 		placeholder="Enter a tag"
 	/>
 	{#each _tags as tag, index}
-		<div class="tag">
-			<span class="tag-text">{tag}</span>
+		<div class="tags">
+			<span style={`background-color: ${stringToColor(tag)}`} class="tag-text">#{tag}</span>
 			<button type="button" class="tag-remove" on:click={() => removeTag(index)}
 				>&times;</button
 			>
@@ -172,12 +173,17 @@
 		position: relative;
 	}
 
-	.tag {
+	.tags {
 		display: flex;
-		align-items: center;
-		padding: 4px;
-		background-color: #eee;
-		border-radius: 4px;
+		flex-wrap: wrap;
+		gap: var(--fs-2);
+		justify-content: center;
+	}
+
+	.tags span {
+		font-size: var(--fs-1);
+		color: white;
+		font-weight: 500;
 	}
 
 	.tag-text {
