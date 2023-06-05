@@ -144,16 +144,20 @@
 		on:blur={resetStates}
 		placeholder="Enter a tag"
 	/>
-	{#each _tags as tag, index}
-		<div class="tags">
-			<!-- svelte-ignore a11y-click-events-have-key-events -->
-			<span
-				on:click={() => removeTag(index)}
-				style={`background-color: ${stringToColor(tag)}`}
-				class="bubble">#{tag}</span
-			>
-		</div>
-	{/each}
+
+	<div class="tags">
+		{#each _tags as tag, index}
+			<div class="tag">
+				<!-- svelte-ignore a11y-click-events-have-key-events -->
+				<span
+					on:click={() => removeTag(index)}
+					style={`background-color: ${stringToColor(tag)}`}
+					class="bubble">#{tag}</span
+				>
+			</div>
+		{/each}
+	</div>
+
 	{#if matches.length > 0}
 		<ul class="matches">
 			{#each matches as match, idx}
@@ -168,24 +172,24 @@
 
 <style>
 	.tag-selector {
-		display: flex;
-		flex-wrap: wrap;
-		align-items: center;
-		gap: 8px;
-		padding: 4px;
-		border: 1px solid #ccc;
-		border-radius: 4px;
 		position: relative;
 	}
 
 	.tags {
 		display: flex;
 		flex-wrap: wrap;
+		align-items: center;
+    gap: var(--fs-2);
+	}
+
+	.tag {
+		display: flex;
+		flex-wrap: wrap;
 		gap: var(--fs-2);
 		justify-content: center;
 	}
 
-	.tags span {
+	.tag span {
 		font-size: var(--fs-1);
 		color: white;
 		font-weight: 500;
