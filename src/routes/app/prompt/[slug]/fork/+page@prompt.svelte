@@ -16,7 +16,9 @@
 	formName="fork-prompt-form"
 	data={{
 		placeholder: {
-			name: 'your uniuqe name todocopy'
+			name: 'Give it a name',
+			description: 'Describe your prompt in a few sentences',
+			content: 'Here comes your magic prompt'
 		},
 		prefill: {
 			description: $page.data.prompt.description,
