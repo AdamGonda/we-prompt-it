@@ -126,6 +126,12 @@ export async function loadProfile(event) {
 		}
 	});
 
+	if (!user) {
+		throw error(404, {
+			message: 'Not found'
+		});
+	}
+
 	return { user };
 }
 

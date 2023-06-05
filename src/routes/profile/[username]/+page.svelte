@@ -6,8 +6,8 @@
 </script>
 
 <div class="profile">
-	<img src={user.image} alt="user" />
-	<p>{user.username}</p>
+	<img src={user?.image} alt="user" />
+	<p>{user?.username}</p>
 </div>
 
 <CardList prompts={user.prompts} />
