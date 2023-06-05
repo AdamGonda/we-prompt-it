@@ -38,3 +38,14 @@ export async function validateForm(event, schema): Promise<PromptSchema | Create
 export function convertToSlug(username, text) {
 	return username + '-' + text.toLowerCase().replace(/ /g, '-');
 }
+
+export function hash(str) {
+	let hash = 0;
+	for (let i = 0; i < str.length; i++) {
+			const char = str.charCodeAt(i);
+			hash = ((hash<<5)-hash)+char;
+			hash = hash & hash; // Convert to 32bit integer
+	}
+
+	return hash;
+}

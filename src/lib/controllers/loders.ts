@@ -3,6 +3,7 @@ import { getAllAIModels, getAllTags, getDBUser, getPromptBySlug } from './shared
 import { error, redirect } from '@sveltejs/kit';
 import { _search } from './api';
 import globalIncludes from '$lib/global-includes';
+import { hash } from '$lib/utils';
 
 const prisma = new PrismaClient();
 
@@ -17,7 +18,7 @@ export async function loadIndexLayout(event) {
 		const session = await event.locals.getSession();
 
 		if (session) {
-			if (!event.cookies.get('isOnboarded')) {
+			if (event.cookies.get('isOnboarded') !== hash(session.user.email)) {
 				// at this point
 				// 1. user is in session
 				// 2. user has no cookie
@@ -28,7 +29,9 @@ export async function loadIndexLayout(event) {
 				if (user && !event.cookies.get('isOnboarded')) {
 					console.log('set cookie');
 					// if user is in db, cookie probably has been deleted, so we set it again
-					event.cookies.set('isOnboarded=true; Max-Age=86400; Path=/; HttpOnly');
+					event.cookies.set(
+						`isOnboarded=${hash(user.email)}; Max-Age=86400; Path=/; HttpOnly`
+					);
 				} else if (!user && event.route.id !== '/app/onboarding') {
 					console.log('redirect');
 					throw redirect(308, '/app/onboarding');
