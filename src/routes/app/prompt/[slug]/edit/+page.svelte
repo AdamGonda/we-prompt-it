@@ -196,6 +196,11 @@
 		color: whitesmoke;
 	}
 
+	.apply:disabled {
+		background: #b3b3b3 !important;
+		cursor: not-allowed;
+	}
+
 	.discard {
 		font-size: var(--fs-1) !important;
 		text-decoration: underline

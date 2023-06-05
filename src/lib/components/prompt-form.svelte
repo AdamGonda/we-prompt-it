@@ -298,5 +298,11 @@
 		color: whitesmoke;
 		border: none;
 		font-size: var(--fs-2);
+		cursor: pointer;
+	}
+
+	.submit-wrap input:disabled {
+		background: #b3b3b3;
+		cursor: not-allowed;
 	}
 </style>
