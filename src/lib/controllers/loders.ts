@@ -1,6 +1,6 @@
 import { PrismaClient } from '@prisma/client';
 import { createUser, getAllAIModels, getAllTags, getDBUser, getPromptBySlug } from './shared';
-import { error, redirect } from '@sveltejs/kit';
+import { error } from '@sveltejs/kit';
 import { _search } from './api';
 import globalIncludes from '$lib/global-includes';
 import { hash } from '$lib/utils';
@@ -20,16 +20,9 @@ export async function loadIndexLayout(event) {
 	let dbUser = null;
 
 	if (session) {
-		// TODO performace issue? to hit the db every time we visit a page?
+		console.log('log ', )
 		dbUser = await getDBUser(session);
 	}
-
-	// if (session) {
-	// TODO revise if this needed or not
-	// 	if (event.route.id !== '/login' && (!dbUser || !dbUser.isOnboarded)) {
-	// 		throw redirect(308, '/login');
-	// 	}
-	// }
 
 	return { session, dbUser };
 }
