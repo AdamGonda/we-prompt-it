@@ -73,7 +73,6 @@ model Tag {
   id        Int      @id @default(autoincrement())
   name      String   @unique
   prompts   Prompt[]
-  color     String   @default("")
   isDeleted Boolean  @default(false)
 }
 

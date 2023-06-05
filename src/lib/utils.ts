@@ -1,7 +1,6 @@
 import { error } from '@sveltejs/kit';
 import type { PromptSchema, CreateUserSchema } from './yup-schemas';
 
-
 export function formDataToObject(formData) {
 	const formValues = {};
 	for (const [key, value] of formData.entries()) {
@@ -16,7 +15,10 @@ export function formDataToObject(formData) {
 	return formValues;
 }
 
-export async function validateForm(event, schema): Promise<PromptSchema | CreateUserSchema> {
+export async function validateForm(
+	event,
+	schema
+): Promise<PromptSchema | CreateUserSchema> {
 	const formData = formDataToObject(await event.request.formData());
 	const errors = {};
 
@@ -39,17 +41,30 @@ export function convertToSlug(username, text) {
 	return username + '-' + text.toLowerCase().replace(/ /g, '-');
 }
 
+export function stringToColor(str) {
+	let hash = 0;
+	for (let i = 0; i < str.length; i++) {
+		hash = str.charCodeAt(i) + ((hash << 5) - hash);
+	}
+	let color = '#';
+	for (let i = 0; i < 3; i++) {
+		const value = (hash >> (i * 8)) & 0xaf; // change 0x7f to 0xaf
+		color += ('00' + value.toString(16)).substr(-2);
+	}
+	return color;
+}
+
 export function hash(str) {
 	let hash = 0;
 	for (let i = 0; i < str.length; i++) {
-			const char = str.charCodeAt(i);
-			hash = ((hash<<5)-hash)+char;
-			hash = hash & hash; // Convert to 32bit integer
+		const char = str.charCodeAt(i);
+		hash = (hash << 5) - hash + char;
+		hash = hash & hash; // Convert to 32bit integer
 	}
 
 	return hash;
 }
 
 export function nameToUsername(name) {
-	return name.trim().split(' ').join('-').toLowerCase()
+	return name.trim().split(' ').join('-').toLowerCase();
 }

@@ -2,6 +2,7 @@
 	import { goto } from '$app/navigation';
 	import { page } from '$app/stores';
 	import routes from '$lib/routes';
+	import { stringToColor } from '$lib/utils';
 
 	const user = $page.data.dbUser;
 	const isOwner = user ? $page.data.prompt.author.email === user.email : false;
@@ -114,7 +115,7 @@
 			{#each $page.data.prompt.tags as tag (tag.id)}
 				<a
 					class="bubble"
-					style={`background-color: ${tag.color}`}
+					style={`background-color: ${stringToColor(tag.name)}`}
 					href={`/?tag=${tag.name}`}
 				>
 					#{tag.name}

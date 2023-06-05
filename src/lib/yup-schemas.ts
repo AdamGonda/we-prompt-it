@@ -4,7 +4,8 @@ export const promptSchema = object().shape({
 	name: string()
 		.required('Name is required')
 		.trim()
-		.min(5, 'Must be 5 or more characters long'),
+		.min(5, 'Must be 5 or more characters long')
+		.max(20, 'Must be less than 20 characters long'),
 	description: string()
 		.required('Description is required')
 		.trim()
@@ -21,7 +22,8 @@ export const promptSchema = object().shape({
 			schema
 				.required('New model name is required')
 				.trim()
-				.min(5, 'Must be 5 or more characters long)'),
+				.min(5, 'Must be 5 or more characters long')
+				.max(15, 'Must be less then 15 characters long'),
 		otherwise: (schema) => schema.optional()
 	}),
 	newModelLink: string()

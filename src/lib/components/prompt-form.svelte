@@ -32,6 +32,14 @@
 		if (type === 'fork') {
 			validateForm();
 		}
+
+		Array.from(_form.elements).forEach((el) => {
+			if(el.tagName === 'TEXTAREA') {
+				el.style.height = 'auto';
+				el.style.height = `${el.scrollHeight}px`;
+			}
+		}
+		);
 	});
 
 	function isSelected(model) {
@@ -55,7 +63,7 @@
 
 	async function nameCheck(formData) {
 		if (formData.name) {
-			const isExisting = type === 'edit'
+			const isExisting = type === 'edit';
 			const promptId = isExisting ? `&promptId=${data.id}` : '';
 
 			let url = `/api/name-check?proposedName=${formData.name}${promptId}`;
@@ -110,6 +118,12 @@
 			showAddNewModel = false;
 		}
 	}
+
+	function handleHeight(event) {
+    const input = event.target;
+    input.style.height = 'auto';
+    input.style.height = `${input.scrollHeight}px`;
+  }
 </script>
 
 <form
@@ -120,8 +134,7 @@
 	on:input={validateForm}
 	bind:this={_form}
 >
-	<label for="name">
-		Name {['create', 'fork'].includes(type) ? '*' : ''}
+	<div class="name field-wrap">
 		<input
 			name="name"
 			type="text"
@@ -135,51 +148,19 @@
 				}
 			}}
 		/>
-		<span>{isTouched.name && errors.name ? errors.name : ''}</span>
-	</label>
+		<span class="error">{isTouched.name && errors.name ? errors.name : ''}</span>
+	</div>
 
-	<label for="description">
-		Description {type == 'create' ? '*' : ''}
-		<textarea
-			name="description"
-			rows="4"
-			cols="50"
-			placeholder={data.placeholder?.description}
-			on:blur={handleFieldChange}
-			on:input={handleFieldChange}
-			value={_.get(data, 'prefill.description', '')}
-		/>
-		<span>{isTouched.description && errors.description ? errors.description : ''}</span>
-	</label>
-
-	<label for="content">
-		Prompt {type == 'create' ? '*' : ''}
-		<textarea
-			name="content"
-			rows="4"
-			cols="50"
-			placeholder={data.placeholder?.content}
-			on:blur={handleFieldChange}
-			on:input={handleFieldChange}
-			value={_.get(data, 'prefill.content', '')}
-		/>
-		<span>{isTouched.content && errors.content ? errors.content : ''}</span>
-	</label>
-
-	<label for="model">
-		Model
+	<div class="model">
 		<select name="model" on:change={handleAddNewModel} on:focus={handleAddNewModel}>
 			{#each data.allModels as model}
 				<option selected={isSelected(model)} value={model.id}>{model.name}</option>
 			{/each}
 			<option value="-1">Add new model</option>
 		</select>
-	</label>
-
-	{#if showAddNewModel}
-		<div>
-			<label for="newModelName">
-				Model name
+		{#if showAddNewModel}
+		<div class="new-model">
+			<div>
 				<input
 					type="text"
 					name="newModelName"
@@ -192,9 +173,8 @@
 						? errors.newModelName
 						: ''}</span
 				>
-			</label>
-			<label for="newModelLink">
-				Model link
+			</div>
+			<div>
 				<input
 					type="text"
 					name="newModelLink"
@@ -207,35 +187,161 @@
 						? errors.newModelLink
 						: ''}</span
 				>
-			</label>
+			</div>
 		</div>
 	{/if}
+	</div>
 
-	<label for="tags">
-		Tags
-		<Tags />
-	</label>
+	<Tags />
+
+	<div class="description field-wrap">
+		<h2>Description</h2>
+		<textarea
+			name="description"
+			rows="1"
+			placeholder={data.placeholder?.description}
+			on:blur={handleFieldChange}
+			on:input={handleFieldChange}
+			on:input={handleHeight}
+			value={_.get(data, 'prefill.description', '')}
+		/>
+		<span class="error">{isTouched.description && errors.description ? errors.description : ''}</span>
+	</div>
+
+	<div class="field-wrap content">
+		<h2>Prompt</h2>
+		<textarea
+			name="content"
+			rows="1"
+			placeholder={data.placeholder?.content}
+			on:blur={handleFieldChange}
+			on:input={handleFieldChange}
+			on:input={handleHeight}
+			value={_.get(data, 'prefill.content', '')}
+		/>
+		<span class="error">{isTouched.content && errors.content ? errors.content : ''}</span>
+	</div>
 
 	<slot {disabled}>
-		<input type="submit" {disabled} />
+		<div class="submit-wrap">
+			<input class="bubble" type="submit" {disabled} />
+		</div>
 	</slot>
 </form>
 
 <style>
 	form {
+		margin-top: 42px;
 		display: flex;
 		flex-direction: column;
-		align-items: start;
+		align-items: center;
 		gap: 8px;
 	}
 
-	label {
+	.field-wrap {
 		display: flex;
 		flex-direction: column;
-		gap: 4px;
+		align-items: center;
+		margin-bottom: var(--s-4);
+		width: 100%;
+		max-width: 750px;
 	}
-	span {
-		font-size: 1rem;
+
+	.name {
+		margin-bottom: var(--s-4);
+	}
+
+	.name input {
+		font-size: var(--fs-5);
+		font-weight: bold;
+		text-align: center;
+		border: none;
+		border-bottom: 2px solid rgb(120, 120, 120);
+	}
+
+	.model {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		margin-bottom: var(--s-6);
+	}
+
+	select[name="model"] {
+		padding: var(--s-2);
+		font-size: var(--fs-2);
+		font-weight: bold;
+		text-align: center;
+		border: none;
+		border-bottom: 2px solid rgb(120, 120, 120);
+	}
+
+	.new-model {
+		display: flex;
+		margin-top: var(--s-5);
+		margin-bottom: var(--s-7);
+	}
+
+	.new-model div {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+	}
+
+	.new-model input {
+		padding: var(--s-2);
+		font-size: var(--fs-2);
+		font-weight: bold;
+		text-align: center;
+		border: none;
+		border-bottom: 2px solid rgb(120, 120, 120);
+	}
+
+	h2 {
+		font-size: var(--fs-4);
+		text-align: start;
+		margin-bottom: var(--s-1);
+		width: 100%;
+	}
+
+	.description {
+		margin-top: var(--s-7);
+	}
+
+	.content {
+		margin-top: var(--s-7);
+	}
+
+	input:focus, textarea:focus, select:focus {
+		outline: none;
+	}
+
+	textarea {
+		font-family: source-serif-pro, Georgia, Cambria, 'Times New Roman', Times, serif;
+		border: none;
+		border-bottom: 2px solid rgb(120, 120, 120);
+		font-size: var(--fs-3);
+		line-height: var(--s-6);
+		width: 100%;
+		resize: none;
+		overflow-y: hidden;
+	}
+
+	.error {
 		color: red;
+	}
+
+	.submit-wrap {
+		display: flex;
+		justify-content: end;
+		width: 100%;
+		max-width: 750px;
+		margin-top: var(--s-7);
+	}
+
+	.submit-wrap input {
+		background: #59a14f;
+		color: whitesmoke;
+		border: none;
+		font-size: var(--fs-2);
 	}
 </style>

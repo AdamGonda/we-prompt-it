@@ -1,5 +1,10 @@
 <script>
-	import { page } from "$app/stores";
+	import { toast } from '@zerodevx/svelte-toast';
+	import { page } from '$app/stores';
+	import { stringToColor } from '$lib/utils';
+	import BadWordsNext from 'bad-words-next';
+	import en from 'bad-words-next/data/en.json';
+	const badwords = new BadWordsNext({ data: en });
 
 	const allTags = getAllTags();
 	let _tags = getExistingPromptTags();
@@ -10,13 +15,13 @@
 	$: matches = getMatches(input);
 
 	function getAllTags() {
-		const tags = $page.data?.tags?.map((tag) => tag.name)
+		const tags = $page.data?.tags?.map((tag) => tag.name);
 
 		return tags ? tags : [];
 	}
 
-	function getExistingPromptTags(){
-		const tags = $page.data?.prompt?.tags.map((tag) => tag.name)
+	function getExistingPromptTags() {
+		const tags = $page.data?.prompt?.tags.map((tag) => tag.name);
 
 		return tags ? tags : [];
 	}
@@ -34,28 +39,49 @@
 	}
 
 	function validateNewTag(tag) {
-		// Check length
-		const isTooShort = tag.length < 3;
+		const minLength = 3;
+		const maxLength = 20;
+		const maxTags = 5;
+
+		const isTooShort = tag.length < minLength;
+		const isTooLong = tag.length > maxLength;
+		const tooManyTags = _tags.length >= maxTags;
 		const isAlreadyAdded = _tags.includes(tag);
-		const moreThanOneWord = tag.includes(' ');
+		const isProfane = badwords.check(tag);
+		
 
 		if (isTooShort) {
 			input = '';
-			// TODO: toaster - tag too short
+			toast.push(`Tag is too short. It should be at least ${minLength} characters.`);
+
 			return;
 		}
 
-		// Check if not already in tags
+		if (isTooLong) {
+			input = '';
+			toast.push(`Tag is too long. It should be no more than ${maxLength} characters.`);
+			return;
+		}
+
 		if (isAlreadyAdded) {
 			input = '';
-			// TODO: toaster - tag already added
+			toast.push(`This tag is already added. Consider adding a similar or related tag.`);
 			return;
 		}
 
-		// it can be just one word
-		if (moreThanOneWord) {
+		if (tooManyTags) {
 			input = '';
-			// TODO: toaster - it can be just one word
+			toast.push(
+				`You can add a maximum of ${maxTags} tags. Please remove a tag before adding another.`
+			);
+			return;
+		}
+
+		if (isProfane) {
+			input = '';
+			toast.push(
+				`Tag contains profanity. Try a different tag or contact us if you think this is a mistake.`
+			);
 			return;
 		}
 
@@ -63,7 +89,12 @@
 	}
 
 	function cleanTag(tag) {
-		return tag.replace(/<b>|<\/b>/g, '').toString().trim();
+		return tag
+			.replace(/<b>|<\/b>/g, '')
+			.toString()
+			.trim()
+			.replace(' ', '-')
+			.replace('_', '');
 	}
 
 	function addTag(tag) {
@@ -140,14 +171,20 @@
 		on:blur={resetStates}
 		placeholder="Enter a tag"
 	/>
-	{#each _tags as tag, index}
-		<div class="tag">
-			<span class="tag-text">{tag}</span>
-			<button type="button" class="tag-remove" on:click={() => removeTag(index)}
-				>&times;</button
-			>
-		</div>
-	{/each}
+
+	<div class="tags">
+		{#each _tags as tag, index}
+			<div class="tag">
+				<!-- svelte-ignore a11y-click-events-have-key-events -->
+				<span
+					on:click={() => removeTag(index)}
+					style={`background-color: ${stringToColor(tag)}`}
+					class="bubble">#{tag}</span
+				>
+			</div>
+		{/each}
+	</div>
+
 	{#if matches.length > 0}
 		<ul class="matches">
 			{#each matches as match, idx}
@@ -163,30 +200,44 @@
 <style>
 	.tag-selector {
 		display: flex;
+		flex-direction: column;
+		gap: var(--fs-2);
+		align-items: center;
+		position: relative;
+	}
+
+	input[type='text'] {
+		width: 150px;
+		font-size: var(--fs-2);
+		font-weight: bold;
+		text-align: center;
+		border: none;
+		border-bottom: 2px solid rgb(120, 120, 120);
+	}
+
+	input:focus {
+		outline: none;
+	}
+
+	.tags {
+		display: flex;
 		flex-wrap: wrap;
 		align-items: center;
-		gap: 8px;
-		padding: 4px;
-		border: 1px solid #ccc;
-		border-radius: 4px;
-		position: relative;
+		gap: var(--fs-2);
 	}
 
 	.tag {
 		display: flex;
-		align-items: center;
-		padding: 4px;
-		background-color: #eee;
-		border-radius: 4px;
+		flex-wrap: wrap;
+		gap: var(--fs-2);
+		justify-content: center;
 	}
 
-	.tag-text {
-		margin-right: 4px;
-	}
-
-	.tag-remove {
+	.tag span {
+		font-size: var(--fs-1);
+		color: white;
+		font-weight: 500;
 		cursor: pointer;
-		font-weight: bold;
 	}
 
 	.matches {

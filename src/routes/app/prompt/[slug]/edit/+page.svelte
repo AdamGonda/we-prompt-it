@@ -5,8 +5,10 @@
 	import PromptForm from '$lib/components/prompt-form.svelte';
 	import routes from '$lib/routes';
 	import _ from 'lodash';
+	import { onMount } from 'svelte';
 
 	let confirmEditDialog;
+	let confirmDiscardDialog;
 	let confirmDeleteDialog;
 	let form;
 
@@ -18,6 +20,12 @@
 
 	function onEditSuccess(data) {
 		goto(`/app/prompt/${data.slug}`);
+	}
+
+	function handleBackdropClose(event) {
+		if (event.target.close) {
+			event.target.close();
+		}
 	}
 </script>
 
@@ -35,36 +43,168 @@
 			description: $page.data.prompt.description,
 			content: $page.data.prompt.content
 		},
+		placeholder: {
+			name: 'Give it a name',
+			description: 'Describe your prompt in a few sentences',
+			content: 'Here comes your magic prompt'
+		},
 		selectedModelId: $page.data.prompt.aiModelId,
 		allModels: $page.data.aiModels
 	}}
 >
-	<a href={routes.prompt(true, $page.params.slug)}>
-		<span>Content</span>
-	</a>
-	<button type="button" {disabled} on:click={() => confirmEditDialog.showModal()}
-		>Submit</button
-	>
+	<div class="slot">
+		<div>
+			<button
+			class="bubble delete"
+			type="button"
+			on:click={() => {
+				confirmDeleteDialog.showModal();
+			}}>Delete</button
+		>
+		</div>
+
+		<dir class="discard-apply">
+			<button
+				class="discard"
+				type="button"
+				on:click={() => confirmDiscardDialog.showModal()}
+			>
+				discard changes
+			</button>
+			<button
+				class="bubble apply"
+				type="button"
+				{disabled}
+				on:click={() => confirmEditDialog.showModal()}>Apply changes</button
+			>
+		</dir>
+	</div>
 </PromptForm>
 
-<dialog bind:this={confirmEditDialog}>
-	<button on:click={() => confirmEditDialog.close()}>Close</button>
-	<h2>Are you sure you want to edit?</h2>
-	<button on:click={form.requestSubmit()}>Submit</button>
+<!-- svelte-ignore a11y-click-events-have-key-events -->
+<dialog bind:this={confirmEditDialog} on:click={handleBackdropClose}>
+	<form method="POST" action="?/delete" use:enhance={onDelete}>
+		<p>Are you sure you want to proceed?</p>
+		<div>
+			<button type="button" on:click={() => confirmEditDialog.close()}>Cancel</button>
+			<input
+				class="bubble"
+				type="button"
+				value="Apply changes"
+				style="background: #59a14f; color: whitesmoke"
+				on:click={() => form.requestSubmit()}
+			/>
+		</div>
+	</form>
 </dialog>
 
-<button
-	on:click={() => {
-		confirmDeleteDialog.showModal();
-	}}>Delete</button
->
-<dialog bind:this={confirmDeleteDialog}>
-	<button on:click={() => confirmDeleteDialog.close()}>Close</button>
+<!-- svelte-ignore a11y-click-events-have-key-events -->
+<dialog bind:this={confirmDiscardDialog} on:click={handleBackdropClose}>
 	<form method="POST" action="?/delete" use:enhance={onDelete}>
-		Danger zone
-		<input type="submit" value="Delete" />
+		<p>Are you sure you want to proceed?</p>
+		<div>
+			<button type="button" on:click={() => confirmDiscardDialog.close()}>Cancel</button>
+			<input
+				class="bubble"
+				type="button"
+				value="Discard changes"
+				style="background: #edc948; color: #333333"
+				on:click={() => goto(routes.prompt(true, $page.params.slug))}
+			/>
+		</div>
+	</form>
+</dialog>
+
+<!-- svelte-ignore a11y-click-events-have-key-events -->
+<dialog bind:this={confirmDeleteDialog} on:click={handleBackdropClose}>
+	<form method="POST" action="?/delete" use:enhance={onDelete}>
+		<p>Are you sure you want to proceed?</p>
+		<div>
+			<button type="button" on:click={() => confirmDeleteDialog.close()}>Cancel</button>
+			<input class="bubble" type="submit" value="Delete" />
+		</div>
 	</form>
 </dialog>
 
 <style>
+	dialog {
+		background: white;
+		border: none;
+		border-radius: var(--br-1);
+		padding: 0;
+	}
+
+	dialog::backdrop {
+		background-color: rgba(0, 0, 0, 0.5);
+	}
+
+	dialog form {
+		font-size: var(--fs-4);
+		display: flex;
+		flex-direction: column;
+		gap: var(--s-4);
+		align-items: end;
+		padding: var(--s-5);
+	}
+
+	dialog p {
+		margin-top: 0;
+	}
+
+	dialog button,
+	input {
+		font-size: var(--fs-2);
+		background: none;
+		border: none;
+		cursor: pointer;
+	}
+
+	dialog input {
+		background: #e15759;
+		color: white;
+		font-weight: 400;
+		margin-left: var(--s-4);
+	}
+
+	dialog input:hover {
+		background: rgb(211, 31, 31);
+	}
+
+	.slot {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		margin-top: var(--s-5);
+		width: 100%;
+		max-width: 750px;
+	}
+
+	.slot button {
+		background: none;
+		border: none;
+		cursor: pointer;
+		font-size: var(--fs-2);
+	}
+
+	.discard-apply{
+		display: flex;
+		gap: var(--s-4);
+	}
+
+	.apply {
+		background: #59a14f !important;
+		color: whitesmoke;
+	}
+
+	.discard {
+		font-size: var(--fs-1) !important;
+		text-decoration: underline
+	}
+
+	.delete {
+		background: #e15759 !important;
+		color: white;
+		border-radius: var(--br-1);
+    padding: var(--s-3) var(--s-4);
+	}
 </style>
