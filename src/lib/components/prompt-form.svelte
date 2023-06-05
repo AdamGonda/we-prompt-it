@@ -1,4 +1,5 @@
 <script>
+	import { toast } from '@zerodevx/svelte-toast';
 	import { enhance } from '$app/forms';
 	import { formDataToObject } from '$lib/utils';
 	import { promptSchema } from '$lib/yup-schemas';
@@ -34,12 +35,11 @@
 		}
 
 		Array.from(_form.elements).forEach((el) => {
-			if(el.tagName === 'TEXTAREA') {
+			if (el.tagName === 'TEXTAREA') {
 				el.style.height = 'auto';
 				el.style.height = `${el.scrollHeight}px`;
 			}
-		}
-		);
+		});
 	});
 
 	function isSelected(model) {
@@ -68,11 +68,16 @@
 
 			let url = `/api/name-check?proposedName=${formData.name}${promptId}`;
 
-			const r = await fetch(url);
-			const json = await r.json();
+			try {
+				const r = await fetch(url);
+				const json = await r.json();
 
-			if (!json.ok) {
-				errors.name = 'Name is not unique';
+				if (!json.ok) {
+					errors.name = 'Name is not unique';
+				}
+			} catch (e) {
+				toast.push('Something went wrong. Please try again.');
+				console.log(e);
 			}
 		}
 	}
@@ -120,10 +125,10 @@
 	}
 
 	function handleHeight(event) {
-    const input = event.target;
-    input.style.height = 'auto';
-    input.style.height = `${input.scrollHeight}px`;
-  }
+		const input = event.target;
+		input.style.height = 'auto';
+		input.style.height = `${input.scrollHeight}px`;
+	}
 </script>
 
 <form
@@ -172,7 +177,9 @@
 			on:input={handleHeight}
 			value={_.get(data, 'prefill.description', '')}
 		/>
-		<span class="error">{isTouched.description && errors.description ? errors.description : ''}</span>
+		<span class="error"
+			>{isTouched.description && errors.description ? errors.description : ''}</span
+		>
 	</div>
 
 	<div class="field-wrap content">
@@ -233,7 +240,7 @@
 		margin-bottom: var(--s-5);
 	}
 
-	select[name="model"] {
+	select[name='model'] {
 		padding: var(--s-2);
 		font-size: var(--fs-2);
 		font-weight: bold;
@@ -257,7 +264,9 @@
 		margin-top: var(--s-7);
 	}
 
-	input:focus, textarea:focus, select:focus {
+	input:focus,
+	textarea:focus,
+	select:focus {
 		outline: none;
 	}
 

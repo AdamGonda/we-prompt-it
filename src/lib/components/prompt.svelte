@@ -3,6 +3,8 @@
 	import { page } from '$app/stores';
 	import routes from '$lib/routes';
 	import { stringToColor } from '$lib/utils';
+	import { toast } from '@zerodevx/svelte-toast';
+	import Error from '../../routes/+error.svelte';
 
 	const user = $page.data.dbUser;
 	const isOwner = user ? $page.data.prompt.author.email === user.email : false;
@@ -27,18 +29,26 @@
 			goto('/login');
 		}
 
-		const r = await fetch(`/api/add-remove-like?id=${$page.data.prompt.id}`, {
-			method: 'POST'
-		});
-		const json = await r.json();
-		if (json.status == 200) {
-			likes += json.diff;
+		try {
+			const r = await fetch(`/api/add-remove-like?id=${$page.data.prompt.id}`, {
+				method: 'POST'
+			});
 
-			if (hartIconPrefix == 'hart') {
-				hartIconPrefix = 'fullhart';
+			const json = await r.json();
+			if (json.status == 200) {
+				likes += json.diff;
+
+				if (hartIconPrefix == 'hart') {
+					hartIconPrefix = 'fullhart';
+				} else {
+					hartIconPrefix = 'hart';
+				}
 			} else {
-				hartIconPrefix = 'hart';
+				toast.push('Something went wrong. Please try again.');
 			}
+		} catch (e) {
+			toast.push('Something went wrong. Please try again.');
+			console.log(e);
 		}
 	}
 

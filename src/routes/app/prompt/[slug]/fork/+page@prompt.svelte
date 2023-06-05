@@ -9,7 +9,6 @@
 	}
 </script>
 
-Fork
 <PromptForm
 	{onSuccess}
 	type="fork"
