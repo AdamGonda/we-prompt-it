@@ -108,7 +108,6 @@
 	input {
 		padding: 0 16px;
 		border: none;
-		min-width: 300px;
 		height: 46px;
 		font-size: 16px;
 		background: #e9e9e9;
