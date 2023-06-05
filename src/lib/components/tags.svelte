@@ -1,4 +1,5 @@
 <script>
+	import { toast } from '@zerodevx/svelte-toast'
 	import { page } from '$app/stores';
 	import { stringToColor } from '$lib/utils';
 
@@ -35,28 +36,37 @@
 	}
 
 	function validateNewTag(tag) {
-		// Check length
-		const isTooShort = tag.length < 3;
+		const minLength = 3;
+    const maxLength = 20;
+    const maxTags = 5;
+
+		const isTooShort = tag.length < minLength;
+		const isTooLong = tag.length > maxLength;
+		const tooManyTags = _tags.length >= maxTags;
 		const isAlreadyAdded = _tags.includes(tag);
-		const moreThanOneWord = tag.includes(' ');
 
 		if (isTooShort) {
 			input = '';
-			// TODO: toaster - tag too short
+			toast.push(`Tag is too short. It should be at least ${minLength} characters.`);
+
 			return;
 		}
 
-		// Check if not already in tags
+		if (isTooLong) {
+			input = '';
+			toast.push(`Tag is too long. It should be no more than ${maxLength} characters.`);
+			return;
+		}
+
 		if (isAlreadyAdded) {
 			input = '';
-			// TODO: toaster - tag already added
+			toast.push(`This tag is already added. Consider adding a similar or related tag.`);
 			return;
 		}
 
-		// it can be just one word
-		if (moreThanOneWord) {
+		if(tooManyTags) {
 			input = '';
-			// TODO: toaster - it can be just one word
+			toast.push(`You can add a maximum of ${maxTags} tags. Please remove a tag before adding another.`);
 			return;
 		}
 
@@ -67,7 +77,8 @@
 		return tag
 			.replace(/<b>|<\/b>/g, '')
 			.toString()
-			.trim();
+			.trim()
+			.replace(' ', '-')
 	}
 
 	function addTag(tag) {

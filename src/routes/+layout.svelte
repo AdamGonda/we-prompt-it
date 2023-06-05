@@ -1,8 +1,15 @@
 <script lang="ts">
+	import { SvelteToast } from '@zerodevx/svelte-toast';
 	import Navigation from '$lib/components/navigation.svelte';
 	import { searchFocused } from '$lib/stores/search-bar-store';
+
+	const options = {
+		duration: 3500,
+		pausable: true
+	};
 </script>
 
+<SvelteToast {options} />
 <Navigation />
 
 <div class="overlay-ref">
