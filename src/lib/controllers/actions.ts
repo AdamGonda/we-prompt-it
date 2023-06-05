@@ -4,14 +4,14 @@ import type { RequestEvent } from '@sveltejs/kit';
 
 import { error } from '@sveltejs/kit';
 import { PrismaClient } from '@prisma/client';
-import { convertToSlug, validateForm } from '$lib/utils';
+import { convertToSlug, forceAuth, validateForm } from '$lib/utils';
 import { promptToString } from './api';
 import { promptSchema } from '$lib/yup-schemas';
 
 const prisma = new PrismaClient();
 
 export async function createPrompt(event: RequestEvent) {
-	const session = await event.locals.getSession();
+	const session = forceAuth(event)
 	const user = await getDBUser(session);
 	const data = await validateForm(event, promptSchema);
 	const aiModelId = await getOrCreateAiModel(data);
@@ -47,7 +47,7 @@ export async function createPrompt(event: RequestEvent) {
 
 export async function editPrompt(event: RequestEvent) {
 	const slug = event.params.slug;
-	const session = await event.locals.getSession();
+	const session = forceAuth(event)
 	const user = await getDBUser(session);
 	const data = await validateForm(event, promptSchema);
 	const aiModelId = await getOrCreateAiModel(data);
@@ -97,7 +97,7 @@ export async function editPrompt(event: RequestEvent) {
 }
 
 export async function forkPrompt(event: RequestEvent) {
-	const session = await event.locals.getSession();
+	const session = forceAuth(event)
 	const dbUser = await getDBUser(session);
 	const slug = event.params.slug;
 	const data = await validateForm(event, promptSchema);
@@ -149,6 +149,7 @@ export async function forkPrompt(event: RequestEvent) {
 }
 
 export async function deletePrompt(event: RequestEvent) {
+	forceAuth(event)
 	const slug = event.params.slug;
 	const parent = await getPromptBySlug(slug);
 

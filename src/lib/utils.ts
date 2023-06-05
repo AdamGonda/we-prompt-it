@@ -1,20 +1,6 @@
 import { error } from '@sveltejs/kit';
 import type { PromptSchema, CreateUserSchema } from './yup-schemas';
 
-export function formDataToObject(formData) {
-	const formValues = {};
-	for (const [key, value] of formData.entries()) {
-		if (value === '') {
-			formValues[key] = value;
-		} else if (!isNaN(value) && key !== 'tags') {
-			formValues[key] = Number(value);
-		} else {
-			formValues[key] = value;
-		}
-	}
-	return formValues;
-}
-
 export async function validateForm(
 	event,
 	schema
@@ -35,6 +21,30 @@ export async function validateForm(
 	}
 
 	return formData;
+}
+
+export async function forceAuth(event) {
+	const session = await event.locals.getSession();
+
+	if (!session.user) {
+		throw error(401, 'Unauthorized');
+	}
+
+	return session
+}
+
+export function formDataToObject(formData) {
+	const formValues = {};
+	for (const [key, value] of formData.entries()) {
+		if (value === '') {
+			formValues[key] = value;
+		} else if (!isNaN(value) && key !== 'tags') {
+			formValues[key] = Number(value);
+		} else {
+			formValues[key] = value;
+		}
+	}
+	return formValues;
 }
 
 export function convertToSlug(username, text) {
