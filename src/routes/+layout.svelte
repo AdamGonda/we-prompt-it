@@ -17,10 +17,6 @@
 	<div class="content">
 		<slot />
 	</div>
-
-	<footer>
-		<span>footer</span>
-	</footer>
 </div>
 
 <style>
@@ -94,6 +90,7 @@
 	.content {
 		min-height: calc(100vh - 93px);
 		padding: var(--s-5) 100px;
+		padding-bottom: var(--s-6);
 	}
 
 	.overlay-ref {
@@ -113,13 +110,5 @@
 
 	.show {
 		display: block;
-	}
-
-	footer {
-		margin-top: 48px;
-		background-color: grey;
-		color: whitesmoke;
-		text-align: center;
-		padding: 24px 0;
 	}
 </style>
