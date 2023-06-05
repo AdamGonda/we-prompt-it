@@ -2,11 +2,11 @@ import { getOrCreateAiModel, getDBUser, getOrCreateTags } from '$lib/controllers
 import { getPromptBySlug } from '$lib/controllers/shared';
 import type { RequestEvent } from '@sveltejs/kit';
 
-import { error, redirect } from '@sveltejs/kit';
+import { error } from '@sveltejs/kit';
 import { PrismaClient } from '@prisma/client';
 import { convertToSlug, validateForm } from '$lib/utils';
 import { promptToString } from './api';
-import { createUserSchema, promptSchema } from '$lib/yup-schemas';
+import { promptSchema } from '$lib/yup-schemas';
 
 const prisma = new PrismaClient();
 

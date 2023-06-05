@@ -156,40 +156,7 @@
 			{#each data.allModels as model}
 				<option selected={isSelected(model)} value={model.id}>{model.name}</option>
 			{/each}
-			<option value="-1">Add new model</option>
 		</select>
-		{#if showAddNewModel}
-		<div class="new-model">
-			<div>
-				<input
-					type="text"
-					name="newModelName"
-					placeholder="Name"
-					on:blur={handleFieldChange}
-					on:input={handleFieldChange}
-				/>
-				<span
-					>{isTouched.newModelName && errors.newModelName
-						? errors.newModelName
-						: ''}</span
-				>
-			</div>
-			<div>
-				<input
-					type="text"
-					name="newModelLink"
-					placeholder="Link"
-					on:blur={handleFieldChange}
-					on:input={handleFieldChange}
-				/>
-				<span
-					>{isTouched.newModelLink && errors.newModelLink
-						? errors.newModelLink
-						: ''}</span
-				>
-			</div>
-		</div>
-	{/if}
 	</div>
 
 	<Tags />
@@ -263,31 +230,10 @@
 		display: flex;
 		flex-direction: column;
 		align-items: center;
-		margin-bottom: var(--s-6);
+		margin-bottom: var(--s-5);
 	}
 
 	select[name="model"] {
-		padding: var(--s-2);
-		font-size: var(--fs-2);
-		font-weight: bold;
-		text-align: center;
-		border: none;
-		border-bottom: 2px solid rgb(120, 120, 120);
-	}
-
-	.new-model {
-		display: flex;
-		margin-top: var(--s-5);
-		margin-bottom: var(--s-7);
-	}
-
-	.new-model div {
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-	}
-
-	.new-model input {
 		padding: var(--s-2);
 		font-size: var(--fs-2);
 		font-weight: bold;
