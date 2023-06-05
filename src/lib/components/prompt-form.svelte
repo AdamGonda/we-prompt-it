@@ -156,7 +156,7 @@
 			{#each data.allModels as model}
 				<option selected={isSelected(model)} value={model.id}>{model.name}</option>
 			{/each}
-			<option selected value="-1">Add new model</option>
+			<option value="-1">Add new model</option>
 		</select>
 		{#if showAddNewModel}
 		<div class="new-model">
@@ -278,7 +278,6 @@
 	.new-model {
 		display: flex;
 		margin-top: var(--s-5);
-		/* gap: var(--s-4); */
 		margin-bottom: var(--s-7);
 	}
 
