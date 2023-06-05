@@ -241,6 +241,7 @@
 	}
 
 	select[name='model'] {
+		width: 146px;
 		padding: var(--s-2);
 		font-size: var(--fs-2);
 		font-weight: bold;
