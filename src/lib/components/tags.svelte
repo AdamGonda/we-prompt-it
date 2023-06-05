@@ -172,7 +172,24 @@
 
 <style>
 	.tag-selector {
+		display: flex;
+		flex-direction: column;
+		gap: var(--fs-2);
+		align-items: center;
 		position: relative;
+	}
+
+	input[type="text"] {
+		width: 150px;
+		font-size: var(--fs-2);
+		font-weight: bold;
+		text-align: center;
+		border: none;
+		border-bottom: 2px solid rgb(120, 120, 120);
+	}
+
+	input:focus {
+		outline: none;
 	}
 
 	.tags {
