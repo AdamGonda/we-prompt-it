@@ -51,5 +51,5 @@ export function hash(str) {
 }
 
 export function nameToUsername(name) {
-	return name.split(' ').join('-').toLowerCase()
+	return name.trim().split(' ').join('-').toLowerCase()
 }
