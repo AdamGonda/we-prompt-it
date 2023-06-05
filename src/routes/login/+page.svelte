@@ -15,7 +15,7 @@
 
 <div class="wrap">
 	<h1>Welcome Idea Weaver!</h1>
-	<h3>Time to explore, craft, and share AI prompts!</h3>
+	<h3>Time to explore, craft, and share those prompts!</h3>
 	<button class="bubble" on:click={() => signIn('google')}>
 		<img src="/google-logo.png" alt="Google Logo" />
 		Continue with Google</button

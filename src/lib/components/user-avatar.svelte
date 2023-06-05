@@ -40,7 +40,9 @@
 		{/if}
 	</div>
 	{:else}
-	<!-- <a class="login" href={routes.login}>Login</a> -->
+	<div class="login bubble">
+		<a href={routes.login}>Login</a>
+	</div>
 {/if}
 
 <style>
@@ -111,9 +113,17 @@
 	}
 
 	.login {
+		display: flex;
+		align-items: center;
+		gap: 8px;
+		background: #E9E9E9;
+		height: 46px;
+	}
+
+	.login a{
 		color: black;
 		text-decoration: none;
 		font-size: 0.9rem;
-		display: inline-block;
+		font-weight: 500;
 	}
 </style>
