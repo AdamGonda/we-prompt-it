@@ -1,5 +1,11 @@
 import { PrismaClient } from '@prisma/client';
-import { createUser, getAllAIModels, getAllTags, getDBUser, getPromptBySlug } from './shared';
+import {
+	createUser,
+	getAllAIModels,
+	getAllTags,
+	getDBUser,
+	getPromptBySlug
+} from './shared';
 import { error } from '@sveltejs/kit';
 import { _search } from './api';
 import globalIncludes from '$lib/global-includes';
@@ -20,7 +26,7 @@ export async function loadIndexLayout(event) {
 	let dbUser = null;
 
 	if (session) {
-		console.log('log ', )
+		console.log('loadIndexLaout');
 		dbUser = await getDBUser(session);
 	}
 
@@ -116,8 +122,8 @@ export async function loadProfile(event) {
 			prompts: {
 				where: { isDeleted: false },
 				...globalIncludes
-			},
-		},
+			}
+		}
 	});
 
 	return { user };
@@ -131,28 +137,13 @@ export async function loadOnboarding(event) {
 }
 
 async function createUserOnFirstLogin(event) {
-	const session = await event.locals.getSession()
+	const session = await event.locals.getSession();
 
 	if (session) {
-		if (event.cookies.get('isOnboarded') !== hash(session.user.email)) {
-			// at this point
-			// 1. user is in session
-			// 2. user has no cookie
+		const user = await getDBUser(session);
 
-			// now we need to check if user is in db
-			const user = await getDBUser(session);
-
-			if (user) {
-				// if user is in db, cookie probably has been deleted, so we set it again
-				console.log('set cookie');
-				event.cookies.set(
-					`isOnboarded=${hash(user.email)}; Max-Age=86400; Path=/; HttpOnly`
-				);
-			} else {
-				// create new user in db
-				console.log('create new user');
-				createUser(session)
-			}
+		if (!user) {
+			createUser(session);
 		}
 	}
 }
