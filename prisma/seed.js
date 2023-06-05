@@ -5,7 +5,7 @@ const prisma = new PrismaClient();
 const RAW_PROMPTS = [
 	// 0
 	{
-		name: 'Art Exhibition Review',
+		name: 'Art Exhibition',
 		description:
 			'Critique a famous art exhibition. Analyze the presentation, curatorial decisions, artworks, and overall experience in depth.',
 		content:
@@ -15,7 +15,7 @@ const RAW_PROMPTS = [
 	},
 	// 1
 	{
-		name: 'Restaurant Review',
+		name: 'Restaurant',
 		description:
 			"Provide an in-depth analysis of a well-known restaurant's offerings. Evaluate its cuisine, service, ambiance, and overall dining experience.",
 		content:
@@ -25,7 +25,7 @@ const RAW_PROMPTS = [
 	},
 	// 2
 	{
-		name: 'Travel Destination Critique',
+		name: 'Travel Destination',
 		description:
 			'Review a popular travel destination in depth. Discuss its attractions, local cuisine, culture, people, infrastructure, and overall experience.',
 		content:
@@ -75,7 +75,7 @@ const RAW_PROMPTS = [
 	},
 	// 7
 	{
-		name: 'Fashion Show Review',
+		name: 'Fashion Show',
 		description:
 			'Provide a thorough review of a major fashion show. Discuss the designs, themes, models, presentation, music, audience reaction, and overall impact.',
 		content:
@@ -85,7 +85,7 @@ const RAW_PROMPTS = [
 	},
 	// 8
 	{
-		name: 'Tech Product Review',
+		name: 'Tech Product',
 		description:
 			'Provide an in-depth critique of a new tech gadget. Discuss its features, performance, design, value for money, and the overall user experience.',
 		content:

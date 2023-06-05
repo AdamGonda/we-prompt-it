@@ -1,6 +1,6 @@
 <script>
-	import { page } from "$app/stores";
-	import { stringToColor } from "$lib/utils";
+	import { page } from '$app/stores';
+	import { stringToColor } from '$lib/utils';
 
 	const allTags = getAllTags();
 	let _tags = getExistingPromptTags();
@@ -11,13 +11,13 @@
 	$: matches = getMatches(input);
 
 	function getAllTags() {
-		const tags = $page.data?.tags?.map((tag) => tag.name)
+		const tags = $page.data?.tags?.map((tag) => tag.name);
 
 		return tags ? tags : [];
 	}
 
-	function getExistingPromptTags(){
-		const tags = $page.data?.prompt?.tags.map((tag) => tag.name)
+	function getExistingPromptTags() {
+		const tags = $page.data?.prompt?.tags.map((tag) => tag.name);
 
 		return tags ? tags : [];
 	}
@@ -64,7 +64,10 @@
 	}
 
 	function cleanTag(tag) {
-		return tag.replace(/<b>|<\/b>/g, '').toString().trim();
+		return tag
+			.replace(/<b>|<\/b>/g, '')
+			.toString()
+			.trim();
 	}
 
 	function addTag(tag) {
@@ -143,9 +146,11 @@
 	/>
 	{#each _tags as tag, index}
 		<div class="tags">
-			<span style={`background-color: ${stringToColor(tag)}`} class="tag-text">#{tag}</span>
-			<button type="button" class="tag-remove" on:click={() => removeTag(index)}
-				>&times;</button
+			<!-- svelte-ignore a11y-click-events-have-key-events -->
+			<span
+				on:click={() => removeTag(index)}
+				style={`background-color: ${stringToColor(tag)}`}
+				class="bubble">#{tag}</span
 			>
 		</div>
 	{/each}
@@ -184,15 +189,7 @@
 		font-size: var(--fs-1);
 		color: white;
 		font-weight: 500;
-	}
-
-	.tag-text {
-		margin-right: 4px;
-	}
-
-	.tag-remove {
 		cursor: pointer;
-		font-weight: bold;
 	}
 
 	.matches {
