@@ -20,15 +20,8 @@ export async function loadIndex(event) {
 }
 
 export async function loadIndexLayout(event) {
-	createUserOnFirstLogin(event);
-
 	const session = await event.locals.getSession();
-	let dbUser = null;
-
-	if (session) {
-		console.log('loadIndexLaout');
-		dbUser = await getDBUser(session);
-	}
+	const dbUser = createUserOnFirstLogin(event)
 
 	return { session, dbUser };
 }
@@ -144,12 +137,15 @@ export async function loadOnboarding(event) {
 
 async function createUserOnFirstLogin(event) {
 	const session = await event.locals.getSession();
+	let dbUser = null;
 
 	if (session) {
-		const user = await getDBUser(session);
+		dbUser = await getDBUser(session);
 
-		if (!user) {
+		if (!dbUser) {
 			createUser(session);
 		}
 	}
+
+	return dbUser;
 }
