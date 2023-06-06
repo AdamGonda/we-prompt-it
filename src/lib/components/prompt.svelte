@@ -5,6 +5,8 @@
 	import { stringToColor } from '$lib/utils';
 	import { toast } from '@zerodevx/svelte-toast';
 	import Error from '../../routes/+error.svelte';
+	import { fade } from 'svelte/transition';
+	import { fadeConfig } from '$lib/config';
 
 	const user = $page.data.dbUser;
 	const isOwner = user ? $page.data.prompt.author.email === user.email : false;
@@ -67,7 +69,7 @@
 	<title>Prompt details | We Prompt</title>
 </svelte:head>
 
-<main>
+<main in:fade={fadeConfig}>
 	<div class="header">
 		<div class="top-bar">
 			<a class="author" href={routes.profile($page.data.prompt.author.username)}>

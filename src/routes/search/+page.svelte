@@ -1,7 +1,9 @@
 <script>
+	import { fade } from 'svelte/transition';
 	import searchStore, { isLoading } from '$lib/stores/search-store';
 	import CardList from '$lib/components/card-list.svelte';
 	import LoadingIndicator from '$lib/components/loading-indicator.svelte';
+	import { fadeConfig } from '$lib/config';
 
 	let resultsToShow = [];
 
@@ -18,8 +20,8 @@
 	{#if $isLoading}
 		<LoadingIndicator />
 	{:else if resultsToShow.length === 0}
-		<div class="placeholder bubble">
-			<p>No results found. 🤷‍♂️ <br> Try searching for something else.</p>
+		<div class="placeholder bubble" in:fade={fadeConfig}>
+			<p>No results found. 🤷‍♂️ <br /> Try searching for something else.</p>
 		</div>
 	{:else}
 		<CardList prompts={resultsToShow} />

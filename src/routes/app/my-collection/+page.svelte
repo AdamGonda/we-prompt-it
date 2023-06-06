@@ -1,6 +1,8 @@
 <script>
 	import { page } from '$app/stores';
 	import CardList from '$lib/components/card-list.svelte';
+	import { fadeConfig } from '$lib/config';
+	import { fade } from 'svelte/transition';
 
 	const myCollection = $page.data;
 </script>
@@ -13,7 +15,7 @@
 	<h3>Created</h3>
 	{#if myCollection.createdBy.length === 0}
 		<div class="placeholder-wrap">
-			<div class="placeholder bubble">
+			<div class="placeholder bubble" in:fade={fadeConfig}>
 				<p>
 					It appears you haven't created any prompts yet! To start crafting your own,
 					simply click on the
@@ -21,7 +23,7 @@
 					button in the top right, to craft something from scratch.
 				</p>
 			</div>
-			<div class="placeholder bubble">
+			<div class="placeholder bubble" in:fade={fadeConfig}>
 				<p>
 					Alternatively, if you've found a prompt that inspires you, make it your own! All you need to do is navigate to its page and look for the 
 					<span>
@@ -38,7 +40,7 @@
 
 	<h3 class="liked">Liked</h3>
 	{#if myCollection.liked.length === 0}
-		<div class="placeholder bubble">
+		<div class="placeholder bubble" in:fade={fadeConfig}>
 			<p>
 				Looks like you haven't liked any prompts yet! To add to your favorites, tap the
 				<span>

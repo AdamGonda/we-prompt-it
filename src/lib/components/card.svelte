@@ -1,7 +1,9 @@
 <script>
 	import { page } from '$app/stores';
+	import { fadeConfig } from '$lib/config';
 	import routes from '$lib/routes';
 	import _ from 'lodash';
+	import { fade } from 'svelte/transition';
 
 	export let prompt;
 
@@ -16,7 +18,7 @@
 	}
 </script>
 
-<a href={routes.prompt($page.data.session?.user, prompt.slug)} class="card">
+<a href={routes.prompt($page.data.session?.user, prompt.slug)} class="card" in:fade={fadeConfig}>
 	<div>
 		<div class="row">
 			<p class="name">{prompt.name}</p>

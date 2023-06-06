@@ -1,0 +1,1 @@
+export const fadeConfig = { duration: 150 }

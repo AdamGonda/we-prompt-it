@@ -1,6 +1,8 @@
 <script>
 	import { page } from '$app/stores';
 	import CardList from '$lib/components/card-list.svelte';
+	import { fadeConfig } from '$lib/config';
+	import { fade } from 'svelte/transition';
 
 	const user = $page.data.user;
 </script>
@@ -9,18 +11,20 @@
 	<title>Profile | We Prompt</title>
 </svelte:head>
 
-<div class="profile">
-	<img src={user?.image} alt="user" />
-	<p>{user?.username}</p>
-</div>
-
-{#if user.prompts.length === 0}
+<div in:fade={fadeConfig}>
+	<div class="profile">
+		<img src={user?.image} alt="user" />
+		<p>{user?.username}</p>
+	</div>
+	
+	{#if user.prompts.length === 0}
 	<div class="placeholder bubble">
 		<p>Seems like this user is new and hasn't crafted any prompts yet!</p>
 	</div>
-{:else}
+	{:else}
 	<CardList prompts={user.prompts} />
-{/if}
+	{/if}
+</div>
 
 <style>
 	.profile {

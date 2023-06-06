@@ -6,6 +6,8 @@
 	import _ from 'lodash';
 	import { onMount } from 'svelte';
 	import Tags from './tags.svelte';
+	import { fade } from 'svelte/transition';
+	import { fadeConfig } from '$lib/config';
 
 	export let onSuccess = (data) => {};
 	export let onError = (error) => {};
@@ -138,6 +140,7 @@
 	use:enhance={handleSubmit}
 	on:input={validateForm}
 	bind:this={_form}
+	in:fade={fadeConfig}
 >
 	<div class="name field-wrap">
 		<input
