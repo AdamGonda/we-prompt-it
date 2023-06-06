@@ -55,8 +55,11 @@
 		--br-2: 30px;
 
 		--sucess: #59a14f;
+		--sucess-hover: #467c3b;
 		--alert: #edc948;
+		--alert-hover: #d7b737;
 		--danger: #e15759;
+		--danger-hover: #c14245;
 		--black: #333333;
 		--white: whitesmoke;
 	}

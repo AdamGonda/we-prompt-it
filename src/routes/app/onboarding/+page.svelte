@@ -4,6 +4,7 @@
 	import { page } from '$app/stores';
 	import { formDataToObject } from '$lib/utils';
 	import { createUserSchema } from '$lib/yup-schemas';
+	import { toast } from '@zerodevx/svelte-toast';
 	import _ from 'lodash';
 
 	let form;
@@ -17,6 +18,7 @@
 		if (browser && $page.data.forceOnboarding) {
 			if (to.route.id !== 'app/onboarding') {
 				cancel();
+				toast.push('You need to complete the onboarding first.')
 			}
 		}
 	});
@@ -83,8 +85,8 @@
 </script>
 
 <div class="wrap">
-	<h1>It seams this is your first time here.</h1>
-	<h3>Please choose a user name so everybody knows who made those great prompts.</h3>
+	<h1>I see you are new around here 😃</h1>
+	<h4>How sould we call you?</h4>
 	<form
 		method="POST"
 		bind:this={form}
@@ -111,7 +113,7 @@
 
 <style>
 	h1,
-	h3 {
+	h4 {
 		font-weight: 400;
 		text-align: center;
 		margin: 0;
@@ -122,7 +124,7 @@
 		margin-bottom: var(--s-2);
 	}
 
-	h3 {
+	h4 {
 		margin-bottom: var(--s-6);
 	}
 
@@ -170,11 +172,15 @@
 	}
 
 	.submit-wrap input {
-		background: #59a14f;
+		background: var(--sucess);
 		color: whitesmoke;
 		border: none;
 		font-size: var(--fs-2);
 		cursor: pointer;
+	}
+
+	.submit-wrap input:hover {
+		background: var(--sucess-hover)
 	}
 
 	.submit-wrap input:disabled {
