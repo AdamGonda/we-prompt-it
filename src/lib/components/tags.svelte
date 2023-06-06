@@ -48,7 +48,6 @@
 		const tooManyTags = _tags.length >= maxTags;
 		const isAlreadyAdded = _tags.includes(tag);
 		const isProfane = badwords.check(tag);
-		
 
 		if (isTooShort) {
 			input = '';
@@ -175,12 +174,46 @@
 	<div class="tags">
 		{#each _tags as tag, index}
 			<div class="tag">
-				<!-- svelte-ignore a11y-click-events-have-key-events -->
-				<span
-					on:click={() => removeTag(index)}
-					style={`background-color: ${stringToColor(tag)}`}
-					class="bubble">#{tag}</span
-				>
+				<span style={`background-color: ${stringToColor(tag)}`} class="bubble"
+					>#{tag}
+					<button type="button" on:click={() => removeTag(index)}>
+						<svg
+							width="100%"
+							height="100%"
+							viewBox="0 0 664 664"
+							version="1.1"
+							xmlns="http://www.w3.org/2000/svg"
+							xmlns:xlink="http://www.w3.org/1999/xlink"
+							xml:space="preserve"
+							style="fill-rule:evenodd;clip-rule:evenodd;stroke-linecap:square;stroke-miterlimit:1.5;"
+						>
+							<g transform="matrix(1,0,0,1,-7100,-24891)">
+								<g transform="matrix(1,0,0,1,-26623.9,9530.87)">
+									<g id="x-icon">
+										<g
+											id="tick"
+											transform="matrix(0.593179,0,0,0.593179,13499.7,6673.28)"
+										>
+											<path
+												d="M34298.4,15560.2L35010.2,14848.4"
+												style="fill:none;stroke:white;stroke-width:224.78px;"
+											/>
+										</g>
+										<g
+											id="tick1"
+											transform="matrix(-0.593179,0,0,0.593179,54612.1,6673.28)"
+										>
+											<path
+												d="M34298.4,15560.2L35010.2,14848.4"
+												style="fill:none;stroke:white;stroke-width:224.78px;"
+											/>
+										</g>
+									</g>
+								</g>
+							</g>
+						</svg>
+					</button>
+				</span>
 			</div>
 		{/each}
 	</div>
@@ -237,7 +270,28 @@
 		font-size: var(--fs-1);
 		color: white;
 		font-weight: 500;
+		user-select: none;
+		position: relative;
+		display: inline-block;
+		padding-right: 30px;
+	}
+
+	.tag button {
+		position: absolute;
 		cursor: pointer;
+		border: none;
+		background: none;
+		top: 51%;
+		transform: translateY(-50%);
+		right: 12px;
+		width: 9px;
+		padding: 0;
+		margin: 0;
+		opacity: 0.8;
+	}
+	
+	.tag button:hover {
+		opacity: 1;
 	}
 
 	.matches {
