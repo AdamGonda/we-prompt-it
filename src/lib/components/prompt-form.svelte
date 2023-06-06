@@ -305,11 +305,15 @@
 	}
 
 	.submit-wrap input {
-		background: #59a14f;
+		background: var(--sucess);
 		color: whitesmoke;
 		border: none;
 		font-size: var(--fs-2);
 		cursor: pointer;
+	}
+
+	.submit-wrap input:hover {
+		background: var(--sucess-hover);
 	}
 
 	.submit-wrap input:disabled {
