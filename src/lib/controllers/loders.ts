@@ -40,6 +40,10 @@ export async function loadMyCollection(event) {
 
 	const dbUser = await getDBUser(session);
 
+	if(!dbUser) {
+		return {}
+	}
+
 	const createdBy = await prisma.prompt.findMany({
 		where: {
 			authorId: dbUser.id,
