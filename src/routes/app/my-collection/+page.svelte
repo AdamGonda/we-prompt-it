@@ -12,17 +12,25 @@
 <main>
 	<h3>Created</h3>
 	{#if myCollection.createdBy.length === 0}
-		<div class="placeholder bubble">
-			<p>
-				It appears you haven't created any prompts yet! To start crafting your own, simply click on the
-        <b>Create</b>
-				button in the top right,
-				to craft something from scratch, or if there's a specific prompt you like, look for the
-				<span>
-					<img src="/fork-icon.png" alt="plus" style="margin-right: -2px"/>
-				</span>
-				button on its page to make it your own.
-			</p>
+		<div class="placeholder-wrap">
+			<div class="placeholder bubble">
+				<p>
+					It appears you haven't created any prompts yet! To start crafting your own,
+					simply click on the
+					<b>Create</b>
+					button in the top right, to craft something from scratch.
+				</p>
+			</div>
+			<div class="placeholder bubble">
+				<p>
+					Alternatively, if you've found a prompt that inspires you, make it your own! All you need to do is navigate to its page and look for the 
+					<span>
+						<img src="/fork-icon.png" alt="plus" style="margin-right: -2px" />
+					</span>
+					button. 
+				</p>
+			</div>
+			
 		</div>
 	{:else}
 		<CardList prompts={myCollection.createdBy} />
@@ -36,7 +44,7 @@
 				<span>
 					<img src="/fathart-icon.svg" alt="hart" />
 				</span>
-				cutton located on the top right corner of the prompts page that you love. They'll then show up here.
+				button located on the top right corner of the prompts page that you love.
 			</p>
 		</div>
 	{:else}
@@ -61,5 +69,11 @@
 
 	.placeholder img {
 		width: 20px;
+	}
+
+	.placeholder-wrap {
+		display: flex;
+		flex-wrap: wrap;
+		gap: var(--s-6);
 	}
 </style>
