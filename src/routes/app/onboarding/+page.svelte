@@ -44,7 +44,7 @@
 			const json = await r.json();
 
 			if (!json.ok) {
-				errors.name = 'Name is not unique';
+				errors.name = 'This name is already taken.';
 			}
 		}
 	}
