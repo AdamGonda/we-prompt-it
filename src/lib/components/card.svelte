@@ -37,7 +37,7 @@
 			<span class="likes">
 				<img
 					style="width: 16px"
-					src={`/${getHartIconPrefix()}-icon.png`}
+					src={`/${getHartIconPrefix()}-icon.svg`}
 					alt="hart-icon"
 				/>
 				{prompt.likes?.length}</span

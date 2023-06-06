@@ -10,7 +10,7 @@
 </script>
 
 <svelte:head>
-	<title>Remix | We Prompt</title>
+	<title>Fork | We Prompt</title>
 </svelte:head>
 
 <PromptForm
