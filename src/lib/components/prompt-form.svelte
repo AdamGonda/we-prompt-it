@@ -143,6 +143,7 @@
 		<input
 			name="name"
 			type="text"
+			autocomplete="off"
 			placeholder={data.placeholder?.name}
 			class:invalid={isTouched.name && errors.name}
 			on:blur={handleFieldChange}
@@ -174,6 +175,7 @@
 		<textarea
 			name="description"
 			rows="1"
+			autocomplete="off"
 			placeholder={data.placeholder?.description}
 			class:invalid={isTouched.description && errors.description}
 			on:blur={handleFieldChange}
@@ -191,6 +193,7 @@
 		<textarea
 			name="content"
 			rows="1"
+			autocomplete="off"
 			placeholder={data.placeholder?.content}
 			class:invalid={isTouched.content && errors.content}
 			on:blur={handleFieldChange}
