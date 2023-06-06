@@ -14,7 +14,13 @@
 	<p>{user?.username}</p>
 </div>
 
-<CardList prompts={user.prompts} />
+{#if user.prompts.length === 0}
+	<div class="placeholder bubble">
+		<p>Seems like this user is new and hasn't crafted any prompts yet!</p>
+	</div>
+{:else}
+	<CardList prompts={user.prompts} />
+{/if}
 
 <style>
 	.profile {
@@ -34,5 +40,9 @@
 	p {
 		font-weight: bold;
 		margin-top: var(--s-4);
+	}
+
+	.placeholder {
+		margin: 0 auto;
 	}
 </style>

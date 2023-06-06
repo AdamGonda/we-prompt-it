@@ -25,3 +25,9 @@
 		<CardList prompts={resultsToShow} />
 	{/if}
 </main>
+
+<style>
+	.placeholder {
+		margin: 0 auto;
+	}
+</style>
