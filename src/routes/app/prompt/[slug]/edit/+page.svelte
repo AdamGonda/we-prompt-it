@@ -88,10 +88,9 @@
 		<div>
 			<button type="button" on:click={() => confirmEditDialog.close()}>Cancel</button>
 			<input
-				class="bubble"
+				class="bubble dialog-confirm-apply"
 				type="button"
 				value="Apply changes"
-				style="background: #59a14f; color: whitesmoke"
 				on:click={() => form.requestSubmit()}
 			/>
 		</div>
@@ -105,10 +104,9 @@
 		<div>
 			<button type="button" on:click={() => confirmDiscardDialog.close()}>Cancel</button>
 			<input
-				class="bubble"
+				class="bubble dialog-confirm-discard"
 				type="button"
 				value="Discard changes"
-				style="background: #edc948; color: #333333"
 				on:click={() => goto(routes.prompt(true, $page.params.slug))}
 			/>
 		</div>
@@ -121,7 +119,7 @@
 		<p>Are you sure you want to proceed?</p>
 		<div>
 			<button type="button" on:click={() => confirmDeleteDialog.close()}>Cancel</button>
-			<input class="bubble" type="submit" value="Delete" />
+			<input class="bubble dialog-confirm-delete" type="submit" value="Delete" />
 		</div>
 	</form>
 </dialog>
@@ -159,14 +157,14 @@
 		cursor: pointer;
 	}
 
-	dialog input {
+	.dialog-confirm-delete {
 		background: #e15759;
 		color: white;
 		font-weight: 400;
 		margin-left: var(--s-4);
 	}
 
-	dialog input:hover {
+	.dialog-confirm-delete:hover {
 		background: rgb(211, 31, 31);
 	}
 
@@ -192,8 +190,12 @@
 	}
 
 	.apply {
-		background: #59a14f !important;
+		background: var(--sucess) !important;
 		color: whitesmoke;
+	}
+
+	.apply:hover {
+		background: var(--sucess-hover) !important;
 	}
 
 	.apply:disabled {
@@ -201,15 +203,37 @@
 		cursor: not-allowed;
 	}
 
+	.dialog-confirm-apply {
+		background: var(--sucess);
+		color: whitesmoke
+	}
+
+	.dialog-confirm-apply:hover {
+		background: var(--sucess-hover);
+	}
+
 	.discard {
 		font-size: var(--fs-1) !important;
 		text-decoration: underline
 	}
 
+	.dialog-confirm-discard {
+		background: var(--alert);
+		color: #333333
+	}
+
+	.dialog-confirm-discard:hover {
+		background: var(--alert-hover);
+	}
+	
 	.delete {
-		background: #e15759 !important;
+		background: var(--danger) !important;
 		color: white;
 		border-radius: var(--br-1);
     padding: var(--s-3) var(--s-4);
+	}
+
+	.delete:hover {
+		background: var(--danger-hover) !important;
 	}
 </style>
