@@ -6,7 +6,7 @@ import {
 	getDBUser,
 	getPromptBySlug
 } from './shared';
-import { error } from '@sveltejs/kit';
+import { error, redirect } from '@sveltejs/kit';
 import { _search } from './api';
 import globalIncludes from '$lib/global-includes';
 import { hash } from '$lib/utils';
@@ -21,9 +21,18 @@ export async function loadIndex(event) {
 
 export async function loadIndexLayout(event) {
 	const session = await event.locals.getSession();
-	const dbUser = createUserOnFirstLogin(event)
+	let dbUser = null;
+	let forceOnboarding = false;
 
-	return { session, dbUser };
+	if (session) {
+		dbUser = await getDBUser(session);
+
+		if (!dbUser) {
+			forceOnboarding = true;
+		}
+	}
+
+	return { session, dbUser, forceOnboarding };
 }
 
 export async function loadMyCollection(event) {
@@ -133,19 +142,4 @@ export async function loadOnboarding(event) {
 	const dbUser = await getDBUser(session);
 
 	return { dbUser };
-}
-
-async function createUserOnFirstLogin(event) {
-	const session = await event.locals.getSession();
-	let dbUser = null;
-
-	if (session) {
-		dbUser = await getDBUser(session);
-
-		if (!dbUser) {
-			createUser(session);
-		}
-	}
-
-	return dbUser;
 }

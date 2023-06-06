@@ -4,7 +4,7 @@
 	import { page } from '$app/stores';
 	import { signIn } from '@auth/sveltekit/client';
 
-	if(browser && $page.data.session) {
+	if(browser && $page.data.dbUser) {
 		goto('/');
 	}
 </script>

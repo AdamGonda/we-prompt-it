@@ -7,8 +7,58 @@ import { convertToSlug, forceAuth } from '$lib/utils';
 
 const prisma = new PrismaClient();
 
+export async function createUser(event) {
+	const session = await forceAuth(event);
+	const username = event.url.searchParams.get('username');
+
+	// check if user with the same email in the database
+	const user = await prisma.user.findUnique({
+		where: {
+			email: session.user.email
+		}
+	});
+
+	if(user && user.isDeleted === false) {
+		throw error(400, { message: 'User already exists for this session' });
+	}
+
+	// check if user with the same username in the database
+	const userWithsameUsername = await prisma.user.findUnique({
+		where: {
+			username
+		}
+	});
+
+	if (userWithsameUsername && userWithsameUsername.isDeleted === false) {
+		throw error(400, { message: 'Name is not unique' });
+	}
+
+	// if user with the same username exists, but deleted - restore it
+	if (userWithsameUsername && userWithsameUsername.isDeleted === true) {
+		await prisma.user.update({
+			where: {
+				id: userWithsameUsername.id
+			},
+			data: {
+				isDeleted: false
+			}
+		});
+	} else {
+		// create new user
+		await prisma.user.create({
+			data: {
+				username,
+				email: session.user.email,
+				image: session.user.image,
+			}
+		});
+	}
+
+	return new Response(JSON.stringify({ status: 200 }));
+}
+
 export async function addRemoveLike(event) {
-	const session = await await forceAuth(event);
+	const session = await forceAuth(event);
 	const id = event.url.searchParams.get('id');
 	const user = await getDBUser(session);
 	const userId = user.id;
