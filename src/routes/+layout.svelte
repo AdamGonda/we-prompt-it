@@ -76,6 +76,8 @@
 		font-weight: 400;
 		max-width: 400px;
 		padding: var(--s-5);
+		font-size: var(--fs-3);
+		border: 2px dashed var(--black);
 	}
 
 	/* 

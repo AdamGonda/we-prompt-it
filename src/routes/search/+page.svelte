@@ -17,6 +17,10 @@
 <main>
 	{#if $isLoading}
 		<LoadingIndicator />
+	{:else if resultsToShow.length === 0}
+		<div class="placeholder bubble">
+			<p>No results found. 🤷‍♂️ Try searching for something else.</p>
+		</div>
 	{:else}
 		<CardList prompts={resultsToShow} />
 	{/if}

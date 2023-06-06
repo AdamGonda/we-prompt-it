@@ -14,9 +14,14 @@
 	{#if myCollection.createdBy.length === 0}
 		<div class="placeholder bubble">
 			<p>
-				It seems you haven't created any prompts yet! To do this, simply click on 
+				It appears you haven't created any prompts yet! To start crafting your own, simply click on the
         <b>Create</b>
-				in top right corner.
+				button in the top right,
+				to craft something from scratch, or if there's a specific prompt you like, look for the
+				<span>
+					<img src="/fork-icon.png" alt="plus" style="margin-right: -2px"/>
+				</span>
+				button on its page to make it your own.
 			</p>
 		</div>
 	{:else}
@@ -27,11 +32,11 @@
 	{#if myCollection.liked.length === 0}
 		<div class="placeholder bubble">
 			<p>
-				No likes yet? No problem! Show some love to your favorite prompts by tapping the
+				Looks like you haven't liked any prompts yet! To add to your favorites, tap the
 				<span>
-					<img src="/hart-icon.png" alt="hart" />
+					<img src="/fathart-icon.svg" alt="hart" />
 				</span>
-				icon!
+				cutton located on the top right corner of the prompts page that you love. They'll then show up here.
 			</p>
 		</div>
 	{:else}
