@@ -19,7 +19,7 @@
 		<LoadingIndicator />
 	{:else if resultsToShow.length === 0}
 		<div class="placeholder bubble">
-			<p>No results found. 🤷‍♂️ Try searching for something else.</p>
+			<p>No results found. 🤷‍♂️ <br> Try searching for something else.</p>
 		</div>
 	{:else}
 		<CardList prompts={resultsToShow} />
@@ -29,5 +29,6 @@
 <style>
 	.placeholder {
 		margin: 0 auto;
+		text-align: center;
 	}
 </style>

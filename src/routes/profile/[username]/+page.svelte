@@ -31,18 +31,19 @@
 		margin-bottom: var(--s-7);
 	}
 
-	img {
+	.profile img {
 		width: 130px;
 		height: 130px;
 		border-radius: 50%;
 	}
 
-	p {
+	.profile p {
 		font-weight: bold;
 		margin-top: var(--s-4);
 	}
 
 	.placeholder {
 		margin: 0 auto;
+		text-align: center;
 	}
 </style>
