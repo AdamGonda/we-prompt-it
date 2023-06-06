@@ -48,11 +48,12 @@
 	}
 
 	button {
-		background: #e9e9e9;
+		background: var(--grey);
 		border-radius: var(--br-2);
 		display: flex;
 		align-items: center;
 		padding: var(--s-4);
+		padding-right: var(--s-5);
 		gap: var(--s-4);
 		border: none;
 		cursor: pointer;

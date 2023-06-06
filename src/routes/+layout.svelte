@@ -62,6 +62,7 @@
 		--danger-hover: #c14245;
 
 		--grey: #e9e9e9;
+		--grey-hover: #d1d1d1;
 		--black: #333333;
 		--white: whitesmoke;
 	}
