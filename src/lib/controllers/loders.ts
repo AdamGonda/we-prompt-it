@@ -110,7 +110,6 @@ export async function loadCreatePrompt() {
 }
 
 export async function loadProfile(event) {
-	// if id is not present trhow 404
 	if (!event.params.username) {
 		throw error(404, {
 			message: 'Not found'

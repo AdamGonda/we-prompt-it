@@ -42,6 +42,8 @@ export const createUserSchema = object().shape({
 	.required('Name is required')
 	.trim()
 	.min(5, 'Must be 5 or more characters long')
+	.max(10, 'Must be less than 10 characters long')
+	.matches(/^[a-z0-9]+([-_][a-z0-9]+)*$/, 'Name must be lowercase, can include numbers and only special characters allowed are "-" and "_"')
 });
 
 export type CreateUserSchema = InferType<typeof createUserSchema>;

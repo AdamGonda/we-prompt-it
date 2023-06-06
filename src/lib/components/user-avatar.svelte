@@ -6,7 +6,7 @@
 	import { signOut } from '@auth/sveltekit/client';
 	import { onMount } from 'svelte';
 
-	$: user = browser ? $page.data.session?.user: null
+	$: user = $page.data.dbUser;
 	let showDropdown = false;
 
 	onMount(() => {
@@ -34,7 +34,7 @@
 		{#if showDropdown}
 			<!-- svelte-ignore a11y-click-events-have-key-events -->
 			<ul class="dropdown-menu" on:click={toggleShowDropdown}>
-				<li><a href={routes.profile(nameToUsername(user.name))}>Profile</a></li>
+				<li><a href={routes.profile(user.username)}>Profile</a></li>
 				<li><button on:click={handleSignout}>Signout</button></li>
 			</ul>
 		{/if}
