@@ -60,6 +60,8 @@
 		--alert-hover: #d7b737;
 		--danger: #e15759;
 		--danger-hover: #c14245;
+
+		--grey: #e9e9e9;
 		--black: #333333;
 		--white: whitesmoke;
 	}
@@ -67,6 +69,13 @@
 	:global(.bubble) {
 		border-radius: var(--br-1);
 		padding: var(--s-3) var(--s-4);
+	}
+
+	:global(.placeholder) {
+		background: var(--grey);
+		font-weight: 400;
+		max-width: 400px;
+		padding: var(--s-5);
 	}
 
 	/* 
