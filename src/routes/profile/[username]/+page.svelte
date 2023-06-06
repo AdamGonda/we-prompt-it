@@ -5,6 +5,10 @@
 	const user = $page.data.user;
 </script>
 
+<svelte:head>
+	<title>Profile | We Prompt</title>
+</svelte:head>
+
 <div class="profile">
 	<img src={user?.image} alt="user" />
 	<p>{user?.username}</p>

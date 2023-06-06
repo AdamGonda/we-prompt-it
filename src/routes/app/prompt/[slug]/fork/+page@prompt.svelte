@@ -9,6 +9,10 @@
 	}
 </script>
 
+<svelte:head>
+	<title>Remix | We Prompt</title>
+</svelte:head>
+
 <PromptForm
 	{onSuccess}
 	type="fork"

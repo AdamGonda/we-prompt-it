@@ -5,6 +5,10 @@
 	const myCollection = $page.data;
 </script>
 
+<svelte:head>
+	<title>My collection | We Prompt</title>
+</svelte:head>
+
 <main>
 	<h3>Created</h3>
 	<CardList prompts={myCollection.createdBy} />

@@ -84,6 +84,10 @@
 	}
 </script>
 
+<svelte:head>
+	<title>Onboarding | We Prompt</title>
+</svelte:head>
+
 <div class="wrap">
 	<h1>I see you are new around here 😃</h1>
 	<h4>How sould we call you?</h4>

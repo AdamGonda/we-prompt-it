@@ -1,7 +1,3 @@
-<svelte:head>
-    <title>Home | We Prompt</title> 
-</svelte:head>
-
 <script>
 	import { page } from '$app/stores';
 	import { onMount } from 'svelte';
@@ -23,7 +19,10 @@
 	});
 </script>
 
-<main>	
+<svelte:head>
+	<title>Home | We Prompt</title>
+</svelte:head>
+
+<main>
 	<CardList prompts={resultsToShow} />
 </main>
-

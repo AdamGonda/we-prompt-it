@@ -8,6 +8,10 @@
 	}
 </script>
 
+<svelte:head>
+	<title>Create | We Prompt</title>
+</svelte:head>
+
 <PromptForm
 	{onSuccess}
 	action="?/create"
