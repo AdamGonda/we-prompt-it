@@ -511,6 +511,76 @@ const RAW_PROMPTS = [
 			'Consider the binary search tree (BST) data structure. Discuss its properties, basic operations like insertion and search, and its use-cases. Implement a BST in a language like Java or Python and discuss the code.',
 		tags: ['coding', 'data-structures', 'education', 'computer-science'],
 		aiModel: 'RoBERTa'
+	},
+	// 51
+	{
+		name: 'The World of Classical Literature',
+		description:
+			'Discuss a classical piece of literature. Explain its plot, characters, themes, and historical context.',
+		content:
+			'Consider Homer\'s "The Iliad". Discuss the epic’s plot, key characters, major themes, and its historical and cultural context. Reflect on its influence on literature and its contemporary relevance.',
+		tags: ['literature', 'classical-literature', 'education', 'history'],
+		aiModel: 'BERT'
+	},
+	// 52
+	{
+		name: 'Building a Chatbot with Node.js',
+		description:
+			'Create a chatbot using Node.js. Discuss the process, code implementation, and integration with messaging platforms.',
+		content:
+			'Consider building a simple chatbot that can answer FAQs. Discuss setting up the Node.js environment, creating the chat logic, and integrating with a platform like Slack. Reflect on the benefits and challenges of chatbot development.',
+		tags: ['coding', 'chatbot', 'node.js', 'education'],
+		aiModel: 'RoBERTa'
+	},
+	// 53
+	{
+		name: 'The Science of Nutrition',
+		description:
+			'Discuss a topic in nutrition science. Explain its principles, health impacts, and related dietary advice.',
+		content:
+			'Consider the role of dietary fiber. Discuss what it is, its health benefits, sources, and dietary recommendations. Reflect on its importance in a balanced diet.',
+		tags: ['science', 'nutrition', 'health', 'education'],
+		aiModel: 'BERT'
+	},
+	// 54
+	{
+		name: 'Creating a Web Scraping Tool with Python',
+		description:
+			'Build a web scraping tool using Python. Discuss the process, code implementation, and ethical considerations.',
+		content:
+			'Consider creating a scraper to gather data from a website using Python and libraries like BeautifulSoup. Discuss the process, the code, and ethical considerations in web scraping. Reflect on its uses and limitations.',
+		tags: ['coding', 'web-scraping', 'python', 'education'],
+		aiModel: 'RoBERTa'
+	},
+	// 55
+	{
+		name: 'Exploring Modern Art',
+		description:
+			'Discuss a modern art movement. Explain its characteristics, key artists, and influences.',
+		content:
+			'Consider the Surrealist movement. Discuss its key characteristics, prominent artists like Salvador Dalí, and its influence on art and culture. Reflect on its philosophies and impact on subsequent art movements.',
+		tags: ['art', 'modern-art', 'education', 'culture'],
+		aiModel: 'BERT'
+	},
+	// 56
+	{
+		name: 'Developing a Mobile App with Flutter',
+		description:
+			'Create a mobile application using Flutter. Discuss the process, code implementation, and deployment to app stores.',
+		content:
+			'Consider creating a recipe app with Flutter. Discuss setting up the Flutter environment, creating screens, managing state, and deploying the app to app stores. Reflect on the benefits of Flutter in mobile app development.',
+		tags: ['coding', 'mobile-development', 'flutter', 'education'],
+		aiModel: 'RoBERTa'
+	},
+	// 57
+	{
+		name: 'Understanding Human Psychology',
+		description:
+			'Discuss a concept in human psychology. Explain its principles, research supporting it, and its impact on human behavior.',
+		content:
+			'Consider the concept of cognitive dissonance. Discuss its definition, experimental studies like Festinger and Carlsmith’s study, and its impact on attitudes and behavior.',
+		tags: ['psychology', 'human-behavior', 'education', 'science'],
+		aiModel: 'BERT'
 	}
 ];
 
