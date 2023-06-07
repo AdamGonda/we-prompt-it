@@ -99,7 +99,7 @@
 </svelte:head>
 
 <div class="wrap">
-	<h1>I see you are new around here 😃</h1>
+	<h1>I see you are new around here 👋</h1>
 	<h4>How sould we call you?</h4>
 	<form
 		method="POST"
