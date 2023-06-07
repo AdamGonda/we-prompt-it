@@ -28,7 +28,7 @@
 		<LoadingIndicator />
 	{:else if !$isSearchLoading && resultsToShow.length === 0 && !isInitialLoad}
 		<div class="placeholder bubble" in:fade={fadeConfig}>
-			<p>🤷‍♂️ No results found.<br /> Try searching for something else.</p>
+			<p><spam>🤷‍♂️</spam> No results found.<br /> Try searching for something else.</p>
 		</div>
 	{:else}
 		<CardList prompts={resultsToShow} />
@@ -40,5 +40,29 @@
 	.placeholder {
 		margin: 0 auto;
 		text-align: center;
+	}
+
+	spam {
+		display: inline-block;
+		font-size: 2rem;
+		animation: wobble 0.5s ease-in;
+	}
+
+	@keyframes wobble {
+		0% {
+			transform: rotate(0deg);
+		}
+		25% {
+			transform: rotate(15deg);
+		}
+		50% {
+			transform: rotate(-15deg);
+		}
+		75% {
+			transform: rotate(15deg);
+		}
+		100% {
+			transform: rotate(0deg);
+		}
 	}
 </style>

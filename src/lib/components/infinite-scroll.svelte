@@ -55,7 +55,7 @@
 	{#if !$isMoreLoading && !$isSearchLoading && stop}
 		<div class="placeholder-wrap">
 			<div class="placeholder bubble">
-				🤷‍♂️ End of the line! You've scrolled through it all.
+				<spam>🤷‍♂️</spam> End of the line! You've scrolled through it all.
 			</div>
 		</div>
 	{/if}
@@ -77,5 +77,47 @@
 
 	.placeholder {
 		text-align: center;
+	}
+
+	spam {
+		display: inline-block;
+		font-size: 2rem;
+		animation: wobble 2s ease-in;
+	}
+
+	@keyframes wobble {
+		0% {
+			transform: rotate(0deg);
+		}
+		10% {
+			transform: rotate(10deg);
+		}
+		20% {
+			transform: rotate(-10deg);
+		}
+		30% {
+			transform: rotate(10deg);
+		}
+		40% {
+			transform: rotate(-10deg);
+		}
+		50% {
+			transform: rotate(5deg);
+		}
+		60% {
+			transform: rotate(-5deg);
+		}
+		70% {
+			transform: rotate(5deg);
+		}
+		80% {
+			transform: rotate(-5deg);
+		}
+		90% {
+			transform: rotate(2deg);
+		}
+		100% {
+			transform: rotate(0deg);
+		}
 	}
 </style>
