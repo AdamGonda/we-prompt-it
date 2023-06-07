@@ -4,7 +4,7 @@
 	import { fadeConfig } from '$lib/config';
 	import { fade } from 'svelte/transition';
 
-	const { dbUser, allPrompts, likesGiven, likesReceived, forked } = $page.data;
+	const { profileUser, allPrompts, likesGiven, likesReceived, forked } = $page.data;
 
 </script>
 
@@ -26,8 +26,8 @@
 		</div>
 
 		<div class="user">
-			<img src={dbUser?.image} alt="user" />
-			<p>{dbUser?.username}</p>
+			<img src={profileUser?.image} alt="user" />
+			<p>{profileUser?.username}</p>
 		</div>
 
 		<div class="stats">
@@ -42,12 +42,12 @@
 		</div>
 	</div>
 
-	{#if dbUser.prompts.length === 0}
+	{#if profileUser.prompts.length === 0}
 		<div class="placeholder bubble">
 			<p>Seems like this user is new and hasn't crafted any prompts yet!</p>
 		</div>
 	{:else}
-		<CardList prompts={dbUser.prompts} />
+		<CardList prompts={profileUser.prompts} />
 	{/if}
 </div>
 

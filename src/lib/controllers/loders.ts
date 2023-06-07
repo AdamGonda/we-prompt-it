@@ -121,7 +121,7 @@ export async function loadProfile(event) {
 	}
 
 	// get user by id, prisma
-	const dbUser = await prisma.user.findFirst({
+	const profileUser = await prisma.user.findFirst({
 		where: { username: event.params.username },
 		include: {
 			prompts: {
@@ -131,7 +131,7 @@ export async function loadProfile(event) {
 		}
 	});
 
-	if (!dbUser) {
+	if (!profileUser) {
 		throw error(404, {
 			message: 'Not found'
 		});
@@ -139,7 +139,7 @@ export async function loadProfile(event) {
 
 	const allPrompts = await prisma.prompt.count({
 		where: {
-			authorId: dbUser.id,
+			authorId: profileUser.id,
 			isDeleted: false
 		}
 	});
@@ -147,7 +147,7 @@ export async function loadProfile(event) {
 	// all the likes that the user has given
 	const likesGiven = await prisma.like.count({
 		where: {
-			userId: dbUser.id,
+			userId: profileUser.id,
 			isDeleted: false
 		}
 	});
@@ -156,7 +156,7 @@ export async function loadProfile(event) {
 	const likesReceived = await prisma.like.count({
 		where: {
 			prompt: {
-				authorId: dbUser.id,
+				authorId: profileUser.id,
 				isDeleted: false
 			},
 			isDeleted: false
@@ -166,14 +166,14 @@ export async function loadProfile(event) {
 	// total number of times other users have forked the user's prompts
 	const userPrompts = await prisma.prompt.findMany({
 		where: {
-			authorId: dbUser.id,
+			authorId: profileUser.id,
 		},
 	});
 	
 	const forked = userPrompts.reduce((total, prompt) => total + prompt.forkedCount, 0);
 
 
-	return { dbUser, allPrompts, likesGiven, likesReceived, forked };
+	return { profileUser, allPrompts, likesGiven, likesReceived, forked };
 }
 
 export async function loadOnboarding(event) {
