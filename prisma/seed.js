@@ -581,6 +581,136 @@ const RAW_PROMPTS = [
 			'Consider the concept of cognitive dissonance. Discuss its definition, experimental studies like Festinger and Carlsmith’s study, and its impact on attitudes and behavior.',
 		tags: ['psychology', 'human-behavior', 'education', 'science'],
 		aiModel: 'BERT'
+	},
+	// 58
+	{
+		name: 'Working with Blockchain and Cryptocurrencies',
+		description:
+			'Introduce blockchain technology and cryptocurrencies. Discuss their principles, workings, and potential applications.',
+		content:
+			'Discuss what blockchain is, its key features, and how cryptocurrencies like Bitcoin use blockchain. Explore potential applications and implications of blockchain technology.',
+		tags: ['blockchain', 'cryptocurrency', 'technology', 'education'],
+		aiModel: 'RoBERTa'
+	},
+	// 59
+	{
+		name: 'The Beauty of Poetry',
+		description:
+			'Discuss a well-known poem. Analyze its structure, language, themes, and context.',
+		content:
+			'Consider Robert Frost’s "The Road Not Taken". Analyze its structure, use of language, major themes, and the historical and personal context of the poem. Reflect on its impact and interpret its meanings.',
+		tags: ['poetry', 'literature', 'education', 'culture'],
+		aiModel: 'BERT'
+	},
+	// 60
+	{
+		name: 'Building Websites with JAMstack',
+		description:
+			'Build a website using JAMstack principles. Discuss the process, code implementation, and benefits.',
+		content:
+			'Consider building a blog website using JAMstack principles, with technologies like JavaScript, APIs, and Markdown. Discuss the process, the code, and the benefits of JAMstack, such as performance and security.',
+		tags: ['coding', 'web-development', 'jamstack', 'education'],
+		aiModel: 'RoBERTa'
+	},
+	// 61
+	{
+		name: 'The Basics of Astronomy',
+		description:
+			'Discuss an astronomy topic. Explain its principles, related discoveries, and its significance in understanding the universe.',
+		content:
+			'Consider the life cycle of a star. Discuss the stages from nebula to possible outcomes like white dwarf, neutron star, or black hole. Reflect on the role of stars in the cosmos.',
+		tags: ['astronomy', 'science', 'education', 'space'],
+		aiModel: 'BERT'
+	},
+	// 62
+	{
+		name: 'Introduction to Deep Learning',
+		description:
+			'Introduce a concept in deep learning. Discuss its principles, applications, and code implementation.',
+		content:
+			'Consider the concept of convolutional neural networks (CNNs). Discuss their structure, how they work, their applications in image recognition, and implement a basic CNN using a library like TensorFlow.',
+		tags: ['coding', 'deep-learning', 'machine-learning', 'education'],
+		aiModel: 'RoBERTa'
+	},
+	// 63
+	{
+		name: 'Exploring Environmental Science',
+		description:
+			'Discuss an environmental science topic. Explain its principles, impact on the planet, and potential solutions.',
+		content:
+			'Consider the topic of climate change. Discuss what it is, how human activities contribute to it, its potential impacts, and strategies for mitigation and adaptation.',
+		tags: ['environmental-science', 'climate-change', 'education', 'science'],
+		aiModel: 'BERT'
+	},
+	// 64
+	{
+		name: 'Creating an eCommerce Website with Shopify',
+		description:
+			'Create an eCommerce website using Shopify. Discuss the process, customization, and best practices for user experience.',
+		content:
+			'Consider setting up an online store on Shopify. Discuss setting up the store, choosing and customizing a theme, adding products, and optimizing for a better user experience.',
+		tags: ['ecommerce', 'shopify', 'web-development', 'education'],
+		aiModel: 'RoBERTa'
+	},
+	// 65
+	{
+		name: 'Understanding Sociology',
+		description:
+			'Discuss a sociological theory or concept. Explain its principles, related research, and real-world implications.',
+		content:
+			'Consider the theory of social constructionism. Discuss its principles, how it explains social phenomena, and its implications for understanding society and culture.',
+		tags: ['sociology', 'theory', 'education', 'society'],
+		aiModel: 'BERT'
+	},
+	// 66
+	{
+		name: 'Developing Applications with React Native',
+		description:
+			'Create a mobile application using React Native. Discuss the process, code implementation, and deployment to app stores.',
+		content:
+			'Consider creating a to-do list app with React Native. Discuss setting up the React Native environment, creating components, managing state, and deploying the app to app stores. Reflect on the benefits of React Native in mobile app development.',
+		tags: ['coding', 'mobile-development', 'react-native', 'education'],
+		aiModel: 'RoBERTa'
+	},
+	// 67
+	{
+		name: 'The Fascinating World of Quantum Physics',
+		description:
+			'Discuss a topic in quantum physics. Explain its principles, related experiments, and its significance in science.',
+		content:
+			'Consider the concept of quantum entanglement. Discuss what it is, its implications for understanding the nature of reality, and key experiments like the Bell test experiments.',
+		tags: ['physics', 'quantum-physics', 'education', 'science'],
+		aiModel: 'BERT'
+	},
+	// 68
+	{
+		name: 'Building a Progressive Web App',
+		description:
+			'Build a progressive web application (PWA). Discuss the process, code implementation, and benefits.',
+		content:
+			'Consider creating a news reader PWA. Discuss setting up the development environment, creating the app shell, making it work offline with service workers, and adding a manifest file for "add to home screen" capability.',
+		tags: ['coding', 'web-development', 'pwa', 'education'],
+		aiModel: 'RoBERTa'
+	},
+	// 69
+	{
+		name: 'Exploring Music Theory',
+		description:
+			'Discuss a concept in music theory. Explain its principles, its use in compositions, and its impact on musical understanding.',
+		content:
+			'Consider the concept of harmonic progression. Discuss what it is, how it guides the movement of chords in a composition, and its impact on the listener’s emotional experience.',
+		tags: ['music', 'music-theory', 'education', 'art'],
+		aiModel: 'BERT'
+	},
+	// 70
+	{
+		name: 'Building a Full-Stack Application with MERN Stack',
+		description:
+			'Create a full-stack application using the MERN stack (MongoDB, Express.js, React, Node.js). Discuss the process, code implementation, and deployment.',
+		content:
+			'Consider creating a simple social media app with the MERN stack. Discuss setting up the development environment, creating the backend and frontend, connecting them, and deploying the app.',
+		tags: ['coding', 'full-stack-development', 'mern-stack', 'education'],
+		aiModel: 'RoBERTa'
 	}
 ];
 
