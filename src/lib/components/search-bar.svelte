@@ -8,6 +8,8 @@
 	let inputValue;
 	let placeholder = 'Find the prompt you need';
 	let inputInFocus = false;
+	let limit = '10'
+	let _page = '0'
 
 	afterNavigate(async () => {
 		initVarsFromURL();
@@ -39,16 +41,9 @@
 			});
 		}
 		
-		const limit = old.get('limit');
-		if (limit) {
-			searchParams.append('limit', limit);
-		}
-
-		const _page = old.get('page');
-		if (_page) {
-			searchParams.append('page', _page);
-		}
-
+		searchParams.append('limit', limit);
+		searchParams.append('page', _page);
+		
 		return searchParams.toString();
 	}
 
