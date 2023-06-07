@@ -115,8 +115,8 @@
 		border: none;
 		height: 46px;
 		font-size: 16px;
-		background: #e9e9e9;
-		color: #333333;
+		background: var(--grey);
+		color: var(--black);
 		border-radius: 25px;
 		width: 100%;
 	}
@@ -127,7 +127,7 @@
 
 	button {
 		border: none;
-		background: #ffffff;
+		background: var(--white);
 		cursor: pointer;
 		height: 42px;
 		width: 45px;
@@ -161,7 +161,7 @@
 	}
 
 	.clear-button:hover {
-		background: #cdcdcd;
+		background: var(--grey-hover);
 	}
 
 	.clear-button img {

@@ -252,7 +252,7 @@
 	}
 
 	.forked {
-		background: #e9e9e9;
+		background: var(--grey);
 	}
 
 	.top-bar {
@@ -262,7 +262,7 @@
 	}
 
 	button {
-		background: #e9e9e9;
+		background: var(--grey);
 		color: black;
 		text-decoration: none;
 		font-size: 16px;
@@ -276,11 +276,7 @@
 
 	button:hover,
 	.forked:hover {
-		background-color: #cdcdcd;
-	}
-
-	button:active {
-		background-color: #a0a0a0;
+		background-color: var(--grey-hover);
 	}
 
 	.icon {
