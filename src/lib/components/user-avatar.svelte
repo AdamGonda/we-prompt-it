@@ -1,8 +1,7 @@
 <script>
-	import { browser } from '$app/environment';
+	import { invalidate } from '$app/navigation';
 	import { page } from '$app/stores';
 	import routes from '$lib/routes';
-	import { nameToUsername } from '$lib/utils';
 	import { signOut } from '@auth/sveltekit/client';
 	import { onMount } from 'svelte';
 
@@ -34,12 +33,17 @@
 		{#if showDropdown}
 			<!-- svelte-ignore a11y-click-events-have-key-events -->
 			<ul class="dropdown-menu" on:click={toggleShowDropdown}>
-				<li><a href={routes.profile(user.username)}>Profile</a></li>
+				<li>
+					<a
+						href={routes.profile(user.username)}
+						on:click={() => invalidate(routes.profile(user.username))}>Profile</a
+					>
+				</li>
 				<li><button on:click={handleSignout}>Signout</button></li>
 			</ul>
 		{/if}
 	</div>
-	{:else}
+{:else}
 	<div class="login bubble">
 		<a href={routes.login}>Login</a>
 	</div>
@@ -116,11 +120,11 @@
 		display: flex;
 		align-items: center;
 		gap: 8px;
-		background: #E9E9E9;
+		background: #e9e9e9;
 		height: 46px;
 	}
 
-	.login a{
+	.login a {
 		color: black;
 		text-decoration: none;
 		font-size: 0.9rem;

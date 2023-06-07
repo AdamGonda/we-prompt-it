@@ -4,8 +4,6 @@
 	import { fadeConfig } from '$lib/config';
 	import { fade } from 'svelte/transition';
 
-	const { profileUser, allPrompts, likesGiven, likesReceived, forked } = $page.data;
-
 </script>
 
 <svelte:head>
@@ -17,37 +15,37 @@
 		<div class="stats">
 			<div class="stat">
 				<p>All prompts</p>
-				<span>{allPrompts}</span>
+				<span>{$page.data.allPrompts}</span>
 			</div>
 			<div class="stat">
 				<p>Likes given</p>
-				<span>{likesGiven}</span>
+				<span>{$page.data.likesGiven}</span>
 			</div>
 		</div>
 
 		<div class="user">
-			<img src={profileUser?.image} alt="user" />
-			<p>{profileUser?.username}</p>
+			<img src={$page.data.profileUser?.image} alt="user" />
+			<p>{$page.data.profileUser?.username}</p>
 		</div>
 
 		<div class="stats">
 			<div class="stat">
 				<p>Likes received</p>
-				<span>{likesReceived}</span>
+				<span>{$page.data.likesReceived}</span>
 			</div>
 			<div class="stat">
 				<p>Forked</p>
-				<span>{forked}</span>
+				<span>{$page.data.forked}</span>
 			</div>
 		</div>
 	</div>
 
-	{#if profileUser.prompts.length === 0}
+	{#if $page.data.profileUser.prompts.length === 0}
 		<div class="placeholder bubble">
 			<p>Seems like this user is new and hasn't crafted any prompts yet!</p>
 		</div>
 	{:else}
-		<CardList prompts={profileUser.prompts} />
+		<CardList prompts={$page.data.profileUser.prompts} />
 	{/if}
 </div>
 
