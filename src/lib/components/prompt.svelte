@@ -4,7 +4,6 @@
 	import routes from '$lib/routes';
 	import { stringToColor } from '$lib/utils';
 	import { toast } from '@zerodevx/svelte-toast';
-	import Error from '../../routes/+error.svelte';
 	import { fade } from 'svelte/transition';
 	import { fadeConfig } from '$lib/config';
 
