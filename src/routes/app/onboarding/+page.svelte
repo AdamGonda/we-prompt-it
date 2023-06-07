@@ -8,7 +8,7 @@
 	import _ from 'lodash';
 
 	let form;
-	let errors = {}
+	let errors = {};
 	$: disabled = getDisabled(errors, isTouched);
 	let isTouched = {
 		name: false
@@ -18,7 +18,7 @@
 		if (browser && $page.data.forceOnboarding) {
 			if (to.route.id !== 'app/onboarding') {
 				cancel();
-				toast.push('You need to complete the onboarding first.')
+				toast.push('You need to complete the onboarding first.');
 			}
 		}
 	});
@@ -42,11 +42,16 @@
 		if (formData.name) {
 			let url = `/api/username-check?proposedName=${formData.name}`;
 
-			const r = await fetch(url);
-			const json = await r.json();
+			try {
+				const r = await fetch(url);
+				const json = await r.json();
 
-			if (!json.ok) {
-				errors.name = 'This name is already taken.';
+				if (!json.ok) {
+					errors.name = 'This name is already taken.';
+				}
+			} catch (e) {
+				toast.push('Something went wrong. Please try again.');
+				console.log(e);
 			}
 		}
 	}
@@ -60,20 +65,25 @@
 		validateForm();
 	}
 
-	function handleSubmit() {
+	async function handleSubmit() {
 		if (errors.name) {
 			return;
 		}
 
-		fetch(`/api/create-user?username=${form.name.value}`, {
-			method: 'POST'
-		})
-			.then((r) => r.json())
-			.then((json) => {
-				if (json.status === 200) {
-					window.location.href = '/';
-				}
+		try {
+			const r = await fetch(`/api/create-user?username=${form.name.value}`, {
+				method: 'POST'
 			});
+
+			const json = await r.json();
+
+			if (json.status === 200) {
+				window.location.href = '/';
+			}
+		} catch (e) {
+			toast.push('Something went wrong. Please try again.');
+			console.log(e);
+		}
 	}
 
 	function getDisabled(errors, isTouched) {
@@ -184,7 +194,7 @@
 	}
 
 	.submit-wrap input:hover {
-		background: var(--sucess-hover)
+		background: var(--sucess-hover);
 	}
 
 	.submit-wrap input:disabled {
