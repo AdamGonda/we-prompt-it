@@ -25,6 +25,5 @@
 </svelte:head>
 
 <main>
-	<button on:click={() => {throw Error}}>click to error</button>
 	<CardList prompts={resultsToShow} />
 </main>
