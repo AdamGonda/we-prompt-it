@@ -198,7 +198,9 @@ export async function _search(event) {
 	_handleSortBy(query, event);
 	_handlePagination(query, event);
 
-	return await prisma.prompt.findMany(query);
+	const r = await prisma.prompt.findMany(query);
+	console.log('log r', r)
+	return r
 }
 
 function _handlePagination(query, event) {
