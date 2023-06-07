@@ -8,8 +8,9 @@
 	let pageNumber = 0;
 	let stop = false;
 
-	searchStore.subscribe(() => {
+	isSearchLoading.subscribe((value) => {
 		stop = false;
+		pageNumber = 0;
 	});
 
 	onMount(() => {
@@ -35,7 +36,6 @@
 		searchParams.set('page', pageNumber += 1);
 		const data = await searchStore.loadMore(searchParams);
 
-		console.log('log data', data)
 		if (data.length < searchParams.get('limit')) {
 			stop = true;
 		}
