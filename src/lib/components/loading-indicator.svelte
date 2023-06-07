@@ -1,4 +1,8 @@
-<div class="loading-container">
+<script>
+	export let height = 'calc(100vh - 330px)'
+</script>
+
+<div class="loading-container" style={`height: ${height}`}>
 	<div class="loader">
 		<div />
 		<div />
@@ -12,8 +16,6 @@
 		align-items: center;
 		justify-content: center;
 		gap: 14px;
-    height: calc(100vh - 330px);
-
 	}
 
 	.loader {
