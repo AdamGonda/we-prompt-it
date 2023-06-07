@@ -38,6 +38,16 @@
 				searchParams.append('sort_by', sort);
 			});
 		}
+		
+		const limit = old.get('limit');
+		if (limit) {
+			searchParams.append('limit', limit);
+		}
+
+		const _page = old.get('page');
+		if (_page) {
+			searchParams.append('page', _page);
+		}
 
 		return searchParams.toString();
 	}
