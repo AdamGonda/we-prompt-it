@@ -112,6 +112,405 @@ const RAW_PROMPTS = [
 			'Consider a coding problem such as reversing a string in JavaScript. Provide a step-by-step solution, explaining your thought process as you break down the problem, your approach to coding the solution, and any considerations for edge cases or errors. Reflect on the efficiency of the solution and discuss potential optimizations or alternative solutions.',
 		tags: ['coding', 'technology', 'education', 'problem-solving', 'career-advice'],
 		aiModel: 'RoBERTa'
+	},
+	// 11
+	{
+		name: 'Understanding Quantum Physics',
+		description:
+			'Discuss the principles of Quantum Physics. Provide examples and explain their implications in the real world.',
+		content:
+			'Consider concepts such as superposition and quantum entanglement. Discuss their theoretical foundations and their implications in technology and the real world. Reflect on how they challenge our intuitive understanding of reality.',
+		tags: ['science', 'physics', 'education', 'quantum-physics'],
+		aiModel: 'BERT'
+	},
+	// 12
+	{
+		name: 'Data Analysis with Python',
+		description:
+			'Analyze a dataset using Python. Explain the process, techniques used, insights derived, and potential applications.',
+		content:
+			'Consider a dataset, like a customer database. Explain how you would load the data using pandas, clean and preprocess it, analyze it using appropriate techniques, and derive insights from it. Discuss potential applications of these insights in a business context.',
+		tags: ['coding', 'data-science', 'education', 'python', 'pandas'],
+		aiModel: 'RoBERTa'
+	},
+	// 13
+	{
+		name: 'Philosophy of Ethics',
+		description:
+			'Discuss an ethical theory in depth. Explain its principles, criticisms, and practical applications.',
+		content:
+			'Consider a theory like utilitarianism. Discuss its core principles, potential criticisms, and how it can be applied in real-world ethical dilemmas. Reflect on its influence in philosophy and modern society.',
+		tags: ['philosophy', 'ethics', 'education', 'humanities'],
+		aiModel: 'BERT'
+	},
+	// 14
+	{
+		name: 'Web Development with React',
+		description:
+			'Build a simple web application using React. Explain the steps, code implementation, and decisions made during the process.',
+		content:
+			'Consider building a simple todo list application with React. Explain the creation of components, state management, and handling user input. Reflect on the choices made during the development process, potential optimizations, and alternate approaches.',
+		tags: ['coding', 'web-development', 'react', 'javascript', 'education'],
+		aiModel: 'RoBERTa'
+	},
+	// 15
+	{
+		name: 'Economic Principles',
+		description:
+			'Discuss a key principle in economics. Explain its theory, real-world applications, and implications.',
+		content:
+			'Consider the principle of supply and demand. Discuss its theoretical foundations, real-world examples, and its implications in various economic situations. Reflect on how it informs our understanding of markets and economic behavior.',
+		tags: ['economics', 'education', 'finance', 'social-science'],
+		aiModel: 'BERT'
+	},
+	// 16
+	{
+		name: 'Building a Mobile App with Flutter',
+		description:
+			'Build a simple mobile app using Flutter. Discuss the steps, code implementation, and considerations made during the process.',
+		content:
+			'Consider creating a basic weather app with Flutter. Explain the creation of widgets, state management, and handling user interactions. Reflect on the choices made during the development process, potential optimizations, and alternate approaches.',
+		tags: ['coding', 'mobile-development', 'flutter', 'dart', 'education'],
+		aiModel: 'RoBERTa'
+	},
+	// 17
+	{
+		name: 'Psychology of Learning',
+		description:
+			'Discuss a theory about how people learn. Explain its principles, examples, and applications in educational settings.',
+		content:
+			'Consider a theory such as the Zone of Proximal Development by Vygotsky. Discuss its main ideas, provide examples of its application, and reflect on its significance in understanding student learning and designing effective instruction.',
+		tags: ['psychology', 'education', 'learning-theory', 'humanities'],
+		aiModel: 'BERT'
+	},
+	// 18
+	{
+		name: 'Machine Learning with Scikit-Learn',
+		description:
+			'Build a simple machine learning model using Scikit-Learn. Discuss the process, code implementation, and performance evaluation.',
+		content:
+			'Consider creating a simple linear regression model with Scikit-Learn. Discuss the data preprocessing steps, the model creation and training process, prediction and evaluation of the model. Reflect on the choices made during the process, potential improvements, and alternate approaches.',
+		tags: ['coding', 'machine-learning', 'scikit-learn', 'python', 'education'],
+		aiModel: 'RoBERTa'
+	},
+	// 19
+	{
+		name: 'Climate Change Effects',
+		description:
+			'Discuss the effects of climate change on a specific ecosystem. Explain the impacts, adaptations, and implications for the future.',
+		content:
+			'Consider an ecosystem like the Arctic tundra. Discuss the impacts of climate change on its flora and fauna, any observable adaptations, and potential future scenarios under continued climate change. Reflect on the global implications and the importance of mitigating climate change.',
+		tags: ['climate-change', 'science', 'education', 'ecology', 'environment'],
+		aiModel: 'BERT'
+	},
+	// 20
+	{
+		name: 'Building REST API with Node.js',
+		description:
+			'Build a simple REST API using Node.js. Discuss the process, code implementation, and testing methods.',
+		content:
+			'Consider creating a basic REST API for a book store with Node.js and Express. Explain the creation of endpoints, request handling, and database interactions. Discuss the methods for testing the API and reflect on the choices made during the development process, potential optimizations, and alternate approaches.',
+		tags: ['coding', 'web-development', 'node.js', 'rest-api', 'education'],
+		aiModel: 'RoBERTa'
+	},
+	// 21
+	{
+		name: 'Exploring the Universe',
+		description:
+			'Discuss the mysteries and recent discoveries about the Universe. Explain theories, evidences, and implications.',
+		content:
+			'Consider the mysteries like dark matter and energy, or recent discoveries about black holes. Discuss the theories, evidence supporting them, and their implications for our understanding of the universe.',
+		tags: ['science', 'astronomy', 'education', 'space'],
+		aiModel: 'BERT'
+	},
+	// 22
+	{
+		name: 'Creating Interactive Visualizations with D3.js',
+		description:
+			'Create a data visualization using D3.js. Discuss the process, code implementation, and data interpretation.',
+		content:
+			'Consider creating an interactive bar chart with D3.js. Discuss data preparation, creation of scales and axes, rendering of bars, and adding interactivity. Reflect on how the visualization helps interpret the data and potential improvements.',
+		tags: ['coding', 'data-visualization', 'd3.js', 'javascript', 'education'],
+		aiModel: 'RoBERTa'
+	},
+	// 23
+	{
+		name: 'Understanding Modern Art',
+		description:
+			'Discuss a modern art movement. Explain its characteristics, key figures, and its influence on culture and society.',
+		content:
+			'Consider a movement like Dada. Discuss its characteristics, major artists and works, and how it reacted against societal norms. Reflect on its influence on subsequent art movements and its cultural significance.',
+		tags: ['art', 'modern-art', 'education', 'culture', 'history'],
+		aiModel: 'BERT'
+	},
+	// 24
+	{
+		name: 'Developing a Progressive Web App (PWA)',
+		description:
+			'Build a Progressive Web App. Discuss the process, code implementation, and performance considerations.',
+		content:
+			'Consider creating a PWA for a news feed. Discuss the process of setting up a service worker, caching assets for offline use, and setting up a web app manifest. Reflect on the advantages of PWAs and considerations for performance and user experience.',
+		tags: ['coding', 'web-development', 'pwa', 'javascript', 'education'],
+		aiModel: 'RoBERTa'
+	},
+	// 25
+	{
+		name: 'Social Psychology Concepts',
+		description:
+			'Discuss a key concept in social psychology. Explain its theory, experiments that support it, and real-world implications.',
+		content:
+			'Consider a concept like conformity. Discuss its theoretical foundation, landmark experiments like the Asch experiment, and implications in everyday life. Reflect on the importance of understanding these concepts and how they shape human behavior.',
+		tags: ['psychology', 'social-psychology', 'education', 'human-behavior'],
+		aiModel: 'BERT'
+	},
+	// 26
+	{
+		name: 'Building a Chatbot with Dialogflow',
+		description:
+			'Build a simple chatbot using Dialogflow. Discuss the setup, intents creation, and integration with a messaging platform.',
+		content:
+			'Consider creating a basic chatbot for booking appointments. Discuss the creation of agents, intents, entities, and contexts in Dialogflow, and how to integrate it with a messaging platform like Slack. Reflect on the role of chatbots in enhancing user interaction and potential improvements.',
+		tags: ['coding', 'chatbot', 'dialogflow', 'ai', 'education'],
+		aiModel: 'RoBERTa'
+	},
+	// 27
+	{
+		name: 'Exploring Human Anatomy',
+		description:
+			'Discuss a specific human body system. Explain its structure, function, and importance to overall health.',
+		content:
+			'Consider the cardiovascular system. Discuss the structure of the heart and blood vessels, the process of blood circulation, and its importance to overall health. Reflect on common diseases that affect this system and the importance of maintaining cardiovascular health.',
+		tags: ['science', 'anatomy', 'education', 'health'],
+		aiModel: 'BERT'
+	},
+	// 28
+	{
+		name: 'Cybersecurity Fundamentals',
+		description:
+			'Solve a cybersecurity problem. Discuss the process, techniques used, and preventative measures.',
+		content:
+			'Consider a scenario where a system is attacked by a phishing scheme. Discuss the process of identifying the attack, steps taken to mitigate it, and measures to prevent similar attacks in the future. Reflect on the importance of cybersecurity in the digital age.',
+		tags: ['coding', 'cybersecurity', 'problem-solving', 'education'],
+		aiModel: 'RoBERTa'
+	},
+	// 29
+	{
+		name: 'Analyzing Literary Works',
+		description:
+			'Analyze a literary work. Discuss its themes, stylistic devices used, historical context, and overall impact.',
+		content: `Consider a work like George Orwell’s "1984". Discuss its major themes, Orwell's use of language and symbolism, its historical context, and its impact on literature and society. Reflect on its relevance in contemporary times.`,
+		tags: ['literature', 'analysis', 'education', 'history', 'culture'],
+		aiModel: 'BERT'
+	},
+	// 30
+	{
+		name: 'Creating a Blockchain with Python',
+		description:
+			'Build a simple Blockchain using Python. Discuss the process, code implementation, and basic principles of blockchain.',
+		content:
+			'Consider creating a basic Blockchain in Python. Discuss the creation of blocks, implementing the proof of work, and creating transactions. Reflect on the principles of blockchain technology and its potential applications.',
+		tags: ['coding', 'blockchain', 'python', 'education', 'cryptocurrency'],
+		aiModel: 'RoBERTa'
+	},
+	// 31
+	{
+		name: 'Exploring Classical Music',
+		description:
+			'Discuss a period in classical music. Explain its characteristics, key composers, and their influence.',
+		content:
+			'Consider the Romantic period. Discuss its distinguishing features, major composers like Chopin, and their impact on the evolution of music. Reflect on how it contrasts with other periods in classical music.',
+		tags: ['music', 'classical-music', 'education', 'history'],
+		aiModel: 'BERT'
+	},
+	// 32
+	{
+		name: 'Building Interactive UI with Vue.js',
+		description:
+			'Create an interactive user interface using Vue.js. Discuss the process, code implementation, and best practices.',
+		content:
+			'Consider building a real-time search feature with Vue.js. Discuss setting up the Vue instance, creating reactive data, and setting up event listeners. Reflect on how Vue.js facilitates the creation of interactive UIs.',
+		tags: ['coding', 'web-development', 'vue.js', 'javascript', 'education'],
+		aiModel: 'RoBERTa'
+	},
+	// 33
+	{
+		name: 'The Science of Climate Change',
+		description:
+			'Discuss the science behind climate change. Explain its causes, evidences, and potential solutions.',
+		content:
+			'Discuss greenhouse gases, their sources, and how they cause global warming. Reflect on evidence for climate change and potential technological and policy solutions.',
+		tags: ['science', 'climate-change', 'education', 'environment'],
+		aiModel: 'BERT'
+	},
+	// 34
+	{
+		name: 'Building a Server with Deno',
+		description:
+			'Build a server using Deno. Discuss the process, code implementation, and comparison with Node.js.',
+		content:
+			'Consider creating a basic HTTP server with Deno. Discuss the setup process, handling requests, and comparing the experience with Node.js. Reflect on the advantages and disadvantages of Deno.',
+		tags: ['coding', 'deno', 'server', 'javascript', 'education'],
+		aiModel: 'RoBERTa'
+	},
+	// 35
+	{
+		name: 'Understanding Genetics',
+		description:
+			'Discuss a topic in genetics. Explain its principles, real-world implications, and ethical considerations.',
+		content:
+			'Consider the topic of genetic engineering. Discuss its principles, applications in medicine and agriculture, and ethical considerations. Reflect on its impact on society and potential future developments.',
+		tags: ['science', 'genetics', 'education', 'biology'],
+		aiModel: 'BERT'
+	},
+	// 36
+	{
+		name: 'Developing with Angular',
+		description:
+			'Create a web application using Angular. Discuss the process, code implementation, and best practices.',
+		content:
+			'Consider creating a simple e-commerce application with Angular. Discuss setting up the Angular environment, creating components and services, and handling user input. Reflect on the advantages of Angular in building scalable web applications.',
+		tags: ['coding', 'web-development', 'angular', 'javascript', 'education'],
+		aiModel: 'RoBERTa'
+	},
+	// 37
+	{
+		name: 'Exploring World Religions',
+		description:
+			'Discuss a world religion. Explain its beliefs, practices, historical context, and influence.',
+		content:
+			'Consider Buddhism. Discuss its core beliefs, practices, the historical context of its emergence, and its influence on culture and society. Reflect on its philosophical aspects and how they relate to other religions.',
+		tags: ['religion', 'history', 'education', 'culture'],
+		aiModel: 'BERT'
+	},
+	// 38
+	{
+		name: 'Working with SQL',
+		description:
+			'Solve a problem using SQL. Discuss the problem, your SQL queries, and any considerations or potential optimizations.',
+		content:
+			'Consider a problem of retrieving specific data from a large database. Discuss your SQL query, how it solves the problem, and any considerations for efficiency or edge cases. Reflect on potential optimizations or alternate solutions.',
+		tags: ['coding', 'database', 'sql', 'problem-solving', 'education'],
+		aiModel: 'RoBERTa'
+	},
+	// 39
+	{
+		name: 'Exploring Philosophy',
+		description:
+			'Discuss a philosophical concept or philosopher. Explain the concept or philosopher’s ideas, historical context, and influence.',
+		content:
+			'Consider the concept of existentialism. Discuss its major ideas, philosophers who contributed to it like Jean-Paul Sartre, and its influence on society and culture. Reflect on its relevance in contemporary times.',
+		tags: ['philosophy', 'history', 'education', 'culture'],
+		aiModel: 'BERT'
+	},
+	// 40
+	{
+		name: 'Building a Full Stack Application with MERN Stack',
+		description:
+			'Create a full stack application using MongoDB, Express.js, React.js, and Node.js (MERN). Discuss the process, code implementation, and deployment.',
+		content:
+			'Consider creating a blogging platform with the MERN stack. Discuss setting up the backend with Node.js and Express, setting up the database with MongoDB, creating the frontend with React, and deploying the application. Reflect on the benefits and challenges of working with the MERN stack.',
+		tags: ['coding', 'web-development', 'mern-stack', 'javascript', 'education'],
+		aiModel: 'RoBERTa'
+	},
+	// 41
+	{
+		name: 'Understanding Quantum Mechanics',
+		description:
+			'Discuss a principle of quantum mechanics. Explain its theory, experiments that support it, and implications for our understanding of the physical world.',
+		content:
+			'Consider the principle of superposition. Discuss its theoretical foundation, key experiments like the double-slit experiment, and its implications for our understanding of reality.',
+		tags: ['science', 'quantum-mechanics', 'education', 'physics'],
+		aiModel: 'BERT'
+	},
+	// 42
+	{
+		name: 'Creating a Mobile App with React Native',
+		description:
+			'Create a mobile application using React Native. Discuss the process, code implementation, and best practices.',
+		content:
+			'Consider creating a weather application with React Native. Discuss setting up the environment, creating components, fetching data from an API, and handling user input. Reflect on the advantages of React Native in mobile application development.',
+		tags: ['coding', 'mobile-development', 'react-native', 'javascript', 'education'],
+		aiModel: 'RoBERTa'
+	},
+	// 43
+	{
+		name: 'The Psychology of Learning',
+		description:
+			'Discuss a concept in the psychology of learning. Explain its principles, supporting research, and implications for education.',
+		content:
+			'Consider the concept of spaced repetition. Discuss its principles, research supporting its effectiveness, and its implications for study habits and education. Reflect on how understanding such concepts can enhance learning.',
+		tags: ['psychology', 'learning', 'education', 'research'],
+		aiModel: 'BERT'
+	},
+	// 44
+	{
+		name: 'Creating Data Pipelines with Python',
+		description:
+			'Create a data pipeline using Python. Discuss the process, code implementation, and handling of potential errors.',
+		content:
+			'Consider creating a pipeline for data cleaning and transformation in Python. Discuss the use of libraries like Pandas, creating functions for cleaning tasks, and chaining these tasks. Reflect on the importance of data pipelines in data science projects.',
+		tags: ['coding', 'data-science', 'python', 'education'],
+		aiModel: 'RoBERTa'
+	},
+	// 45
+	{
+		name: 'Exploring World History',
+		description:
+			'Discuss a significant event in world history. Explain its causes, outcomes, and its influence on subsequent events.',
+		content:
+			'Consider World War II. Discuss its causes, key events, outcomes, and its impact on subsequent history. Reflect on its lessons and their relevance in contemporary times.',
+		tags: ['history', 'world-history', 'education', 'culture'],
+		aiModel: 'BERT'
+	},
+	// 46
+	{
+		name: 'Building a REST API with Django',
+		description:
+			'Build a REST API using Django. Discuss the process, code implementation, and testing.',
+		content:
+			'Consider creating a REST API for a bookstore with Django. Discuss setting up Django and Django REST Framework, creating models, serializers, and views, and testing the API. Reflect on the benefits of Django in building APIs.',
+		tags: ['coding', 'web-development', 'django', 'api', 'education'],
+		aiModel: 'RoBERTa'
+	},
+	// 47
+	{
+		name: 'Understanding Economic Theories',
+		description:
+			'Discuss an economic theory. Explain its principles, real-world applications, and potential criticisms.',
+		content:
+			'Consider the theory of supply and demand. Discuss its principles, how it applies to real-world markets, and potential criticisms or limitations. Reflect on its relevance in understanding economic behavior.',
+		tags: ['economics', 'theory', 'education', 'business'],
+		aiModel: 'BERT'
+	},
+	// 48
+	{
+		name: 'Developing Games with Unity',
+		description:
+			'Create a simple game using Unity. Discuss the process, code implementation, and best practices.',
+		content:
+			'Consider creating a 2D platformer game with Unity. Discuss setting up the Unity environment, creating game objects, implementing player controls, and adding game mechanics. Reflect on the process and what makes Unity a preferred choice for game development.',
+		tags: ['coding', 'game-development', 'unity', 'education'],
+		aiModel: 'RoBERTa'
+	},
+	// 49
+	{
+		name: 'Exploring Cultural Anthropology',
+		description:
+			'Discuss a topic in cultural anthropology. Explain its principles, research methods, and real-world implications.',
+		content:
+			'Consider the concept of cultural relativism. Discuss its principles, how anthropologists apply it in their research, and its implications for understanding and respecting cultural diversity.',
+		tags: ['anthropology', 'culture', 'education', 'society'],
+		aiModel: 'BERT'
+	},
+	// 50
+	{
+		name: 'Introduction to Data Structures',
+		description:
+			'Explain a type of data structure. Discuss its properties, operations, use-cases, and its implementation in a programming language.',
+		content:
+			'Consider the binary search tree (BST) data structure. Discuss its properties, basic operations like insertion and search, and its use-cases. Implement a BST in a language like Java or Python and discuss the code.',
+		tags: ['coding', 'data-structures', 'education', 'computer-science'],
+		aiModel: 'RoBERTa'
 	}
 ];
 
@@ -388,19 +787,6 @@ export function getCleanText(text) {
 export function promptToString(prompt) {
 	const rawString = `${prompt.name} ${prompt.description} ${prompt.content}`;
 	return getCleanText(rawString);
-}
-
-function stringToColor(str) {
-	let hash = 0;
-	for (let i = 0; i < str.length; i++) {
-		hash = str.charCodeAt(i) + ((hash << 5) - hash);
-	}
-	let color = '#';
-	for (let i = 0; i < 3; i++) {
-		let value = (hash >> (i * 8)) & 0xaf; // change 0x7f to 0xaf
-		color += ('00' + value.toString(16)).substr(-2);
-	}
-	return color;
 }
 
 main()
