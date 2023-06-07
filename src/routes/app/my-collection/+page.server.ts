@@ -1,3 +1,3 @@
-import { loadMyCollection } from "$lib/controllers/loders";
+import { loadMyCollection } from "$lib/controllers/loader";
 
 export const load = loadMyCollection

@@ -1,3 +1,3 @@
-import { loadIndex } from "$lib/controllers/loders";
+import { loadIndex } from "$lib/controllers/loader";
 
 export const load = loadIndex

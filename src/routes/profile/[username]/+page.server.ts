@@ -1,3 +1,3 @@
-import { loadProfile } from "$lib/controllers/loders";
+import { loadProfile } from "$lib/controllers/loader";
 
 export const load = loadProfile
