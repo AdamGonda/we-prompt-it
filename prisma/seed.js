@@ -11,7 +11,7 @@ const RAW_PROMPTS = [
 		content:
 			"Imagine you're reviewing a renowned art exhibition like 'Van Gogh: The Immersive Experience'. Discuss the showcased artworks, delve into the themes portrayed, analyze the curation's effectiveness, and describe the overall visitor experience. Reflect on the exhibition's impact and significance. Provide both praise and constructive criticism, concluding with a recommendation for or against visiting.",
 		tags: ['art', 'museums', 'culture', 'education', 'entertainment'],
-		aiModel: 'RoBERTa'
+		aiModel: 'GPT-4'
 	},
 	// 1
 	{
@@ -111,7 +111,7 @@ const RAW_PROMPTS = [
 		content:
 			'Consider a coding problem such as reversing a string in JavaScript. Provide a step-by-step solution, explaining your thought process as you break down the problem, your approach to coding the solution, and any considerations for edge cases or errors. Reflect on the efficiency of the solution and discuss potential optimizations or alternative solutions.',
 		tags: ['coding', 'technology', 'education', 'problem-solving', 'career-advice'],
-		aiModel: 'RoBERTa'
+		aiModel: 'GPT-4'
 	},
 	// 11
 	{
@@ -131,7 +131,7 @@ const RAW_PROMPTS = [
 		content:
 			'Consider a dataset, like a customer database. Explain how you would load the data using pandas, clean and preprocess it, analyze it using appropriate techniques, and derive insights from it. Discuss potential applications of these insights in a business context.',
 		tags: ['coding', 'data-science', 'education', 'python', 'pandas'],
-		aiModel: 'RoBERTa'
+		aiModel: 'GPT-4'
 	},
 	// 13
 	{
@@ -151,7 +151,7 @@ const RAW_PROMPTS = [
 		content:
 			'Consider building a simple todo list application with React. Explain the creation of components, state management, and handling user input. Reflect on the choices made during the development process, potential optimizations, and alternate approaches.',
 		tags: ['coding', 'web-development', 'react', 'javascript', 'education'],
-		aiModel: 'RoBERTa'
+		aiModel: 'GPT-4'
 	},
 	// 15
 	{
@@ -171,7 +171,7 @@ const RAW_PROMPTS = [
 		content:
 			'Consider creating a basic weather app with Flutter. Explain the creation of widgets, state management, and handling user interactions. Reflect on the choices made during the development process, potential optimizations, and alternate approaches.',
 		tags: ['coding', 'mobile-development', 'flutter', 'dart', 'education'],
-		aiModel: 'RoBERTa'
+		aiModel: 'GPT-4'
 	},
 	// 17
 	{
@@ -191,7 +191,7 @@ const RAW_PROMPTS = [
 		content:
 			'Consider creating a simple linear regression model with Scikit-Learn. Discuss the data preprocessing steps, the model creation and training process, prediction and evaluation of the model. Reflect on the choices made during the process, potential improvements, and alternate approaches.',
 		tags: ['coding', 'machine-learning', 'scikit-learn', 'python', 'education'],
-		aiModel: 'RoBERTa'
+		aiModel: 'GPT-4'
 	},
 	// 19
 	{
@@ -211,7 +211,7 @@ const RAW_PROMPTS = [
 		content:
 			'Consider creating a basic REST API for a book store with Node.js and Express. Explain the creation of endpoints, request handling, and database interactions. Discuss the methods for testing the API and reflect on the choices made during the development process, potential optimizations, and alternate approaches.',
 		tags: ['coding', 'web-development', 'node.js', 'rest-api', 'education'],
-		aiModel: 'RoBERTa'
+		aiModel: 'GPT-4'
 	},
 	// 21
 	{
@@ -231,7 +231,7 @@ const RAW_PROMPTS = [
 		content:
 			'Consider creating an interactive bar chart with D3.js. Discuss data preparation, creation of scales and axes, rendering of bars, and adding interactivity. Reflect on how the visualization helps interpret the data and potential improvements.',
 		tags: ['coding', 'data-visualization', 'd3.js', 'javascript', 'education'],
-		aiModel: 'RoBERTa'
+		aiModel: 'GPT-4'
 	},
 	// 23
 	{
@@ -251,7 +251,7 @@ const RAW_PROMPTS = [
 		content:
 			'Consider creating a PWA for a news feed. Discuss the process of setting up a service worker, caching assets for offline use, and setting up a web app manifest. Reflect on the advantages of PWAs and considerations for performance and user experience.',
 		tags: ['coding', 'web-development', 'pwa', 'javascript', 'education'],
-		aiModel: 'RoBERTa'
+		aiModel: 'GPT-4'
 	},
 	// 25
 	{
@@ -271,7 +271,7 @@ const RAW_PROMPTS = [
 		content:
 			'Consider creating a basic chatbot for booking appointments. Discuss the creation of agents, intents, entities, and contexts in Dialogflow, and how to integrate it with a messaging platform like Slack. Reflect on the role of chatbots in enhancing user interaction and potential improvements.',
 		tags: ['coding', 'chatbot', 'dialogflow', 'ai', 'education'],
-		aiModel: 'RoBERTa'
+		aiModel: 'GPT-4'
 	},
 	// 27
 	{
@@ -291,7 +291,7 @@ const RAW_PROMPTS = [
 		content:
 			'Consider a scenario where a system is attacked by a phishing scheme. Discuss the process of identifying the attack, steps taken to mitigate it, and measures to prevent similar attacks in the future. Reflect on the importance of cybersecurity in the digital age.',
 		tags: ['coding', 'cybersecurity', 'problem-solving', 'education'],
-		aiModel: 'RoBERTa'
+		aiModel: 'GPT-4'
 	},
 	// 29
 	{
@@ -310,7 +310,7 @@ const RAW_PROMPTS = [
 		content:
 			'Consider creating a basic Blockchain in Python. Discuss the creation of blocks, implementing the proof of work, and creating transactions. Reflect on the principles of blockchain technology and its potential applications.',
 		tags: ['coding', 'blockchain', 'python', 'education', 'cryptocurrency'],
-		aiModel: 'RoBERTa'
+		aiModel: 'GPT-4'
 	},
 	// 31
 	{
@@ -330,7 +330,7 @@ const RAW_PROMPTS = [
 		content:
 			'Consider building a real-time search feature with Vue.js. Discuss setting up the Vue instance, creating reactive data, and setting up event listeners. Reflect on how Vue.js facilitates the creation of interactive UIs.',
 		tags: ['coding', 'web-development', 'vue.js', 'javascript', 'education'],
-		aiModel: 'RoBERTa'
+		aiModel: 'GPT-4'
 	},
 	// 33
 	{
@@ -350,7 +350,7 @@ const RAW_PROMPTS = [
 		content:
 			'Consider creating a basic HTTP server with Deno. Discuss the setup process, handling requests, and comparing the experience with Node.js. Reflect on the advantages and disadvantages of Deno.',
 		tags: ['coding', 'deno', 'server', 'javascript', 'education'],
-		aiModel: 'RoBERTa'
+		aiModel: 'GPT-4'
 	},
 	// 35
 	{
@@ -370,7 +370,7 @@ const RAW_PROMPTS = [
 		content:
 			'Consider creating a simple e-commerce application with Angular. Discuss setting up the Angular environment, creating components and services, and handling user input. Reflect on the advantages of Angular in building scalable web applications.',
 		tags: ['coding', 'web-development', 'angular', 'javascript', 'education'],
-		aiModel: 'RoBERTa'
+		aiModel: 'GPT-4'
 	},
 	// 37
 	{
@@ -390,7 +390,7 @@ const RAW_PROMPTS = [
 		content:
 			'Consider a problem of retrieving specific data from a large database. Discuss your SQL query, how it solves the problem, and any considerations for efficiency or edge cases. Reflect on potential optimizations or alternate solutions.',
 		tags: ['coding', 'database', 'sql', 'problem-solving', 'education'],
-		aiModel: 'RoBERTa'
+		aiModel: 'GPT-4'
 	},
 	// 39
 	{
@@ -410,7 +410,7 @@ const RAW_PROMPTS = [
 		content:
 			'Consider creating a blogging platform with the MERN stack. Discuss setting up the backend with Node.js and Express, setting up the database with MongoDB, creating the frontend with React, and deploying the application. Reflect on the benefits and challenges of working with the MERN stack.',
 		tags: ['coding', 'web-development', 'mern-stack', 'javascript', 'education'],
-		aiModel: 'RoBERTa'
+		aiModel: 'GPT-4'
 	},
 	// 41
 	{
@@ -430,7 +430,7 @@ const RAW_PROMPTS = [
 		content:
 			'Consider creating a weather application with React Native. Discuss setting up the environment, creating components, fetching data from an API, and handling user input. Reflect on the advantages of React Native in mobile application development.',
 		tags: ['coding', 'mobile-development', 'react-native', 'javascript', 'education'],
-		aiModel: 'RoBERTa'
+		aiModel: 'GPT-4'
 	},
 	// 43
 	{
@@ -450,7 +450,7 @@ const RAW_PROMPTS = [
 		content:
 			'Consider creating a pipeline for data cleaning and transformation in Python. Discuss the use of libraries like Pandas, creating functions for cleaning tasks, and chaining these tasks. Reflect on the importance of data pipelines in data science projects.',
 		tags: ['coding', 'data-science', 'python', 'education'],
-		aiModel: 'RoBERTa'
+		aiModel: 'GPT-4'
 	},
 	// 45
 	{
@@ -470,7 +470,7 @@ const RAW_PROMPTS = [
 		content:
 			'Consider creating a REST API for a bookstore with Django. Discuss setting up Django and Django REST Framework, creating models, serializers, and views, and testing the API. Reflect on the benefits of Django in building APIs.',
 		tags: ['coding', 'web-development', 'django', 'api', 'education'],
-		aiModel: 'RoBERTa'
+		aiModel: 'GPT-4'
 	},
 	// 47
 	{
@@ -490,7 +490,7 @@ const RAW_PROMPTS = [
 		content:
 			'Consider creating a 2D platformer game with Unity. Discuss setting up the Unity environment, creating game objects, implementing player controls, and adding game mechanics. Reflect on the process and what makes Unity a preferred choice for game development.',
 		tags: ['coding', 'game-development', 'unity', 'education'],
-		aiModel: 'RoBERTa'
+		aiModel: 'GPT-4'
 	},
 	// 49
 	{
@@ -510,7 +510,7 @@ const RAW_PROMPTS = [
 		content:
 			'Consider the binary search tree (BST) data structure. Discuss its properties, basic operations like insertion and search, and its use-cases. Implement a BST in a language like Java or Python and discuss the code.',
 		tags: ['coding', 'data-structures', 'education', 'computer-science'],
-		aiModel: 'RoBERTa'
+		aiModel: 'GPT-4'
 	},
 	// 51
 	{
@@ -530,7 +530,7 @@ const RAW_PROMPTS = [
 		content:
 			'Consider building a simple chatbot that can answer FAQs. Discuss setting up the Node.js environment, creating the chat logic, and integrating with a platform like Slack. Reflect on the benefits and challenges of chatbot development.',
 		tags: ['coding', 'chatbot', 'node.js', 'education'],
-		aiModel: 'RoBERTa'
+		aiModel: 'GPT-4'
 	},
 	// 53
 	{
@@ -550,7 +550,7 @@ const RAW_PROMPTS = [
 		content:
 			'Consider creating a scraper to gather data from a website using Python and libraries like BeautifulSoup. Discuss the process, the code, and ethical considerations in web scraping. Reflect on its uses and limitations.',
 		tags: ['coding', 'web-scraping', 'python', 'education'],
-		aiModel: 'RoBERTa'
+		aiModel: 'GPT-4'
 	},
 	// 55
 	{
@@ -570,7 +570,7 @@ const RAW_PROMPTS = [
 		content:
 			'Consider creating a recipe app with Flutter. Discuss setting up the Flutter environment, creating screens, managing state, and deploying the app to app stores. Reflect on the benefits of Flutter in mobile app development.',
 		tags: ['coding', 'mobile-development', 'flutter', 'education'],
-		aiModel: 'RoBERTa'
+		aiModel: 'GPT-4'
 	},
 	// 57
 	{
@@ -590,7 +590,7 @@ const RAW_PROMPTS = [
 		content:
 			'Discuss what blockchain is, its key features, and how cryptocurrencies like Bitcoin use blockchain. Explore potential applications and implications of blockchain technology.',
 		tags: ['blockchain', 'cryptocurrency', 'technology', 'education'],
-		aiModel: 'RoBERTa'
+		aiModel: 'GPT-4'
 	},
 	// 59
 	{
@@ -610,7 +610,7 @@ const RAW_PROMPTS = [
 		content:
 			'Consider building a blog website using JAMstack principles, with technologies like JavaScript, APIs, and Markdown. Discuss the process, the code, and the benefits of JAMstack, such as performance and security.',
 		tags: ['coding', 'web-development', 'jamstack', 'education'],
-		aiModel: 'RoBERTa'
+		aiModel: 'GPT-4'
 	},
 	// 61
 	{
@@ -630,7 +630,7 @@ const RAW_PROMPTS = [
 		content:
 			'Consider the concept of convolutional neural networks (CNNs). Discuss their structure, how they work, their applications in image recognition, and implement a basic CNN using a library like TensorFlow.',
 		tags: ['coding', 'deep-learning', 'machine-learning', 'education'],
-		aiModel: 'RoBERTa'
+		aiModel: 'GPT-4'
 	},
 	// 63
 	{
@@ -650,7 +650,7 @@ const RAW_PROMPTS = [
 		content:
 			'Consider setting up an online store on Shopify. Discuss setting up the store, choosing and customizing a theme, adding products, and optimizing for a better user experience.',
 		tags: ['ecommerce', 'shopify', 'web-development', 'education'],
-		aiModel: 'RoBERTa'
+		aiModel: 'GPT-4'
 	},
 	// 65
 	{
@@ -670,7 +670,7 @@ const RAW_PROMPTS = [
 		content:
 			'Consider creating a to-do list app with React Native. Discuss setting up the React Native environment, creating components, managing state, and deploying the app to app stores. Reflect on the benefits of React Native in mobile app development.',
 		tags: ['coding', 'mobile-development', 'react-native', 'education'],
-		aiModel: 'RoBERTa'
+		aiModel: 'GPT-4'
 	},
 	// 67
 	{
@@ -690,7 +690,7 @@ const RAW_PROMPTS = [
 		content:
 			'Consider creating a news reader PWA. Discuss setting up the development environment, creating the app shell, making it work offline with service workers, and adding a manifest file for "add to home screen" capability.',
 		tags: ['coding', 'web-development', 'pwa', 'education'],
-		aiModel: 'RoBERTa'
+		aiModel: 'GPT-4'
 	},
 	// 69
 	{
@@ -710,7 +710,7 @@ const RAW_PROMPTS = [
 		content:
 			'Consider creating a simple social media app with the MERN stack. Discuss setting up the development environment, creating the backend and frontend, connecting them, and deploying the app.',
 		tags: ['coding', 'full-stack-development', 'mern-stack', 'education'],
-		aiModel: 'RoBERTa'
+		aiModel: 'GPT-4'
 	}
 ];
 

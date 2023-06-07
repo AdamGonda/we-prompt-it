@@ -19,7 +19,7 @@
 <main>
 	{#if $isLoading}
 		<LoadingIndicator />
-	{:else if resultsToShow.length === 0}
+	{:else if !$isLoading && resultsToShow.length === 0}
 		<div class="placeholder bubble" in:fade={fadeConfig}>
 			<p>No results found. 🤷‍♂️ <br /> Try searching for something else.</p>
 		</div>
