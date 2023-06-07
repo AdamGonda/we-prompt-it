@@ -8,7 +8,7 @@
 	let pageNumber = 0;
 	let stop = false;
 
-	isSearchLoading.subscribe((value) => {
+	isSearchLoading.subscribe(() => {
 		reset();
 	});
 
