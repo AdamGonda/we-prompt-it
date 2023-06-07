@@ -768,7 +768,7 @@ async function main() {
 	const getRandomNumber = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min;
 
 	// Iterate over each item in the RAW_PROMPTS array
-	for (const prompt of RAW_PROMPTS) {
+	for (const [idx, prompt] of RAW_PROMPTS.entries()) {
 		// Randomly select an author
 		const author = getRandomElement(users);
 
@@ -803,10 +803,10 @@ async function main() {
 		// Create the prompt
 		await prisma.prompt.create({
 			data: {
-				name: prompt.name,
+				name: prompt.name  + ' ' + idx,
 				description: prompt.description,
 				content: prompt.content,
-				slug: prompt.name.toLowerCase().replace(/\s/g, '-'),
+				slug: prompt.name.toLowerCase().replace(/\s/g, '-') + ' ' + idx,
 				author: {
 					connect: {
 						id: author.id
