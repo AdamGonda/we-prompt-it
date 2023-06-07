@@ -3,6 +3,7 @@
 	import { onMount } from 'svelte';
 	import searchStore from '$lib/stores/search-store';
 	import CardList from '$lib/components/card-list.svelte';
+	import Error from './+error.svelte';
 
 	const { prompts } = $page.data;
 	let resultsToShow = prompts;
@@ -24,5 +25,6 @@
 </svelte:head>
 
 <main>
+	<button on:click={() => {throw Error}}>click to error</button>
 	<CardList prompts={resultsToShow} />
 </main>
