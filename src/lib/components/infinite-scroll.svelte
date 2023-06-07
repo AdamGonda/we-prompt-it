@@ -9,9 +9,13 @@
 	let stop = false;
 
 	isSearchLoading.subscribe((value) => {
-		stop = false;
-		pageNumber = 0;
+		reset();
 	});
+
+	function reset() {
+		pageNumber = 0;
+		stop = false;
+	}
 
 	onMount(() => {
 		const observer = new IntersectionObserver((entries) => {
@@ -33,7 +37,7 @@
 		if (stop) return;
 
 		const searchParams = new URLSearchParams($page.url.search);
-		searchParams.set('page', pageNumber += 1);
+		searchParams.set('page', (pageNumber += 1));
 		const data = await searchStore.loadMore(searchParams);
 
 		if (data.length < searchParams.get('limit')) {
