@@ -5,8 +5,12 @@
 	import LoadingIndicator from './loading-indicator.svelte';
 
 	let ref;
-	let pageNumber = 1;
+	let pageNumber = 0;
 	let stop = false;
+
+	searchStore.subscribe(() => {
+		stop = false;
+	});
 
 	onMount(() => {
 		const observer = new IntersectionObserver((entries) => {
@@ -31,6 +35,7 @@
 		searchParams.set('page', (pageNumber += 1).toString());
 		const data = await searchStore.loadMore(searchParams);
 
+		console.log('log data', data)
 		if (data.length < searchParams.get('limit')) {
 			stop = true;
 		}
@@ -43,13 +48,13 @@
 		<LoadingIndicator height="400px" />
 	{/if}
 
-	<!-- {#if !$isMoreLoading && !$isSearchLoading && stop}
+	{#if !$isMoreLoading && !$isSearchLoading && stop}
 		<div class="placeholder-wrap">
 			<div class="placeholder bubble">
 				🤷‍♂️ End of the line! You've scrolled through it all.
 			</div>
 		</div>
-	{/if} -->
+	{/if}
 </div>
 
 <style>
