@@ -8,7 +8,7 @@
 	let inputValue;
 	let placeholder = 'Find the prompt you need';
 	let inputInFocus = false;
-	let limit = '2'
+	let limit = '5'
 	let _page = '0'
 
 	afterNavigate(async () => {
