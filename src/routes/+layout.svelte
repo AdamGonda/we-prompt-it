@@ -118,6 +118,7 @@
 
 	.overlay-ref {
 		position: relative;
+		height: 100vh;
 	}
 
 	.overlay {
