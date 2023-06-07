@@ -20,7 +20,7 @@
 					It appears you haven't created any prompts yet! To start crafting your own,
 					simply click on the
 					<b>Create</b>
-					button in the top right, to craft something from scratch.
+					button on the top right in the navigation bar.
 				</p>
 			</div>
 			<div class="placeholder bubble" in:fade={fadeConfig}>
@@ -29,7 +29,7 @@
 					<span>
 						<img src="/fork-icon.png" alt="plus" style="margin-right: -2px" />
 					</span>
-					button. 
+					button on the top right.
 				</p>
 			</div>
 			
@@ -46,7 +46,7 @@
 				<span>
 					<img src="/fathart-icon.svg" alt="hart" />
 				</span>
-				button located on the top right corner of the prompts page that you love.
+				button located on the top right corner of the prompts page.
 			</p>
 		</div>
 	{:else}
