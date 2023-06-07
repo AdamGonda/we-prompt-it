@@ -6,7 +6,6 @@
 	import { fadeConfig } from '$lib/config';
 	import { onMount } from 'svelte';
 	import { page } from '$app/stores';
-	import { toast } from '@zerodevx/svelte-toast';
 
 	let resultsToShow = [];
 	let isInitialLoad = true;
@@ -18,7 +17,6 @@
 
 	searchStore.subscribe((value) => {
 		resultsToShow = value;
-		console.log('log resultsToShow', resultsToShow)
 	});
 
 	function loadMore() {
