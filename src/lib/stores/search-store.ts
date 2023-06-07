@@ -3,16 +3,17 @@ import { goto } from '$app/navigation';
 import { toast } from '@zerodevx/svelte-toast';
 
 const { subscribe, set, update } = writable([]);
-export const isLoading = writable(false);
+export const isSearchLoading = writable(false);
+export const isMoreLoading = writable(false);
 
 async function search({ endpoint, updateURL = '' }) {
 	let data;
-	isLoading.set(true);
+	isSearchLoading.set(true);
 
 	try {
 		const response = await fetch(`${endpoint}`);
 		data = await response.json();
-		isLoading.set(false);
+		isSearchLoading.set(false);
 	} catch (e) {
 		toast.push('Something went wrong. Please try again.');
 		console.log(e);
@@ -32,20 +33,20 @@ function reset() {
 }
 
 async function loadMore(searchParams) {
-	console.log('log searchParams', searchParams)
 	let data;
-	// isLoading.set(true);
+	isMoreLoading.set(true);
 
 	try {
 		const response = await fetch(`/api/search?${searchParams}`);
 		data = await response.json();
-		// isLoading.set(false);
+		isMoreLoading.set(false);
 	} catch (e) {
 		toast.push('Something went wrong. Please try again.');
 		console.log(e);
 	}
 
 	update((value) => [...value, ...data]);
+	return data
 }
 
 export default {
