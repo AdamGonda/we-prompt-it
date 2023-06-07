@@ -32,7 +32,7 @@
 		if (stop) return;
 
 		const searchParams = new URLSearchParams($page.url.search);
-		searchParams.set('page', (pageNumber += 1).toString());
+		searchParams.set('page', pageNumber += 1);
 		const data = await searchStore.loadMore(searchParams);
 
 		console.log('log data', data)
