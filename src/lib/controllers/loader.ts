@@ -6,16 +6,28 @@ import {
 	getDBUser,
 	getPromptBySlug
 } from './shared';
-import { error, redirect } from '@sveltejs/kit';
-import { _search } from './api';
+import { error } from '@sveltejs/kit';
 import globalIncludes from '$lib/global-includes';
-import { hash } from '$lib/utils';
 
 const prisma = new PrismaClient();
 
 export async function loadIndex(event) {
+	// get the most liked prompts, 9 of them
+	const prompts = await prisma.prompt.findMany({
+		where: {
+			isDeleted: false
+		},
+		orderBy: {
+			likes: {
+				_count: 'desc'
+			}
+		},
+		take: 9,
+		...globalIncludes
+	});
+
 	return {
-		prompts: await _search(event)
+		prompts
 	};
 }
 
@@ -166,12 +178,11 @@ export async function loadProfile(event) {
 	// total number of times other users have forked the user's prompts
 	const userPrompts = await prisma.prompt.findMany({
 		where: {
-			authorId: profileUser.id,
-		},
+			authorId: profileUser.id
+		}
 	});
-	
-	const forked = userPrompts.reduce((total, prompt) => total + prompt.forkedCount, 0);
 
+	const forked = userPrompts.reduce((total, prompt) => total + prompt.forkedCount, 0);
 
 	return { profileUser, allPrompts, likesGiven, likesReceived, forked };
 }
