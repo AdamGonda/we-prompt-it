@@ -31,6 +31,50 @@
 			card.addEventListener('mouseleave', resetStyles);
 		}
 	});
+
+	const words = [
+		'AI',
+		'Prompts',
+		'Exploration',
+		'Creation',
+		'Collection',
+		'Innovation',
+		'Collaboration',
+		'Community',
+		'Open-source',
+		'Inspiration',
+		'Learning',
+		'Reputation',
+		'Personalization',
+		'Forking',
+		'Shareability',
+		'Engagement',
+		'Discovery',
+		'User-Friendly',
+		'Interactive',
+		'Versatility',
+		'Diverse',
+		'Recognition',
+		'Accessibility',
+		'Value',
+		'Knowledge',
+		'Growth',
+		'Empowerment',
+		'Networking',
+		'Achievement',
+		'Creativity'
+	];
+
+	// create and object from each word and add random font size and weight props to it
+	const wordsWithProps = words.map((word) => {
+		return {
+			word,
+			fontSize: Math.random() * (2 - 0.8) + 0.8,
+			fontWeight: Math.floor(Math.random() * (900 - 100 + 1) + 100),
+			top: Math.floor(Math.random() * 290), // using percentage value to keep the position within the cloud div
+			left: Math.floor(Math.random() * 90)
+		};
+	});
 </script>
 
 <svelte:head>
@@ -41,28 +85,37 @@
 	<div class="container">
 		<article class="card">
 			<div class="content">
-        <h2 style="position: absolute; bottom: 0;    left: 0;">The Best Beaches</h2>
-        <h2 style="position: absolute; bottom: -20px; left: 0;">The Best Beaches</h2>
-        <h2 style="position: absolute; bottom: -40px; left: 0;">The Best Beaches</h2>
-        <h2 style="position: absolute; bottom: -50px; left: 0;">The Best Beaches</h2>
-        <h2 style="position: absolute; bottom: -0px; left: 0;">The Best Beaches</h2>
+				{#each wordsWithProps as item (item.word)}
+					<span
+						class="item"
+						style="font-size: {item.fontSize}em; font-weight: {item.fontWeight}; top: {item.top}px; left: {item.left}%;"
+					>
+						{item.word}
+					</span>
+				{/each}
 			</div>
 		</article>
 	</div>
 </main>
 
 <style>
+	main {
+		display: grid;
+		place-items: center center;
+		height: 500px;
+		width: 100%;
+		overflow: hidden; /* hide words that may overflow due to their random positions */
+	}
+
 	.card {
 		width: 400px;
 		height: 250px;
 		margin: auto;
-		
-		padding: 40px;
 		position: relative;
 		transition: transform 0.1s ease;
 		transform-style: preserve-3d;
 		will-change: transform;
-    border: 1px solid black;
+		/* border: 1px solid black; */
 	}
 
 	.card:hover .content {
