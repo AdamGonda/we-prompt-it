@@ -8,8 +8,10 @@
 	let pageNumber = 0;
 	let stop = false;
 
-	isSearchLoading.subscribe(() => {
-		reset();
+	isSearchLoading.subscribe((value) => {
+		if (value) {
+			reset();
+		}
 	});
 
 	function reset() {
@@ -20,7 +22,7 @@
 	onMount(() => {
 		const observer = new IntersectionObserver((entries) => {
 			entries.forEach((entry) => {
-				if (entry.isIntersecting && !$isSearchLoading) {
+				if(entry.isIntersecting) {
 					loadMore();
 				}
 			});
