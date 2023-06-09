@@ -44,18 +44,12 @@
 		{/if}
 	</div>
 {:else}
-	<div class="login bubble">
+	<div class="login">
 		<a href={routes.login}>Login</a>
 	</div>
 {/if}
 
 <style>
-	p {
-		color: white;
-		margin: 0;
-		font-size: 0.9rem;
-	}
-
 	img {
 		width: 1.8rem;
 		height: 1.8rem;
@@ -117,11 +111,7 @@
 	}
 
 	.login {
-		display: flex;
-		align-items: center;
-		gap: 8px;
-		background: #e9e9e9;
-		height: 46px;
+
 	}
 
 	.login a {

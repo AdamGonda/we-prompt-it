@@ -5,12 +5,8 @@
 	import routes from '$lib/routes';
 
 	const user = $page.data.session?.user;
-	$: links = {
-		create: routes.create(user),
-		myCollection: routes.myCollection(user)
-	};
-	$: onMycollection = $page.route.id.includes('my-collection')
-	$: onCreate = $page.route.id.includes('create') || $page.route.id.includes('fork')
+	$: onMycollection = $page.route.id.includes('my-collection');
+	$: onCreate = $page.route.id.includes('create') || $page.route.id.includes('fork');
 </script>
 
 <nav>
@@ -19,12 +15,14 @@
 	</a>
 	<SearchBar />
 
-	<a href={routes.myCollection(user)} class="button">
-		<p class="my-collection" class:underline={onMycollection} >My collection</p>
-	</a>
-	<a href={links.create} class="button">
-		<p class:underline={onCreate}>Create</p>
-	</a>
+	{#if user}
+		<a href={routes.myCollection} class="button">
+			<p class="my-collection" class:underline={onMycollection}>My collection</p>
+		</a>
+		<a href={routes.create} class="button">
+			<p class:underline={onCreate}>Create</p>
+		</a>
+	{/if}
 	<UserAvatar />
 </nav>
 
