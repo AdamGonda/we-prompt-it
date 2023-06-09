@@ -5,7 +5,6 @@
 	import PromptForm from '$lib/components/prompt-form.svelte';
 	import routes from '$lib/routes';
 	import _ from 'lodash';
-	import { onMount } from 'svelte';
 
 	let confirmEditDialog;
 	let confirmDiscardDialog;
@@ -55,12 +54,12 @@
 	<div class="slot">
 		<div>
 			<button
-			class="bubble delete"
-			type="button"
-			on:click={() => {
-				confirmDeleteDialog.showModal();
-			}}>Delete</button
-		>
+				class="bubble delete"
+				type="button"
+				on:click={() => {
+					confirmDeleteDialog.showModal();
+				}}>Delete</button
+			>
 		</div>
 
 		<dir class="discard-apply">
@@ -132,6 +131,19 @@
 		padding: 0;
 	}
 
+	dialog[open] {
+		animation: fadeIn 0.2s forwards;
+	}
+
+	@keyframes fadeIn {
+		0% {
+			opacity: 0;
+		}
+		100% {
+			opacity: 1;
+		}
+	}
+
 	dialog::backdrop {
 		background-color: rgba(0, 0, 0, 0.5);
 	}
@@ -184,7 +196,7 @@
 		font-size: var(--fs-2);
 	}
 
-	.discard-apply{
+	.discard-apply {
 		display: flex;
 		gap: var(--s-4);
 	}
@@ -205,7 +217,7 @@
 
 	.dialog-confirm-apply {
 		background: var(--sucess);
-		color: whitesmoke
+		color: whitesmoke;
 	}
 
 	.dialog-confirm-apply:hover {
@@ -214,23 +226,23 @@
 
 	.discard {
 		font-size: var(--fs-1) !important;
-		text-decoration: underline
+		text-decoration: underline;
 	}
 
 	.dialog-confirm-discard {
 		background: var(--alert);
-		color: #333333
+		color: #333333;
 	}
 
 	.dialog-confirm-discard:hover {
 		background: var(--alert-hover);
 	}
-	
+
 	.delete {
 		background: var(--danger) !important;
 		color: white;
 		border-radius: var(--br-1);
-    padding: var(--s-3) var(--s-4);
+		padding: var(--s-3) var(--s-4);
 	}
 
 	.delete:hover {
