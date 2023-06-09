@@ -75,6 +75,7 @@
 		font-size: var(--fs-3);
 		border-radius: var(--br-2);
 		padding: var(--s-3) var(--s-6);
+		cursor: pointer;
 	}
 
 	.signup {
@@ -89,5 +90,6 @@
 		border: 3px solid var(--black);
 		padding: var(--s-2) var(--s-5);
 		color: var(--black);
+		font-weight: 500;
 	}
 </style>
