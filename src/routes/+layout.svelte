@@ -1,10 +1,14 @@
 <script lang="ts">
+	import { dev } from '$app/environment';
+	import { inject } from '@vercel/analytics';
 	import { SvelteToast } from '@zerodevx/svelte-toast';
 	import Navigation from '$lib/components/navigation.svelte';
 	import { searchFocused } from '$lib/stores/search-bar-store';
 	import { goto } from '$app/navigation';
 	import { page } from '$app/stores';
 	import { browser } from '$app/environment';
+
+	inject({ mode: dev ? 'development' : 'production' });
 
 	const options = {
 		duration: 3500,
