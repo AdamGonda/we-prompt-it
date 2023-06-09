@@ -34,7 +34,7 @@
 		gap: 30px;
 		height: 80px;
 	}
-
+	
 	img {
 		width: 38px;
 		margin-top: 3px;

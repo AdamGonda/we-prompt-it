@@ -81,13 +81,13 @@
 			</a>
 
 			<div class="actions">
-				<button class="bubble" on:click={handleAddRemoveLike} style={`box-shadow: 0 0 8px ${stringToColor($page.data.prompt.name + $page.data.prompt.description)};`}>
+				<button class="bubble" on:click={handleAddRemoveLike}>
 					<img class="icon" src={`/${hartIconPrefix}-icon.png`} alt="hart-icon" />
 					{appreciationText}
 				</button>
 
 				<a href={forkLink}>
-					<span class="forked bubble" style={`box-shadow: 0 0 8px ${stringToColor($page.data.prompt.name + $page.data.prompt.description)};`}>
+					<span class="forked bubble">
 						<img class="icon" src="/fork-icon.png" alt="fork-icon" />
 						{$page.data.prompt.forkedCount}
 					</span>
@@ -107,7 +107,7 @@
 				<p>{$page.data.prompt.aiModel.name}</p>
 			</a>
 
-			<button class="copy-btn bubble" on:click={copyToClipboard} style={`box-shadow: 0 0 8px ${stringToColor($page.data.prompt.name + $page.data.prompt.description)};`}>
+			<button class="copy-btn bubble" on:click={copyToClipboard}>
 				{#if showCopyFeedback}
 					<img class="tick-icon" src="/tick.png" alt="tick-icon" />
 					Copied!
