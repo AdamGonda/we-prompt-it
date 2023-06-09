@@ -1,6 +1,8 @@
 <script>
+	import { goto } from '$app/navigation';
 	import { page } from '$app/stores';
 	import CardList from '$lib/components/card-list.svelte';
+	import routes from '$lib/routes';
 	import { onMount } from 'svelte';
 
 	let items = {
@@ -51,7 +53,7 @@
 			</div>
 
 			<div class="cta-s">
-				<button class="signup">Sign up</button>
+				<button class="signup" on:click={() => goto(routes.login)}>Sign up</button>
 				<button class="explore">Explore</button>
 			</div>
 		</div>
