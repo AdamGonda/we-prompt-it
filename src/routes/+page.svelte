@@ -1,8 +1,31 @@
 <script>
 	import { page } from '$app/stores';
 	import CardList from '$lib/components/card-list.svelte';
+	import { onMount } from 'svelte';
 
+	let items = {
+		explore: null,
+		collect: null,
+		create: null,
+		getNoticed: null
+	};
+	let activeIdx = 1;
 	$: prompts = $page.data.loadIndex.topPrompts;
+
+	onMount(() => {
+		setInterval(() => {
+			let keys = Object.keys(items);
+			let index = activeIdx++ % keys.length;
+			let previous = items[keys[index - 1]] || items[keys[keys.length - 1]];
+			let current = items[keys[index]];
+
+			console.log('log current', current);
+			console.log('log previous', previous);
+
+			current.classList.add('active');
+			previous.classList.remove('active');
+		}, 3000);
+	});
 </script>
 
 <svelte:head>
@@ -18,9 +41,15 @@
 					<br />
 					and your prompts.
 				</h1>
-				<h2>Explore, collect, create and get noticed.</h2>
+				<h2>
+					<span class="active" bind:this={items.explore}>Explore</span>,
+					<span bind:this={items.collect}>collect</span>,
+					<span bind:this={items.create}>create</span>
+					and
+					<span bind:this={items.getNoticed}>get noticed</span>.
+				</h2>
 			</div>
-	
+
 			<div class="cta-s">
 				<button class="signup">Sign up</button>
 				<button class="explore">Explore</button>
@@ -33,11 +62,36 @@
 </main>
 
 <style>
-
 	.hero-wrap {
 		display: flex;
 		justify-content: center;
 		margin-top: var(--s-5);
+	}
+
+	.active {
+		position: relative;
+		overflow: hidden;
+	}
+
+	.active::after {
+		content: '';
+		position: absolute;
+		width: 0;
+		height: 8px;
+		left: 0;
+		bottom: 0;
+		margin-bottom: -8px;
+		background: #0067dd;
+		animation: grow 0.6s ease-in-out forwards;
+	}
+
+	@keyframes grow {
+		0% {
+			width: 0;
+		}
+		100% {
+			width: 100%;
+		}
 	}
 
 	.tagline {
