@@ -2,6 +2,7 @@
 	import { page } from '$app/stores';
 	import { fadeConfig } from '$lib/config';
 	import routes from '$lib/routes';
+	import { stringToColor } from '$lib/utils';
 	import _ from 'lodash';
 	import { fade } from 'svelte/transition';
 
@@ -18,10 +19,17 @@
 	}
 </script>
 
-<a href={routes.prompt($page.data.session?.user, prompt.slug)} class="card" in:fade={fadeConfig}>
+<a
+	href={routes.prompt($page.data.session?.user, prompt.slug)}
+	class="card"
+	in:fade={fadeConfig}
+	style={` box-shadow: 0 0 8px ${stringToColor(prompt.name + prompt.description)};`}
+>
 	<div>
 		<div class="row">
-			<p class="name">{prompt.name}</p>
+			<p class="name">
+				{prompt.name}
+			</p>
 		</div>
 
 		<div class="description">
