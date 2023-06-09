@@ -51,7 +51,7 @@
 	}
 
 	.button {
-		font-size: 1rem;
+		font-size: var(--fs-2);
 		font-weight: 600;
 	}
 

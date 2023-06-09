@@ -110,14 +110,10 @@
 		background-color: rgba(0, 0, 0, 0.1);
 	}
 
-	.login {
-
-	}
-
 	.login a {
 		color: black;
 		text-decoration: none;
-		font-size: 0.9rem;
-		font-weight: 500;
+		font-size: var(--fs-2);
+		font-weight: 600;
 	}
 </style>
