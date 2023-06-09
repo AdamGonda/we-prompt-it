@@ -23,7 +23,7 @@
 	href={routes.prompt($page.data.session?.user, prompt.slug)}
 	class="card"
 	in:fade={fadeConfig}
-	style={` box-shadow: 0 0 8px ${stringToColor(prompt.name + prompt.description)};`}
+	style={`box-shadow: 0 0 8px ${stringToColor(prompt.name + prompt.description)};`}
 >
 	<div>
 		<div class="row">
