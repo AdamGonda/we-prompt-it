@@ -14,7 +14,7 @@
 		"format": "prettier --plugin-search-dir . --write .",
 		"rdb": "prisma migrate reset",
 		"mdb": "prisma migrate dev",
-		"postinstall": "prisma generate"
+		"postinstall": "prisma generate && prisma migrate production"
 	},
 	"devDependencies": {
 		"@playwright/test": "^1.28.1",
