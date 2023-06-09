@@ -28,7 +28,7 @@
 		</div>
 	</div>
 
-	<h3>Top 10</h3>
+	<h3>Featured</h3>
 	<CardList {prompts} />
 </main>
 
