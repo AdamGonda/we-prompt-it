@@ -15,7 +15,7 @@
 	$: prompts = $page.data.loadIndex.topPrompts;
 
 	onMount(() => {
-		setInterval(() => {
+		const cancelInterval = setInterval(() => {
 			let keys = Object.keys(items);
 			let index = activeIdx++ % keys.length;
 			let previous = items[keys[index - 1]] || items[keys[keys.length - 1]];
@@ -24,7 +24,17 @@
 			current.classList.add('active');
 			previous.classList.remove('active');
 		}, 3000);
+
+		return () => clearInterval(cancelInterval);
 	});
+
+	function handleSignUp() {
+		goto(routes.login)
+	}
+
+	function handleExplore() {
+		document.querySelector('input[name="text-search"]').focus()
+	}
 </script>
 
 <svelte:head>
@@ -50,8 +60,8 @@
 			</div>
 
 			<div class="cta-s">
-				<button class="signup" on:click={() => goto(routes.login)}>Sign up</button>
-				<button class="explore">Explore</button>
+				<button class="signup" on:click={handleSignUp}>Sign up</button>
+				<button class="explore" on:click={handleExplore}>Explore</button>
 			</div>
 		</div>
 	</div>
