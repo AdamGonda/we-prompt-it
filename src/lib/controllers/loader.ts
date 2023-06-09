@@ -11,9 +11,9 @@ import globalIncludes from '$lib/global-includes';
 
 const prisma = new PrismaClient();
 
-export async function loadIndex(event) {
+export async function loadIndex() {
 	// get the most liked prompts, 9 of them
-	const prompts = await prisma.prompt.findMany({
+	const topPrompts = await prisma.prompt.findMany({
 		where: {
 			isDeleted: false
 		},
@@ -27,7 +27,9 @@ export async function loadIndex(event) {
 	});
 
 	return {
-		prompts
+		loadIndex: {
+			topPrompts
+		}
 	};
 }
 

@@ -1,96 +1,93 @@
 <script>
-	import { page } from "$app/stores";
-	import CardList from "$lib/components/card-list.svelte";
+	import { page } from '$app/stores';
+	import CardList from '$lib/components/card-list.svelte';
 
-  $: prompts = $page.data.prompts
+	$: prompts = $page.data.loadIndex.topPrompts;
 </script>
+
 <svelte:head>
 	<title>Home | We Prompt</title>
 </svelte:head>
 
-<div class="hero-section">
+<main>
 	<div class="hero-wrap">
-    <div class="hero-text-wrap">
-      <div>
-        <h1>
-          A place for you
-          <br/>
-          and you prompts.
-        </h1>
-        <h2>Explore, collect, create and get noticed.</h2>
-      </div>
-  
-      <div class="cta-s">
-        <button class="signup">Sign up</button>
-        <button class="explore">Explore</button>
-      </div>
-    </div>
-    <img src="/cloud.png" alt="word-cloud" />
-  </div>
-</div>
+		<div>
+			<div class="tagline">
+				<h1>
+					A place for you
+					<br />
+					and your prompts.
+				</h1>
+				<h2>Explore, collect, create and get noticed.</h2>
+			</div>
+	
+			<div class="cta-s">
+				<button class="signup">Sign up</button>
+				<button class="explore">Explore</button>
+			</div>
+		</div>
+	</div>
 
-<h3>Top 10</h3>
-<CardList {prompts}/>
+	<h3>Top 10</h3>
+	<CardList {prompts} />
+</main>
 
 <style>
-  .hero-section {
-    display: flex;
-    justify-content: center;
-    padding-top: var(--s-9);
-    margin-bottom: 170px;
-  }
 
-  .hero-wrap {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 1070px;
-  }
+	.hero-wrap {
+		display: flex;
+		justify-content: center;
+		margin-top: var(--s-5);
+	}
 
-  h1 {
-    font-size: 2.7rem;
-    margin: 0;
-  }
-  
-  h2 {
-    margin: 0;
-    margin-top: var(--s-2);
-    font-weight: 400;
-    font-size: 1.1rem;
-  }
-  
-  .cta-s {
-    margin-top: var(--s-9);
-  }
+	.tagline {
+		text-align: center;
+	}
 
-  img {
-    width: 500px;
-  }
+	h1 {
+		font-size: 5.5rem;
+		margin: 0;
+		line-height: 1;
+		font-weight: 800;
+	}
 
-  .signup,.explore {
-    border: none;
-    font-size: var(--fs-3);
-    border-radius: var(--br-2);
-    padding: var(--s-3) var(--s-5);
-  }
+	h2 {
+		margin: 0;
+		margin-top: var(--s-5);
+		font-weight: 400;
+		font-size: 1.8rem;
+	}
 
-  .signup {
-    color: var(--white);
-    background: var(--black);
-    margin-right: var(--s-2);
-  }
+	h3 {
+		margin-top: var(--s-10);
+	}
 
-  .explore {
-    color: var(--black);
-    background: none;
-    border: 3px solid var(--black);
-    padding: var(--s-2) var(--s-5);
-    color: var(--black);
+	.cta-s {
+		display: flex;
+		justify-content: center;
+		margin-top: var(--s-9);
+		gap: var(--s-3);
+	}
 
-  }
+	.signup,
+	.explore {
+		border: none;
+		font-size: var(--fs-3);
+		border-radius: var(--br-2);
+		padding: var(--s-3) var(--s-6);
+	}
 
-  .hero-text-wrap {
-    margin-top: -50px;
-  }
-  
+	.signup {
+		color: var(--white);
+		background: var(--black);
+		margin-right: var(--s-2);
+	}
+
+	.explore {
+		color: var(--black);
+		background: none;
+		border: 3px solid var(--black);
+		padding: var(--s-2) var(--s-5);
+		color: var(--black);
+	}
 </style>
