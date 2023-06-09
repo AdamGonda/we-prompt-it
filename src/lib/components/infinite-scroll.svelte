@@ -34,9 +34,10 @@
 	});
 
 	async function loadMore() {
-		if (stop) return;
-
 		const searchParams = new URLSearchParams($page.url.search);
+
+		if (stop || !searchParams.get('page') || !searchParams.get('limit')) return;
+
 		searchParams.set('page', (pageNumber += 1));
 		const data = await searchStore.loadMore(searchParams);
 
