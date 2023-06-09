@@ -13,7 +13,8 @@
 		"lint": "prettier --plugin-search-dir . --check . && eslint .",
 		"format": "prettier --plugin-search-dir . --write .",
 		"rdb": "prisma migrate reset",
-		"mdb": "prisma migrate dev"
+		"mdb": "prisma migrate dev",
+		"postinstall": "prisma generate"
 	},
 	"devDependencies": {
 		"@playwright/test": "^1.28.1",
