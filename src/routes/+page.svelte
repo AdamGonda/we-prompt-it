@@ -21,9 +21,6 @@
 			let previous = items[keys[index - 1]] || items[keys[keys.length - 1]];
 			let current = items[keys[index]];
 
-			console.log('log current', current);
-			console.log('log previous', previous);
-
 			current.classList.add('active');
 			previous.classList.remove('active');
 		}, 3000);
