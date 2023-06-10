@@ -5,8 +5,8 @@
 	import routes from '$lib/routes';
 
 	const user = $page.data.session?.user;
-	$: onMycollection = $page.route.id.includes('my-collection');
-	$: onCreate = $page.route.id.includes('create') || $page.route.id.includes('fork');
+	$: onMycollection = $page.route.id?.includes('my-collection');
+	$: onCreate = $page.route.id?.includes('create') || $page.route.id?.includes('fork');
 </script>
 
 <nav>

@@ -32,8 +32,8 @@
 		</div>
 	{:else}
 		<CardList prompts={resultsToShow} />
+		<InfiniteScroll />
 	{/if}
-	<InfiniteScroll />
 </main>
 
 <style>
