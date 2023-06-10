@@ -90,11 +90,7 @@ export async function loadMyCollection(event) {
 
 	return {
 		createdBy,
-		liked: like?.filter((like) => {
-			if(!like.prompt.isDeleted) {
-				return like.prompt
-			}
-		})
+		liked: like?.map(like => like.prompt).filter(prompt => !prompt.isDeleted)
 	};
 }
 
