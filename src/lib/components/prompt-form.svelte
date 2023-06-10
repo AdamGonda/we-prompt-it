@@ -27,6 +27,9 @@
 		newModelName: false,
 		newModelLink: false
 	};
+	let cancelNameCheck = null;
+	let nameCheckDelay = 400;
+	let nameAlreadyExistsError = 'Name already exists';
 
 	$: disabled = getDisabled(errors, isTouched);
 	$: form = _form;
@@ -60,7 +63,13 @@
 			});
 		}
 
-		nameCheck(formData);
+		if (cancelNameCheck) {
+			clearTimeout(cancelNameCheck);
+		}
+
+		cancelNameCheck = setTimeout(() => {
+			nameCheck(formData);
+		}, nameCheckDelay);
 	}
 
 	async function nameCheck(formData) {
@@ -75,7 +84,10 @@
 				const json = await r.json();
 
 				if (!json.ok) {
-					errors.name = 'Name is not unique';
+					errors.name = nameAlreadyExistsError;
+				} else {
+					const { name, ...restErrors } = errors;
+					errors = restErrors;
 				}
 			} catch (e) {
 				toast.push('Something went wrong. Please try again.');
@@ -329,7 +341,8 @@
 		color: var(--danger);
 	}
 
-	input.invalid::placeholder, textarea.invalid::placeholder {
+	input.invalid::placeholder,
+	textarea.invalid::placeholder {
 		color: var(--danger);
 	}
 </style>
