@@ -13,6 +13,9 @@
 	let isTouched = {
 		name: false
 	};
+	let nameAlreadyExistsError = 'This name is already taken.';
+	let cancelNameCheck = null;
+	let nameCheckDelay = 400;
 
 	beforeNavigate(({ cancel, to }) => {
 		if (browser && $page.data.forceOnboarding) {
@@ -35,7 +38,13 @@
 			});
 		}
 
-		nameCheck(formData);
+		if (cancelNameCheck) {
+			clearTimeout(cancelNameCheck);
+		}
+
+		cancelNameCheck = setTimeout(() => {
+			nameCheck(formData);
+		}, nameCheckDelay);
 	}
 
 	async function nameCheck(formData) {
@@ -47,7 +56,10 @@
 				const json = await r.json();
 
 				if (!json.ok) {
-					errors.name = 'This name is already taken.';
+					errors.name = nameAlreadyExistsError;
+				} else {
+					const { name, ...restErrors } = errors;
+					errors = restErrors;
 				}
 			} catch (e) {
 				toast.push('Something went wrong. Please try again.');
