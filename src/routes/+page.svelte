@@ -29,11 +29,11 @@
 	});
 
 	function handleSignUp() {
-		goto(routes.login)
+		goto(routes.login);
 	}
 
 	function handleExplore() {
-		document.querySelector('input[name="text-search"]').focus()
+		document.querySelector('input[name="text-search"]').focus();
 	}
 </script>
 
@@ -69,7 +69,6 @@
 	<h3>Featured</h3>
 	<CardList {prompts} />
 </main>
-
 <style>
 	.hero-wrap {
 		display: flex;

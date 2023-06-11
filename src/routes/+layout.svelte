@@ -7,6 +7,7 @@
 	import { goto } from '$app/navigation';
 	import { page } from '$app/stores';
 	import { browser } from '$app/environment';
+	import Footer from '$lib/components/footer.svelte';
 
 	inject({ mode: dev ? 'development' : 'production' });
 
@@ -28,6 +29,7 @@
 	<div class="content">
 		<slot />
 	</div>
+	<Footer />
 </div>
 
 <style>
