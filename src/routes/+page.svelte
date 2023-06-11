@@ -5,30 +5,17 @@
 	import routes from '$lib/routes';
 	import { onMount } from 'svelte';
 
-	let items = {
-		explore: null,
-		collect: null,
-		create: null,
-		getNoticed: null
-	};
-	let activeIdx = 1;
+	let activeIdx = 0;
 	$: prompts = $page.data.loadIndex.topPrompts;
 
 	onMount(() => {
-		console.log('log items', items)
 		const cancelInterval = setInterval(() => {
-			let keys = Object.keys(items);
-			console.log('log keys', keys)
-			let index = activeIdx++ % keys.length;
-			console.log('log index', index)
-			let previous = items[keys[index - 1]] || items[keys[keys.length - 1]];
-			console.log('log previous', previous)
-			let current = items[keys[index]];
-			console.log('log current', current)
-
-			current.classList.add('active');
-			previous.classList.remove('active');
-		}, 3000);
+			if (activeIdx < 3) {
+				activeIdx++;
+			} else {
+				activeIdx = 0;
+			}
+		}, 5000);
 
 		return () => clearInterval(cancelInterval);
 	});
@@ -56,11 +43,11 @@
 					and your prompts.
 				</h1>
 				<h2>
-					<span class="active" bind:this={items.explore}>Explore</span>,
-					<span bind:this={items.collect}>collect</span>,
-					<span bind:this={items.create}>create</span>
+					<span class:active={activeIdx == 0}>Explore</span>,
+					<span class:active={activeIdx == 1}>collect</span>,
+					<span class:active={activeIdx == 2}>create</span>
 					and
-					<span bind:this={items.getNoticed}>get noticed</span>.
+					<span class:active={activeIdx == 3}>get noticed</span>.
 				</h2>
 			</div>
 
@@ -74,6 +61,7 @@
 	<h3>Featured</h3>
 	<CardList {prompts} />
 </main>
+
 <style>
 	.hero-wrap {
 		display: flex;
@@ -89,21 +77,34 @@
 	.active::after {
 		content: '';
 		position: absolute;
-		width: 0;
+		width: 100%;
 		height: 8px;
 		left: 0;
 		bottom: 0;
 		margin-bottom: -8px;
 		background: #0067dd;
-		animation: grow 0.6s ease-in-out forwards;
+		animation: appear 1.2s ease-in-out forwards, fadeout 1.2s ease-in 3.2s forwards;
 	}
 
-	@keyframes grow {
+	@keyframes appear {
 		0% {
-			width: 0;
+			transform-origin: left;
+			transform: scaleX(0);
 		}
 		100% {
-			width: 100%;
+			transform-origin: left;
+			transform: scaleX(1);
+		}
+	}
+
+	@keyframes fadeout {
+		0% {
+			transform-origin: right;
+			transform: scaleX(1);
+		}
+		100% {
+			transform-origin: right;
+			transform: scaleX(0);
 		}
 	}
 
