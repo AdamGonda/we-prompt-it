@@ -18,9 +18,13 @@
 		console.log('log items', items)
 		const cancelInterval = setInterval(() => {
 			let keys = Object.keys(items);
+			console.log('log keys', keys)
 			let index = activeIdx++ % keys.length;
+			console.log('log index', index)
 			let previous = items[keys[index - 1]] || items[keys[keys.length - 1]];
+			console.log('log previous', previous)
 			let current = items[keys[index]];
+			console.log('log current', current)
 
 			current.classList.add('active');
 			previous.classList.remove('active');
