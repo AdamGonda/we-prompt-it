@@ -15,6 +15,7 @@
 	$: prompts = $page.data.loadIndex.topPrompts;
 
 	onMount(() => {
+		console.log('log items', items)
 		const cancelInterval = setInterval(() => {
 			let keys = Object.keys(items);
 			let index = activeIdx++ % keys.length;
