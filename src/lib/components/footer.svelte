@@ -1,7 +1,7 @@
 <footer class="footer">
 	<div>
-    <a href="#">Terms of service</a>
-		<a href="#">Privacy policy</a>
+    <a href="/terms-of-service">Terms of service</a>
+		<a href="/privacy-policy">Privacy policy</a>
 	</div>
 </footer>
 
