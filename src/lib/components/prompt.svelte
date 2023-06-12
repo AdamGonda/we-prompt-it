@@ -233,8 +233,12 @@
 	}
 
 	.author span {
-		font-size: 0.8em;
+		font-size: var(--fs-1);
 		font-weight: 300;
+	}
+
+	.author p {
+		line-height: 1.1;
 	}
 
 	.infos {
