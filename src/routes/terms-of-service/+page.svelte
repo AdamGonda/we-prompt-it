@@ -3,6 +3,8 @@
 </svelte:head>
 
 <h1>Terms of Service</h1>
+<p>Last updated: Jun 11, 2023 2:37 AM</p>
+
 <p>
 	By using the 'We Prompt' service ('Service'), you are agreeing to be bound by these
 	Terms of Service. Our <a href="/privacy-policy">Privacy Policy</a> explains how we collect
