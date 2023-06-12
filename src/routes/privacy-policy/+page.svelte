@@ -1,11 +1,10 @@
 <svelte:head>
+	<title>Privacy policy | We Prompt</title>
   <script src="https://app.termageddon.com/js/termageddon.js"></script>
 </svelte:head>
 
 <div
 	id="policy"
-	width="640"
-	height="480"
 	data-policy-key="ZEdGT1QzTnRjazlTT0doWU1FRTlQUT09"
 	data-extra="h-align=left&table-style=accordion"
 >
