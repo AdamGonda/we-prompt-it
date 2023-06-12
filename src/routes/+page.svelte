@@ -15,7 +15,7 @@
 			} else {
 				activeIdx = 0;
 			}
-		}, 4500);
+		}, 3000);
 
 		return () => clearInterval(cancelInterval);
 	});
@@ -83,7 +83,7 @@
 		bottom: 0;
 		margin-bottom: -8px;
 		background: #0067dd;
-		animation: appear 1.2s ease-in-out forwards, fadeout 1s ease-in 3s forwards;
+		animation: appear 0.5s ease-in-out forwards;
 	}
 
 	@keyframes appear {
