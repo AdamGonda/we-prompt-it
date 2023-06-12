@@ -280,11 +280,8 @@
 <h2 class="">Analytics programs</h2>
 
 <p>
-	This Application uses Google Analytics to collect information about you and your
-	behaviors. If you would like to opt out of Google Analytics, please visit <a
-		href="https://tools.google.com/dlpage/gaoptout/"
-		target="_blank">https://tools.google.com/dlpage/gaoptout/</a
-	>.
+	This Application uses Privacy-friendly <a href="https://vercel.com/analytics">Vercel Analytics</a> to collect information about you and your
+	behaviors.
 </p>
 
 <h2 class="">Information retention</h2>
@@ -461,7 +458,7 @@
 <h2 class="">Questions</h2>
 <p>
 	If you have any questions about this Privacy Policy, please contact us at
-	hello@weprompt.it.
+	<a href="mailto:hello@weprompt.it">hello@weprompt.it</a>
 </p>
 
 <style>
@@ -474,7 +471,7 @@
 	.accordion {
 		border-bottom: 1px solid #aaa;
 	}
-	
+
 	.accordion-summary {
 		cursor: pointer;
 		padding: 0.5em 0.5em;
