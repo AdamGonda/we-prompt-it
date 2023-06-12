@@ -59,7 +59,10 @@
 					errors.name = nameAlreadyExistsError;
 				} else {
 					const { name, ...restErrors } = errors;
-					errors = restErrors;
+
+					if(name == nameAlreadyExistsError) {
+						errors = restErrors;
+					}
 				}
 			} catch (e) {
 				toast.push('Something went wrong. Please try again.');
