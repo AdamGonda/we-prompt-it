@@ -30,7 +30,11 @@
 </script>
 
 <svelte:head>
-	<title>Home | We Prompt</title>
+	<title>Explore, Collect, and Create AI Prompts | We Prompt</title>
+	<meta
+		name="description"
+		content="We Prompt is a platform where you can explore, collect and create AI prompts. Sign up now to join our community."
+	/>
 </svelte:head>
 
 <main>
