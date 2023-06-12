@@ -22,7 +22,7 @@ export async function loadIndex() {
 				_count: 'desc'
 			}
 		},
-		take: 9,
+		take: 3,
 		...globalIncludes
 	});
 

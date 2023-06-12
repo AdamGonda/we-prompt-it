@@ -58,7 +58,7 @@
 		</div>
 	</div>
 
-	<h3>Featured</h3>
+	<h3>Top 3</h3>
 	<CardList {prompts} />
 </main>
 
