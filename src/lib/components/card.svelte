@@ -108,6 +108,7 @@
 		font-weight: 400;
 		margin-top: var(--s-4);
 		margin-bottom: 40px;
+		font-family: 'Source Sans Pro', sans-serif;
 	}
 
 	.likes,

@@ -56,7 +56,7 @@
 	}
 
 	.my-collection {
-		width: 104px;
+		width: 108px;
 	}
 
 	.underline {

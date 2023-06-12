@@ -175,7 +175,7 @@
 
 	.description,
 	.prompt {
-		font-family: source-serif-pro, Georgia, Cambria, 'Times New Roman', Times, serif;
+		font-family: 'Source Sans Pro', sans-serif;
 		font-size: var(--fs-3);
 		line-height: var(--s-6);
 	}
