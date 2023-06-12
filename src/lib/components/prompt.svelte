@@ -175,9 +175,9 @@
 
 	.description,
 	.prompt {
-		font-family: 'Source Sans Pro', sans-serif;
+		font-family: 'My Source Sans Pro', sans-serif;
 		font-size: var(--fs-3);
-		line-height: var(--s-6);
+		line-height: var(--s-5);
 	}
 
 	.tags {

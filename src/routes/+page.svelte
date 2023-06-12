@@ -115,7 +115,7 @@
 	h1 {
 		font-size: 5.5rem;
 		margin: 0;
-		line-height: 1;
+		line-height: 1.15;
 		font-weight: 800;
 	}
 

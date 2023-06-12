@@ -104,11 +104,10 @@
 	}
 
 	.description {
-		font-size: 1.15rem;
+		font-size: var(--fs-2);
 		font-weight: 400;
 		margin-top: var(--s-4);
 		margin-bottom: 40px;
-		font-family: 'Source Sans Pro', sans-serif;
 	}
 
 	.likes,

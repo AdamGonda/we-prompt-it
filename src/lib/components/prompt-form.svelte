@@ -295,7 +295,7 @@
 	}
 
 	textarea {
-		font-family: 'Source Sans Pro', sans-serif;
+		font-family: 'My Source Sans Pro', sans-serif;
 		border: none;
 		border-bottom: 2px solid rgb(120, 120, 120);
 		font-size: var(--fs-3);

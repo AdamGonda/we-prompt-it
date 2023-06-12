@@ -82,7 +82,7 @@
 	}
 
 	:global(*) {
-		font-family: Poppins, sans-serif;
+		font-family: My poppins, sans-serif;
 		box-sizing: border-box;
 
 		--s-1: 4px;
@@ -119,7 +119,7 @@
 	}
 
 	:global(.bubble) {
-		border-radius: var(--br-1);
+		border-radius: var(--br-2);
 		padding: var(--s-3) var(--s-4);
 	}
 

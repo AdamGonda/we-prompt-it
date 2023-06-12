@@ -241,7 +241,7 @@
 	.delete {
 		background: var(--danger) !important;
 		color: white;
-		border-radius: var(--br-1);
+		border-radius: var(--br-2);
 		padding: var(--s-3) var(--s-4);
 	}
 
