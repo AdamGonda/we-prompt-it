@@ -66,7 +66,11 @@
 </script>
 
 <svelte:head>
-	<title>Prompt details | We Prompt</title>
+	<title>{$page.data.prompt.name} | We Prompt</title>
+	<meta
+		name="description"
+		content={$page.data.prompt.description}
+	/>
 </svelte:head>
 
 <main in:fade={fadeConfig}>
