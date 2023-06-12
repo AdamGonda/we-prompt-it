@@ -34,43 +34,43 @@
 
 <style>
 	@font-face {
-		font-family: 'Poppins';
+		font-family: 'My Poppins';
 		src: url('/fonts/Poppins-ExtraBold.ttf') format('truetype');
 		font-weight: 800;
 	}
 
 	@font-face {
-		font-family: 'Poppins';
+		font-family: 'My Poppins';
 		src: url('/fonts/Poppins-Bold.ttf') format('truetype');
 		font-weight: bold;
 	}
 
 	@font-face {
-		font-family: 'Poppins';
-		src: url('/fonts/Poppins-Semi-Bold.ttf') format('truetype');
+		font-family: 'My Poppins';
+		src: url('/fonts/Poppins-SemiBold.ttf') format('truetype');
 		font-weight: 600;
 	}
 
 	@font-face {
-		font-family: 'Poppins';
+		font-family: 'My Poppins';
 		src: url('/fonts/Poppins-Medium.ttf') format('truetype');
 		font-weight: 500;
 	}
 
 	@font-face {
-		font-family: 'Poppins';
+		font-family: 'My Poppins';
 		src: url('/fonts/Poppins-Regular.ttf') format('truetype');
 		font-weight: normal;
 	}
 
 	@font-face {
-		font-family: 'Poppins';
+		font-family: 'My Poppins';
 		src: url('/fonts/Poppins-Light.ttf') format('truetype');
 		font-weight: 300;
 	}
 	
 	@font-face {
-		font-family: 'Source Sans Pro';
+		font-family: 'My Source Sans Pro';
 		src: url('/fonts/SourceSansPro-Regular.otf') format('opentype');
 		font-weight: 400;
 	}
