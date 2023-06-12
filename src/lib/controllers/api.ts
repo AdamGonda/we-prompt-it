@@ -10,6 +10,7 @@ const prisma = new PrismaClient();
 export async function createUser(event) {
 	const session = await forceAuth(event);
 	const username = event.url.searchParams.get('username');
+	// TODO add name check with yup
 
 	// check if user with the same email in the database
 	const user = await prisma.user.findUnique({
