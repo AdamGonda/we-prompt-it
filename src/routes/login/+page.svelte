@@ -4,7 +4,7 @@
 	import { page } from '$app/stores';
 	import { signIn } from '@auth/sveltekit/client';
 
-	if(browser && $page.data.dbUser) {
+	if (browser && $page.data.dbUser) {
 		goto('/');
 	}
 </script>
@@ -20,8 +20,6 @@
 		<img src="/google-logo.png" alt="Google Logo" />
 		Continue with Google</button
 	>
-
-	<p style="margin-top: 450px">terms of service</p>
 </div>
 
 <style>
