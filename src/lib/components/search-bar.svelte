@@ -8,11 +8,15 @@
 	let inputValue;
 	let placeholder = 'Find the prompt you need';
 	let inputInFocus = false;
-	let limit = '10'
-	let _page = '0'
+	let limit = '10';
+	let _page = '0';
 
-	afterNavigate(async () => {
+	afterNavigate(async ({ from }) => {
 		initVarsFromURL();
+
+		if(from?.route?.id === '/app/prompt/[slug]') {
+			return
+		}
 
 		if ($page.route.id.includes('search')) {
 			await searchStore.search({
@@ -40,10 +44,10 @@
 				searchParams.append('sort_by', sort);
 			});
 		}
-		
+
 		searchParams.append('limit', limit);
 		searchParams.append('page', _page);
-		
+
 		return searchParams.toString();
 	}
 

@@ -5,6 +5,7 @@ import { toast } from '@zerodevx/svelte-toast';
 const { subscribe, set, update } = writable([]);
 export const isSearchLoading = writable(false);
 export const isMoreLoading = writable(false);
+export const pageNumber = writable(0);
 
 async function search({ endpoint, updateURL = '' }) {
 	let data;

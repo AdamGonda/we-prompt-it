@@ -1,11 +1,10 @@
 <script>
 	import { page } from '$app/stores';
-	import searchStore, { isMoreLoading, isSearchLoading } from '$lib/stores/search-store';
+	import searchStore, { isMoreLoading, isSearchLoading, pageNumber } from '$lib/stores/search-store';
 	import { onMount } from 'svelte';
 	import LoadingIndicator from './loading-indicator.svelte';
 
 	let ref;
-	let pageNumber = 0;
 	let stop = false;
 
 	isSearchLoading.subscribe((value) => {
@@ -15,7 +14,7 @@
 	});
 
 	function reset() {
-		pageNumber = 0;
+		pageNumber.set(0)
 		stop = false;
 	}
 
@@ -39,8 +38,9 @@
 		const searchParams = new URLSearchParams($page.url.search);
 
 		if (stop || !searchParams.get('page') || !searchParams.get('limit')) return;
-
-		searchParams.set('page', (pageNumber += 1));
+		
+		pageNumber.set($pageNumber + 1)
+		searchParams.set('page',($pageNumber + ''));
 		const data = await searchStore.loadMore(searchParams);
 
 		if (data.length < searchParams.get('limit')) {
