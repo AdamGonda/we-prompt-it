@@ -48,7 +48,7 @@ export function formDataToObject(formData) {
 }
 
 export function convertToSlug(username, text) {
-	return username + '-' + text.toLowerCase().replace(/ /g, '-');
+	return username + '-' + text.toLowerCase().replace(/\s/g, '-');
 }
 
 export function stringToColor(str) {
