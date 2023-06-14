@@ -164,8 +164,7 @@
 	h2 {
 		margin: 0;
 		margin-top: var(--s-7);
-		margin-bottom: var(--s-1);
-		font-size: var(--fs-4);
+		font-size: var(--fs-3-5);
 	}
 
 	.model {
@@ -195,7 +194,6 @@
 	.tags a {
 		font-size: var(--fs-1);
 		color: white;
-		font-weight: 500;
 	}
 
 	.name {
@@ -238,8 +236,9 @@
 	}
 
 	.author span {
-		font-size: var(--fs-1);
-		font-weight: 300;
+		font-size: var(--fs-0);
+		letter-spacing: -0.5px
+		
 	}
 
 	.author p {

@@ -269,7 +269,6 @@
 	.tag span {
 		font-size: var(--fs-1);
 		color: white;
-		font-weight: 500;
 		user-select: none;
 		position: relative;
 		display: inline-block;

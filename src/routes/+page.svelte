@@ -162,6 +162,5 @@
 		border: 3px solid var(--black);
 		padding: var(--s-2) var(--s-5);
 		color: var(--black);
-		font-weight: 500;
 	}
 </style>

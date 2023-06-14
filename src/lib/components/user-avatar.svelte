@@ -82,11 +82,6 @@
 		padding: 8px;
 	}
 
-	.dropdown-menu li,
-	button {
-		font-weight: 500;
-	}
-
 	button {
 		border: none;
 		background: none;

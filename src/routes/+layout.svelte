@@ -8,11 +8,8 @@
 	import { page } from '$app/stores';
 	import { browser } from '$app/environment';
 	import Footer from '$lib/components/footer.svelte';
-	import '@fontsource/poppins/300.css';
 	import '@fontsource/poppins/400.css';
-	import '@fontsource/poppins/500.css';
 	import '@fontsource/poppins/600.css';
-	import '@fontsource/poppins/700.css';
 	import '@fontsource/poppins/800.css';
 	import '@fontsource/source-sans-pro';
 
@@ -61,9 +58,11 @@
 		--s-9: 80px;
 		--s-10: 100px;
 
+		--fs-0: 0.67rem;
 		--fs-1: 0.8rem;
 		--fs-2: 1rem;
 		--fs-3: 1.3rem;
+		--fs-3-5: 1.4rem;
 		--fs-4: 1.6rem;
 		--fs-5: 2.6rem;
 

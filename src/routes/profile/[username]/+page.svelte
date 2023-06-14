@@ -75,7 +75,6 @@
 	.stat p {
 		margin: 0;
 		font-size: var(--fs-3);
-		font-weight: 500;
 		text-decoration: underline;
 	}
 
