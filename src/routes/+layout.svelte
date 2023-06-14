@@ -8,6 +8,13 @@
 	import { page } from '$app/stores';
 	import { browser } from '$app/environment';
 	import Footer from '$lib/components/footer.svelte';
+	import '@fontsource/poppins/300.css';
+	import '@fontsource/poppins/400.css';
+	import '@fontsource/poppins/500.css';
+	import '@fontsource/poppins/600.css';
+	import '@fontsource/poppins/700.css';
+	import '@fontsource/poppins/800.css';
+	import '@fontsource/source-sans-pro';
 
 	inject({ mode: dev ? 'development' : 'production' });
 
@@ -33,48 +40,6 @@
 </div>
 
 <style>
-	@font-face {
-		font-family: 'My Poppins';
-		src: url('/fonts/Poppins-ExtraBold.ttf') format('truetype');
-		font-weight: 800;
-	}
-
-	@font-face {
-		font-family: 'My Poppins';
-		src: url('/fonts/Poppins-Bold.ttf') format('truetype');
-		font-weight: bold;
-	}
-
-	@font-face {
-		font-family: 'My Poppins';
-		src: url('/fonts/Poppins-SemiBold.ttf') format('truetype');
-		font-weight: 600;
-	}
-
-	@font-face {
-		font-family: 'My Poppins';
-		src: url('/fonts/Poppins-Medium.ttf') format('truetype');
-		font-weight: 500;
-	}
-
-	@font-face {
-		font-family: 'My Poppins';
-		src: url('/fonts/Poppins-Regular.ttf') format('truetype');
-		font-weight: normal;
-	}
-
-	@font-face {
-		font-family: 'My Poppins';
-		src: url('/fonts/Poppins-Light.ttf') format('truetype');
-		font-weight: 300;
-	}
-	
-	@font-face {
-		font-family: 'My Source Sans Pro';
-		src: url('/fonts/SourceSansPro-Regular.otf') format('opentype');
-		font-weight: 400;
-	}
-
 	:global(body) {
 		margin: 0;
 		box-sizing: border-box;
@@ -82,7 +47,7 @@
 	}
 
 	:global(*) {
-		font-family: My poppins, sans-serif;
+		font-family: Poppins, sans-serif;
 		box-sizing: border-box;
 
 		--s-1: 4px;
