@@ -33,9 +33,9 @@
 	<title>Explore, Collect, and Create AI Prompts | We Prompt</title>
 	<meta
 		name="description"
-		content='We Prompt is an open, community-driven platform where everyone, from AI enthusiasts to professionals, can find the perfect prompt to solve any problem. Dive into our expansive collection to explore, collect, and create prompts designed to meet every challenge. Our platform fosters an environment of collaboration and continual improvement, all underpinned by the unique feature of accessible prompt engineering for all.'
+		content='We are an open, community-driven platform where everyone, from AI enthusiasts to professionals, can find the perfect prompt to solve any problem. Dive into our expansive collection to explore, collect, and create prompts designed to meet every challenge. Our platform fosters an environment of collaboration and continual improvement, all underpinned by the unique feature of accessible prompt engineering for all.'
 	/>
-	<meta property="og:image" content="/og-image.jpg" />
+	<meta property="og:image" content="https://we-prompt-it.vercel.app/og-image.jpg" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
 </svelte:head>
