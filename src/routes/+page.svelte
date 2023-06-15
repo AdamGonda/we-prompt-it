@@ -4,6 +4,7 @@
 	import CardList from '$lib/components/card-list.svelte';
 	import routes from '$lib/routes';
 	import { onMount } from 'svelte';
+	import * as seo from '$lib/seo';
 
 	let activeIdx = 0;
 	$: prompts = $page.data.loadIndex.topPrompts;
@@ -30,22 +31,19 @@
 </script>
 
 <svelte:head>
-	<meta property="og:url" content="https://we-prompt-it.vercel.app">
-	<title>Explore, Collect, and Create AI Prompts | We Prompt</title>
-	<meta property="og:title" content="Explore, Collect, and Create AI Prompts | We Prompt">
-	<meta
-		name="description"
-		content='We are an open, community-driven platform where everyone, from AI enthusiasts to professionals, can find the perfect prompt to solve any problem. Dive into our expansive collection of prompts to explore, collect, and create. Our platform fosters an environment of collaboration and continual improvement, all underpinned by the unique feature of accessible prompt engineering for all.'
-	/>
-	<meta property="og:description" content="We are an open, community-driven platform where everyone, from AI enthusiasts to professionals, can find the perfect prompt to solve any problem. Dive into our expansive collection of prompts to explore, collect, and create. Our platform fosters an environment of collaboration and continual improvement, all underpinned by the unique feature of accessible prompt engineering for all." />
-	<meta property="og:image" content="https://we-prompt-it.vercel.app/og-image.jpg" />
-  <meta property="og:image:width" content="1200" />
-  <meta property="og:image:height" content="630" />
+	<meta property="og:url" content={seo.url} />
+	<title>{seo.title}</title>
+	<meta property="og:title" content={seo.title} />
+	<meta name="description" content={seo.description} />
+	<meta property="og:description" content={seo.description} />
+	<meta property="og:image" content={seo.image} />
+	<meta property="og:image:width" content="1200" />
+	<meta property="og:image:height" content="630" />
 
-	<meta property="twitter:image" content="https://we-prompt-it.vercel.app/og-image.jpg">
-	<meta property="twitter:card" content="https://we-prompt-it.vercel.app/og-image.jpg">
-	<meta property="twitter:title" content="Explore, Collect, and Create AI Prompts | We Prompt">
-	<meta property="twitter:description" content="We are an open, community-driven platform where everyone, from AI enthusiasts to professionals, can find the perfect prompt to solve any problem. Dive into our expansive collection of prompts to explore, collect, and create. Our platform fosters an environment of collaboration and continual improvement, all underpinned by the unique feature of accessible prompt engineering for all.">
+	<meta property="twitter:image" content={seo.image} />
+	<meta property="twitter:card" content={seo.image} />
+	<meta property="twitter:title" content={seo.title} />
+	<meta property="twitter:description" content={seo.description} />
 </svelte:head>
 
 <main>
