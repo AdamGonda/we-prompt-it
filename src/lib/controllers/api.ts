@@ -50,7 +50,7 @@ export async function createUser(event) {
 			data: {
 				username,
 				email: session.user.email,
-				image: session.user.image,
+				image: session.user.image ? session.user.image : '/default-user-img.png',
 			}
 		});
 	}
