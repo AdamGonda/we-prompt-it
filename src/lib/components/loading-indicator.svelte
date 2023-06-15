@@ -1,8 +1,9 @@
 <script>
 	export let height = 'calc(100vh - 330px)'
+	export let scale = 1
 </script>
 
-<div class="loading-container" style={`height: ${height}`}>
+<div class="loading-container" style={`height: ${height}; transform: scale(${scale})`}>
 	<div class="loader">
 		<div />
 		<div />
