@@ -190,6 +190,7 @@
 		font-family: 'source';
 		font-size: var(--fs-3);
 		line-height: var(--s-5);
+		white-space: pre-wrap;
 	}
 
 	.tags {
