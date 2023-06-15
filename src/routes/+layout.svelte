@@ -8,10 +8,10 @@
 	import { page } from '$app/stores';
 	import { browser } from '$app/environment';
 	import Footer from '$lib/components/footer.svelte';
-	import '@fontsource/poppins/400.css';
-	import '@fontsource/poppins/600.css';
-	import '@fontsource/poppins/800.css';
-	import '@fontsource/source-sans-pro';
+	// import '@fontsource/poppins/400.css';
+	// import '@fontsource/poppins/600.css';
+	// import '@fontsource/poppins/800.css';
+	// import '@fontsource/source-sans-pro';
 
 	inject({ mode: dev ? 'development' : 'production' });
 
@@ -37,6 +37,30 @@
 </div>
 
 <style>
+	@font-face {
+		font-family: 'default';
+		src: url('/fonts/Poppins-Regular.ttf') format('truetype');
+		font-weight: 400;
+	}
+
+	@font-face {
+		font-family: 'default';
+		src: url('/fonts/Poppins-SemiBold.ttf') format('truetype');
+		font-weight: 600;
+	}
+
+	@font-face {
+		font-family: 'default';
+		src: url('/fonts/Poppins-ExtraBold.ttf') format('truetype');
+		font-weight: 800;
+	}
+
+	@font-face {
+		font-family: 'source';
+		src: url('/fonts/SourceSansPro-Regular.otf') format('opentype');
+		font-weight: 400;
+	}
+
 	:global(body) {
 		margin: 0;
 		box-sizing: border-box;
@@ -44,7 +68,7 @@
 	}
 
 	:global(*) {
-		font-family: Poppins, sans-serif;
+		font-family: 'default';
 		box-sizing: border-box;
 
 		--s-1: 4px;

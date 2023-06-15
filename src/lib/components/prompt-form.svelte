@@ -277,9 +277,9 @@
 	}
 
 	h2 {
-		font-size: var(--fs-4);
+		font-size: var(--fs-3-5);
 		text-align: start;
-		margin-bottom: var(--s-1);
+		margin-bottom: var(--s-2);
 		width: 100%;
 	}
 
@@ -298,14 +298,15 @@
 	}
 
 	textarea {
-		font-family: 'My Source Sans Pro', sans-serif;
+		font-family: 'source';
 		border: none;
 		border-bottom: 2px solid rgb(120, 120, 120);
 		font-size: var(--fs-3);
-		line-height: var(--s-6);
+		line-height: var(--s-5);
 		width: 100%;
 		resize: none;
 		overflow-y: hidden;
+		padding-bottom: 15px;
 	}
 
 	.error {

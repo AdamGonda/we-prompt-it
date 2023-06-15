@@ -187,7 +187,7 @@
 
 	.description,
 	.prompt {
-		font-family: Source Sans Pro, sans-serif;
+		font-family: 'source';
 		font-size: var(--fs-3);
 		line-height: var(--s-5);
 	}
