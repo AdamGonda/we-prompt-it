@@ -46,7 +46,6 @@
 		<div>
 			<span class="likes">
 				<img
-					style="width: 16px"
 					src={`/${getHartIconPrefix()}-icon.svg`}
 					alt="hart-icon"
 				/>
@@ -117,9 +116,14 @@
 		font-size: 0.9rem;
 	}
 
+	.likes img {
+		width: 16px;
+		margin-right: 3px
+	}
+
 	.forked img {
 		width: 15px;
-		margin-right: 5px;
+		margin-right: 1px;
 	}
 
 	.stats {
