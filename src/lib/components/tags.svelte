@@ -89,8 +89,8 @@
 
 	function cleanTag(tag) {
 		return tag
+			.toLowerCase()
 			.replace(/<b>|<\/b>/g, '')
-			.toString()
 			.trim()
 			.replace(' ', '-')
 			.replace('_', '');
