@@ -16,12 +16,6 @@
 	let confirmDiscardDialog;
 	let confirmDeleteDialog;
 
-	onMount(() => {
-		if (browser) {
-			confirmDeleteDialog.showModal();
-		}
-	});
-
 	function onDelete() {
 		isLoading = true;
 
@@ -105,12 +99,17 @@
 				type="button"
 				on:click={() => confirmEditDialog.close()}>Cancel</button
 			>
-			<input
+			<button
 				class="bubble dialog-confirm-apply"
 				type="button"
-				value="Apply changes"
 				on:click={() => form.requestSubmit()}
-			/>
+			>
+				{#if isLoading}
+					<LoadingIndicator height="20px" scale="0.4" color="var(--white)" />
+				{:else}
+					Apply changes
+				{/if}
+			</button>
 		</div>
 	</form>
 </dialog>
@@ -125,12 +124,17 @@
 				type="button"
 				on:click={() => confirmDiscardDialog.close()}>Cancel</button
 			>
-			<input
+			<button
 				class="bubble dialog-confirm-discard"
 				type="button"
-				value="Discard changes"
 				on:click={() => goto(routes.prompt(true, $page.params.slug))}
-			/>
+			>
+				{#if isLoading}
+					<LoadingIndicator height="20px" scale="0.4" color="var(--black)" />
+				{:else}
+					Discard changes
+				{/if}
+			</button>
 		</div>
 	</form>
 </dialog>
@@ -216,7 +220,6 @@
 		background: #e15759;
 		color: white;
 		font-weight: 400;
-		width: 83px;
 	}
 
 	.dialog-confirm-delete:hover {
