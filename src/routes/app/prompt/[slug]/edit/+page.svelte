@@ -135,7 +135,7 @@
 			<button type="button" on:click={() => confirmDeleteDialog.close()}>Cancel</button>
 			<button class="bubble dialog-confirm-delete">
 				{#if isLoading}
-					<LoadingIndicator height="20px" scale="0.5" color="var(--white)" />
+					<LoadingIndicator height="20px" scale="0.4" color="var(--white)" />
 				{:else}
 					Delete
 				{/if}
