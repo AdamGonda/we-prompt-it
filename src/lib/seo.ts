@@ -1,4 +1,4 @@
-export const url = 'https://we-prompt-it.vercel.app';
+export const url = 'https://weprompt.it';
 export const title = 'Explore, Collect, and Create AI Prompts | We Prompt';
 export const image = `${url}/og-image.jpg`;
 export const description =
