@@ -17,10 +17,10 @@
 	let confirmDeleteDialog;
 
 	onMount(() => {
-		if(browser) {
+		if (browser) {
 			confirmDeleteDialog.showModal();
 		}
-	})
+	});
 
 	function onDelete() {
 		isLoading = true;
@@ -99,8 +99,12 @@
 <dialog bind:this={confirmEditDialog} on:click={handleBackdropClose}>
 	<form method="POST" action="?/delete" use:enhance={onDelete}>
 		<p>Are you sure you want to proceed?</p>
-		<div>
-			<button type="button" on:click={() => confirmEditDialog.close()}>Cancel</button>
+		<div class="dialog-confirm-wrap">
+			<button
+				class="dialog-confirm-cancel"
+				type="button"
+				on:click={() => confirmEditDialog.close()}>Cancel</button
+			>
 			<input
 				class="bubble dialog-confirm-apply"
 				type="button"
@@ -115,8 +119,12 @@
 <dialog bind:this={confirmDiscardDialog} on:click={handleBackdropClose}>
 	<form method="POST" action="?/delete" use:enhance={onDelete}>
 		<p>Are you sure you want to proceed?</p>
-		<div>
-			<button type="button" on:click={() => confirmDiscardDialog.close()}>Cancel</button>
+		<div class="dialog-confirm-wrap">
+			<button
+				class="dialog-confirm-cancel"
+				type="button"
+				on:click={() => confirmDiscardDialog.close()}>Cancel</button
+			>
 			<input
 				class="bubble dialog-confirm-discard"
 				type="button"
@@ -132,7 +140,11 @@
 	<form method="POST" action="?/delete" use:enhance={onDelete}>
 		<p>Are you sure you want to proceed?</p>
 		<div class="dialog-confirm-wrap">
-			<button type="button" on:click={() => confirmDeleteDialog.close()}>Cancel</button>
+			<button
+				class="dialog-confirm-cancel"
+				type="button"
+				on:click={() => confirmDeleteDialog.close()}>Cancel</button
+			>
 			<button class="bubble dialog-confirm-delete">
 				{#if isLoading}
 					<LoadingIndicator height="20px" scale="0.4" color="var(--white)" />
@@ -192,14 +204,19 @@
 
 	.dialog-confirm-wrap {
 		display: flex;
+		gap: var(--s-4);
+	}
+
+	.dialog-confirm-cancel {
+		margin: 0;
+		padding: 0;
 	}
 
 	.dialog-confirm-delete {
 		background: #e15759;
 		color: white;
 		font-weight: 400;
-		margin-left: var(--s-4);
-		width: 83px
+		width: 83px;
 	}
 
 	.dialog-confirm-delete:hover {
