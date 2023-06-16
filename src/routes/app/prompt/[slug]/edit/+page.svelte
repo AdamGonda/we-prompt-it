@@ -46,6 +46,7 @@
 	onSuccess={onEditSuccess}
 	type="edit"
 	bind:form
+	bind:isLoading
 	let:disabled
 	action={`?/edit`}
 	formName="edit-prompt-form"
