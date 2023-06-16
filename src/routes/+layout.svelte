@@ -8,10 +8,6 @@
 	import { page } from '$app/stores';
 	import { browser } from '$app/environment';
 	import Footer from '$lib/components/footer.svelte';
-	// import '@fontsource/poppins/400.css';
-	// import '@fontsource/poppins/600.css';
-	// import '@fontsource/poppins/800.css';
-	// import '@fontsource/source-sans-pro';
 
 	inject({ mode: dev ? 'development' : 'production' });
 
