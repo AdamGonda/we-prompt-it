@@ -7,15 +7,31 @@ import { PrismaClient } from '@prisma/client';
 import { convertToSlug, forceAuth, validateForm } from '$lib/utils';
 import { promptToString } from './api';
 import { promptSchema } from '$lib/yup-schemas';
+import crypto from 'crypto';
 
 const prisma = new PrismaClient();
 
 export async function createPrompt(event: RequestEvent) {
-	const session = await forceAuth(event)
+	const session = await forceAuth(event);
 	const user = await getDBUser(session);
 	const data = await validateForm(event, promptSchema);
 	const aiModelId = await getOrCreateAiModel(data);
 	const tagIds = await getOrCreateTags(data);
+
+	// check if is there an already deleted prompt with the same slug
+	const deletedPrompt = await prisma.prompt.findFirst({
+		where: { slug: convertToSlug(user.username, data.name), isDeleted: true }
+	});
+
+	if (deletedPrompt) {
+		// update so the slugs won't clash in db
+		await prisma.prompt.update({
+			where: { id: deletedPrompt.id },
+			data: {
+				slug: crypto.randomUUID()
+			}
+		});
+	}
 
 	return await prisma.prompt.create({
 		data: {
@@ -47,7 +63,7 @@ export async function createPrompt(event: RequestEvent) {
 
 export async function editPrompt(event: RequestEvent) {
 	const slug = event.params.slug;
-	const session = await forceAuth(event)
+	const session = await forceAuth(event);
 	const user = await getDBUser(session);
 	const data = await validateForm(event, promptSchema);
 	const aiModelId = await getOrCreateAiModel(data);
@@ -97,7 +113,7 @@ export async function editPrompt(event: RequestEvent) {
 }
 
 export async function forkPrompt(event: RequestEvent) {
-	const session = await forceAuth(event)
+	const session = await forceAuth(event);
 	const dbUser = await getDBUser(session);
 	const slug = event.params.slug;
 	const data = await validateForm(event, promptSchema);
@@ -149,7 +165,7 @@ export async function forkPrompt(event: RequestEvent) {
 }
 
 export async function deletePrompt(event: RequestEvent) {
-	await forceAuth(event)
+	await forceAuth(event);
 	const slug = event.params.slug;
 	const parent = await getPromptBySlug(slug);
 
