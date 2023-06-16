@@ -8,6 +8,7 @@
 	import { navigating, page } from '$app/stores';
 	import { browser } from '$app/environment';
 	import Footer from '$lib/components/footer.svelte';
+	import { fade } from 'svelte/transition';
 
 	inject({ mode: dev ? 'development' : 'production' });
 
@@ -67,7 +68,7 @@
 </div>
 
 {#if isLoading}
-	<div class="progress-bar">
+	<div class="progress-bar" out:fade={{duration: 500}}>
 		<div class="progress" style={`--width: ${progress}%`} />
 	</div>
 {/if}
