@@ -198,7 +198,7 @@
 		background: #e15759;
 		color: white;
 		font-weight: 400;
-		margin-left: calc(var(--s-4) + 6px);
+		margin-left: var(--s-4);
 		width: 83px
 	}
 
