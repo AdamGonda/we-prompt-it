@@ -2,9 +2,11 @@
 	import { goto } from '$app/navigation';
 	import { page } from '$app/stores';
 	import PromptForm from '$lib/components/prompt-form.svelte';
+	import { toast } from '@zerodevx/svelte-toast';
 
 	function onSuccess(data) {
 		goto(`/app/prompt/${data.slug}`);
+		toast.push('Prompt created! 🎉');
 	}
 </script>
 

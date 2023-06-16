@@ -1,13 +1,14 @@
 <script>
 	export let height = 'calc(100vh - 330px)'
-	export let scale = 1
+	export let scale = '1'
+	export let color = '#333'
 </script>
 
 <div class="loading-container" style={`height: ${height}; transform: scale(${scale})`}>
 	<div class="loader">
-		<div />
-		<div />
-		<div />
+		<div style={`background: ${color}`} />
+		<div style={`background: ${color}`} />
+		<div style={`background: ${color}`} />
 	</div>
 </div>
 

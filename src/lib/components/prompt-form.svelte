@@ -8,6 +8,7 @@
 	import Tags from './tags.svelte';
 	import { fade } from 'svelte/transition';
 	import { fadeConfig } from '$lib/config';
+	import LoadingIndicator from './loading-indicator.svelte';
 
 	export let onSuccess = (data) => {};
 	export let onError = (error) => {};
@@ -30,6 +31,7 @@
 	let cancelNameCheck = null;
 	let nameCheckDelay = 400;
 	let nameAlreadyExistsError = 'Name already exists';
+	let isLoading = false;
 
 	$: disabled = getDisabled(errors, isTouched);
 	$: form = _form;
@@ -88,7 +90,7 @@
 				} else {
 					const { name, ...restErrors } = errors;
 
-					if(name == nameAlreadyExistsError) {
+					if (name == nameAlreadyExistsError) {
 						errors = restErrors;
 					}
 				}
@@ -111,15 +113,16 @@
 	}
 
 	function handleSubmit() {
+		isLoading = true;
+
 		return async ({ result }) => {
 			if (result.error) {
 				console.log(`[FRONTEND ERROR] in ${formName}`, result.error);
-				// TODO show some error toser
+				toast.push('Something went wrong. Please try again.');
 				onError(result.error);
 				return;
 			}
 
-			// TODO show some success toser
 			onSuccess(result.data);
 		};
 	}
@@ -224,7 +227,13 @@
 
 	<slot {disabled}>
 		<div class="submit-wrap">
-			<input class="bubble" type="submit" {disabled} />
+			<button class="bubble" {disabled}>
+				{#if isLoading}
+					<LoadingIndicator height="20px" scale="0.5" color="var(--white)" />
+				{:else}
+					Create
+				{/if}
+			</button>
 		</div>
 	</slot>
 </form>
@@ -323,19 +332,24 @@
 		margin-top: var(--s-7);
 	}
 
-	.submit-wrap input {
+	.submit-wrap button {
 		background: var(--sucess);
 		color: whitesmoke;
 		border: none;
 		font-size: var(--fs-2);
 		cursor: pointer;
+		height: 48px;
+		width: 87px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
 	}
 
-	.submit-wrap input:hover {
+	.submit-wrap button:hover {
 		background: var(--sucess-hover);
 	}
 
-	.submit-wrap input:disabled {
+	.submit-wrap button:disabled {
 		background: #b3b3b3;
 		cursor: not-allowed;
 	}
