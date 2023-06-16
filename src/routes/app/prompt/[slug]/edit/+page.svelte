@@ -35,6 +35,11 @@
 			event.target.close();
 		}
 	}
+
+	function handleDiscardChanges() {
+		isLoading = true;
+		goto(routes.prompt(true, $page.params.slug))
+	}
 </script>
 
 <PromptForm
@@ -127,7 +132,7 @@
 			<button
 				class="bubble dialog-confirm-discard"
 				type="button"
-				on:click={() => goto(routes.prompt(true, $page.params.slug))}
+				on:click={handleDiscardChanges}
 			>
 				{#if isLoading}
 					<LoadingIndicator height="20px" scale="0.4" color="var(--black)" />
