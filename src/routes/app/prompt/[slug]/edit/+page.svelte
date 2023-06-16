@@ -1,17 +1,26 @@
 <script>
+	import { browser } from '$app/environment';
 	import { enhance } from '$app/forms';
 	import { goto } from '$app/navigation';
 	import { page } from '$app/stores';
+	import LoadingIndicator from '$lib/components/loading-indicator.svelte';
 	import PromptForm from '$lib/components/prompt-form.svelte';
 	import routes from '$lib/routes';
 	import { toast } from '@zerodevx/svelte-toast';
 	import _ from 'lodash';
+	import { onMount } from 'svelte';
 
 	let form;
 	let isLoading;
 	let confirmEditDialog;
 	let confirmDiscardDialog;
 	let confirmDeleteDialog;
+
+	onMount(() => {
+		if(browser) {
+			// confirmDeleteDialog.showModal();
+		}
+	})
 
 	function onDelete() {
 		return async () => {
@@ -121,9 +130,15 @@
 <dialog bind:this={confirmDeleteDialog} on:click={handleBackdropClose}>
 	<form method="POST" action="?/delete" use:enhance={onDelete}>
 		<p>Are you sure you want to proceed?</p>
-		<div>
+		<div class="dialog-confirm-wrap">
 			<button type="button" on:click={() => confirmDeleteDialog.close()}>Cancel</button>
-			<input class="bubble dialog-confirm-delete" type="submit" value="Delete" />
+			<button class="bubble dialog-confirm-delete">
+				{#if isLoading}
+					<LoadingIndicator height="20px" scale="0.5" color="var(--white)" />
+				{:else}
+					Delete
+				{/if}
+			</button>
 		</div>
 	</form>
 </dialog>
@@ -174,11 +189,16 @@
 		cursor: pointer;
 	}
 
+	.dialog-confirm-wrap {
+		display: flex;
+	}
+
 	.dialog-confirm-delete {
 		background: #e15759;
 		color: white;
 		font-weight: 400;
-		margin-left: var(--s-4);
+		margin-left: var(--s-5);
+		width: 83px
 	}
 
 	.dialog-confirm-delete:hover {
