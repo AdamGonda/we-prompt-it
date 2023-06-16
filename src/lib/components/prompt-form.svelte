@@ -9,6 +9,9 @@
 	import { fade } from 'svelte/transition';
 	import { fadeConfig } from '$lib/config';
 	import LoadingIndicator from './loading-indicator.svelte';
+	import { createEventDispatcher } from 'svelte';
+
+  const dispatch = createEventDispatcher();
 
 	export let onSuccess = (data) => {};
 	export let onError = (error) => {};
@@ -17,7 +20,8 @@
 	export let action;
 	export let type = 'create';
 	export let form = null;
-
+	export let isLoading = false;
+	
 	let _form;
 	let errors = {};
 	let showAddNewModel = false;
@@ -31,7 +35,6 @@
 	let cancelNameCheck = null;
 	let nameCheckDelay = 400;
 	let nameAlreadyExistsError = 'Name already exists';
-	let isLoading = false;
 
 	$: disabled = getDisabled(errors, isTouched);
 	$: form = _form;

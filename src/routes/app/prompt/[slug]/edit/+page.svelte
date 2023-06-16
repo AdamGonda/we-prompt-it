@@ -4,21 +4,25 @@
 	import { page } from '$app/stores';
 	import PromptForm from '$lib/components/prompt-form.svelte';
 	import routes from '$lib/routes';
+	import { toast } from '@zerodevx/svelte-toast';
 	import _ from 'lodash';
 
+	let form;
+	let isLoading;
 	let confirmEditDialog;
 	let confirmDiscardDialog;
 	let confirmDeleteDialog;
-	let form;
 
 	function onDelete() {
 		return async () => {
 			goto(`/app/my-collection`);
+			toast.push('Prompt deleted!');
 		};
 	}
 
 	function onEditSuccess(data) {
 		goto(`/app/prompt/${data.slug}`);
+		toast.push('Prompt updated!');
 	}
 
 	function handleBackdropClose(event) {
@@ -33,6 +37,7 @@
 	type="edit"
 	bind:form
 	let:disabled
+	bind:isLoading={isLoading}
 	action={`?/edit`}
 	formName="edit-prompt-form"
 	data={{
