@@ -5,11 +5,19 @@
 	import Navigation from '$lib/components/navigation.svelte';
 	import { searchFocused } from '$lib/stores/search-bar-store';
 	import { goto } from '$app/navigation';
-	import { page } from '$app/stores';
+	import { navigating, page } from '$app/stores';
 	import { browser } from '$app/environment';
 	import Footer from '$lib/components/footer.svelte';
 
 	inject({ mode: dev ? 'development' : 'production' });
+
+	let progress = 0;
+	let interval;
+	let isLoading = false;
+
+	navigating.subscribe((nav) => {
+		handleGlobalLoadingIndicator(nav);
+	});
 
 	const options = {
 		duration: 3500,
@@ -18,6 +26,32 @@
 
 	if (browser && $page.data.forceOnboarding) {
 		goto('/app/onboarding');
+	}
+
+	function handleGlobalLoadingIndicator(nav) {
+		const increaseProgress = (value) => Math.min(100, value + (100 - value) / 20);
+
+		if (nav) {
+			// start navigating
+			isLoading = true;
+			progress = 0;
+
+			// Start an interval to increment the progress bar width
+			interval = setInterval(() => {
+				progress = increaseProgress(progress);
+			}, 200);
+		} else {
+			// end navigating
+			// Clear the interval and set the progress to 100%
+			clearInterval(interval);
+			progress = 100;
+
+			// Reset the progress after a delay and set loading to false
+			setTimeout(() => {
+				progress = 0;
+				isLoading = false;
+			}, 200);
+		}
 	}
 </script>
 
@@ -32,7 +66,28 @@
 	<Footer />
 </div>
 
+{#if isLoading}
+	<div class="progress-bar">
+		<div class="progress" style={`--width: ${progress}%`} />
+	</div>
+{/if}
+
 <style>
+	.progress-bar {
+		position: fixed;
+		top: 0;
+		left: 0;
+		right: 0;
+		height: 0.2rem;
+	}
+
+	.progress {
+		width: var(--width);
+		background-color: #0067dd;
+		height: 100%;
+		transition: width 0.2s ease-in-out;
+	}
+
 	@font-face {
 		font-family: 'default';
 		src: url('/fonts/Poppins-Regular.ttf') format('truetype');
