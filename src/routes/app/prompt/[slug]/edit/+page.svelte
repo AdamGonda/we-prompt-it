@@ -18,11 +18,13 @@
 
 	onMount(() => {
 		if(browser) {
-			// confirmDeleteDialog.showModal();
+			confirmDeleteDialog.showModal();
 		}
 	})
 
 	function onDelete() {
+		isLoading = true;
+
 		return async () => {
 			goto(`/app/my-collection`);
 			toast.push('Prompt deleted!');
@@ -46,7 +48,6 @@
 	type="edit"
 	bind:form
 	let:disabled
-	bind:isLoading={isLoading}
 	action={`?/edit`}
 	formName="edit-prompt-form"
 	data={{
@@ -197,7 +198,7 @@
 		background: #e15759;
 		color: white;
 		font-weight: 400;
-		margin-left: var(--s-5);
+		margin-left: calc(var(--s-4) + 6px);
 		width: 83px
 	}
 
