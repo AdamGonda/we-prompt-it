@@ -14,6 +14,7 @@
 		"format": "prettier --plugin-search-dir . --write .",
 		"rdb": "prisma migrate reset",
 		"mdb": "prisma migrate dev",
+		"pdb": "prisma db push",
 		"postinstall": "prisma generate"
 	},
 	"devDependencies": {

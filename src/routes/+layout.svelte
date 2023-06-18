@@ -80,6 +80,7 @@
 		left: 0;
 		right: 0;
 		height: 0.2rem;
+		z-index: 20;
 	}
 
 	.progress {
