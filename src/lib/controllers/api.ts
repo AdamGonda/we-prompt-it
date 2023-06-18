@@ -240,7 +240,6 @@ function _handleSearchBar(query, event) {
 				some: {
 					name: {
 						contains: word,
-						mode: 'insensitive'
 					}
 				}
 			}
@@ -252,7 +251,6 @@ function _handleSearchBar(query, event) {
 			aiModel: {
 				name: {
 					contains: word,
-					mode: 'insensitive'
 				}
 			}
 		};

@@ -1,13 +1,12 @@
 generator client {
   provider        = "prisma-client-js"
-  previewFeatures = ["fullTextSearch"]
+  previewFeatures = ["fullTextSearch", "fullTextIndex"]
 }
 
 datasource db {
-  provider          = "postgresql"
-  url               = env("POSTGRES_PRISMA_URL")
-  directUrl         = env("POSTGRES_URL_NON_POOLING")
-  shadowDatabaseUrl = env("POSTGRES_URL_NON_POOLING")
+  provider     = "mysql"
+  url          = env("DATABASE_URL")
+  relationMode = "prisma"
 }
 
 model User {
@@ -30,10 +29,10 @@ model Prompt {
   id           Int       @id @default(autoincrement())
   name         String
   slug         String    @unique
-  description  String    @default("")
+  description  String    @db.Text
   forkedCount  Int       @default(0)
-  content      String
-  fulltext     String
+  content      String    @db.Text
+  fulltext     String    @db.Text
   createdAt    DateTime  @default(now())
   updatedAt    DateTime  @updatedAt
   isDeleted    Boolean   @default(false)
@@ -44,9 +43,14 @@ model Prompt {
   likes        Like[]
   aiModel      AiModel?  @relation(fields: [aiModelId], references: [id])
   author       User      @relation(fields: [authorId], references: [id])
-  parentPrompt Prompt?   @relation("ChildPrompts", fields: [parentId], references: [id])
+  parentPrompt Prompt?   @relation("ChildPrompts", fields: [parentId], references: [id], onDelete: NoAction, onUpdate: NoAction)
   childPrompts Prompt[]  @relation("ChildPrompts")
   tags         Tag[]     @relation("PromptToTag")
+
+  @@fulltext([fulltext])
+  @@index([aiModelId])
+  @@index([authorId])
+  @@index([parentId])
 }
 
 model AiModel {
@@ -67,6 +71,7 @@ model Like {
   user      User     @relation(fields: [userId], references: [id])
 
   @@unique([userId, promptId])
+  @@index([promptId])
 }
 
 model Tag {
@@ -86,6 +91,9 @@ model Comment {
   isDeleted Boolean  @default(false)
   author    User     @relation(fields: [authorId], references: [id])
   prompt    Prompt?  @relation(fields: [promptId], references: [id])
+
+  @@index([authorId])
+  @@index([promptId])
 }
 
 model Follower {
@@ -98,4 +106,5 @@ model Follower {
   user        User     @relation("Followers", fields: [userId], references: [id])
 
   @@unique([userId, followingId])
+  @@index([followingId])
 }
