@@ -42,7 +42,9 @@
 
 		typeAnimsToShow = [...typeAnimsToShow, typeAnims[0]];
 		let idx = 1;
+
 		setTimeout(() => {
+			console.log('log idx', idx)
 			if (idx < typeAnims.length) {
 				typeAnimsToShow = [...typeAnimsToShow, typeAnims[idx]];
 				idx++;
@@ -51,7 +53,7 @@
 					idx = 0;
 				}
 			}
-		}, getRandomInterval(100, 400));
+		}, 1000);
 
 		return () => clearInterval(cancelInterval);
 	});
@@ -109,7 +111,7 @@
 
 {#each typeAnimsToShow as props}
 {/each}
-<AiInteractionAnimation props={typeAnims[0]} />
+<AiInteractionAnimation />
 
 <style>
 	.hero-wrap {
