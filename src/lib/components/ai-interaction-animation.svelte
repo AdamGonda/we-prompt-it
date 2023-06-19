@@ -29,6 +29,7 @@
 			tl.to(ref, { opacity: 0, y: 40, duration: 1 });
 			return;
 		}
+
 		toShow = [...toShow, words.shift()];
 
 		setTimeout(() => {
