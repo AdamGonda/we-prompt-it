@@ -1,11 +1,14 @@
 <script>
 	import { onMount } from 'svelte';
 
+	export let scale = 1;
 	export let sencente =
 		'This change should prevent the flex container from expanding vertically when new lines are added. Please adjust as needed and see if it resolves your issue.';
 
 	let words = sencente.split(' ');
 	let toShow = [];
+	let width = 500 * scale;
+	let fontSize = 20 * scale;
 
 	onMount(() => {
 		updateToShow(words);
@@ -14,6 +17,7 @@
 	function updateToShow(words) {
 		if (words.length == 0) return;
 		toShow = [...toShow, words.shift()];
+
 		setTimeout(() => {
 			updateToShow(words);
 		}, getRandomInterval(100, 300));
@@ -24,7 +28,7 @@
 	}
 </script>
 
-<div class="wrap">
+<div class="wrap" style={`width: ${width}px; font-size: ${fontSize}px`}>
 	{#each toShow as word}
 		<span>{word}</span>
 	{/each}
@@ -37,10 +41,11 @@
 		flex-wrap: wrap;
 		color: var(--black);
 		column-gap: var(--s-1);
-		row-gap: 0px;
-		width: 400px;
-		font-family: 'source' !important;
-		font-size: 20px;
+		row-gap: 8px;
+	}
+
+	.wrap span {
+		font-family: 'source';
 	}
 
 	.cursor {
