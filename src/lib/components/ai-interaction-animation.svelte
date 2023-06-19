@@ -1,8 +1,9 @@
 <script>
 	import { onMount } from 'svelte';
 	import gsap from 'gsap';
-	import { getRandomInterval, stringToColor } from '$lib/utils';
+	import { getRandomHexColor, getRandomInterval, stringToColor } from '$lib/utils';
 	import { createEventDispatcher } from 'svelte';
+	import { fade } from 'svelte/transition';
 	const dispatcher = createEventDispatcher();
 
 	export let id;
@@ -38,14 +39,15 @@
 
 		setTimeout(() => {
 			updateToShow();
-		}, getRandomInterval(10, 200));
+		}, getRandomInterval(10, 400));
 	}
 </script>
 
 <div
 	bind:this={ref}
+	out:fade
 	class="wrap"
-	style={`width: ${width}px; font-size: ${fontSize}px; top: ${top}; left: ${left}; box-shadow: 0 0 12px ${stringToColor(text)}`}
+	style={`width: ${width}px; font-size: ${fontSize}px; top: ${top}; left: ${left}; box-shadow: 0 0 8px ${getRandomHexColor()}`}
 >
 	{#each toShow as word}
 		<span>{word}</span>
@@ -57,9 +59,9 @@
 	.wrap {
 		display: flex;
 		flex-wrap: wrap;
-		color: var(--white);
+		color: var(--black);
 		column-gap: var(--s-1);
-		background: var(--black);
+		background: var(--grey);
 		padding: var(--s-3);
 		border-radius: 7px;
 		position: absolute;
@@ -75,7 +77,7 @@
 	.cursor {
 		height: 1.4em;
 		width: 0.7em;
-		background-color: var(--white);
+		background-color: var(--black);
 		animation: blink 1s steps(5, start) infinite;
 	}
 

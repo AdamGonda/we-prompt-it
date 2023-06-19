@@ -90,3 +90,12 @@ export function nameToUsername(name) {
 export function getRandomInterval(min, max) {
 	return Math.floor(Math.random() * (max - min + 1)) + min;
 }
+
+export function getRandomHexColor() {
+	const letters = '012345678';
+	let color = '#';
+	for (let i = 0; i < 6; i++) {
+			color += letters[Math.floor(Math.random() * letters.length)];
+	}
+	return color;
+}
