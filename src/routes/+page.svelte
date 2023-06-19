@@ -7,7 +7,7 @@
 	import { anims } from '$lib/landing-animation';
 
 	let activeIdx = 0;
-	let typeAnimsToShow = [];
+	let animsToShow = [];
 
 	onMount(() => {
 		const cancelInterval = setInterval(() => {
@@ -19,28 +19,28 @@
 		}, 3000);
 
 		setTimeout(() => {
-			pushToTypeANimsToShow();
+			pushToAnimsToShow();
 
 			setInterval(() => {
-				pushToTypeANimsToShow();
-			}, 3000);
+				pushToAnimsToShow();
+			}, 1000);
 		}, 1000);
 
 		return () => clearInterval(cancelInterval);
 	});
 
-	function pushToTypeANimsToShow() {
+	function pushToAnimsToShow() {
 		let randomIdx = Math.floor(Math.random() * anims.length);
 
-		if (typeAnimsToShow.find((anim) => anim.id == anims[randomIdx].id)) {
+		if (animsToShow.find((anim) => anim.id == anims[randomIdx].id)) {
 			return;
 		}
 
-		typeAnimsToShow = [...typeAnimsToShow, anims[randomIdx]];
+		animsToShow = [...animsToShow, anims[randomIdx]];
 	}
 
-	function popFromTypeANimsToShow({ detail: { id } }) {
-		typeAnimsToShow = typeAnimsToShow.filter((anim) => anim.id != id);
+	function popFromaNimsToShow({ detail: { id } }) {
+		animsToShow = animsToShow.filter((anim) => anim.id != id);
 	}
 
 	function handleSignUp() {
@@ -94,12 +94,14 @@
 	</div>
 </main>
 
-{#each typeAnimsToShow as anim (anim.id)}
+{#each animsToShow as anim (anim.id)}
 	<AiInteractionAnimation
-		on:done={popFromTypeANimsToShow}
-		left={anim.left}
-		top={anim.top}
+		on:done={popFromaNimsToShow}
 		id={anim.id}
+		top={anim.top}
+		left={anim.left}
+		scale={anim.scale}
+		text={anim.text}
 	/>
 {/each}
 
@@ -152,8 +154,6 @@
 	.tagline {
 		text-align: center;
 		padding: var(--s-4);
-		background-color: rgba(255, 255, 255, 0.39); /* Semi-transparent white */
-		backdrop-filter: blur(5px); /* Blurs the background */
 	}
 
 	h1 {

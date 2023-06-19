@@ -38,14 +38,14 @@
 
 		setTimeout(() => {
 			updateToShow();
-		}, getRandomInterval(100, 400));
+		}, getRandomInterval(10, 200));
 	}
 </script>
 
 <div
 	bind:this={ref}
 	class="wrap"
-	style={`width: ${width}px; font-size: ${fontSize}px; top: ${top}px; left: ${top}px; left: ${left}; box-shadow: 0 0 12px #0067dd;`}
+	style={`width: ${width}px; font-size: ${fontSize}px; top: ${top}; left: ${left}; box-shadow: 0 0 12px ${stringToColor(text)}`}
 >
 	{#each toShow as word}
 		<span>{word}</span>
