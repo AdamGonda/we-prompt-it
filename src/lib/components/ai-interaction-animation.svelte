@@ -1,7 +1,7 @@
 <script>
 	import { onMount } from 'svelte';
 
-	export let scale = 0.7;
+	export let scale = 1;
 	export let sencente =
 		'This change should prevent the flex container from expanding vertically when new lines are added. Please adjust as needed and see if it resolves your issue.';
 
