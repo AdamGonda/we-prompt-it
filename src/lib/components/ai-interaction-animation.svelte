@@ -1,7 +1,8 @@
 <script>
+	import { stringToColor } from '$lib/utils';
 	import { onMount } from 'svelte';
 
-	export let scale = .7;
+	export let scale = 0.7;
 	export let sencente =
 		'This change should prevent the flex container from expanding vertically when new lines are added. Please adjust as needed and see if it resolves your issue.';
 
@@ -39,8 +40,11 @@
 	.wrap {
 		display: flex;
 		flex-wrap: wrap;
-		color: var(--black);
+		color: var(--white);
 		column-gap: var(--s-1);
+		background: var(--black);
+		padding: var(--s-3);
+		border-radius: 7px;
 	}
 
 	.wrap span {
@@ -51,7 +55,7 @@
 	.cursor {
 		height: 1.4em;
 		width: 0.7em;
-		background-color: var(--black);
+		background-color: var(--white);
 		animation: blink 1s steps(5, start) infinite;
 	}
 
