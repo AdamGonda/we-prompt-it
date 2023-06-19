@@ -30,7 +30,7 @@ export async function forceAuth(event) {
 		throw error(401, 'Unauthorized');
 	}
 
-	return session
+	return session;
 }
 
 export function formDataToObject(formData) {
@@ -48,7 +48,15 @@ export function formDataToObject(formData) {
 }
 
 export function convertToSlug(username, text) {
-	return username + '-' + text.trim().toLowerCase().replace(/\s/g, '-').replace(/[^a-z0-9-]/g, '');
+	return (
+		username +
+		'-' +
+		text
+			.trim()
+			.toLowerCase()
+			.replace(/\s/g, '-')
+			.replace(/[^a-z0-9-]/g, '')
+	);
 }
 
 export function stringToColor(str) {
@@ -77,4 +85,8 @@ export function hash(str) {
 
 export function nameToUsername(name) {
 	return name.trim().split(' ').join('-').toLowerCase();
+}
+
+export function getRandomInterval(min, max) {
+	return Math.floor(Math.random() * (max - min + 1)) + min;
 }

@@ -1,23 +1,27 @@
 <script>
 	import { onMount } from 'svelte';
 	import gsap from 'gsap';
+	import { getRandomInterval, stringToColor } from '$lib/utils';
 
-	export let props = {
-		top: '',
-		right: '',
-		scale: 0.45,
-		text: 'This change should prevent the flex container from expanding vertically when new lines are added.'
-	}
+	export let top = '';
+	export let left = '';
+	export let scale = 0.45;
+	export let text =
+		'Feel the thrill of innovation! Let our platform be the catalyst for your eureka moments. Amplify your voice, express your thoughts, and make your mark in this AI-driven world.';
 
-	let words = props.text.split(' ');
+	let words = text.split(' ');
 	let toShow = [];
-	let width = 500 * props.scale;
-	let fontSize = 20 * props.scale;
+	let width = 500 * scale;
+	let fontSize = 20 * scale;
 	let ref;
 	let tl;
 
 	onMount(() => {
-		tl = gsap.timeline().to(ref, { delay: 0.4, opacity: 1, y: 20, duration: 1 }).call(updateToShow);
+		tl = gsap
+			.timeline()
+			.delay(1)
+			.call(updateToShow)
+			.to(ref, { delay: -0.3, opacity: 1, y: 20, duration: 1 });
 	});
 
 	function updateToShow() {
@@ -29,18 +33,16 @@
 
 		setTimeout(() => {
 			updateToShow();
-		}, getRandomInterval(100, 300));
-	}
-
-	function getRandomInterval(min, max) {
-		return Math.floor(Math.random() * (max - min + 1)) + min;
+		}, getRandomInterval(100, 400));
 	}
 </script>
 
 <div
 	bind:this={ref}
 	class="wrap"
-	style={`width: ${width}px; font-size: ${fontSize}px; top: ${props.top}px; left: ${props.left}px; right: ${props.right}px`}
+	style={`width: ${width}px; font-size: ${fontSize}px; top: ${top}px; left: ${top}px; left: ${left} box-shadow: 0 0 12px ${stringToColor(
+		text
+	)};`}
 >
 	{#each toShow as word}
 		<span>{word}</span>
@@ -59,6 +61,7 @@
 		border-radius: 7px;
 		position: absolute;
 		opacity: 0;
+		z-index: -10;
 	}
 
 	.wrap span {

@@ -4,32 +4,29 @@
 	import { onMount } from 'svelte';
 	import * as seo from '$lib/seo';
 	import AiInteractionAnimation from '$lib/components/ai-interaction-animation.svelte';
+	import { getRandomInterval } from '$lib/utils';
 
 	let activeIdx = 0;
 	let typeAnims = [
 		{
 			top: '30',
-			right: '50',
-			scale: 0.5,
-			text: 'Harness the power of AI with our platform! Unleash your creativity, transform your ideas into amazing realities, and give life to those ingenious prompts.'
+			left: '100',
+			scale: 0.45,
 		},
 		{
-			top: '10',
+			top: '130',
 			left: '60',
-			scale: 0.6,
-			text: 'Empower your creativity! Dive into an immersive world where your ideas take the front seat. Discover, create, share, and revel in the joy of exploration.'
+			scale: 0.35,
 		},
 		{
 			top: '360',
-			right: '160',
-			scale: 0.35,
-			text: 'Boldly stride into the future! Our platform is not just about typing prompts. It’s about pioneering the uncharted territories of imagination, powered by AI.'
+			left: '160',
+			scale: 0.6,
 		},
 		{
 			top: '350',
 			left: '100',
-			scale: 0.75,
-			text: 'Feel the thrill of innovation! Let our platform be the catalyst for your eureka moments. Amplify your voice, express your thoughts, and make your mark in this AI-driven world.'
+			scale: 0.5,
 		}
 	];
 	let typeAnimsToShow = [];
@@ -45,14 +42,16 @@
 
 		typeAnimsToShow = [...typeAnimsToShow, typeAnims[0]];
 		let idx = 1;
-		const interval = setInterval(() => {
+		setTimeout(() => {
 			if (idx < typeAnims.length) {
 				typeAnimsToShow = [...typeAnimsToShow, typeAnims[idx]];
 				idx++;
-			} else {
-				clearInterval(interval);
+
+				if (idx == typeAnims.length) {
+					idx = 0;
+				}
 			}
-		}, 4000);
+		}, getRandomInterval(100, 400));
 
 		return () => clearInterval(cancelInterval);
 	});
@@ -109,8 +108,8 @@
 </main>
 
 {#each typeAnimsToShow as props}
-	<AiInteractionAnimation {props} />
 {/each}
+<AiInteractionAnimation props={typeAnims[0]} />
 
 <style>
 	.hero-wrap {
