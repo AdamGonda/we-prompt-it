@@ -173,6 +173,9 @@
 
 	.tagline {
 		text-align: center;
+		padding: var(--s-4);
+		background-color: rgba(255, 255, 255, 0.39);  /* Semi-transparent white */
+  	backdrop-filter: blur(5px);  /* Blurs the background */
 	}
 
 	h1 {

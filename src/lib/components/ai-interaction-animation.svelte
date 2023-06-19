@@ -14,7 +14,7 @@
 
 	let words = text.split(' ');
 	let toShow = [];
-	let width = 500 * scale;
+	let width = 400 * scale;
 	let fontSize = 20 * scale;
 	let ref;
 	let tl;
@@ -45,9 +45,7 @@
 <div
 	bind:this={ref}
 	class="wrap"
-	style={`width: ${width}px; font-size: ${fontSize}px; top: ${top}px; left: ${top}px; left: ${left} box-shadow: 0 0 12px ${stringToColor(
-		text
-	)};`}
+	style={`width: ${width}px; font-size: ${fontSize}px; top: ${top}px; left: ${top}px; left: ${left}; box-shadow: 0 0 12px #0067dd;`}
 >
 	{#each toShow as word}
 		<span>{word}</span>
