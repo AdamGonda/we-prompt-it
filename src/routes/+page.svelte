@@ -7,17 +7,17 @@
 
 	let activeIdx = 0;
 
-	// onMount(() => {
-	// 	const cancelInterval = setInterval(() => {
-	// 		if (activeIdx < 3) {
-	// 			activeIdx++;
-	// 		} else {
-	// 			activeIdx = 0;
-	// 		}
-	// 	}, 3000);
+	onMount(() => {
+		const cancelInterval = setInterval(() => {
+			if (activeIdx < 3) {
+				activeIdx++;
+			} else {
+				activeIdx = 0;
+			}
+		}, 3000);
 
-	// 	return () => clearInterval(cancelInterval);
-	// });
+		return () => clearInterval(cancelInterval);
+	});
 
 	function handleSignUp() {
 		goto(routes.login);
@@ -44,7 +44,7 @@
 	<meta property="twitter:description" content={seo.description} />
 </svelte:head>
 
-<!-- <main>
+<main>
 	<div class="hero-wrap">
 		<div>
 			<div class="tagline">
@@ -68,12 +68,9 @@
 			</div>
 		</div>
 	</div>
+</main>
 
-	<h3>Top 3</h3>
-	<CardList {prompts} />
-</main> -->
-
-<AiInteractionAnimation />
+<AiInteractionAnimation top="0" left="0" scale={0.6} />
 
 <style>
 	.hero-wrap {
