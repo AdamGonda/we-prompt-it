@@ -2,7 +2,7 @@
 	import { onMount } from 'svelte';
 
 	export let sencente =
-		'A place for you and your prompts A place for you and your prompts A place for you and your prompts A place for you and your prompts A place for you and your prompts';
+		'This change should prevent the flex container from expanding vertically when new lines are added. Please adjust as needed and see if it resolves your issue.';
 
 	let words = sencente.split(' ');
 	let toShow = [];
@@ -38,11 +38,15 @@
 		color: var(--black);
 		column-gap: var(--s-1);
     row-gap: 0px;
+    font-family: 'source' !important;
+    /* font-size: 10px; */
+    /* align-items: start; */
 	}
 
 	.cursor {
 		height: 25px;
 		width: 15px;
+    /* transform: scale(0.6); */
 		background-color: var(--black);
 		animation: blink 1s steps(5, start) infinite;
 	}

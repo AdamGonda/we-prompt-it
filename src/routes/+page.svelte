@@ -1,14 +1,11 @@
 <script>
 	import { goto } from '$app/navigation';
-	import { page } from '$app/stores';
-	import CardList from '$lib/components/card-list.svelte';
 	import routes from '$lib/routes';
 	import { onMount } from 'svelte';
 	import * as seo from '$lib/seo';
 	import AiInteractionAnimation from '$lib/components/ai-interaction-animation.svelte';
 
 	let activeIdx = 0;
-	$: prompts = $page.data.loadIndex.topPrompts;
 
 	// onMount(() => {
 	// 	const cancelInterval = setInterval(() => {

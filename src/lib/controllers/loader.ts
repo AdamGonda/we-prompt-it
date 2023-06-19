@@ -11,28 +11,6 @@ import globalIncludes from '$lib/global-includes';
 
 const prisma = new PrismaClient();
 
-export async function loadIndex() {
-	// get the most liked prompts, 9 of them
-	const topPrompts = await prisma.prompt.findMany({
-		where: {
-			isDeleted: false
-		},
-		orderBy: {
-			likes: {
-				_count: 'desc'
-			}
-		},
-		take: 3,
-		...globalIncludes
-	});
-
-	return {
-		loadIndex: {
-			topPrompts
-		}
-	};
-}
-
 export async function loadIndexLayout(event) {
 	const session = await event.locals.getSession();
 	let dbUser = null;
