@@ -4,35 +4,9 @@
 	import { onMount } from 'svelte';
 	import * as seo from '$lib/seo';
 	import AiInteractionAnimation from '$lib/components/ai-interaction-animation.svelte';
-	import { getRandomInterval } from '$lib/utils';
+	import { anims } from '$lib/landing-animation';
 
 	let activeIdx = 0;
-	let typeAnims = [
-		{
-			id: 0,
-			top: '30',
-			left: '100',
-			scale: 0.45
-		},
-		{
-			id: 1,
-			top: '130',
-			left: '60',
-			scale: 0.35
-		},
-		{
-			id: 2,
-			top: '360',
-			left: '160',
-			scale: 0.6
-		},
-		{
-			id: 3,
-			top: '350',
-			left: '100',
-			scale: 0.5
-		}
-	];
 	let typeAnimsToShow = [];
 
 	onMount(() => {
@@ -44,21 +18,29 @@
 			}
 		}, 3000);
 
-		setInterval(() => {
+		setTimeout(() => {
 			pushToTypeANimsToShow();
+
+			setInterval(() => {
+				pushToTypeANimsToShow();
+			}, 3000);
 		}, 1000);
 
 		return () => clearInterval(cancelInterval);
 	});
 
 	function pushToTypeANimsToShow() {
-		let randomIdx = Math.floor(Math.random() * typeAnims.length);
+		let randomIdx = Math.floor(Math.random() * anims.length);
 
-		if (typeAnimsToShow.find((anim) => anim.id == typeAnims[randomIdx].id)) {
+		if (typeAnimsToShow.find((anim) => anim.id == anims[randomIdx].id)) {
 			return;
 		}
 
-		typeAnimsToShow = [...typeAnimsToShow, typeAnims[randomIdx]];
+		typeAnimsToShow = [...typeAnimsToShow, anims[randomIdx]];
+	}
+
+	function popFromTypeANimsToShow({ detail: { id } }) {
+		typeAnimsToShow = typeAnimsToShow.filter((anim) => anim.id != id);
 	}
 
 	function handleSignUp() {
@@ -67,10 +49,6 @@
 
 	function handleExplore() {
 		document.querySelector('input[name="text-search"]').focus();
-	}
-
-	function popFromTypeANimsToShow({ detail: { id } }) {
-		typeAnimsToShow = typeAnimsToShow.filter((anim) => anim.id != id);
 	}
 </script>
 
@@ -174,8 +152,8 @@
 	.tagline {
 		text-align: center;
 		padding: var(--s-4);
-		background-color: rgba(255, 255, 255, 0.39);  /* Semi-transparent white */
-  	backdrop-filter: blur(5px);  /* Blurs the background */
+		background-color: rgba(255, 255, 255, 0.39); /* Semi-transparent white */
+		backdrop-filter: blur(5px); /* Blurs the background */
 	}
 
 	h1 {
