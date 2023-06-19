@@ -6,6 +6,33 @@
 	import AiInteractionAnimation from '$lib/components/ai-interaction-animation.svelte';
 
 	let activeIdx = 0;
+	let typeAnims = [
+		{
+			top: '30',
+			right: '50',
+			scale: 0.5,
+			text: 'Harness the power of AI with our platform! Unleash your creativity, transform your ideas into amazing realities, and give life to those ingenious prompts.'
+		},
+		{
+			top: '10',
+			left: '60',
+			scale: 0.6,
+			text: 'Empower your creativity! Dive into an immersive world where your ideas take the front seat. Discover, create, share, and revel in the joy of exploration.'
+		},
+		{
+			top: '360',
+			right: '160',
+			scale: 0.35,
+			text: 'Boldly stride into the future! Our platform is not just about typing prompts. It’s about pioneering the uncharted territories of imagination, powered by AI.'
+		},
+		{
+			top: '350',
+			left: '100',
+			scale: 0.75,
+			text: 'Feel the thrill of innovation! Let our platform be the catalyst for your eureka moments. Amplify your voice, express your thoughts, and make your mark in this AI-driven world.'
+		}
+	];
+	let typeAnimsToShow = [];
 
 	onMount(() => {
 		const cancelInterval = setInterval(() => {
@@ -15,6 +42,17 @@
 				activeIdx = 0;
 			}
 		}, 3000);
+
+		typeAnimsToShow = [...typeAnimsToShow, typeAnims[0]];
+		let idx = 1;
+		const interval = setInterval(() => {
+			if (idx < typeAnims.length) {
+				typeAnimsToShow = [...typeAnimsToShow, typeAnims[idx]];
+				idx++;
+			} else {
+				clearInterval(interval);
+			}
+		}, 4000);
 
 		return () => clearInterval(cancelInterval);
 	});
@@ -70,7 +108,9 @@
 	</div>
 </main>
 
-<AiInteractionAnimation top="0" left="0" scale={0.6} />
+{#each typeAnimsToShow as props}
+	<AiInteractionAnimation {props} />
+{/each}
 
 <style>
 	.hero-wrap {

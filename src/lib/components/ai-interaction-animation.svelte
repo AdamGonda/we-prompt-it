@@ -2,21 +2,22 @@
 	import { onMount } from 'svelte';
 	import gsap from 'gsap';
 
-	export let top;
-	export let left;
-	export let scale = 1;
-	export let sencente =
-		'This change should prevent the flex container from expanding vertically when new lines are added. Please adjust as needed and see if it resolves your issue.';
+	export let props = {
+		top: '',
+		right: '',
+		scale: 0.45,
+		text: 'This change should prevent the flex container from expanding vertically when new lines are added.'
+	}
 
-	let words = sencente.split(' ');
+	let words = props.text.split(' ');
 	let toShow = [];
-	let width = 500 * scale;
-	let fontSize = 20 * scale;
+	let width = 500 * props.scale;
+	let fontSize = 20 * props.scale;
 	let ref;
 	let tl;
 
 	onMount(() => {
-		tl = gsap.timeline().to(ref, { opacity: 1, y: 20, duration: 1 }).call(updateToShow);
+		tl = gsap.timeline().to(ref, { delay: 0.4, opacity: 1, y: 20, duration: 1 }).call(updateToShow);
 	});
 
 	function updateToShow() {
@@ -39,7 +40,7 @@
 <div
 	bind:this={ref}
 	class="wrap"
-	style={`width: ${width}px; font-size: ${fontSize}px; top: ${top}; left: ${left}`}
+	style={`width: ${width}px; font-size: ${fontSize}px; top: ${props.top}px; left: ${props.left}px; right: ${props.right}px`}
 >
 	{#each toShow as word}
 		<span>{word}</span>
@@ -57,6 +58,7 @@
 		padding: var(--s-3);
 		border-radius: 7px;
 		position: absolute;
+		opacity: 0;
 	}
 
 	.wrap span {
