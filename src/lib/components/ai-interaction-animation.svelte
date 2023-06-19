@@ -37,16 +37,15 @@
 		flex-wrap: wrap;
 		color: var(--black);
 		column-gap: var(--s-1);
-    row-gap: 0px;
-    font-family: 'source' !important;
-    /* font-size: 10px; */
-    /* align-items: start; */
+		row-gap: 0px;
+		width: 400px;
+		font-family: 'source' !important;
+		font-size: 20px;
 	}
 
 	.cursor {
-		height: 25px;
-		width: 15px;
-    /* transform: scale(0.6); */
+		height: 1.4em;
+		width: 0.7em;
 		background-color: var(--black);
 		animation: blink 1s steps(5, start) infinite;
 	}
