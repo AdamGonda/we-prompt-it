@@ -1,5 +1,4 @@
 <script>
-	import { stringToColor } from '$lib/utils';
 	import { onMount } from 'svelte';
 
 	export let scale = 0.7;
@@ -29,7 +28,7 @@
 	}
 </script>
 
-<div class="wrap" style={`width: ${width}px; font-size: ${fontSize}px`}>
+<div class="wrap" style={`width: ${width}px; font-size: ${fontSize}px;`}>
 	{#each toShow as word}
 		<span>{word}</span>
 	{/each}
