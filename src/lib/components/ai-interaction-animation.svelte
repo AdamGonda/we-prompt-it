@@ -2,7 +2,10 @@
 	import { onMount } from 'svelte';
 	import gsap from 'gsap';
 	import { getRandomInterval, stringToColor } from '$lib/utils';
+	import { createEventDispatcher } from 'svelte';
+	const dispatcher = createEventDispatcher();
 
+	export let id;
 	export let top = '';
 	export let left = '';
 	export let scale = 0.45;
@@ -27,6 +30,7 @@
 	function updateToShow() {
 		if (words.length == 0) {
 			tl.to(ref, { opacity: 0, y: 40, duration: 1 });
+			dispatcher('done', { id });
 			return;
 		}
 
