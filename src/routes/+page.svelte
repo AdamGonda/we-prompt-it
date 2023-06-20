@@ -3,9 +3,9 @@
 	import routes from '$lib/routes';
 	import { onMount } from 'svelte';
 	import * as seo from '$lib/seo';
+	import { page } from '$app/stores';
 
 	let activeIdx = 0;
-	let noOfChars = 2000;
 
 	onMount(() => {
 		const cancelInterval = setInterval(() => {
@@ -25,11 +25,6 @@
 
 	function handleExplore() {
 		document.querySelector('input[name="text-search"]').focus();
-	}
-
-	function getRandomChar() {
-		var alphabet = 'abcdefghijklmnopqrstuvwxyz';
-		return alphabet[Math.floor(Math.random() * alphabet.length)];
 	}
 </script>
 
@@ -80,8 +75,8 @@
 </main>
 
 <div class="chars">
-	{#each [...Array(noOfChars).keys()] as _}
-		<span>{getRandomChar()}</span>
+	{#each $page.data.chars as c}
+		<span>{c}</span>
 	{/each}
 </div>
 
