@@ -9,7 +9,7 @@
 	export let id;
 	export let top = '';
 	export let left = '';
-	export let scale = 0.45;
+	export let scale = 1;
 	export let text =
 		'Feel the thrill of innovation! Let our platform be the catalyst for your eureka moments. Amplify your voice, express your thoughts, and make your mark in this AI-driven world.';
 

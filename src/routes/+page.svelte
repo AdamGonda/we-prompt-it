@@ -4,6 +4,7 @@
 	import { onMount } from 'svelte';
 	import * as seo from '$lib/seo';
 	import { page } from '$app/stores';
+	import AiInteractionAnimation from '$lib/components/ai-interaction-animation.svelte';
 
 	let activeIdx = 0;
 
@@ -68,7 +69,7 @@
 	</section>
 
 	<section>
-		<span>hello</span>
+		<AiInteractionAnimation />
 	</section>
 </main>
 
@@ -202,6 +203,6 @@
 			rgb(255, 255, 255) 0%,
 			rgba(213, 213, 213, 0) 100%
 		);
-		backdrop-filter: blur(2.5px);
+		backdrop-filter: blur(4px);
 	}
 </style>
