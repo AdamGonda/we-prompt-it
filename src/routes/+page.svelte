@@ -3,7 +3,6 @@
 	import routes from '$lib/routes';
 	import { onMount } from 'svelte';
 	import * as seo from '$lib/seo';
-	import { browser } from '$app/environment';
 
 	let activeIdx = 0;
 	let noOfChars = 2000;
