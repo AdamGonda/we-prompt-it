@@ -3,11 +3,8 @@
 	import routes from '$lib/routes';
 	import { onMount } from 'svelte';
 	import * as seo from '$lib/seo';
-	import AiInteractionAnimation from '$lib/components/ai-interaction-animation.svelte';
-	import { anims } from '$lib/landing-animation';
 
 	let activeIdx = 0;
-	let animsToShow = [];
 
 	onMount(() => {
 		const cancelInterval = setInterval(() => {
@@ -18,30 +15,8 @@
 			}
 		}, 3000);
 
-		setTimeout(() => {
-			pushToAnimsToShow();
-
-			setInterval(() => {
-				pushToAnimsToShow();
-			}, 3000);
-		}, 1000);
-
 		return () => clearInterval(cancelInterval);
 	});
-
-	function pushToAnimsToShow() {
-		let randomIdx = Math.floor(Math.random() * anims.length);
-
-		if (animsToShow.find((anim) => anim.id == anims[randomIdx].id)) {
-			return;
-		}
-
-		animsToShow = [...animsToShow, anims[randomIdx]];
-	}
-
-	function popFromaNimsToShow({ detail: { id } }) {
-		animsToShow = animsToShow.filter((anim) => anim.id != id);
-	}
 
 	function handleSignUp() {
 		goto(routes.login);
@@ -68,7 +43,7 @@
 	<meta property="twitter:description" content={seo.description} />
 </svelte:head>
 
-<main>
+<!-- <main>
 	<div class="hero-wrap">
 		<div>
 			<div class="tagline">
@@ -92,18 +67,7 @@
 			</div>
 		</div>
 	</div>
-</main>
-
-{#each animsToShow as anim (anim.id)}
-	<AiInteractionAnimation
-		on:done={popFromaNimsToShow}
-		id={anim.id}
-		top={anim.top}
-		left={anim.left}
-		scale={anim.scale}
-		text={anim.text}
-	/>
-{/each}
+</main> -->
 
 <style>
 	.hero-wrap {
@@ -168,10 +132,6 @@
 		margin-top: var(--s-5);
 		font-weight: 400;
 		font-size: 1.8rem;
-	}
-
-	h3 {
-		margin-top: var(--s-10);
 	}
 
 	.cta-s {
