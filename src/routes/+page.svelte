@@ -79,11 +79,11 @@
 	</section>
 </main>
 
-<!-- <div class="chars">
+<div class="chars">
 	{#each [...Array(noOfChars).keys()] as _}
 		<span>{getRandomChar()}</span>
 	{/each}
-</div> -->
+</div>
 
 <style>
 	section {
