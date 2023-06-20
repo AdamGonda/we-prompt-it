@@ -5,6 +5,7 @@
 	import * as seo from '$lib/seo';
 
 	let activeIdx = 0;
+	let noOfChars = 550
 
 	onMount(() => {
 		const cancelInterval = setInterval(() => {
@@ -25,6 +26,11 @@
 	function handleExplore() {
 		document.querySelector('input[name="text-search"]').focus();
 	}
+
+	function getRandomChar() {
+		var alphabet = 'abcdefghijklmnopqrstuvwxyz';
+		return alphabet[Math.floor(Math.random() * alphabet.length)];
+	}
 </script>
 
 <svelte:head>
@@ -43,7 +49,7 @@
 	<meta property="twitter:description" content={seo.description} />
 </svelte:head>
 
-<!-- <main>
+<main>
 	<div class="hero-wrap">
 		<div>
 			<div class="tagline">
@@ -67,9 +73,27 @@
 			</div>
 		</div>
 	</div>
-</main> -->
+</main>
+
+<div class="chars">
+	{#each [...Array(noOfChars).keys()] as time}
+		<span>{getRandomChar()}</span>
+	{/each}
+</div>
 
 <style>
+	.chars {
+		position: absolute;
+		padding: 0 16px;
+		left: 0;
+		top: 0;
+		display: flex;
+		width: 100vw;
+		flex-wrap: wrap;
+		gap: 30px;
+		z-index: -10;
+	}
+
 	.hero-wrap {
 		display: flex;
 		justify-content: center;
@@ -118,6 +142,9 @@
 	.tagline {
 		text-align: center;
 		padding: var(--s-4);
+    background: radial-gradient(circle, rgb(255, 255, 255) 0%, rgba(213, 213, 213, 0) 100%);
+		backdrop-filter: blur(2.5px);
+		border-radius: 30%;
 	}
 
 	h1 {
@@ -162,5 +189,7 @@
 		border: 3px solid var(--black);
 		padding: var(--s-2) var(--s-5);
 		color: var(--black);
+		background: radial-gradient(circle, rgb(255, 255, 255) 0%, rgba(213, 213, 213, 0) 100%);
+		backdrop-filter: blur(2.5px);
 	}
 </style>
