@@ -5,8 +5,12 @@
 	import * as seo from '$lib/seo';
 	import { page } from '$app/stores';
 	import AiInteractionAnimation from '$lib/components/ai-interaction-animation.svelte';
+	import { gsap } from 'gsap/dist/gsap';
+	import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
+	gsap.registerPlugin(ScrollTrigger);
 
 	let activeIdx = 0;
+	let triggerOne;
 
 	onMount(() => {
 		const cancelInterval = setInterval(() => {
@@ -17,6 +21,8 @@
 			}
 		}, 2500);
 
+		gsapAnim();
+
 		return () => clearInterval(cancelInterval);
 	});
 
@@ -26,6 +32,20 @@
 
 	function handleExplore() {
 		document.querySelector('input[name="text-search"]').focus();
+	}
+
+	function gsapAnim() {
+		gsap.from('.trigger-one', {
+			scrollTrigger: {
+				trigger: '.trigger-one',
+				start: 'top center',
+				end: 'bottom center',
+				scrub: 1,
+				onEnter: () => {
+					triggerOne = true;
+				},
+			}
+		});
 	}
 </script>
 
@@ -69,7 +89,11 @@
 	</section>
 
 	<section>
-		<AiInteractionAnimation />
+		<div class="trigger-one">
+			{#if triggerOne}
+				<AiInteractionAnimation />
+			{/if}
+		</div>
 	</section>
 </main>
 
@@ -80,6 +104,12 @@
 </div>
 
 <style>
+	.trigger-one {
+		margin-top: -125px;
+		display: flex;
+		justify-content: center;
+	}
+
 	section {
 		height: 100vh;
 	}

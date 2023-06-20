@@ -6,9 +6,7 @@
 	import { fade } from 'svelte/transition';
 	const dispatcher = createEventDispatcher();
 
-	export let id;
-	export let top = '';
-	export let left = '';
+	export let hideAfterDone = false;
 	export let scale = 1;
 	export let text =
 		'Feel the thrill of innovation! Let our platform be the catalyst for your eureka moments. Amplify your voice, express your thoughts, and make your mark in this AI-driven world.';
@@ -25,13 +23,14 @@
 			.timeline()
 			.delay(1)
 			.call(updateToShow)
-			.to(ref, { delay: -0.3, opacity: 1, y: 20, duration: 1 });
+			.to(ref, { delay: -1, opacity: 1, y: -20, duration: 1 });
 	});
 
 	function updateToShow() {
 		if (words.length == 0) {
-			tl.to(ref, { opacity: 0, y: 40, duration: 1 });
-			dispatcher('done', { id });
+			if(hideAfterDone) {
+				tl.to(ref, { opacity: 0, y: 20, duration: 1 });
+			}
 			return;
 		}
 
@@ -47,7 +46,7 @@
 	bind:this={ref}
 	out:fade
 	class="wrap"
-	style={`width: ${width}px; font-size: ${fontSize}px; top: ${top}; left: ${left}; box-shadow: 0 0 8px ${getRandomHexColor()}`}
+	style={`width: ${width}px; font-size: ${fontSize}px; box-shadow: 0 0 8px ${getRandomHexColor()}`}
 >
 	{#each toShow as word}
 		<span>{word}</span>
@@ -65,8 +64,6 @@
 		padding: var(--s-3);
 		border-radius: 7px;
 		position: absolute;
-		opacity: 0;
-		z-index: -10;
 	}
 
 	.wrap span {
