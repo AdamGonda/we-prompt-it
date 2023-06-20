@@ -89,9 +89,11 @@
 		top: 0;
 		display: flex;
 		width: 100vw;
+		height: 100vh;
 		flex-wrap: wrap;
 		gap: 30px;
 		z-index: -10;
+		overflow: hidden;
 	}
 
 	.hero-wrap {
