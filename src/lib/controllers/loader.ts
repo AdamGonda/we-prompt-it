@@ -11,7 +11,7 @@ import globalIncludes from '$lib/global-includes';
 
 const prisma = new PrismaClient();
 
-export async function loadLanding(event) {
+export async function loadLanding() {
 	const rChar = () => {
 		const alphabet = 'abcdefghijklmnopqrstuvwxyz';
 		return alphabet[Math.floor(Math.random() * alphabet.length)];
