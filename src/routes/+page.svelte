@@ -5,7 +5,7 @@
 	import * as seo from '$lib/seo';
 
 	let activeIdx = 0;
-	let noOfChars = 550
+	let noOfChars = 250;
 
 	onMount(() => {
 		const cancelInterval = setInterval(() => {
@@ -87,11 +87,11 @@
 		padding: 0 16px;
 		left: 0;
 		top: 0;
-		display: flex;
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(30px, 1fr));
 		width: 100vw;
 		height: 100vh;
-		flex-wrap: wrap;
-		gap: 30px;
+		gap: 40px;
 		z-index: -10;
 		overflow: hidden;
 	}
@@ -144,7 +144,11 @@
 	.tagline {
 		text-align: center;
 		padding: var(--s-4);
-    background: radial-gradient(circle, rgb(255, 255, 255) 0%, rgba(213, 213, 213, 0) 100%);
+		background: radial-gradient(
+			circle,
+			rgb(255, 255, 255) 0%,
+			rgba(213, 213, 213, 0) 100%
+		);
 		backdrop-filter: blur(2.5px);
 		border-radius: 30%;
 	}
@@ -191,7 +195,11 @@
 		border: 3px solid var(--black);
 		padding: var(--s-2) var(--s-5);
 		color: var(--black);
-		background: radial-gradient(circle, rgb(255, 255, 255) 0%, rgba(213, 213, 213, 0) 100%);
+		background: radial-gradient(
+			circle,
+			rgb(255, 255, 255) 0%,
+			rgba(213, 213, 213, 0) 100%
+		);
 		backdrop-filter: blur(2.5px);
 	}
 </style>
