@@ -9,12 +9,12 @@
 
 	onMount(() => {
 		const cancelInterval = setInterval(() => {
-			if (activeIdx < 3) {
+			if (activeIdx < 2) {
 				activeIdx++;
 			} else {
 				activeIdx = 0;
 			}
-		}, 3000);
+		}, 2500);
 
 		return () => clearInterval(cancelInterval);
 	});
@@ -56,9 +56,7 @@
 				<h2>
 					<span class:active={activeIdx == 0}>Explore</span>,
 					<span class:active={activeIdx == 1}>collect</span>,
-					<span class:active={activeIdx == 2}>create</span>
-					and
-					<span class:active={activeIdx == 3}>get noticed</span>.
+					<span class:active={activeIdx == 2}>create and get noticed</span>
 				</h2>
 			</div>
 
@@ -115,10 +113,10 @@
 		content: '';
 		position: absolute;
 		width: 100%;
-		height: 8px;
+		height: 9px;
 		left: 0;
 		bottom: 0;
-		margin-bottom: -8px;
+		margin-bottom: -9px;
 		background: #0067dd;
 		animation: appear 0.5s ease-in-out forwards;
 	}
