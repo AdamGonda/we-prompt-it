@@ -59,9 +59,9 @@
 	.wrap {
 		display: flex;
 		flex-wrap: wrap;
-		color: var(--black);
+		color: var(--white);
 		column-gap: var(--s-1);
-		background: var(--grey);
+		background: var(--black);
 		padding: var(--s-3);
 		border-radius: 7px;
 		position: absolute;
@@ -77,7 +77,7 @@
 	.cursor {
 		height: 1.4em;
 		width: 0.7em;
-		background-color: var(--black);
+		background-color: var(--white);
 		animation: blink 1s steps(5, start) infinite;
 	}
 
