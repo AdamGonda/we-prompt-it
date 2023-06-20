@@ -3,9 +3,10 @@
 	import routes from '$lib/routes';
 	import { onMount } from 'svelte';
 	import * as seo from '$lib/seo';
+	import { browser } from '$app/environment';
 
 	let activeIdx = 0;
-	let noOfChars = 250;
+	let noOfChars = 2000;
 
 	onMount(() => {
 		const cancelInterval = setInterval(() => {
@@ -50,7 +51,7 @@
 </svelte:head>
 
 <main>
-	<div class="hero-wrap">
+	<section class="hero-wrap">
 		<div>
 			<div class="tagline">
 				<h1>
@@ -72,16 +73,24 @@
 				<button class="explore" on:click={handleExplore}>Explore</button>
 			</div>
 		</div>
-	</div>
+	</section>
+
+	<section>
+		<span>hello</span>
+	</section>
 </main>
 
 <div class="chars">
-	{#each [...Array(noOfChars).keys()] as time}
+	{#each [...Array(noOfChars).keys()] as _}
 		<span>{getRandomChar()}</span>
 	{/each}
 </div>
 
 <style>
+	section {
+		height: 100vh;
+	}
+
 	.chars {
 		position: absolute;
 		padding: 0 16px;
@@ -90,7 +99,7 @@
 		display: grid;
 		grid-template-columns: repeat(auto-fit, minmax(30px, 1fr));
 		width: 100vw;
-		height: 100vh;
+		height: calc(100vh - 80px);
 		gap: 40px;
 		z-index: -10;
 		overflow: hidden;
@@ -100,6 +109,7 @@
 		display: flex;
 		justify-content: center;
 		margin-top: var(--s-5);
+		height: calc(100vh - 80px);
 	}
 
 	.active {
