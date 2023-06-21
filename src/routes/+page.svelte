@@ -4,13 +4,8 @@
 	import { onMount } from 'svelte';
 	import * as seo from '$lib/seo';
 	import { page } from '$app/stores';
-	import AiInteractionAnimation from '$lib/components/ai-interaction-animation.svelte';
-	import { gsap } from 'gsap/dist/gsap';
-	import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
-	gsap.registerPlugin(ScrollTrigger);
 
 	let activeIdx = 0;
-	let triggerOne;
 
 	onMount(() => {
 		const cancelInterval = setInterval(() => {
@@ -21,8 +16,6 @@
 			}
 		}, 2500);
 
-		gsapAnim();
-
 		return () => clearInterval(cancelInterval);
 	});
 
@@ -32,20 +25,6 @@
 
 	function handleExplore() {
 		document.querySelector('input[name="text-search"]').focus();
-	}
-
-	function gsapAnim() {
-		gsap.from('.trigger-one', {
-			scrollTrigger: {
-				trigger: '.trigger-one',
-				start: 'top center',
-				end: 'bottom center',
-				scrub: 1,
-				onEnter: () => {
-					triggerOne = true;
-				},
-			}
-		});
 	}
 </script>
 
@@ -216,5 +195,45 @@
 			rgba(213, 213, 213, 0) 100%
 		);
 		backdrop-filter: blur(4px);
+	}
+
+	@media (max-width: 1080px) {
+		h1 {
+			font-size: 4rem;
+		}
+
+		h2 {
+			font-size: 1.5rem;
+			margin-top: var(--s-4);
+		}
+
+		.cta-s {
+			margin-top: var(--s-7);
+		}
+	}
+
+	@media (max-width: 700px) {
+		h1 {
+			font-size: 2.4rem;
+		}
+
+		h2 {
+			font-size: 1rem;
+			margin-top: var(--s-2);
+		}
+
+		.cta-s {
+			margin-top: var(--s-5);
+		}
+
+		.signup,
+		.explore {
+			font-size: var(--fs-0);
+		}
+
+		.active::after {
+			height: 4px;
+			margin-bottom: -4px;
+		}
 	}
 </style>

@@ -68,7 +68,7 @@
 </div>
 
 {#if isLoading}
-	<div class="progress-bar" out:fade={{duration: 500}}>
+	<div class="progress-bar" out:fade={{ duration: 500 }}>
 		<div class="progress" style={`--width: ${progress}%`} />
 	</div>
 {/if}
@@ -234,6 +234,12 @@
 		}
 		100% {
 			opacity: 1;
+		}
+	}
+
+	@media (max-width: 850px) {
+		.content {
+			padding: var(--s-5) var(--s-7);
 		}
 	}
 </style>
