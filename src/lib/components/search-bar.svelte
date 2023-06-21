@@ -14,10 +14,6 @@
 	afterNavigate(async ({ from }) => {
 		initVarsFromURL();
 
-		if(from?.route?.id === '/app/prompt/[slug]') {
-			return
-		}
-
 		if ($page.route.id.includes('search')) {
 			await searchStore.search({
 				endpoint: `/api/search${$page.url.search}`
