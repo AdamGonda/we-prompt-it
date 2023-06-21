@@ -13,7 +13,6 @@
 
 	afterNavigate(async ({ from }) => {
 		initVarsFromURL();
-		console.log('log hasToSearch', hasToSearch)
 
 		if(!$hasToSearch && from?.route?.id === '/app/prompt/[slug]') {
 			return
