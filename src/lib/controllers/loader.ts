@@ -11,17 +11,6 @@ import globalIncludes from '$lib/global-includes';
 
 const prisma = new PrismaClient();
 
-export async function loadLanding() {
-	const rChar = () => {
-		const alphabet = 'abcdefghijklmnopqrstuvwxyz';
-		return alphabet[Math.floor(Math.random() * alphabet.length)];
-	};
-
-	return {
-		chars: [...Array(2000).keys()].map(rChar)
-	};
-}
-
 export async function loadIndexLayout(event) {
 	const session = await event.locals.getSession();
 	let dbUser = null;

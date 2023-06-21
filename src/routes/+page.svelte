@@ -3,7 +3,7 @@
 	import routes from '$lib/routes';
 	import { onMount } from 'svelte';
 	import * as seo from '$lib/seo';
-	import { page } from '$app/stores';
+	import Chars from '$lib/components/chars.svelte';
 
 	let activeIdx = 0;
 
@@ -68,27 +68,9 @@
 	</section>
 </main>
 
-<div class="chars">
-	{#each $page.data.chars as c}
-		<span>{c}</span>
-	{/each}
-</div>
+<Chars />
 
 <style>
-	.chars {
-		position: absolute;
-		padding-left: 16px;
-		left: 0;
-		top: 0;
-		display: grid;
-		grid-template-columns: repeat(auto-fit, minmax(30px, 1fr));
-		width: 100vw;
-		height: 100vh;
-		gap: 40px;
-		z-index: -10;
-		overflow: hidden;
-	}
-
 	.hero-wrap {
 		display: flex;
 		justify-content: center;
