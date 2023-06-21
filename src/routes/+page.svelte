@@ -87,14 +87,6 @@
 			</div>
 		</div>
 	</section>
-
-	<section>
-		<div class="trigger-one">
-			{#if triggerOne}
-				<AiInteractionAnimation />
-			{/if}
-		</div>
-	</section>
 </main>
 
 <div class="chars">
@@ -104,16 +96,6 @@
 </div>
 
 <style>
-	.trigger-one {
-		margin-top: -125px;
-		display: flex;
-		justify-content: center;
-	}
-
-	section {
-		height: 100vh;
-	}
-
 	.chars {
 		position: absolute;
 		padding: 0 16px;
@@ -122,7 +104,7 @@
 		display: grid;
 		grid-template-columns: repeat(auto-fit, minmax(30px, 1fr));
 		width: 100vw;
-		height: calc(100vh - 80px);
+		height: 90vh;
 		gap: 40px;
 		z-index: -10;
 		overflow: hidden;
@@ -131,8 +113,8 @@
 	.hero-wrap {
 		display: flex;
 		justify-content: center;
-		margin-top: var(--s-5);
-		height: calc(100vh - 80px);
+		margin-top: var(--s-7);
+		height: 70vh;
 	}
 
 	.active {

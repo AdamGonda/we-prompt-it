@@ -1,9 +1,9 @@
 <footer class="footer">
+	<p class="open-beta">Open beta</p>
 	<div>
 		<a href="/terms-of-service">Terms of service</a>
 		<a href="/privacy-policy">Privacy policy</a>
 	</div>
-	<p class="open-beta">Open beta</p>
 </footer>
 
 <style>
@@ -34,7 +34,7 @@
 
 	.open-beta {
 		margin: 0;
-		margin-top: var(--s-5);
+		margin-bottom: var(--s-5);
 		font-size: var(--fs-1);
 		border: 1PX solid var(--white);
 		padding: var(--s-1) var(--s-2);
