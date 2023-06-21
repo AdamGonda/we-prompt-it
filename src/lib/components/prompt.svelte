@@ -6,6 +6,7 @@
 	import { toast } from '@zerodevx/svelte-toast';
 	import { fade } from 'svelte/transition';
 	import { fadeConfig } from '$lib/config';
+	import { hasToSearch } from '$lib/stores/search-store';
 
 	const user = $page.data.dbUser;
 	const isOwner = user ? $page.data.prompt.author.email === user.email : false;
@@ -61,6 +62,9 @@
 		setTimeout(() => {
 			showCopyFeedback = false;
 		}, 2000);
+	}
+	function handleTagClick() {
+		hasToSearch.set(true)
 	}
 </script>
 
@@ -142,6 +146,7 @@
 					class="bubble"
 					style={`background-color: ${stringToColor(tag.name)}`}
 					href={`/search?tag=${tag.name}&limit=10&page=0`}
+					on:click={handleTagClick}
 				>
 					#{tag.name}
 				</a>

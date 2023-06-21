@@ -6,6 +6,7 @@ const { subscribe, set, update } = writable([]);
 export const isSearchLoading = writable(false);
 export const isMoreLoading = writable(false);
 export const pageNumber = writable(0);
+export const hasToSearch = writable(false)
 
 async function search({ endpoint, updateURL = '' }) {
 	let data;

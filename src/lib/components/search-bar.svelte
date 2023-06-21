@@ -2,7 +2,7 @@
 	import { afterNavigate, goto } from '$app/navigation';
 	import { page } from '$app/stores';
 	import { searchFocused } from '$lib/stores/search-bar-store';
-	import searchStore from '$lib/stores/search-store';
+	import searchStore, { hasToSearch } from '$lib/stores/search-store';
 
 	let input;
 	let inputValue;
@@ -13,11 +13,18 @@
 
 	afterNavigate(async ({ from }) => {
 		initVarsFromURL();
+		console.log('log hasToSearch', hasToSearch)
+
+		if(!$hasToSearch && from?.route?.id === '/app/prompt/[slug]') {
+			return
+		}
 
 		if ($page.route.id.includes('search')) {
 			await searchStore.search({
 				endpoint: `/api/search${$page.url.search}`
 			});
+
+			hasToSearch.set(false)
 		}
 	});
 
@@ -65,6 +72,7 @@
 
 	async function triggerSearch() {
 		goto(`/search?${varsToQuerystring()}`);
+		hasToSearch.set(true)
 	}
 
 	function blurInput(e) {
