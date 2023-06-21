@@ -104,7 +104,7 @@
 		display: grid;
 		grid-template-columns: repeat(auto-fit, minmax(30px, 1fr));
 		width: 100vw;
-		height: 90vh;
+		height: 100vh;
 		gap: 40px;
 		z-index: -10;
 		overflow: hidden;
