@@ -4,6 +4,7 @@
 	import { onMount } from 'svelte';
 	import * as seo from '$lib/seo';
 	import Chars from '$lib/components/chars.svelte';
+	import { page } from '$app/stores';
 
 	let activeIdx = 0;
 
@@ -61,7 +62,9 @@
 			</div>
 
 			<div class="cta-s">
-				<button class="signup" on:click={handleSignUp}>Sign up</button>
+				{#if !$page.data?.session }
+					<button class="signup" on:click={handleSignUp}>Sign up</button>
+				{/if}
 				<button class="explore" on:click={handleExplore}>Explore</button>
 			</div>
 		</div>
