@@ -98,7 +98,7 @@
 <style>
 	.chars {
 		position: absolute;
-		padding: 0 16px;
+		padding-left: 16px;
 		left: 0;
 		top: 0;
 		display: grid;
