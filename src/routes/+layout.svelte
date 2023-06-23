@@ -237,7 +237,7 @@
 		}
 	}
 
-	@media (max-width: 850px) {
+	@media (max-width: 550px) {
 		.content {
 			padding: var(--s-5) var(--s-7);
 		}
