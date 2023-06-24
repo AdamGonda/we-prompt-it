@@ -64,7 +64,7 @@
 		}, 2000);
 	}
 	function handleTagClick() {
-		hasToSearch.set(true)
+		hasToSearch.set(true);
 	}
 </script>
 
@@ -121,7 +121,10 @@
 
 		<div class="infos">
 			<a class="model" target="_blank" href={$page.data.prompt.aiModel.link}>
-				<p>{$page.data.prompt.aiModel.name}</p>
+				<span>
+					{$page.data.prompt.aiModel.name}
+				</span>
+				<img src="/link.svg" alt="link" />
 			</a>
 
 			<button class="copy-btn bubble" on:click={copyToClipboard}>
@@ -180,8 +183,12 @@
 		font-size: var(--fs-3-5);
 	}
 
-	.model {
+	.model span {
 		text-decoration: underline;
+	}
+
+	.model img {
+		width: 10px;
 	}
 
 	.body {
