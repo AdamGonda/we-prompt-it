@@ -173,37 +173,9 @@
 		border: 2px dashed var(--black);
 	}
 
-	/* 
-	TODO test out if these global styles if applied are ok
-	.bubble {
-		border-radius: var(--br-1);
-		padding: var(--s-3) var(--s-4);
-		cursor: pointer;
-		font-size: var(--fs-2);
-	}
-
-	.button {
-		background: none;
-		border: none;
-	}
-
-	.button-red {
-		background: #e15759;
-		color: white;
-	}
-
-	.button-green {
-		background: #59a14f;
-		color: whitesmoke;
-	}
-
-	.button:hover {
-		background: rgb(211, 31, 31);
-	} */
-
 	.content {
 		min-height: calc(100vh - 93px);
-		padding: var(--s-5) 100px;
+		padding: var(--s-5) var(--s-10);
 		padding-bottom: var(--s-6);
 	}
 
@@ -237,9 +209,9 @@
 		}
 	}
 
-	@media (max-width: 550px) {
+	@media (max-width: 768px) {
 		.content {
-			padding: var(--s-5) var(--s-7);
+			padding: var(--s-5) var(--s-5);
 		}
 	}
 </style>
