@@ -18,4 +18,10 @@
 		gap: 34px;
 		width: 100%;
 	}
+	
+	@media (max-width: 450px) {
+		.card-list {
+			grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+		}
+	}
 </style>
