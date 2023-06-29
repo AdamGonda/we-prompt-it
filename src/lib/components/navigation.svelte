@@ -5,7 +5,7 @@
 	import routes from '$lib/routes';
 	import { slide } from 'svelte/transition';
 
-	let isMobileMenuOpen = false;
+	let isMobileMenuOpen = true;
 
 	const user = $page.data.session?.user;
 	$: onMycollection = $page.route.id?.includes('my-collection');
@@ -47,7 +47,7 @@
 
 {#if isMobileMenuOpen}
 	<div class="mobile-menu" out:slide={{ duration: 200, axis: 'x' }}>
-		<button on:click={toggleMobileMenu}>
+		<button class="close" on:click={toggleMobileMenu}>
 			<img src="/exit-icon.svg" alt="close" />
 		</button>
 	</div>
@@ -121,11 +121,11 @@
 		display: flex;
 		justify-content: center;
 	}
-
+	
 	.hamburger img {
 		width: 100%;
 	}
-
+	
 	.mobile-menu {
 		position: fixed;
 		top: 0;
@@ -135,11 +135,25 @@
 		background: var(--white);
 		z-index: 10;
 		animation: slideIn 0.3s ease-in-out forwards;
+		padding: var(--s-4)
 	}
-
+	
 	@keyframes slideIn {
 		to {
 			width: 50vw;
 		}
+	}
+	
+	.mobile-menu .close {
+		width: 25px;
+		background: none;
+		border: none;
+		padding: 0;
+		display: flex;
+		justify-content: center;
+	}
+
+	.mobile-menu .close img {
+		width: 100%;
 	}
 </style>
