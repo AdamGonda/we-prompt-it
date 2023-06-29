@@ -12,15 +12,11 @@
 	const user = $page.data.session?.user;
 	$: onMycollection = $page.route.id?.includes('my-collection');
 	$: onCreate = $page.route.id?.includes('create') || $page.route.id?.includes('fork');
+	$: trends = $page.route.id == '/trends';
 
 	onMount(() => {
 		window.addEventListener('click', (e) => {
-			console.log('log hamburgerRef', hamburgerRef)
-			console.log('log e.target', e.target)
-
 			if (hamburgerRef == e.target) return;
-
-
 
 			isMobileMenuOpen = false;
 		});
@@ -65,6 +61,9 @@
 		<button class="close" on:click={toggleMobileMenu}>
 			<img src="/exit-icon.svg" alt="close" />
 		</button>
+		<a href={routes.trends} class="button">
+			<p class:underline={trends}>Home</p>
+		</a>
 		{#if user}
 			<a href={routes.myCollection} class="button">
 				<p class="my-collection" class:underline={onMycollection}>My collection</p>

@@ -1,5 +1,6 @@
 export default {
 	landing: '/',
+	trends: '/trends',
 	prompt: (inApp, slug) => `${inApp ? '/app' : ''}/prompt/${slug}`,
 	create: '/app/prompt/create',
 	myCollection: '/app/my-collection',
