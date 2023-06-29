@@ -4,12 +4,27 @@
 	import UserAvatar from './user-avatar.svelte';
 	import routes from '$lib/routes';
 	import { slide } from 'svelte/transition';
+	import { onMount } from 'svelte';
 
-	let isMobileMenuOpen = true;
+	let hamburgerRef;
+	let isMobileMenuOpen = false;
 
 	const user = $page.data.session?.user;
 	$: onMycollection = $page.route.id?.includes('my-collection');
 	$: onCreate = $page.route.id?.includes('create') || $page.route.id?.includes('fork');
+
+	onMount(() => {
+		window.addEventListener('click', (e) => {
+			console.log('log hamburgerRef', hamburgerRef)
+			console.log('log e.target', e.target)
+
+			if (hamburgerRef == e.target) return;
+
+
+
+			isMobileMenuOpen = false;
+		});
+	});
 
 	function toggleMobileMenu() {
 		isMobileMenuOpen = !isMobileMenuOpen;
@@ -39,8 +54,8 @@
 
 	<div class="mobile">
 		<SearchBar />
-		<button class="hamburger" on:click={toggleMobileMenu}>
-			<img src="/menu.svg" alt="menu" />
+		<button class="hamburger" on:click={toggleMobileMenu} >
+			<img bind:this={hamburgerRef} src="/menu.svg" alt="menu" />
 		</button>
 	</div>
 </nav>
@@ -136,6 +151,7 @@
 
 	.hamburger img {
 		width: 100%;
+		margin: 0;
 	}
 
 	.mobile-menu {
