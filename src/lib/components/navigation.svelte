@@ -46,10 +46,22 @@
 </nav>
 
 {#if isMobileMenuOpen}
-	<div class="mobile-menu" out:slide={{ duration: 200, axis: 'x' }}>
+	<div class="mobile-menu" out:slide={{ duration: 100, axis: 'x' }}>
 		<button class="close" on:click={toggleMobileMenu}>
 			<img src="/exit-icon.svg" alt="close" />
 		</button>
+		{#if user}
+			<a href={routes.myCollection} class="button">
+				<p class="my-collection" class:underline={onMycollection}>My collection</p>
+			</a>
+			<a href={routes.create} class="button">
+				<p class:underline={onCreate}>Create</p>
+			</a>
+		{:else}
+			<div class="login">
+				<a href={routes.login}>Login</a>
+			</div>
+		{/if}
 	</div>
 {/if}
 
@@ -121,11 +133,11 @@
 		display: flex;
 		justify-content: center;
 	}
-	
+
 	.hamburger img {
 		width: 100%;
 	}
-	
+
 	.mobile-menu {
 		position: fixed;
 		top: 0;
@@ -134,16 +146,20 @@
 		width: 0vw;
 		background: var(--white);
 		z-index: 10;
-		animation: slideIn 0.3s ease-in-out forwards;
-		padding: var(--s-4)
+		animation: slideIn 0.1s ease-in-out forwards;
+		padding: var(--s-4);
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		gap: var(--s-2);
 	}
-	
+
 	@keyframes slideIn {
 		to {
 			width: 50vw;
 		}
 	}
-	
+
 	.mobile-menu .close {
 		width: 25px;
 		background: none;
@@ -151,9 +167,23 @@
 		padding: 0;
 		display: flex;
 		justify-content: center;
+		margin-bottom: var(--s-4);
 	}
 
 	.mobile-menu .close img {
 		width: 100%;
+	}
+
+	.login a {
+		color: black;
+		text-decoration: none;
+		font-size: var(--fs-2);
+		font-weight: 600;
+	}
+
+	.user-profile {
+		width: 4.5rem;
+		height: 4.5rem;
+		border-radius: 50%;
 	}
 </style>
