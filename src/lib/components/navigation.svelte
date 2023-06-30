@@ -6,6 +6,8 @@
 	import { slide } from 'svelte/transition';
 	import { onMount } from 'svelte';
 	import { invalidate } from '$app/navigation';
+	import { signOut } from '@auth/sveltekit/client';
+
 
 	let hamburgerRef;
 	let isMobileMenuOpen = false;
@@ -14,6 +16,7 @@
 	$: onMycollection = $page.route.id?.includes('my-collection');
 	$: onCreate = $page.route.id?.includes('create') || $page.route.id?.includes('fork');
 	$: landing = $page.route.id == '/';
+	$: profile = $page.route.id?.includes('profile')
 
 	onMount(() => {
 		window.addEventListener('click', (e) => {
@@ -25,6 +28,10 @@
 
 	function toggleMobileMenu() {
 		isMobileMenuOpen = !isMobileMenuOpen;
+	}
+
+	function handleSignout() {
+		signOut();
 	}
 </script>
 
@@ -75,10 +82,12 @@
 			<a
 				href={routes.profile($page?.data?.dbUser?.username)}
 				class="button"
+				class:underline={profile}
 				on:click={() => invalidate(routes.profile($page?.data?.dbUser?.username))}
 			>
 				<p>Profile</p></a
 			>
+			<button class="button" on:click={handleSignout}>Signout</button>
 		{:else}
 			<div class="login">
 				<a href={routes.login}>Login</a>
@@ -175,6 +184,12 @@
 		flex-direction: column;
 		align-items: center;
 		gap: var(--s-2);
+	}
+
+	button {
+		border: none;
+		background: none;
+		padding: 0;
 	}
 
 	@keyframes slideIn {
