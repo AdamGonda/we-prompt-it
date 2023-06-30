@@ -4,6 +4,11 @@
 		<a href="/terms-of-service">Terms of service</a>
 		<a href="/privacy-policy">Privacy policy</a>
 	</div>
+	<span class="created-by">Created by 
+		<a href="https://www.linkedin.com/in/adam-gonda/" target="_blank">
+			Adam Gonda
+		</a>
+	</span>
 </footer>
 
 <style>
@@ -38,5 +43,14 @@
 		font-size: var(--fs-1);
 		border: 1PX solid var(--white);
 		padding: var(--s-1) var(--s-2);
+	}
+
+	.created-by {
+		margin-top: var(--s-5);
+		font-size: var(--fs-0);
+	}
+
+	.created-by a {
+		text-decoration: underline;
 	}
 </style>
