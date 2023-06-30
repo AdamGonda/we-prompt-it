@@ -12,7 +12,7 @@
 	const user = $page.data.session?.user;
 	$: onMycollection = $page.route.id?.includes('my-collection');
 	$: onCreate = $page.route.id?.includes('create') || $page.route.id?.includes('fork');
-	$: trends = $page.route.id == '/trends';
+	$: landing = $page.route.id == '/';
 
 	onMount(() => {
 		window.addEventListener('click', (e) => {
@@ -61,8 +61,8 @@
 		<button class="close" on:click={toggleMobileMenu}>
 			<img src="/exit-icon.svg" alt="close" />
 		</button>
-		<a href={routes.trends} class="button">
-			<p class:underline={trends}>Home</p>
+		<a href={routes.landing} class="button">
+			<p class:underline={landing}>Home</p>
 		</a>
 		{#if user}
 			<a href={routes.myCollection} class="button">

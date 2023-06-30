@@ -1,6 +1,5 @@
 import { PrismaClient } from '@prisma/client';
 import {
-	createUser,
 	getAllAIModels,
 	getAllTags,
 	getDBUser,
