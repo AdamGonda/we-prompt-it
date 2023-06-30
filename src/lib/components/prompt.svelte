@@ -288,6 +288,47 @@
 		justify-content: space-between;
 	}
 
+	@media (max-width: 768px) {
+		.top-bar {
+			margin-bottom: var(--s-7);
+		}
+
+		.body {
+			padding: 0;
+		}
+	}
+
+	@media (max-width: 500px) {
+		h1 {
+			font-size: 8vw;
+		}
+
+		.copy-btn {
+			font-size: var(--fs-1);
+		}
+
+		.infos {
+			font-size: var(--fs-1);
+		}
+
+		.tags {
+			gap: var(--fs-1);
+		}
+
+		.tags a {
+			font-size: var(--fs-0);
+		}
+
+		h2 {
+			font-size: var(--fs-3);
+		}
+
+		.description,
+		.prompt {
+			font-size: var(--fs-2);
+		}
+	}
+
 	button {
 		background: var(--grey);
 		color: black;
