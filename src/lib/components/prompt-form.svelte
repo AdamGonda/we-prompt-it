@@ -366,4 +366,10 @@
 	textarea.invalid::placeholder {
 		color: var(--danger);
 	}
+
+	@media (max-width: 768px) {
+		.name input {
+			font-size: var(--fs-4);
+		}
+	}
 </style>
