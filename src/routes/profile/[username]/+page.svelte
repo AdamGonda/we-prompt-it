@@ -106,4 +106,10 @@
 		margin: 0 auto;
 		text-align: center;
 	}
+
+	@media (max-width: 768px) {
+		.stats {
+			display: none;
+		}
+	}
 </style>

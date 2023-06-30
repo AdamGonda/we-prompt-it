@@ -218,10 +218,4 @@
 		font-size: var(--fs-2);
 		font-weight: 600;
 	}
-
-	.user-profile {
-		width: 4.5rem;
-		height: 4.5rem;
-		border-radius: 50%;
-	}
 </style>
