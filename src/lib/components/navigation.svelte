@@ -5,6 +5,7 @@
 	import routes from '$lib/routes';
 	import { slide } from 'svelte/transition';
 	import { onMount } from 'svelte';
+	import { invalidate } from '$app/navigation';
 
 	let hamburgerRef;
 	let isMobileMenuOpen = false;
@@ -50,7 +51,7 @@
 
 	<div class="mobile">
 		<SearchBar />
-		<button class="hamburger" on:click={toggleMobileMenu} >
+		<button class="hamburger" on:click={toggleMobileMenu}>
 			<img bind:this={hamburgerRef} src="/menu.svg" alt="menu" />
 		</button>
 	</div>
@@ -71,6 +72,13 @@
 			<a href={routes.create} class="button">
 				<p class:underline={onCreate}>Create</p>
 			</a>
+			<a
+				href={routes.profile($page?.data?.dbUser?.username)}
+				class="button"
+				on:click={() => invalidate(routes.profile($page?.data?.dbUser?.username))}
+			>
+				<p>Profile</p></a
+			>
 		{:else}
 			<div class="login">
 				<a href={routes.login}>Login</a>
