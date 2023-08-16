@@ -458,7 +458,7 @@
 <h2 class="">Questions</h2>
 <p>
 	If you have any questions about this Privacy Policy, please contact us at
-	<a href="mailto:hello@weprompt.it">hello@weprompt.it</a>
+	<a href="mailto:adamgondagyula@gmail.com">adamgondagyula@gmail.com</a>
 </p>
 
 <style>

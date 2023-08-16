@@ -119,6 +119,6 @@
 <h2>12. Contact Us</h2>
 <p>
 	If you have any questions about these Terms, please contact us at <a
-		href="mailto:hello@weprompt.it">hello@weprompt.it</a
+		href="mailto:adamgondagyula@gmail.com">adamgondagyula@gmail.com</a
 	>
 </p>
